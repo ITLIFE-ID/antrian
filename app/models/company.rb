@@ -1,0 +1,29 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: companies
+#
+#  id           :bigint           not null, primary key
+#  address      :string
+#  api_key      :string
+#  deleted_at   :datetime
+#  latitude     :string
+#  longitude    :string
+#  name         :string
+#  phone_number :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+# Indexes
+#
+#  index_companies_on_deleted_at  (deleted_at)
+#  index_companies_on_name        (name) UNIQUE
+#
+class Company < ApplicationRecord
+  validates_presence_of :name, :address, :api_key, :phone_number
+  validates_uniqueness_of :name
+  validates :phone_number, phone: {possible: true, types: [:mobile]}
+  validates :latitude, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90}
+  validates :longitude, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180}
+end
