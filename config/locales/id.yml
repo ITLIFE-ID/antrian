@@ -1,0 +1,10 @@
+id:
+  service_not_found: Service not found
+  counter_not_found: Counter not found
+  queue_is_not_available: Queue is not available
+  service_temporary_closed: Service temporary closed
+  company_is_closed: "Company is closed at %{value}"
+  service_is_closed: "Service is closed at %{value}"
+  quota_is_exceed: Quota is exceed
+  last_queue_not_available_to_recall: last queue not available to recall
+  queue_not_found: Queue not found

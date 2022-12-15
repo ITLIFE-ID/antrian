@@ -1,0 +1,58 @@
+# == Schema Information
+#
+# Table name: companies
+#
+#  id           :bigint           not null, primary key
+#  address      :string
+#  api_key      :string
+#  deleted_at   :datetime
+#  latitude     :string
+#  longitude    :string
+#  name         :string
+#  phone_number :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+# Indexes
+#
+#  index_companies_on_deleted_at  (deleted_at)
+#  index_companies_on_name        (name) UNIQUE
+#
+require "rails_helper"
+
+RSpec.describe Company, type: :model do
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :address }
+  it { should validate_presence_of :api_key }
+  it { should validate_presence_of :phone_number }
+  it { should validate_uniqueness_of :name }
+
+  it { should validate_numericality_of(:latitude).is_greater_than_or_equal_to(-90) }
+  it { should validate_numericality_of(:latitude).is_less_than_or_equal_to(90) }
+
+  it { should validate_numericality_of(:longitude).is_greater_than_or_equal_to(-180) }
+  it { should validate_numericality_of(:longitude).is_less_than_or_equal_to(180) }
+
+  describe "Phone number validation" do
+    context "given string for phone number" do
+      it "should invalid" do
+        obj = FactoryBot.build_stubbed(:company, phone_number: "aaa")
+        expect(obj.valid?).to be false
+      end
+    end
+
+    context "given invalid area code" do
+      it "should invalid" do
+        obj = FactoryBot.build_stubbed(:company, phone_number: "+182121217937")
+        expect(obj.valid?).to be false
+      end
+    end
+
+    context "given valid" do
+      it "should valid" do
+        obj = FactoryBot.build_stubbed(:company, phone_number: "+6282121217937")
+        expect(obj.valid?).to be true
+      end
+    end
+  end
+end
