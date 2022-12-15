@@ -43,7 +43,7 @@ class UserDashboard < Administrate::BaseDashboard
     unlock_token: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

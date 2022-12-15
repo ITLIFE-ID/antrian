@@ -16,7 +16,7 @@ class BuildingDashboard < Administrate::BaseDashboard
     service_buildings: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

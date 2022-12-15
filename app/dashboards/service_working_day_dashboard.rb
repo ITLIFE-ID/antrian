@@ -16,7 +16,7 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
     service: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

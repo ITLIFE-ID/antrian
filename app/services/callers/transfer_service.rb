@@ -38,13 +38,13 @@
 module Callers
   class TransferService < QueueService
     def execute
-      may_i_transfer_queue_to_another_service?          
-      
+      may_i_transfer_queue_to_another_service?
+
       TodayQueue.transaction do
         find_queue_by_id.update(attend: true)
 
         TodayQueue.where(parent_id: id).delete_all
-        
+
         new_queue = TodayQueue.create(transfer_queue_attributes)
 
         raise ActiveRecord::Rollback unless new_queue.blank?
@@ -59,7 +59,7 @@ module Callers
       is_queue_exists?
       is_service_exists?
       is_service_close_this_day?
-      is_service_temporary_closed?            
+      is_service_temporary_closed?
     end
 
     def transfer_queue_attributes

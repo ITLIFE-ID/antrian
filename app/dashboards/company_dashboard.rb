@@ -18,7 +18,7 @@ class CompanyDashboard < Administrate::BaseDashboard
     phone_number: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

@@ -15,7 +15,7 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
     order_number: Field::Number,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

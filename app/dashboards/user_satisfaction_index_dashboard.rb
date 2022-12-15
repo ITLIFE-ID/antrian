@@ -18,7 +18,7 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     today_queue: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

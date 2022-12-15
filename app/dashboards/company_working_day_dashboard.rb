@@ -16,7 +16,7 @@ class CompanyWorkingDayDashboard < Administrate::BaseDashboard
     open_time: Field::Time,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

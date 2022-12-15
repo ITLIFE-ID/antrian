@@ -6,10 +6,11 @@ module Api
       before_action :set_client_display
 
       def preload
-        playlist = PlayList.where(client_display: @client_display)
+        PlayList.where(client_display: @client_display)
       end
 
-      private 
+      private
+
       def set_client_display
         @client_display ||= ClientDisplay.find(params[:id])
       end

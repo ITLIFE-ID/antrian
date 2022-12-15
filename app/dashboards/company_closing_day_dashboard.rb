@@ -16,7 +16,7 @@ class CompanyClosingDayDashboard < Administrate::BaseDashboard
     start_time: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

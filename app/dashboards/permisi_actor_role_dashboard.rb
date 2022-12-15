@@ -16,7 +16,7 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
     role_id: Field::Number,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

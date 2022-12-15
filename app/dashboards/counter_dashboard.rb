@@ -17,7 +17,7 @@ class CounterDashboard < Administrate::BaseDashboard
     user_counters: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
