@@ -37,3 +37,5 @@ vendor
 /node_modules
 rspec_performance.txt
 .sass-cache
+/app/assets/builds/*
+!/app/assets/builds/.keep

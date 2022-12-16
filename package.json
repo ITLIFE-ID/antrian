@@ -2,19 +2,21 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.4",
-    "admin-lte": "^3.2.0",
-    "autoprefixer": "^10.4.13",    
-    "esbuild": "^0.16.7",
-    "postcss": "^8.4.20",
     "@popperjs/core": "^2.11.6",
+    "admin-lte": "^3.2.0",
+    "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
+    "esbuild": "^0.16.7",
+    "jquery": "^3.6.2",
+    "postcss": "^8.4.20",
     "sass": "^1.56.2"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }

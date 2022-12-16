@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mega</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title> Rails6 AdminLTE 3.0</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body data-scrollbar-auto-hide="n" class="hold-transition sidebar-mini layout-fixed">
+      <div class="wrapper">        
+        <div class="content-wrapper">          
+          <div class="content container-fluid">
+            <div class="container-fluid">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      <div>
   </body>
 </html>
