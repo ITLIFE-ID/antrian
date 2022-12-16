@@ -23,12 +23,10 @@ module Antrian
     Rails.application.routes.default_url_options[:host] = ENV.fetch("HOST", nil)
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**/*.{rb,yml}").to_s]
     config.i18n.fallbacks = [:en]
+    config.assets.debug = true
 
     config.active_record.default_timezone = :utc
-
     config.active_job.queue_adapter = :sidekiq
-
-    config.assets.initialize_on_precompile = true
     config.autoload_paths += %W[#{config.root}/lib]
 
     config.generators do |gen|

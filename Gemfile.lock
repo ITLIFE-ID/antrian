@@ -618,6 +618,7 @@ DEPENDENCIES
   rswag-api
   rswag-specs
   rswag-ui
+  sassc-rails
   selenium-webdriver
   sentry-rails
   shoulda-matchers
