@@ -11,32 +11,58 @@ By default, it renders:
 - Flashes
 - Links to stylesheets and JavaScripts
 %>
-
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
-<head>
-  <meta charset="utf-8">
-  <meta name="ROBOTS" content="NOODP">
-  <meta name="viewport" content="initial-scale=1">
-  <title>
-    <%= content_for(:title) %> - <%= application_title %>
-  </title>
-  <%= render "stylesheet" %>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag if defined?(csp_meta_tag) %>
-</head>
-<body>
-  <%= render "icons" %>
+<html lang="<%= I18n.locale %>">>
+  <head>
+    <meta charset="utf-8">
+    <meta name="ROBOTS" content="NOODP">
+    <meta name="viewport" content="initial-scale=1">
+    <title>
+      <%= content_for(:title) %> - <%= application_title %>
+    </title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <div class="app-container">
-    <%= render "navigation" -%>
+    <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= render "stylesheet" %>  
+    
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= render "javascript" %>
+    
+    <%= csp_meta_tag if defined?(csp_meta_tag) %>
+  </head>
 
-    <main class="main-content">
-      <%= render "flashes" -%>
-      <%= yield %>
-    </main>
-  </div>
+  <body data-scrollbar-auto-hide="n" class="hold-transition sidebar-mini layout-fixed">
+      <div class="wrapper">
+        <%= render "base/header" %>
+        <%= render "base/sidebar" %>
 
-  <%= render "javascript" %>
-</body>
+        <div class="content-wrapper">
+          <div class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1 class="m-0 text-dark">Starter Page</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Starter Page</li>
+                  </ol>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+          </div>
+
+          <div class="content container-fluid">
+            <div class="container-fluid">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+
+        <%= render "base/footer" %>
+        <%= render "base/control_sidebar" %>
+      <div>
+  </body>
 </html>
