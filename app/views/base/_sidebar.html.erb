@@ -1,62 +1,59 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <%=link_to admin_root_path, class: "brand-link" do%>
-      <%=image_tag "itlife-logo.png", class: "brand-image img-circle elevation-3", style: "opacity: .8"%>      
+    <%=link_to admin_root_path, class: "brand-link text-center" do%>    
       <span class="brand-text font-weight-light">QUEUE SYSTEM</span>
     <% end%>    
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">        
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">Current User</a>
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
-     <%=render "base/sidebar/search"%>
+     <%#=render "base/sidebar/search"%>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+        <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t(".companies"), icon: "fa-building"%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t(".schedule"), icon: ""}, 
+          child: [
+            {name: t(".working_days"), path: admin_company_working_days_path},
+            {name: t(".closing_days"), path: admin_company_closing_days_path},          
+          ]%>
+
+        <%=render "base/sidebar/single_menu", path: admin_buildings_path, name: t(".buildings"), icon: "fa-building"%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t(".setting")}, 
+          child: [
+            {name: t(".client_display"), path: admin_client_displays_path},
+            {name: t(".service_clientdisplays"), path: admin_service_clientdisplays_path},
+            {name: t(".voiceover_buildings"), path: admin_voiceover_buildings_path},
+            {name: t(".service_closing_days"), path: admin_service_closing_days_path},
+          ]%>
+        <%=render "base/sidebar/single_menu", path: admin_services_path, name: t(".services"), icon: "fa-landmark"%>
+        <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t(".types"), icon: ""%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t(".schedule"), icon: ""}, 
+          child: [            
+            {name: t(".working_days"), path: admin_service_working_days_path},
+            {name: t(".closing_days"), path: admin_service_closing_days_path},
+          ]%>
+
+        <%=render "base/sidebar/single_menu", path: admin_counters_path, name: t(".counters"), icon: "fa-shop"%>              
+          
+        <%=render "base/sidebar/single_menu", path: admin_users_path, name: t(".users"), icon: "fa-users"%>
+        <%=render "base/sidebar/single_menu", path: admin_user_counters_path, name: t(".user_counters"), icon: "fa-people-line"%>
+        <%=render "base/sidebar/single_menu", path: admin_voice_overs_path, name: t(".voice_overs"), icon: "fa-user-astronaut"%>       
+      
+        <%=render "base/sidebar/nested_menu", parent: {name: t(".permission"), icon: "fa-user-shield"}, 
+          child: [
+            {name: t(".permisi_roles"), path: admin_permisi_roles_path},
+            {name: t(".permisi_actor"), path: admin_permisi_actors_path},
+            {name: t(".permisi_actor_roles"), path: admin_permisi_actor_roles_path}            
+          ]%>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

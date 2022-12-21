@@ -1,0 +1,19 @@
+<li class="nav-item">
+  <%=link_to parent[:path], class: "nav-link" do%>
+    <i class="nav-icon fas <%=parent[:icon]%>"></i>
+    <p>
+      <%=parent[:name]%>
+      <i class="right fas fa-angle-left"></i>
+    </p>
+<% end%>
+  <ul class="nav nav-treeview">
+  <%child.each do |c|%>
+    <li class="nav-item">
+      <%=link_to c[:path], class: "nav-link" do%>
+        <i class="far fa-circle nav-icon"></i>
+        <p><%=c[:name]%></p>
+      <%end%>      
+    </li>           
+    <%end%>              
+  </ul>
+</li>

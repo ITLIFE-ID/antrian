@@ -8,3 +8,25 @@ id:
   quota_is_exceed: Quota is exceed
   last_queue_not_available_to_recall: last queue not available to recall
   queue_not_found: Queue not found
+  voiceover_buildings: Pengisi suara tiap gedung
+  voice_overs: Pengisi suara
+  user_satisfaction_indices: Index kenyamanan user 
+  users: user
+  service_working_days: hari kerja layanan
+  service_types: tipe layanan
+  service_closing_days: jam tutup layanan
+  service_clientdisplays: layanan pada display layar
+  services: layanan
+  satisfaction_indices: Index kenyamanan
+  permisi_roles: Role
+  permisi_actor_roles: Role Aktor
+  permisi_actors: AKtor
+  counters: Loket
+  company_working_days: Hari kerja dinas
+  company_closing_days: Tanggal tutup dinas
+  companies: Perusahaan
+  client_displays: Display layar
+  buildings: Aedung
+  today_queues: Antrian hari ini
+  administrators: Administrator
+  backup_queues: Antrian hari kemarin

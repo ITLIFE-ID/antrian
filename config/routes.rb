@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :voice_overs
     resources :user_satisfaction_indices
     resources :users
+    resources :user_counters
     resources :service_working_days
     resources :service_types
     resources :service_closing_days
