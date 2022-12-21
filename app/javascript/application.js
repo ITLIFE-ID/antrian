@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 
+import "jquery"
 import * as bootstrap from "bootstrap"
 import 'admin-lte'
 import "@fortawesome/fontawesome-free/js/all.min";

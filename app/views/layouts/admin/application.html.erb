@@ -12,14 +12,12 @@ By default, it renders:
 - Links to stylesheets and JavaScripts
 %>
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">>
+<html lang="<%= I18n.locale %>">
   <head>
     <meta charset="utf-8">
     <meta name="ROBOTS" content="NOODP">
     <meta name="viewport" content="initial-scale=1">
-    <title>
-      <%= content_for(:title) %> - <%= application_title %>
-    </title>
+    <title> <%= content_for(:title) %> - <%= application_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -62,7 +60,7 @@ By default, it renders:
         </div>
 
         <%= render "base/footer" %>
-        <%= render "base/control_sidebar" %>
+        <%#= render "base/control_sidebar" %>
       <div>
   </body>
 </html>
