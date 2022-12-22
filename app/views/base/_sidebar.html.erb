@@ -27,8 +27,7 @@
           child: [
             {name: t(".client_display"), path: admin_client_displays_path},
             {name: t(".service_clientdisplays"), path: admin_service_clientdisplays_path},
-            {name: t(".voiceover_buildings"), path: admin_voiceover_buildings_path},
-            {name: t(".service_closing_days"), path: admin_service_closing_days_path},
+            {name: t(".voiceover_buildings"), path: admin_voiceover_buildings_path},            
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_services_path, name: t(".services"), icon: "fa-landmark"%>
         <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t(".types"), icon: ""%>
@@ -44,8 +43,13 @@
         <%=render "base/sidebar/nested_menu", parent: {name: t(".permission"), icon: "fa-user-shield"}, 
           child: [
             {name: t(".permisi_roles"), path: admin_permisi_roles_path},
-            {name: t(".permisi_actor"), path: admin_permisi_actors_path},
+            {name: t(".permisi_actors"), path: admin_permisi_actors_path},
             {name: t(".permisi_actor_roles"), path: admin_permisi_actor_roles_path}            
+          ]%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t(".queue"), icon: "fa-users"}, 
+          child: [
+            {name: t(".today_queues"), path: admin_today_queues_path},
+            {name: t(".backup_queues"), path: admin_backup_queues_path}
           ]%>
       </ul>
     </nav>

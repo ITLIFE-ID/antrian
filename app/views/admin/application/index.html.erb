@@ -25,19 +25,20 @@ It renders the `_table` partial to display details about the resources.
 <% content_for(:title) do %>
   <%= display_resource_name(page.resource_name) %>
 <% end %>
-<%=
-  render("index_header",
-    resources: resources,
-    search_term: search_term,
-    page: page,
-    show_search_bar: show_search_bar,
-  )
-%>
+<%= render("index_header", resources: resources, search_term: search_term, page: page, show_search_bar: show_search_bar)%>
 <div class="card">
   <div class="card-body">
-    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-      <div class="col-sm-12 col-md-6">
-        <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label></div>
+    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 row mb-3">
+      <div class="col-sm-12 col-md-2 px-0">
+        <%if accessible_action?(new_resource, :new)%>
+          <%= link_to(t("administrate.actions.new_resource", name: display_resource_name(page.resource_name, singular: true).downcase), 
+        [:new, namespace, page.resource_path.to_sym], class: "button btn btn-primary") %>
+        <% end%>
+      </div>
+      <div class="col-sm-12 col-md-10">
+        <div class="d-flex justify-content-end">
+          <%= render("pagination", resources: resources) %>
+        </div>
       </div>
     </div>
     <div class="row">
