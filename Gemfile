@@ -134,3 +134,5 @@ gem "to_bool"
 gem "validates_timeliness", github: "adzap/validates_timeliness"
 gem "email_validator", "~> 2.2"
 gem "fasterer", "~> 0.10.0"
+
+gem "htmlbeautifier", "~> 1.4"
