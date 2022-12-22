@@ -38,8 +38,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     address
-    api_key
-    deleted_at
+    api_key    
     latitude
     longitude
     name
@@ -47,6 +46,7 @@ class CompanyDashboard < Administrate::BaseDashboard
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

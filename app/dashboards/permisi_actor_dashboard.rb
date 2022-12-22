@@ -34,11 +34,11 @@ class PermisiActorDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     aka_id
-    aka_type
-    deleted_at
+    aka_type    
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

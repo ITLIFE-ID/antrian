@@ -56,8 +56,7 @@ class AdministratorDashboard < Administrate::BaseDashboard
     confirmation_token
     confirmed_at
     current_sign_in_at
-    current_sign_in_ip
-    deleted_at
+    current_sign_in_ip    
     email
     encrypted_password
     failed_attempts
@@ -75,6 +74,7 @@ class AdministratorDashboard < Administrate::BaseDashboard
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

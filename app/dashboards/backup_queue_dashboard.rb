@@ -51,8 +51,7 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     attend
     children
     counter
-    date
-    deleted_at
+    date    
     finish_time
     letter
     note
@@ -69,6 +68,7 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

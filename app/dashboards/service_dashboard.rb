@@ -52,8 +52,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     client_displays
     closed
     company
-    counters
-    deleted_at
+    counters    
     letter
     max_quota
     name
@@ -67,6 +66,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

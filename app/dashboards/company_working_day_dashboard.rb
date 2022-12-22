@@ -37,12 +37,12 @@ class CompanyWorkingDayDashboard < Administrate::BaseDashboard
     id
     closing_time
     company
-    day
-    deleted_at
+    day    
     open_time
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

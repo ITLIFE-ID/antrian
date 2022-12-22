@@ -36,13 +36,13 @@ class BuildingDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     client_displays
-    company
-    deleted_at
+    company    
     name
     service_buildings
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

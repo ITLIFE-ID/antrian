@@ -36,13 +36,13 @@ class CompanyClosingDayDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     company
-    date
-    deleted_at
+    date    
     finish_time
     start_time
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

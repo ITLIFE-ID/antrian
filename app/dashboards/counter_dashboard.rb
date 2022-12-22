@@ -37,14 +37,14 @@ class CounterDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     closed
-    counter_client_displays
-    deleted_at
+    counter_client_displays    
     number
     service
     user_counters
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

@@ -36,13 +36,13 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     closing_time
-    day
-    deleted_at
+    day    
     open_time
     service
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES

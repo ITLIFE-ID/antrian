@@ -15,43 +15,45 @@ as well as a link to its edit page.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
 %>
-
 <% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>
-
 <header class="main-content__header">
   <h1 class="main-content__page-title">
     <%= content_for(:title) %>
   </h1>
-
-  <div>
-    <%= link_to(
+</header>
+<section class="main-content__body">
+  <div class="card">
+    <div class="card-header text-right">
+      <div>
+        <%= link_to(
       t("administrate.actions.edit_resource", name: page.page_title),
       [:edit, namespace, page.resource],
-      class: "button",
+      class: "btn btn-primary",
     ) if accessible_action?(page.resource, :edit) %>
-
-    <%= link_to(
+        <%= link_to(
       t("administrate.actions.destroy"),
       [namespace, page.resource],
-      class: "button button--danger",
+      class: "btn btn-danger",
       method: :delete,
       data: { confirm: t("administrate.actions.confirm") }
     ) if accessible_action?(page.resource, :destroy) %>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <tbody>
+          <% page.attributes.each do |attribute| %>
+            <tr>
+              <td class="attribute-label" id="<%= attribute.name %>">
+                <%= t("helpers.label.#{resource_name}.#{attribute.name}", default: page.resource.class.human_attribute_name(attribute.name)) %>
+              </td>
+              <td class="attribute-data attribute-data--<%=attribute.html_class%>">
+                <%= render_field attribute, page: page %>
+              </td>
+            </tr>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</header>
-
-<section class="main-content__body">
-  <dl>
-    <% page.attributes.each do |attribute| %>
-      <dt class="attribute-label" id="<%= attribute.name %>">
-      <%= t(
-        "helpers.label.#{resource_name}.#{attribute.name}",
-        default: page.resource.class.human_attribute_name(attribute.name),
-      ) %>
-      </dt>
-
-      <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
-          ><%= render_field attribute, page: page %></dd>
-    <% end %>
-  </dl>
 </section>

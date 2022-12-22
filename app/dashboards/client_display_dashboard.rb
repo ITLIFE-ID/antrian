@@ -42,8 +42,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     id
     building
     client_display_type
-    counter_client_display
-    deleted_at
+    counter_client_display    
     ip_address
     location
     play_lists
@@ -53,6 +52,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
