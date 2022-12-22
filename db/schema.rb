@@ -248,18 +248,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_050429) do
     t.index ["order_number", "company_id"], name: "index_satisfaction_indices_on_order_number_and_company_id", unique: true
   end
 
-  create_table "service_buildings", force: :cascade do |t|
-    t.bigint "service_id"
-    t.bigint "building_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["building_id"], name: "index_service_buildings_on_building_id"
-    t.index ["deleted_at"], name: "index_service_buildings_on_deleted_at"
-    t.index ["service_id", "building_id"], name: "index_service_buildings_on_service_id_and_building_id", unique: true
-    t.index ["service_id"], name: "index_service_buildings_on_service_id"
-  end
-
   create_table "service_clientdisplays", force: :cascade do |t|
     t.bigint "service_id"
     t.bigint "client_display_id"

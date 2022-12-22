@@ -17,8 +17,7 @@
 #  index_buildings_on_company_id_and_name  (company_id,name) UNIQUE
 #  index_buildings_on_deleted_at           (deleted_at)
 #
-class Building < ApplicationRecord
-  has_many :service_buildings
+class Building < ApplicationRecord  
   has_many :client_displays
   belongs_to :company
 

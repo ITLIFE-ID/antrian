@@ -9,7 +9,7 @@
         name: display_resource_name(page.resource_name, singular: true).downcase
       ),
       [:new, namespace, page.resource_path.to_sym],
-      class: "button",
+      class: "button btn btn-primary",
     ) if accessible_action?(new_resource, :new) %>
   </div>
 </header>

@@ -20,44 +20,37 @@ By default, it renders:
     <title> <%= content_for(:title) %> - <%= application_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%#= render "stylesheet" %>  
-    
+    <%#= render "stylesheet" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%#= render "javascript" %>
-    
     <%= csp_meta_tag if defined?(csp_meta_tag) %>
   </head>
-
   <body data-scrollbar-auto-hide="n" class="hold-transition sidebar-mini layout-fixed">
-      <div class="wrapper">
-        <%= render "base/header" %>
-        <%= render "base/sidebar" %>
-
-        <div class="content-wrapper">
-          <div class="content-header">
-            <div class="container-fluid">
-              <div class="row mb-2">                
-                <div class="col-sm-6">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Starter Page</li>
-                  </ol>
-                </div><!-- /.col -->
-              </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-          </div>
-
-          <div class="content container-fluid">
-            <div class="container-fluid">
-              <%= yield %>
+    <div class="wrapper">
+      <%= render "base/header" %>
+      <%= render "base/sidebar" %>
+      <div class="content-wrapper">
+        <div class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <%= render_breadcrumbs :separator => ' / ' %>
+              </div>
+              <!-- /.col -->
             </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container-fluid -->
+        </div>
+        <div class="content container-fluid">
+          <div class="container-fluid">
+            <%= yield %>
           </div>
         </div>
-
-        <%= render "base/footer" %>
-        <%#= render "base/control_sidebar" %>
+      </div>
+      <%= render "base/footer" %>
+      <%#= render "base/control_sidebar" %>
       <div>
-  </body>
-</html>
+      </body>
+    </html>
