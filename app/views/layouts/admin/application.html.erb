@@ -21,9 +21,8 @@ By default, it renders:
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%#= render "stylesheet" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%#= render "javascript" %>
+    <%= render "javascript" %>
     <%= csp_meta_tag if defined?(csp_meta_tag) %>
   </head>
   <body data-scrollbar-auto-hide="n" class="hold-transition sidebar-mini layout-fixed">

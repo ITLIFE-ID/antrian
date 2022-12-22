@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_for :administrators
 
   namespace :admin do
+    resources :dashboards, only: [:index]
     resources :voiceover_buildings
     resources :voice_overs
     resources :user_satisfaction_indices
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
     resources :administrators
     resources :backup_queues
 
-    root to: "users#index"
+    root to: "home#index"
   end
 
   namespace :api, defaults: {format: :json} do
