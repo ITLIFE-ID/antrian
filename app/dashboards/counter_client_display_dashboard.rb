@@ -14,7 +14,7 @@ class CounterClientDisplayDashboard < Administrate::BaseDashboard
     deleted_at: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

@@ -2,19 +2,20 @@
 #
 # Table name: services
 #
-#  id              :bigint           not null, primary key
-#  active          :boolean          default(TRUE)
-#  closed          :boolean          default(FALSE)
-#  deleted_at      :datetime
-#  letter          :string
-#  max_quota       :integer
-#  name            :string
-#  priority        :boolean          default(FALSE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  company_id      :bigint
-#  parent_id       :bigint           default(0)
-#  service_type_id :bigint
+#  id               :bigint           not null, primary key
+#  active           :boolean          default(TRUE)
+#  closed           :boolean          default(FALSE)
+#  deleted_at       :datetime
+#  letter           :string
+#  max_quota        :integer
+#  max_service_time :integer
+#  name             :string
+#  priority         :boolean          default(FALSE)
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  company_id       :bigint
+#  parent_id        :bigint           default(0)
+#  service_type_id  :bigint
 #
 # Indexes
 #

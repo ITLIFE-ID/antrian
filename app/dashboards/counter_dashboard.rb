@@ -37,7 +37,7 @@ class CounterDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     closed
-    counter_client_displays    
+    counter_client_displays
     number
     service
     user_counters

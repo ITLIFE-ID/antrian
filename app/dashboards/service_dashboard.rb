@@ -52,7 +52,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     client_displays
     closed
     company
-    counters    
+    counters
     letter
     max_quota
     name

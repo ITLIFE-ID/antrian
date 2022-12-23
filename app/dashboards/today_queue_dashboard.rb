@@ -51,7 +51,7 @@ class TodayQueueDashboard < Administrate::BaseDashboard
     attend
     children
     counter
-    date    
+    date
     finish_time
     letter
     note

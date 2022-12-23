@@ -35,7 +35,7 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     building
-    day    
+    day
     versions
     voice_over
     created_at

@@ -35,7 +35,7 @@ class ServiceClosingDayDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    date    
+    date
     finish_time
     service
     start_time

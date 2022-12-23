@@ -36,7 +36,7 @@ class CompanyClosingDayDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     company
-    date    
+    date
     finish_time
     start_time
     versions

@@ -36,7 +36,7 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     closing_time
-    day    
+    day
     open_time
     service
     versions

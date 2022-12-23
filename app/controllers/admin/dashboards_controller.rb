@@ -3,7 +3,7 @@ require "administrate/custom_dashboard"
 
 # app/controllers/admin/stats_controller.rb
 module Admin
-  class DashboardsController < Admin::ApplicationController    
+  class DashboardsController < Admin::ApplicationController
     add_breadcrumb "Dashboard"
 
     def past
@@ -12,7 +12,7 @@ module Admin
       add_breadcrumb @summary_title
 
       @performance_title = t("past_queue_performance")
-      @user_satisfaction_title = t("past_queue_user_satisfaction")      
+      @user_satisfaction_title = t("past_queue_user_satisfaction")
 
       @user_satisfaction = [
         {name: t("total_queues"), value: BackupQueue.count, color: "bg-dark", detail_path: admin_today_queues_path},
@@ -58,8 +58,8 @@ module Admin
 
     def future
       @type = "future"
-      @summary_title = t("future_queue")  
-      add_breadcrumb @summary_title          
+      @summary_title = t("future_queue")
+      add_breadcrumb @summary_title
 
       @summary = [
         {name: t("total_future_queues"), value: TodayQueue.total_future_queue.count, color: "bg-dark", detail_path: admin_today_queues_path},

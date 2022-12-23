@@ -36,7 +36,7 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     actor_id
-    administrator    
+    administrator
     permisi_role
     role_id
     versions

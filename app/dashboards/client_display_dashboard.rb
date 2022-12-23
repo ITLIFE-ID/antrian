@@ -42,7 +42,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     id
     building
     client_display_type
-    counter_client_display    
+    counter_client_display
     ip_address
     location
     play_lists

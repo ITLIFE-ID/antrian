@@ -14,7 +14,7 @@ class UserCounterDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,7 +33,7 @@ class UserCounterDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    counter    
+    counter
     user
     versions
     created_at

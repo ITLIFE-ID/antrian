@@ -37,7 +37,7 @@ class CompanyWorkingDayDashboard < Administrate::BaseDashboard
     id
     closing_time
     company
-    day    
+    day
     open_time
     versions
     created_at

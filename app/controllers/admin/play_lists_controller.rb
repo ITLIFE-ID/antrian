@@ -1,6 +1,6 @@
 module Admin
   class PlayListsController < Admin::ApplicationController
-    add_breadcrumb I18n.t("play_list")    
+    add_breadcrumb I18n.t("play_list")
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -22,7 +22,7 @@ module Admin
     # Override this if you have certain roles that require a subset
     # this will be used to set the records shown on the `index` action.
     #
-    def scoped_resource       
+    def scoped_resource
       resource_class.where(file_type: params[:type])
     end
 

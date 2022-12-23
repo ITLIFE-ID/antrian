@@ -34,7 +34,7 @@
 #  index_today_queues_on_parent_id                                  (parent_id)
 #  index_today_queues_on_service_id                                 (service_id)
 #
-class BackupQueue < TodayQueue  
+class BackupQueue < TodayQueue
   scope :total_offline_queue, -> { where(print_ticket_method: "offline") }
   scope :total_online_queue, -> { where(print_ticket_method: "online") }
 end

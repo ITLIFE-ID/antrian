@@ -34,7 +34,7 @@ class PermisiActorDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     aka_id
-    aka_type    
+    aka_type
     versions
     created_at
     updated_at

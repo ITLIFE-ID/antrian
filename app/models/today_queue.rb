@@ -51,6 +51,8 @@ class TodayQueue < ApplicationRecord
   validates_numericality_of :number, only_integer: true, greater_than_or_equal_to: 1,
     less_than_or_equal_to: 999
 
+  validates_numericality_of :process_duration, only_integer: true, greater_than_or_equal_to: 1
+
   with_options on: :next_queue do
     validates_datetime :start_time, after: :print_ticket_time, on_or_after: :today
     validates_datetime :finish_time, after: :start_time, allow_blank: true, on_or_after: :today
@@ -59,7 +61,7 @@ class TodayQueue < ApplicationRecord
   validates_datetime :print_ticket_time, on_or_after: :today
   validates_date :date, on_or_after: :today
 
-  after_save { BackupQueue.upsert(attributes) }  
+  after_save { BackupQueue.upsert(attributes) }
   scope :total_queue, -> { where(date: Date.today) }
   scope :total_processed, -> { where(date: Date.today, attend: true).where.not(finish_time: nil) }
   scope :total_unprocessed, -> { where(date: Date.today, attend: false, finish_time: nil) }

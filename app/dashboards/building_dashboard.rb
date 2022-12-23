@@ -36,7 +36,7 @@ class BuildingDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     client_displays
-    company    
+    company
     name
     service_buildings
     versions

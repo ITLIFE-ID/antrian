@@ -38,7 +38,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     address
-    api_key    
+    api_key
     latitude
     longitude
     name

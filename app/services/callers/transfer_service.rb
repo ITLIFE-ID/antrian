@@ -56,6 +56,7 @@ module Callers
     end
 
     private
+
     def may_i_transfer_queue_to_another_service?
       is_queue_exists?
       is_service_exists?

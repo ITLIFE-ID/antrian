@@ -17,6 +17,7 @@ module Callers
     end
 
     private
+
     def may_i_call_next_queue?
       is_counter_exists?
       is_queue_still_available?

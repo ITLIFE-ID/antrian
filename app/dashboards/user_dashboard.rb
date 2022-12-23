@@ -66,7 +66,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmation_token
     confirmed_at
     current_sign_in_at
-    current_sign_in_ip    
+    current_sign_in_ip
     email
     encrypted_password
     failed_attempts
