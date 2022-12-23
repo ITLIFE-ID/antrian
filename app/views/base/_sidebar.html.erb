@@ -62,6 +62,11 @@
             {name: t("today_queue"), path: admin_today_queues_path},
             {name: t("backup_queue"), path: admin_backup_queues_path}
           ]%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t("satisfaction_index"), icon: "fa-face-smile"}, 
+          child: [
+            {name: t("type"), path: admin_satisfaction_indices_path},
+            {name: t("recap"), path: admin_user_satisfaction_indices_path}
+          ]%>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
