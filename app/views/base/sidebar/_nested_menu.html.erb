@@ -9,7 +9,7 @@
   <ul class="nav nav-treeview">
     <%child.each do |c|%>
       <li class="nav-item">
-        <%=link_to c[:path], class: "nav-link" do%>
+        <%=link_to c[:path], class: "nav-link", target: "_self" do%>
           <i class="far fa-circle nav-icon"></i>
           <p><%=c[:name]%></p>
         <%end%>

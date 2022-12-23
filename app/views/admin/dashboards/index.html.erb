@@ -15,8 +15,14 @@
   <% end%>
 </div>
 <div class="row">
-  <div class="col-12">
-    <div id="chart"></div>
+  <div class="col-<%=(@performance.present? && @user_satisfaction.present?) ? 4: 12%>">
+    <div id="summary"></div>
+  </div>
+  <div class="col-4">
+    <div id="performance"></div>
+  </div>
+  <div class="col-4">
+    <div id="user_satisfaction"></div>
   </div>
 </div>
 <script>
@@ -38,8 +44,8 @@
     })
   });
 
-  // Build the chart
-  Highcharts.chart('chart', {
+  // Summary
+  Highcharts.chart('summary', {
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
@@ -47,7 +53,7 @@
       type: 'pie'
     },
     title: {
-      text: '<%=t(".total_queue")%>'
+      text: '<%=@summary_title%>'
     },
     tooltip: {
       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -73,4 +79,80 @@
       data: <%=@summary.map{|x| {name: x[:name].to_s, y: x[:value]} if !x[:name].to_s.include? "queues"  }.compact.to_json.html_safe%>
     }]
   });
+
+  // Performance
+  <% if @performance.present?%>
+  Highcharts.chart('performance', {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: '<%=@performance_title%>'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          connectorColor: 'silver'
+        }
+      }
+    },
+    series: [{
+      name: 'Share',
+      data: <%=@performance.map{|x| {name: x[:name].to_s, y: x[:value]} if !x[:name].to_s.include? "queues"  }.compact.to_json.html_safe%>
+    }]
+  });
+  <%end%>
+
+  // User Satisfaction
+  <% if @user_satisfaction.present?%>
+  Highcharts.chart('user_satisfaction', {
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false,
+      type: 'pie'
+    },
+    title: {
+      text: '<%=@user_satisfaction_title%>'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+      point: {
+          valueSuffix: '%'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+          connectorColor: 'silver'
+        }
+      }
+    },
+    series: [{
+      name: 'Share',
+      data: <%=@user_satisfaction.map{|x| {name: x[:name].to_s, y: x[:value]} if !x[:name].to_s.include? "queues"  }.compact.to_json.html_safe%>
+    }]
+  });
+  <% end%>
 </script>

@@ -5,32 +5,70 @@ require "administrate/custom_dashboard"
 module Admin
   class DashboardsController < Admin::ApplicationController
     def past
+      @summary_title = t("past_queue")
+      @performance_title = t("past_queue_performance")
+      @user_satisfaction_title = t("past_queue_user_satisfaction")
+      
+      @performance = [
+        {name: :total_queues, value: BackupQueue.count, color: "bg-dark"},
+        {name: :total_offline_queue, value: BackupQueue.total_offline_queue.count, color: "bg-info"},
+        {name: :total_online_queue, value: BackupQueue.total_online_queue.count, color: "bg-success"}
+      ]
+
+      @user_satisfaction = [
+        {name: :total_queues, value: BackupQueue.count, color: "bg-dark"},
+        {name: :total_offline_queue, value: BackupQueue.total_offline_queue.count, color: "bg-info"},
+        {name: :total_online_queue, value: BackupQueue.total_online_queue.count, color: "bg-success"}
+      ]
+
       @summary = [
-        {name: :total_queues, value: BackupQueue.total_queue, color: "bg-primary"},
-        {name: :total_offline_queue, value: BackupQueue.total_offline_queue, color: "bg-info"},
-        {name: :total_online_queue, value: BackupQueue.total_online_queue, color: "bg-success"}
+        {name: :total_queues, value: BackupQueue.count, color: "bg-primary"},
+        {name: :total_offline_queue, value: BackupQueue.total_offline_queue.count, color: "bg-info"},
+        {name: :total_online_queue, value: BackupQueue.total_online_queue.count, color: "bg-success"}
       ]
 
       render "index"
     end
 
     def today
+      @summary_title = t("today_queue")
+      @performance_title = t("today_queue_performance")
+      @user_satisfaction_title = t("today_queue_user_satisfaction")
+
+      @performance = [
+        {name: :total_queues, value: TodayQueue.total_queue.count, color: "bg-dark"},
+        {name: :total_processed, value: TodayQueue.total_processed.count, color: "bg-primary"},
+        {name: :total_unprocessed, value: TodayQueue.total_unprocessed.count, color: "bg-warning"},
+        {name: :total_offline_queue, value: TodayQueue.total_offline_queue.count, color: "bg-info"},
+        {name: :total_online_queue, value: TodayQueue.total_online_queue.count, color: "bg-success"}
+      ]
+
+      @user_satisfaction = [
+        {name: :total_queues, value: TodayQueue.total_queue.count, color: "bg-dark"},
+        {name: :total_processed, value: TodayQueue.total_processed.count, color: "bg-primary"},
+        {name: :total_unprocessed, value: TodayQueue.total_unprocessed.count, color: "bg-warning"},
+        {name: :total_offline_queue, value: TodayQueue.total_offline_queue.count, color: "bg-info"},
+        {name: :total_online_queue, value: TodayQueue.total_online_queue.count, color: "bg-success"}
+      ]
+
       @summary = [
-        {name: :total_queues, value: TodayQueue.total_queue, color: "bg-primary"},
-        {name: :total_processed, value: TodayQueue.total_processed, color: "bg-success"},
-        {name: :total_unprocessed, value: TodayQueue.total_unprocessed, color: "bg-warning"},
-        {name: :total_offline_queue, value: TodayQueue.total_offline_queue, color: "bg-info"},
-        {name: :total_online_queue, value: TodayQueue.total_online_queue, color: "bg-success"}
+        {name: :total_queues, value: TodayQueue.total_queue.count, color: "bg-dark"},
+        {name: :total_processed, value: TodayQueue.total_processed.count, color: "bg-primary"},
+        {name: :total_unprocessed, value: TodayQueue.total_unprocessed.count, color: "bg-warning"},
+        {name: :total_offline_queue, value: TodayQueue.total_offline_queue.count, color: "bg-info"},
+        {name: :total_online_queue, value: TodayQueue.total_online_queue.count, color: "bg-success"}
       ]
 
       render "index"
     end
 
     def future
+      @summary_title = t("future_queue")      
+
       @summary = [
-        {name: :total_future_queues, value: TodayQueue.total_future_queue, color: "bg-primary"},
-        {name: :total_future_offline_queue, value: TodayQueue.total_future_offline_queue, color: "bg-info"},
-        {name: :total_future_online_queue, value: TodayQueue.total_future_online_queue, color: "bg-success"}
+        {name: :total_future_queues, value: TodayQueue.total_future_queue.count, color: "bg-dark"},
+        {name: :total_future_offline_queue, value: TodayQueue.total_future_offline_queue.count, color: "bg-info"},
+        {name: :total_future_online_queue, value: TodayQueue.total_future_online_queue.count, color: "bg-success"}
       ]
 
       render "index"
