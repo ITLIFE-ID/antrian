@@ -44,3 +44,12 @@ id:
   types: Tipe
   working_days: Hari Kerja
   closing_days: Hari tutup
+  total_future_queues: Total antrian
+  total_future_online_queue: Total antrian online
+  total_future_offline_queue: Total antrian offline
+  total_today_queues: Total antrian hari ini
+  total_past_queues: Total antrian hari sebelumnya
+  total_online_queue: Total antrian online
+  total_offline_queue: Total antrian offline
+  total_processed: Total antrian yang telah di proses
+  total_unprocessed: Total antrian yang belum di proses

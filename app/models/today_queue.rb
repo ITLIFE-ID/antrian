@@ -16,6 +16,7 @@
 #  print_ticket_method   :string
 #  print_ticket_time     :datetime
 #  priority              :boolean          default(FALSE)
+#  process_duration      :integer
 #  service_type_slug     :string
 #  start_time            :datetime
 #  uniq_number           :string
@@ -58,7 +59,7 @@ class TodayQueue < ApplicationRecord
   validates_datetime :print_ticket_time, on_or_after: :today
   validates_date :date, on_or_after: :today
 
-  after_save { BackupQueue.upsert(attributes) }
+  after_save { BackupQueue.upsert(attributes) }  
   scope :total_queue, -> { where(date: Date.today) }
   scope :total_processed, -> { where(date: Date.today, attend: true).where.not(finish_time: nil) }
   scope :total_unprocessed, -> { where(date: Date.today, attend: false, finish_time: nil) }

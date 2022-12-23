@@ -14,6 +14,7 @@
 #  print_ticket_method   :string
 #  print_ticket_time     :datetime
 #  priority              :boolean          default(FALSE)
+#  process_duration      :integer
 #  service_type_slug     :string
 #  start_time            :datetime
 #  uniq_number           :string
