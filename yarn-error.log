@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/nw00039/.nvm/versions/node/v16.15.0/bin/node /Users/nw00039/.nvm/versions/node/v16.15.0/bin/yarn add dataTables.bootstrap
+  /Users/nw00039/.nvm/versions/node/v16.15.0/bin/node /Users/nw00039/.nvm/versions/node/v16.15.0/bin/yarn add chartj
 
 PATH: 
-  /Users/nw00039/.bun/bin:/Users/nw00039/.bun/bin:/Users/nw00039/.rbenv/shims:/Users/nw00039/.rbenv/bin:/Users/nw00039/.rbenv/bin:/opt/homebrew/bin:/Users/nw00039/.sdkman/candidates/java/current/bin:/opt/homebrew/opt/openjdk/bin:/Users/nw00039/.pyenv/shims:/Users/nw00039/.pyenv/bin:/Users/nw00039/.nvm/versions/node/v16.15.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/nw00039/.cargo/bin:/usr/local/go/bin:/Users/nw00039/flutter/bin:/Users/nw00039/Downloads/flutter/bin
+  /Users/nw00039/.bun/bin:/Users/nw00039/.bun/bin:/Users/nw00039/.rbenv/shims:/Users/nw00039/.rbenv/bin:/Users/nw00039/.rbenv/bin:/opt/homebrew/bin:/opt/homebrew/opt/openjdk/bin:/Users/nw00039/.pyenv/shims:/Users/nw00039/.pyenv/bin:/Users/nw00039/.nvm/versions/node/v16.15.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/nw00039/.bun/bin:/Users/nw00039/.rbenv/shims:/Users/nw00039/.rbenv/bin:/opt/homebrew/bin:/Users/nw00039/.sdkman/candidates/java/current/bin:/opt/homebrew/opt/openjdk/bin:/Users/nw00039/.pyenv/shims:/Users/nw00039/.pyenv/bin:/Users/nw00039/.nvm/versions/node/v16.15.0/bin:/opt/homebrew/sbin:/Users/nw00039/.cargo/bin:/Users/nw00039/flutter/bin:/Users/nw00039/Downloads/flutter/bin:/Users/nw00039/Documents/flutter/bin:/usr/local/go/bin:/Users/nw00039/Documents/loved/antrian/flutter/bin:/Users/nw00039/Downloads/flutter/bin:/Users/nw00039/Documents/flutter/bin
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/dataTables.bootstrap: Not found
+  Error: https://registry.yarnpkg.com/chartj: Not found
       at Request.params.callback [as _callback] (/Users/nw00039/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:66145:18)
       at Request.self.callback (/Users/nw00039/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:527:28)
@@ -31,20 +31,22 @@ npm manifest:
     "name": "app",
     "private": "true",
     "dependencies": {
+      "@fortawesome/fontawesome-free": "^6.2.1",
       "@hotwired/stimulus": "^3.2.1",
       "@hotwired/turbo-rails": "^7.2.4",
-      "admin-lte": "^3.2.0",
-      "autoprefixer": "^10.4.13",    
-      "esbuild": "^0.16.7",
-      "postcss": "^8.4.20",
       "@popperjs/core": "^2.11.6",
-      "bootstrap": "^5.2.3",
+      "admin-lte": "^3.2.0",
+      "autoprefixer": "^10.4.13",
+      "bootstrap": "4.6.2",
       "bootstrap-icons": "^1.10.2",
+      "esbuild": "^0.16.7",
+      "jquery": "^3.6.2",
+      "postcss": "^8.4.20",
       "sass": "^1.56.2"
     },
     "scripts": {
       "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-      "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --load-path=node_modules"
+      "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
     }
   }
 
@@ -210,6 +212,11 @@ Lockfile:
     version "5.15.4"
     resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.4.tgz#ecda5712b61ac852c760d8b3c79c96adca5554e5"
     integrity sha512-eYm8vijH/hpzr/6/1CJ/V/Eb1xQFW2nnUKArb3z+yUWv7HTwj6M7SP957oMjfZjAHU6qpoNc2wQvIxBLWYa/Jg==
+  
+  "@fortawesome/fontawesome-free@^6.2.1":
+    version "6.2.1"
+    resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-6.2.1.tgz#344baf6ff9eaad7a73cff067d8c56bfc11ae5304"
+    integrity sha512-viouXhegu/TjkvYQoiRZK3aax69dGXxgEjpvZW81wIJdxm5Fnvp3VVIP4VHKqX4SvFw6qpmkILkD4RJWAdrt7A==
   
   "@hotwired/stimulus@^3.2.1":
     version "3.2.1"
@@ -428,15 +435,15 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/bootstrap4-duallistbox/-/bootstrap4-duallistbox-4.0.2.tgz#c6942e34a39d0d05e436d51ebaf31c9349f119d3"
     integrity sha512-vQdANVE2NN0HMaZO9qWJy0C7u04uTpAmtUGO3KLq3xAZKCboJweQ437hDTszI6pbYV2olJCGZMbdhvIkBNGeGQ==
   
-  bootstrap@>=4.0, bootstrap@^5.2.3:
-    version "5.2.3"
-    resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.2.3.tgz#54739f4414de121b9785c5da3c87b37ff008322b"
-    integrity sha512-cEKPM+fwb3cT8NzQZYEu4HilJ3anCrWqh3CHAok1p9jXqMPsPTBhU25fBckEJHJ/p+tTxTFTsFQGM+gaHpi3QQ==
-  
-  bootstrap@^4.6.1:
+  bootstrap@4.6.2, bootstrap@^4.6.1:
     version "4.6.2"
     resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.2.tgz#8e0cd61611728a5bf65a3a2b8d6ff6c77d5d7479"
     integrity sha512-51Bbp/Uxr9aTuy6ca/8FbFloBUJZLHwnhTcnjIeRn2suQWsWzcuJhGjKDB5eppVte/8oCdOL3VuwxvZDUggwGQ==
+  
+  bootstrap@>=4.0:
+    version "5.2.3"
+    resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.2.3.tgz#54739f4414de121b9785c5da3c87b37ff008322b"
+    integrity sha512-cEKPM+fwb3cT8NzQZYEu4HilJ3anCrWqh3CHAok1p9jXqMPsPTBhU25fBckEJHJ/p+tTxTFTsFQGM+gaHpi3QQ==
   
   braces@~3.0.2:
     version "3.0.2"
@@ -1347,7 +1354,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/jquery-validation/-/jquery-validation-1.19.5.tgz#557495b7cad79716897057c4447ad3cd76fda811"
     integrity sha512-X2SmnPq1mRiDecVYL8edWx+yTBZDyC8ohWXFhXdtqFHgU9Wd4KHkvcbCoIZ0JaSaumzS8s2gXSkP8F7ivg/8ZQ==
   
-  jquery@>=1.10, jquery@>=1.12.0, jquery@>=1.7, "jquery@>=1.8.0 <4.0.0", jquery@>=2.2, "jquery@^3.0 || ^2.0 || ^1.0", jquery@^3.4.0, jquery@^3.6.0:
+  jquery@>=1.10, jquery@>=1.12.0, jquery@>=1.7, "jquery@>=1.8.0 <4.0.0", jquery@>=2.2, "jquery@^3.0 || ^2.0 || ^1.0", jquery@^3.4.0, jquery@^3.6.0, jquery@^3.6.2:
     version "3.6.2"
     resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.2.tgz#8302bbc9160646f507bdf59d136a478b312783c4"
     integrity sha512-/e7ulNIEEYk1Z/l4X0vpxGt+B/dNsV8ghOPAWZaJs8pkGvsSC0tm33aMGylXcj/U7y4IcvwtMXPMyBFZn/gK9A==

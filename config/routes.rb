@@ -8,8 +8,13 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :administrators
 
+  root to: "admin/dashboards#today"
   namespace :admin do
-    resources :dashboards, only: [:index]
+    resources :dashboards do
+      get :past, on: :collection
+      get :today, on: :collection
+      get :future, on: :collection
+    end
     resources :voiceover_buildings
     resources :voice_overs
     resources :user_satisfaction_indices
@@ -34,7 +39,7 @@ Rails.application.routes.draw do
     resources :administrators
     resources :backup_queues
 
-    root to: "home#index"
+    root to: "dashboards#today"
   end
 
   namespace :api, defaults: {format: :json} do

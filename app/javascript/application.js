@@ -6,3 +6,5 @@ import "jquery"
 import * as bootstrap from "bootstrap"
 import 'admin-lte'
 import "@fortawesome/fontawesome-free/js/all.min";
+import Highcharts from 'highcharts';
+window.Highcharts = Highcharts;

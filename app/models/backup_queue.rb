@@ -34,4 +34,7 @@
 #  index_today_queues_on_service_id                                 (service_id)
 #
 class BackupQueue < TodayQueue
+  scope :total_queue, -> { count }
+  scope :total_offline_queue, -> { where(print_ticket_method: "offline").count }
+  scope :total_online_queue, -> { where(print_ticket_method: "online").count }
 end

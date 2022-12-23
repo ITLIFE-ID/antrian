@@ -16,6 +16,12 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <%=render "base/sidebar/nested_menu", parent: {name: t(".dashboard"), icon: "fa-dashboard"}, 
+          child: [
+            {name: t(".past"), path: past_admin_dashboards_path},
+            {name: t(".today"), path: today_admin_dashboards_path},            
+            {name: t(".future"), path: future_admin_dashboards_path},
+          ]%>
         <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t(".companies"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t(".schedule"), icon: ""}, 
           child: [

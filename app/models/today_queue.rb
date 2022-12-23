@@ -58,7 +58,16 @@ class TodayQueue < ApplicationRecord
   validates_datetime :print_ticket_time, on_or_after: :today
   validates_date :date, on_or_after: :today
 
-  after_save { BackupQueue.upsert(attributes) }
+  after_save { BackupQueue.upsert(attributes).count }
+  scope :total_queue, -> { where(date: Date.today).count }
+  scope :total_processed, -> { where(date: Date.today, attend: true).where.not(finish_time: nil).count }
+  scope :total_unprocessed, -> { where(date: Date.today, attend: false, finish_time: nil).count }
+  scope :total_offline_queue, -> { where(date: Date.today, print_ticket_method: "offline").count }
+  scope :total_online_queue, -> { where(date: Date.today, print_ticket_method: "online").count }
+
+  scope :total_future_queue, -> { where("date > ?", Date.today).count }
+  scope :total_future_offline_queue, -> { where("date > ?", Date.today).where(print_ticket_method: "offline").count }
+  scope :total_future_online_queue, -> { where("date > ?", Date.today).where(date: Date.today, print_ticket_method: "online").count }
 
   def letter=(value)
     super(value&.upcase)
