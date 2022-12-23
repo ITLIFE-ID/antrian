@@ -28,6 +28,7 @@ Rails.application.routes.draw do
         
     resources :user_counters
     resources :counters
+    resources :counter_client_displays
     
     resources :services
     resources :service_working_days
@@ -44,10 +45,10 @@ Rails.application.routes.draw do
     
     resources :client_displays
     resources :buildings
-    
+
     resources :play_lists do
-      get ':file_type', as: "musics", to: 'play_lists#index', on: :collection, defaults: { file_type: 'music' }
-      get ':file_type', as: "videos", to: 'play_lists#index', on: :collection, defaults: { file_type: 'video' }
+      get ':type', as: "musics", to: 'play_lists#index', on: :collection, defaults: { type: 'music' }
+      get ':type', as: "videos", to: 'play_lists#index', on: :collection, defaults: { type: 'video' }
     end
 
     resources :today_queues do

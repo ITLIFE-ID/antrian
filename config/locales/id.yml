@@ -15,7 +15,7 @@ id:
   service_working_days: hari kerja layanan
   service_types: tipe layanan
   service_closing_days: jam tutup layanan
-  service_clientdisplay: Service pada layar
+  service_clientdisplay: Layanan pada layar
   services: layanan
   satisfaction_indices: Index kenyamanan
   permisi_role: Role
@@ -67,10 +67,38 @@ id:
   working_day: Hari kerja
   closing_day: Hari tutup
   type: Tipe
-  company: Perushaan
+  company: Perusahan
   building: Gedung
   setting: Seting
   client_display: Display layar
   play_list: Play list
-  satisfaction_index: Tingkat kepuasan
+  satisfaction_index: Index kepuasan
   recap: Rekap
+  counter_clientdisplay: Display loket
+  list: Daftar
+  activerecord:
+    models:      
+      backup_queue: Antrian sebelumnya
+      building: Gedung
+      client_display: Display layar
+      company_closing_day: Hari tutup
+      company_working_day: Hari Kerja
+      company: Perusahan     
+      counter_clientdisplay: Display loket
+      counter: Loket
+      permisi_actor_role: Role aktor
+      permisi_actor: Aktor
+      permisi_role: Role
+      play_list: Play list
+      satisfaction_index: Index kepuasan
+      service_clientdisplay: Layanan pada layar
+      service_closing_day: Hari tutup
+      service_type: Tipe layanan
+      service_working_day: Hari Kerja
+      service: Layanan
+      today_queue: Antrian hari ini
+      user_counter: Petugas counter
+      user_satisfaction_index: Index kepuasan pemohon
+      user: Pengguna
+      voice_over: Pengisi suara
+      voice_over_building: Pengisi suara pada gedung

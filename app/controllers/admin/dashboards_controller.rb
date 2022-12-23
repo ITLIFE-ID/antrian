@@ -12,13 +12,7 @@ module Admin
       add_breadcrumb @summary_title
 
       @performance_title = t("past_queue_performance")
-      @user_satisfaction_title = t("past_queue_user_satisfaction")
-      
-      @performance = [
-        {name: t("total_queues"), value: BackupQueue.count, color: "bg-dark", detail_path: admin_today_queues_path},
-        {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue.count, color: "bg-info", detail_path: offline_admin_today_queues_path},
-        {name: t("total_online_queue"), value: BackupQueue.total_online_queue.count, color: "bg-success", detail_path: online_admin_today_queues_path}
-      ]
+      @user_satisfaction_title = t("past_queue_user_satisfaction")      
 
       @user_satisfaction = [
         {name: t("total_queues"), value: BackupQueue.count, color: "bg-dark", detail_path: admin_today_queues_path},
@@ -42,14 +36,6 @@ module Admin
 
       @performance_title = t("today_queue_performance")
       @user_satisfaction_title = t("today_queue_user_satisfaction")
-
-      @performance = [
-        {name: t("total_queues"), value: TodayQueue.total_queue.count, color: "bg-dark", detail_path: admin_today_queues_path},
-        {name: t("total_processed"), value: TodayQueue.total_processed.count, color: "bg-primary", detail_path: admin_today_queues_path},
-        {name: t("total_unprocessed"), value: TodayQueue.total_unprocessed.count, color: "bg-warning", detail_path: admin_today_queues_path},
-        {name: t("total_offline_queue"), value: TodayQueue.total_offline_queue.count, color: "bg-info", detail_path: admin_today_queues_path},
-        {name: t("total_online_queue"), value: TodayQueue.total_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
-      ]
 
       @user_satisfaction = [
         {name: t("total_queues"), value: TodayQueue.total_queue.count, color: "bg-dark", detail_path: admin_today_queues_path},

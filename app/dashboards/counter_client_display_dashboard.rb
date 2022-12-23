@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class BuildingDashboard < Administrate::BaseDashboard
+class CounterClientDisplayDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,14 +9,12 @@ class BuildingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    client_displays: Field::HasMany,
-    company: Field::BelongsTo,
+    client_display: Field::BelongsTo,
+    counter: Field::BelongsTo,
     deleted_at: Field::DateTime,
-    name: Field::String,
-    service_buildings: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,8 +24,8 @@ class BuildingDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    client_displays
-    company
+    client_display
+    counter
     deleted_at
   ].freeze
 
@@ -35,25 +33,21 @@ class BuildingDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    client_displays
-    company    
-    name
-    service_buildings
+    client_display
+    counter
+    deleted_at
     versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    client_displays
-    company
+    client_display
+    counter
     deleted_at
-    name
-    service_buildings
     versions
   ].freeze
 
@@ -69,10 +63,10 @@ class BuildingDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how buildings are displayed
+  # Overwrite this method to customize how counter client displays are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(building)
-    building.name
-  end
+  # def display_resource(counter_client_display)
+  #   "CounterClientDisplay ##{counter_client_display.id}"
+  # end
 end
