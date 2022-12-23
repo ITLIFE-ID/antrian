@@ -51,7 +51,7 @@ class TodayQueue < ApplicationRecord
   validates_numericality_of :number, only_integer: true, greater_than_or_equal_to: 1,
     less_than_or_equal_to: 999
 
-  validates_numericality_of :process_duration, only_integer: true, greater_than_or_equal_to: 1
+  validates_numericality_of :process_duration, only_integer: true, greater_than_or_equal_to: 1, allow_blank: true
 
   with_options on: :next_queue do
     validates_datetime :start_time, after: :print_ticket_time, on_or_after: :today

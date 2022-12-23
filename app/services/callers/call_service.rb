@@ -5,11 +5,9 @@ module Callers
     def execute
       may_i_call_next_queue?
 
-      last_queue_in_counter.update(finish_time: Time.current, attend: user_attend_to_counter) if last_queue_in_counter.present?
+      last_queue_in_counter.update(finish_time: Time.current, attend: user_attend_to_counter, process_duration: process_duration) if last_queue_in_counter.present?
 
       available_queue_to_call.update(counter: counter, start_time: Time.current)
-
-      last_queue_in_counter.update(process_duration: process_duration)
 
       mqtt_publish!("CALL")
     rescue => e

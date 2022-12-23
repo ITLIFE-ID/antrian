@@ -18,7 +18,6 @@
 require "rails_helper"
 
 RSpec.describe Building, type: :model do
-  it { should have_many :service_buildings }
   it { should have_many :client_displays }
   it { should belong_to :company }
   it { should validate_uniqueness_of(:name).scoped_to(:company_id).ignoring_case_sensitivity }

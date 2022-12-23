@@ -36,5 +36,6 @@ FactoryBot.define do
     priority { [true, false].sample }
     max_quota { rand(10..100) }
     closed { false }
+    max_service_time { 3600 }
   end
 end
