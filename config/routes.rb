@@ -15,30 +15,48 @@ Rails.application.routes.draw do
       get :today, on: :collection
       get :future, on: :collection
     end
+
+    resources :companies
+    resources :company_working_days
+    resources :company_closing_days
+    
     resources :voiceover_buildings
     resources :voice_overs
-    resources :user_satisfaction_indices
-    resources :users
+        
     resources :user_counters
+    resources :counters
+    
+    resources :services
     resources :service_working_days
     resources :service_types
     resources :service_closing_days
     resources :service_clientdisplays
-    resources :services
+    
     resources :satisfaction_indices
+    resources :user_satisfaction_indices
+
     resources :permisi_roles
     resources :permisi_actor_roles
     resources :permisi_actors
-    resources :counters
-    resources :company_working_days
-    resources :company_closing_days
-    resources :companies
+    
     resources :client_displays
     resources :buildings
-    resources :today_queues
-    resources :administrators
-    resources :backup_queues
+    resources :today_queues do
+      get :processed, on: :collection 
+      get :unprocessed, on: :collection
+      get :offline, on: :collection
+      get :online, on: :collection
+      get :future_online, on: :collection
+      get :future_offline, on: :collection
+    end
 
+    resources :backup_queues do
+      get :offline, on: :collection
+      get :online, on: :collection
+    end
+
+    resources :administrators    
+    resources :users
     root to: "dashboards#today"
   end
 
