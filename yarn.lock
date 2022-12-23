@@ -2,6 +2,83 @@
 # yarn lockfile v1
 
 
+"@easepick/amp-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/amp-plugin/-/amp-plugin-1.2.0.tgz#9e7a9ff42641cba1b35d905629d82264bb67730d"
+  integrity sha512-RU1/0cTn+g60/ZGQiu0VC8YV3te3G//ld/WtqxT1fFg9D0Zf981GnLzpCFr0Xs+qFfdvDkjETqFZNKGJ4rObjA==
+  dependencies:
+    "@easepick/base-plugin" "^1.1.0"
+
+"@easepick/base-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/base-plugin/-/base-plugin-1.2.0.tgz#76e88ba5c39b53b8a1de80b80fe890f3273bbd9d"
+  integrity sha512-N5zeUW2E0gyOuVCiQs2va0kM2hzojE4XFDrlYBZ4JmQ1pflkipaVgrJoTJVP5/g4dhO94zFhwJ4chhRFnpK1IQ==
+  dependencies:
+    "@easepick/core" "^1.1.0"
+
+"@easepick/bundle@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/bundle/-/bundle-1.2.0.tgz#e811ec7db507acdc74d5ecdd662275d426e8a651"
+  integrity sha512-G435F0pNIIwokrCKbd0Ro4yXWNvZfnEIkHtYwpkVUYakjj5IGxbWQt5aBFthNS4QGskB4lwB9u5MqjzBC0hADg==
+  dependencies:
+    "@easepick/amp-plugin" "^1.1.0"
+    "@easepick/base-plugin" "^1.1.0"
+    "@easepick/core" "^1.1.0"
+    "@easepick/datetime" "^1.1.0"
+    "@easepick/kbd-plugin" "^1.1.0"
+    "@easepick/lock-plugin" "^1.1.0"
+    "@easepick/preset-plugin" "^1.1.0"
+    "@easepick/range-plugin" "^1.1.0"
+    "@easepick/time-plugin" "^1.1.0"
+
+"@easepick/core@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/core/-/core-1.2.0.tgz#a0789aa626e8b6571bc5577f81df66da30f489a1"
+  integrity sha512-kfuQcx/vMbEXZfDOHgk74jFnQFysy+2nXpRH+ATyahYoMqAvtImLOkOxNmdSV0AcWdGeo3PJqB272pMI175EUg==
+  dependencies:
+    "@easepick/datetime" "^1.1.0"
+
+"@easepick/datetime@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/datetime/-/datetime-1.2.0.tgz#2018e8080961b1cff0ed021613559c1090107dd1"
+  integrity sha512-J7xQSMIPCMOXE8wTHEY/XsleQ3P6w+BpV0VAM8k6YlF7w/rzHY9EkRqa4EEjaifMuOLWqEMIiJYijBw7zcBjOA==
+
+"@easepick/kbd-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/kbd-plugin/-/kbd-plugin-1.2.0.tgz#79967ac115abddb04fa9b2f08dd6b549c07cbdb0"
+  integrity sha512-kCKBWtOPsnpei9nrSjcA201lPcT5linEvMvdG/3t50PimvRuI8mvH3/SUUkpPZMpR13T3HMtv/dzxx1d+gbpEQ==
+  dependencies:
+    "@easepick/base-plugin" "^1.1.0"
+
+"@easepick/lock-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/lock-plugin/-/lock-plugin-1.2.0.tgz#57b43963fb699261fe88e7f14181d719329565fa"
+  integrity sha512-kKxsStxQJukk+FTyjJR8fTQOLDfB/JwDyq1Yy/DYQEVPNIFy3676l2CPS59yVgpExsRl48O3KBTSBIAE4Sschw==
+  dependencies:
+    "@easepick/base-plugin" "^1.1.0"
+
+"@easepick/preset-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/preset-plugin/-/preset-plugin-1.2.0.tgz#3797f58b8d55698243418e017b3d10f7973216e7"
+  integrity sha512-d9W9Ruuk1OaBGm0YVLoyH8l4P843YAWweTe4L7+U009Esw9/h8+UlmG19dO73dBfdLsPcighwahzNOQWfjOPlg==
+  dependencies:
+    "@easepick/base-plugin" "^1.1.0"
+    "@easepick/range-plugin" "^1.1.0"
+
+"@easepick/range-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/range-plugin/-/range-plugin-1.2.0.tgz#42fc4b7a9d06b272124c14134b9747343d577b2f"
+  integrity sha512-LcG6vffmnqdvhNxcdq3cfVtLEzL18Wmu6HgA++vuyJ5WaqTbmQ40zahXcAaadzqeiVTHSYkvzbetcMAjSXvdjw==
+  dependencies:
+    "@easepick/base-plugin" "^1.1.0"
+
+"@easepick/time-plugin@^1.1.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@easepick/time-plugin/-/time-plugin-1.2.0.tgz#c3f50e97b70e91963f1e9d448e64817a18548a1e"
+  integrity sha512-OYNzJ8BJYT15iHSN29YDSqhmsuNVmKHQt4ktqyA7Y/VbknuASea37YmQfd89isdCK/y2zJ78yduK/PDgZazHwQ==
+  dependencies:
+    "@easepick/base-plugin" "^1.1.0"
+
 "@esbuild/android-arm64@0.16.7":
   version "0.16.7"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.16.7.tgz#2df472016c77dba3e79596a84da74c541698910f"
@@ -373,6 +450,11 @@ bootstrap-switch@3.3.4:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/bootstrap-switch/-/bootstrap-switch-3.3.4.tgz#70e0aeb2a877c0dc766991de108e2170fc29a2ff"
   integrity sha512-7YQo+Ir6gCUqC36FFp1Zvec5dRF/+obq+1drMtdIMi9Xc84Kx63Evi0kdcp4HfiGsZpiz6IskyYDNlSKcxsL7w==
+
+bootstrap-switch@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/bootstrap-switch/-/bootstrap-switch-3.4.0.tgz#6bbb0445ad8b4264883d06366d48aad3c06988f4"
+  integrity sha512-P4Qdx7mLjqgilKQeeuDCf8AHWeO7992+NFfh0doAA/ExaJqr02QFHhq18GL8EYd2XRviJ16pUUyMRsfOVaPEVg==
 
 bootstrap4-duallistbox@^4.0.2:
   version "4.0.2"
@@ -1380,7 +1462,7 @@ moment-timezone@^0.5.34:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.10.2, moment@^2.29.1, moment@^2.29.2, moment@^2.9.0:
+"moment@>= 2.9.0", moment@^2.10.2, moment@^2.29.1, moment@^2.29.2, moment@^2.29.4, moment@^2.9.0:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -1614,6 +1696,11 @@ select2@^4.0.13:
   version "4.0.13"
   resolved "https://registry.yarnpkg.com/select2/-/select2-4.0.13.tgz#0dbe377df3f96167c4c1626033e924372d8ef44d"
   integrity sha512-1JeB87s6oN/TDxQQYCvS5EFoQyvV6eYMZZ0AeA4tdFDYWN3BAGZ8npr17UBFddU0lgAt3H0yjX3X6/ekOj1yjw==
+
+select2@^4.1.0-rc.0:
+  version "4.1.0-rc.0"
+  resolved "https://registry.yarnpkg.com/select2/-/select2-4.1.0-rc.0.tgz#ba3cd3901dda0155e1c0219ab41b74ba51ea22d8"
+  integrity sha512-Hr9TdhyHCZUtwznEH2CBf7967mEM0idtJ5nMtjvk3Up5tPukOLXbHUNmh10oRfeNIhj+3GD3niu+g6sVK+gK0A==
 
 setimmediate@^1.0.5:
   version "1.0.5"

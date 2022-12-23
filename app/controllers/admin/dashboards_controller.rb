@@ -7,6 +7,7 @@ module Admin
     add_breadcrumb "Dashboard"
 
     def past
+      @type = "past"
       @summary_title = t("past_queue")
       add_breadcrumb @summary_title
 
@@ -35,6 +36,7 @@ module Admin
     end
 
     def today
+      @type = "today"
       @summary_title = t("today_queue")
       add_breadcrumb @summary_title
 
@@ -69,8 +71,9 @@ module Admin
     end
 
     def future
+      @type = "future"
       @summary_title = t("future_queue")  
-      add_breadcrumb @summary_title    
+      add_breadcrumb @summary_title          
 
       @summary = [
         {name: t("total_future_queues"), value: TodayQueue.total_future_queue.count, color: "bg-dark", detail_path: admin_today_queues_path},

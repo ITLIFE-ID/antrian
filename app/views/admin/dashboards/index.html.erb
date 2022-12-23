@@ -1,7 +1,19 @@
 <% content_for(:title) do %>
   <%= @summary_title %>
 <% end %>
-<h1 class="mb-4"><%= content_for(:title) %></h1>
+<div class="d-flex justify-content-start align-items-center mb-4">
+  <h1 class="mr-4"><%= content_for(:title) %></h1>
+  <div>
+    <div class="form-group">
+      <div class="input-group">
+        <button type="button" class="btn btn-default float-right daterange" id="daterange">
+          <i class="far fa-calendar-alt"></i> Date range picker
+          <i class="fas fa-caret-down"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <%@summary.each do |s| %>
     <div class="col-lg-3 col-6">
