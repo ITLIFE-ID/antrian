@@ -10,6 +10,16 @@ module Admin
     add_breadcrumb "Home", :admin_root_path
     # before_action :authenticate_administrator!
 
+    def new
+      add_breadcrumb I18n.t("new")
+      super
+    end
+
+    def edit
+      add_breadcrumb I18n.t("edit")
+      super
+    end
+
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.
     # def records_per_page

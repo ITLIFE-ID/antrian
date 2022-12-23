@@ -15,12 +15,12 @@ id:
   service_working_days: hari kerja layanan
   service_types: tipe layanan
   service_closing_days: jam tutup layanan
-  service_clientdisplays: Display layar
+  service_clientdisplay: Service pada layar
   services: layanan
   satisfaction_indices: Index kenyamanan
-  permisi_roles: Role
-  permisi_actor_roles: Role Aktor
-  permisi_actors: Aktor
+  permisi_role: Role
+  permisi_actor_role: Role Aktor
+  permisi_actor: Aktor
   counters: Loket
   company_working_days: Hari kerja dinas
   company_closing_days: Tanggal tutup dinas
@@ -53,3 +53,22 @@ id:
   total_offline_queue: Total antrian offline
   total_processed: Total antrian yang telah di proses
   total_unprocessed: Total antrian yang belum di proses
+  total_queues: Total antrian
+  new: Buat baru
+  edit: Ubah
+  role: Role
+  actor: Aktor
+  actor_role: Role aktor
+  user_counter: Petugas loket
+  voice_over: Pengisi suara
+  user: Petugas
+  counter: Loket
+  service: Layanan
+  working_day: Hari kerja
+  closing_day: Hari tutup
+  type: Tipe
+  company: Perushaan
+  building: Gedung
+  setting: Seting
+  client_display: Display layar
+  play_list: Play list

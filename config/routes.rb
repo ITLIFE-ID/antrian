@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   devise_for :administrators
 
   root to: "admin/dashboards#today"
+
   namespace :admin do
+    root to: "dashboards#today"
+
     resources :dashboards do
       get :past, on: :collection
       get :today, on: :collection
@@ -41,23 +44,28 @@ Rails.application.routes.draw do
     
     resources :client_displays
     resources :buildings
+    
+    resources :play_lists do
+      get ':file_type', as: "musics", to: 'play_lists#index', on: :collection, defaults: { file_type: 'music' }
+      get ':file_type', as: "videos", to: 'play_lists#index', on: :collection, defaults: { file_type: 'video' }
+    end
+
     resources :today_queues do
-      get :processed, on: :collection 
-      get :unprocessed, on: :collection
-      get :offline, on: :collection
-      get :online, on: :collection
-      get :future_online, on: :collection
-      get :future_offline, on: :collection
+      get ':type', as: "processed", to: 'today_queues#index', on: :collection, defaults: { type: 'processed ' }
+      get ':type', as: "unprocessed", to: 'today_queues#index', on: :collection, defaults: { type: 'unprocessed' }
+      get ':type', as: "offline", to: 'today_queues#index', on: :collection, defaults: { type: 'offline ' }
+      get ':type', as: "online", to: 'today_queues#index', on: :collection, defaults: { type: 'online' }
+      get ':type', as: "future_online", to: 'today_queues#index', on: :collection, defaults: { type: 'future_online ' }
+      get ':type', as: "future_offline", to: 'today_queues#index', on: :collection, defaults: { type: 'future_offline' }      
     end
 
     resources :backup_queues do
-      get :offline, on: :collection
-      get :online, on: :collection
+      get ':type', as: "offline", to: 'backup_queues#index', on: :collection, defaults: { type: 'offline ' }
+      get ':type', as: "online", to: 'backup_queues#index', on: :collection, defaults: { type: 'online' }      
     end
 
     resources :administrators    
-    resources :users
-    root to: "dashboards#today"
+    resources :users    
   end
 
   namespace :api, defaults: {format: :json} do

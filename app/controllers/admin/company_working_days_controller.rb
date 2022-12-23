@@ -1,7 +1,7 @@
 module Admin
   class CompanyWorkingDaysController < Admin::ApplicationController
-    add_breadcrumb "Company", :admin_companies_path
-    add_breadcrumb "Company Working Day", :admin_company_closing_days_path
+    add_breadcrumb I18n.t("company")
+    add_breadcrumb I18n.t("working_day")
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
