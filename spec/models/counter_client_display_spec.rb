@@ -18,7 +18,7 @@
 #
 require "rails_helper"
 
-RSpec.describe CounterClientDisplay, type: :model do
+RSpec.describe CounterClientdisplay, type: :model do
   it { should belong_to :counter }
   it { should belong_to :client_display }
   it { should validate_uniqueness_of(:counter_id).scoped_to(:client_display_id).ignoring_case_sensitivity }

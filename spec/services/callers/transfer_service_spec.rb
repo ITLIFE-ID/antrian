@@ -40,9 +40,9 @@ RSpec.describe Callers::TransferService, type: :service do
 
   context "is_service_close_this_day?" do
     it "add and error" do
-      ServiceClosingDay.create(
+      ClosingDay.create(
         date: Time.current,
-        service: @service2,
+        closeable: @service2,
         start_time: Time.current.change({hour: 8, min: 0, sec: 0}),
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
       )
@@ -54,9 +54,9 @@ RSpec.describe Callers::TransferService, type: :service do
 
   context "is_service_temporary_closed?" do
     it "add and error" do
-      ServiceClosingDay.create(
+      ClosingDay.create(
         date: Time.current,
-        service: @service,
+        closeable: @service,
         start_time: Time.current.change({hour: 8, min: 0, sec: 0}),
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
       )

@@ -19,7 +19,7 @@
 #
 require "rails_helper"
 
-RSpec.describe CompanyWorkingDay, type: :model do
+RSpec.describe WorkingDay, type: :model do
   it { should belong_to :company }
   it { should validate_numericality_of(:day).is_greater_than_or_equal_to(1) }
   it { should validate_numericality_of(:day).is_less_than_or_equal_to(7) }

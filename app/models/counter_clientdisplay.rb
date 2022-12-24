@@ -18,7 +18,7 @@
 #  index_counter_client_displays_on_counter_id                  (counter_id)
 #  index_counter_client_displays_on_deleted_at                  (deleted_at)
 #
-class CounterClientDisplay < ApplicationRecord
+class CounterClientdisplay < ApplicationRecord
   belongs_to :counter
   belongs_to :client_display
 

@@ -174,11 +174,11 @@ class QueueService < ApplicationService
   end
 
   def is_company_close_this_day?
-    raise I18n.t(".company_is_closed", value: selected_date.to_s) if is_closed?(CompanyClosingDay)
+    raise I18n.t(".company_is_closed", value: selected_date.to_s) if is_closed?(ClosingDay)
   end
 
   def is_service_close_this_day?
-    raise I18n.t(".service_is_closed", value: selected_date.to_s) if is_closed?(ServiceClosingDay)
+    raise I18n.t(".service_is_closed", value: selected_date.to_s) if is_closed?(ClosingDay)
   end
 
   def is_quota_exceed?
@@ -186,10 +186,10 @@ class QueueService < ApplicationService
   end
 
   def is_company_working_this_day?
-    raise I18n.t(".company_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(CompanyWorkingDay)
+    raise I18n.t(".company_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(WorkingDay)
   end
 
   def is_service_working_this_day?
-    raise I18n.t(".service_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(ServiceWorkingDay)
+    raise I18n.t(".service_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(WorkingDay)
   end
 end

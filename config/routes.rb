@@ -13,27 +13,25 @@ Rails.application.routes.draw do
     root to: "dashboards#today"
 
     resources :dashboards do
-      get :past, on: :collection
-      get :today, on: :collection
-      get :future, on: :collection
+      get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
+      get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
+      get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
     end
 
     resources :companies
-    resources :company_working_days
-    resources :company_closing_days
+    resources :buildings
+    resources :services
+    resources :service_types
+    resources :counters
+    resources :user_counters
+    resources :service_clientdisplays
+    resources :counter_client_displays
 
     resources :voiceover_buildings
     resources :voice_overs
 
-    resources :user_counters
-    resources :counters
-    resources :counter_client_displays
-
-    resources :services
-    resources :service_working_days
-    resources :service_types
-    resources :service_closing_days
-    resources :service_clientdisplays
+    resources :working_days
+    resources :closing_days
 
     resources :satisfaction_indices
     resources :user_satisfaction_indices
@@ -43,7 +41,7 @@ Rails.application.routes.draw do
     resources :permisi_actors
 
     resources :client_displays
-    resources :buildings
+    
 
     resources :play_lists do
       get ":type", as: "musics", to: "play_lists#index", on: :collection, defaults: {type: "music"}

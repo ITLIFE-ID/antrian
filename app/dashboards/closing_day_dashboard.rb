@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class CompanyWorkingDayDashboard < Administrate::BaseDashboard
+class ClosingDayDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,14 +9,14 @@ class CompanyWorkingDayDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    closing_time: Field::Time,
-    company: Field::BelongsTo,
-    day: Field::Number,
+    closeable: Field::Polymorphic,
+    date: Field::Date,
     deleted_at: Field::DateTime,
-    open_time: Field::Time,
+    finish_time: Field::DateTime,
+    start_time: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,34 +26,34 @@ class CompanyWorkingDayDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    closing_time
-    company
-    day
+    closeable
+    date
+    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    closing_time
-    company
-    day
-    open_time
+    closeable
+    date
+    deleted_at
+    finish_time
+    start_time
     versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    closing_time
-    company
-    day
+    closeable
+    date
     deleted_at
-    open_time
+    finish_time
+    start_time
     versions
   ].freeze
 
@@ -69,10 +69,10 @@ class CompanyWorkingDayDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how company working days are displayed
+  # Overwrite this method to customize how closing days are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(company_working_day)
-  #   "CompanyWorkingDay ##{company_working_day.id}"
+  # def display_resource(closing_day)
+  #   "ClosingDay ##{closing_day.id}"
   # end
 end

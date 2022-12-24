@@ -20,7 +20,14 @@
 #
 FactoryBot.define do
   factory :company_closing_day do
-    association :company
+    association :closeable, factory: :company
+    date { Time.current }
+    finish_time { Time.current.change({hour: 18, min: 0, sec: 0}) }
+    start_time { Time.current.change({hour: 8, min: 0, sec: 0}) }
+  end
+
+  factory :service_closing_day do
+    association :closeable, factory: :service
     date { Time.current }
     finish_time { Time.current.change({hour: 18, min: 0, sec: 0}) }
     start_time { Time.current.change({hour: 8, min: 0, sec: 0}) }

@@ -8,7 +8,7 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :set_paper_trail_whodunnit
     add_breadcrumb "Home", :admin_root_path
-    # before_action :authenticate_administrator!
+    before_action :authenticate_administrator!
 
     def new
       add_breadcrumb I18n.t("new")
@@ -18,6 +18,10 @@ module Admin
     def edit
       add_breadcrumb I18n.t("edit")
       super
+    end
+
+    def current_company
+      current_administrator.company
     end
 
     # Override this value to specify the number of elements to display at a time

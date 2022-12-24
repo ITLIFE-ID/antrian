@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class CounterClientDisplayDashboard < Administrate::BaseDashboard
+class WorkingDayDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,12 +9,14 @@ class CounterClientDisplayDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    client_display: Field::BelongsTo,
-    counter: Field::BelongsTo,
+    closing_time: Field::Time,
+    day: Field::Number,
     deleted_at: Field::DateTime,
+    open_time: Field::Time,
     versions: Field::HasMany,
+    workable: Field::Polymorphic,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,8 +26,8 @@ class CounterClientDisplayDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    client_display
-    counter
+    closing_time
+    day
     deleted_at
   ].freeze
 
@@ -33,10 +35,12 @@ class CounterClientDisplayDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    client_display
-    counter
+    closing_time
+    day
     deleted_at
+    open_time
     versions
+    workable
     created_at
     updated_at
   ].freeze
@@ -45,10 +49,12 @@ class CounterClientDisplayDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    client_display
-    counter
+    closing_time
+    day
     deleted_at
+    open_time
     versions
+    workable
   ].freeze
 
   # COLLECTION_FILTERS
@@ -63,10 +69,10 @@ class CounterClientDisplayDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how counter client displays are displayed
+  # Overwrite this method to customize how working days are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(counter_client_display)
-  #   "CounterClientDisplay ##{counter_client_display.id}"
+  # def display_resource(working_day)
+  #   "WorkingDay ##{working_day.id}"
   # end
 end

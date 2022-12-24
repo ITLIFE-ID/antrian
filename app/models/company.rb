@@ -21,6 +21,9 @@
 #  index_companies_on_name        (name) UNIQUE
 #
 class Company < ApplicationRecord
+  has_many :working_days, as: :workable
+  has_many :closing_days, as: :closeable
+
   validates_presence_of :name, :address, :api_key, :phone_number
   validates_uniqueness_of :name
   validates :phone_number, phone: {possible: true, types: [:mobile]}

@@ -127,6 +127,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["ip_address", "building_id"], name: "index_client_displays_on_ip_address_and_building_id", unique: true
   end
 
+  create_table "closing_days", force: :cascade do |t|
+    t.string "closeable_type"
+    t.bigint "closeable_id"
+    t.date "date"
+    t.datetime "start_time"
+    t.datetime "finish_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["closeable_type", "closeable_id"], name: "index_closing_days_on_closeable"
+    t.index ["date", "closeable_id", "closeable_type"], name: "index_closing_days_on_date_and_closeable_id_and_closeable_type", unique: true
+    t.index ["deleted_at"], name: "index_closing_days_on_deleted_at"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -139,32 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_companies_on_deleted_at"
     t.index ["name"], name: "index_companies_on_name", unique: true
-  end
-
-  create_table "company_closing_days", force: :cascade do |t|
-    t.bigint "company_id"
-    t.date "date"
-    t.datetime "start_time"
-    t.datetime "finish_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["company_id"], name: "index_company_closing_days_on_company_id"
-    t.index ["date", "company_id"], name: "index_company_closing_days_on_date_and_company_id", unique: true
-    t.index ["deleted_at"], name: "index_company_closing_days_on_deleted_at"
-  end
-
-  create_table "company_working_days", force: :cascade do |t|
-    t.bigint "company_id"
-    t.integer "day"
-    t.time "open_time"
-    t.time "closing_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["company_id"], name: "index_company_working_days_on_company_id"
-    t.index ["day", "company_id"], name: "index_company_working_days_on_day_and_company_id", unique: true
-    t.index ["deleted_at"], name: "index_company_working_days_on_deleted_at"
   end
 
   create_table "counter_client_displays", force: :cascade do |t|
@@ -261,19 +249,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["service_id"], name: "index_service_clientdisplays_on_service_id"
   end
 
-  create_table "service_closing_days", force: :cascade do |t|
-    t.bigint "service_id"
-    t.date "date"
-    t.datetime "start_time"
-    t.datetime "finish_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["date", "service_id"], name: "index_service_closing_days_on_date_and_service_id", unique: true
-    t.index ["deleted_at"], name: "index_service_closing_days_on_deleted_at"
-    t.index ["service_id"], name: "index_service_closing_days_on_service_id"
-  end
-
   create_table "service_types", force: :cascade do |t|
     t.bigint "company_id"
     t.string "name"
@@ -284,19 +259,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["company_id", "name"], name: "index_service_types_on_company_id_and_name", unique: true
     t.index ["company_id"], name: "index_service_types_on_company_id"
     t.index ["deleted_at"], name: "index_service_types_on_deleted_at"
-  end
-
-  create_table "service_working_days", force: :cascade do |t|
-    t.bigint "service_id"
-    t.integer "day"
-    t.time "open_time"
-    t.time "closing_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["day", "service_id"], name: "index_service_working_days_on_day_and_service_id", unique: true
-    t.index ["deleted_at"], name: "index_service_working_days_on_deleted_at"
-    t.index ["service_id"], name: "index_service_working_days_on_service_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -453,6 +415,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["deleted_at"], name: "index_voiceover_buildings_on_deleted_at"
     t.index ["voice_over_id", "building_id", "day"], name: "index_voiceover_buildings_on_voice_over_and_building_and_day", unique: true
     t.index ["voice_over_id"], name: "index_voiceover_buildings_on_voice_over_id"
+  end
+
+  create_table "working_days", force: :cascade do |t|
+    t.string "workable_type"
+    t.bigint "workable_id"
+    t.integer "day"
+    t.time "open_time"
+    t.time "closing_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["day", "workable_id", "workable_type"], name: "index_working_days_on_day_and_workable_id_and_workable_type", unique: true
+    t.index ["deleted_at"], name: "index_working_days_on_deleted_at"
+    t.index ["workable_type", "workable_id"], name: "index_working_days_on_workable"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -28,8 +28,9 @@
 #  index_services_on_service_type_id        (service_type_id)
 #
 class Service < ApplicationRecord
-  has_many :service_working_days
-  has_many :service_closing_days
+  has_many :working_days, as: :workable
+  has_many :closing_days, as: :closeable
+  
   has_many :service_clientdisplays
   has_many :service_buildings
   has_many :client_displays, through: :service_clientdisplays

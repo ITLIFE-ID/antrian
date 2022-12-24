@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ServiceWorkingDayDashboard < Administrate::BaseDashboard
+class CounterClientdisplayDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,9 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    closing_time: Field::Time,
-    day: Field::Number,
+    client_display: Field::BelongsTo,
+    counter: Field::BelongsTo,
     deleted_at: Field::DateTime,
-    open_time: Field::Time,
-    service: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -26,8 +24,8 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    closing_time
-    day
+    client_display
+    counter
     deleted_at
   ].freeze
 
@@ -35,25 +33,21 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    closing_time
-    day
-    open_time
-    service
+    client_display
+    counter
+    deleted_at
     versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    closing_time
-    day
+    client_display
+    counter
     deleted_at
-    open_time
-    service
     versions
   ].freeze
 
@@ -69,10 +63,10 @@ class ServiceWorkingDayDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how service working days are displayed
+  # Overwrite this method to customize how counter client displays are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(service_working_day)
-  #   "ServiceWorkingDay ##{service_working_day.id}"
+  # def display_resource(counter_client_display)
+  #   "CounterClientDisplay ##{counter_client_display.id}"
   # end
 end

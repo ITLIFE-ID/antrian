@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CompanyClosingDayPolicy < ApplicationPolicy
+class ClosingDayPolicy < ApplicationPolicy
   # See https://actionpolicy.evilmartians.io/#/writing_policies
   #
   # def index?

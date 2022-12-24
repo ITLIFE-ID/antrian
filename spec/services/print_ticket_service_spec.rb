@@ -27,9 +27,9 @@ RSpec.describe PrintTicketService, type: :service do
 
   context "is_company_close_this_day?" do
     it "add and error" do
-      CompanyClosingDay.create(
+      ClosingDay.create(
         date: Time.current,
-        company: @company,
+        closeable: @company,
         start_time: Time.current.change({hour: 8, min: 0, sec: 0}),
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
       )
@@ -44,9 +44,9 @@ RSpec.describe PrintTicketService, type: :service do
       t = Time.local(2022, 12, 14, 16, 0, 0)
       Timecop.travel(t)
 
-      ServiceClosingDay.create(
+      ClosingDay.create(
         date: Time.current,
-        service: @service,
+        closeable: @service,
         start_time: Time.current.change({hour: 8, min: 0, sec: 0}),
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
       )
@@ -82,7 +82,7 @@ RSpec.describe PrintTicketService, type: :service do
       t = Time.local(2022, 12, 12, 16, 0, 0)
       Timecop.travel(t)
 
-      ServiceWorkingDay.find_by(day: Date.today.wday).destroy
+      WorkingDay.find_by(day: Date.today.wday).destroy
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
       expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true

@@ -74,16 +74,16 @@ ActiveRecord::Base.transaction do
   User.create(name: "Amel", email: "amel@gmal.com", phone_number: "+6282121217917", password: "Password000")
 
   (1..6).each do |d|
-    CompanyWorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00",
-      company: Company.first)
-    CompanyClosingDay.create(date: Date.today - d, start_time: "08:00:00", finish_time: "18:00:00",
-      company: Company.first)
+    WorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00",
+      workable: Company.first)
+    ClosingDay.create(date: Date.today - d, start_time: "08:00:00", finish_time: "18:00:00",
+      closeable: Company.first)
 
     Service.all.each do |service|
-      ServiceWorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00",
-        service: service)
-      ServiceClosingDay.create(date: Date.today - d, start_time: "08:00:00", finish_time: "18:00:00",
-        service: service)
+      WorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00",
+        workable: service)
+      ClosingDay.create(date: Date.today - d, start_time: "08:00:00", finish_time: "18:00:00",
+        closeable: service)
     end
   end
 
