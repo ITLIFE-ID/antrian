@@ -12,8 +12,8 @@ RSpec.describe Callers::RecallService, type: :service do
     @service = Service.first
 
     (1..6).each do |d|
-      FactoryBot.create(:company_working_day, workable: @company, day: d)
-      FactoryBot.create(:service_working_day, workable: @service, day: d)
+      FactoryBot.create(:working_day_for_company, workable: @company, day: d)
+      FactoryBot.create(:working_day_for_service, workable: @service, day: d)
     end
 
     PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)

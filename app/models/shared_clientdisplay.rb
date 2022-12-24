@@ -23,5 +23,6 @@ class SharedClientdisplay < ApplicationRecord
   belongs_to :clientdisplay_able, polymorphic: true
   belongs_to :client_display
 
+  validates_presence_of :clientdisplay_able_type, :clientdisplay_able_id  
   validates_uniqueness_of :client_display_id, scope: [:clientdisplay_able_id, :clientdisplay_able_type]
 end

@@ -1,4 +1,4 @@
-class ExtractLessonDrillArchiveWorker
+class BackupDatabaseWorker
   include Sidekiq::Worker
 
   def perform(*args)

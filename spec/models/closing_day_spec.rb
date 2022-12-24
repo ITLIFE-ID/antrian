@@ -21,7 +21,7 @@
 require "rails_helper"
 
 RSpec.describe ClosingDay, type: :model do
-  it { should belong_to :company }
+  it { should belong_to :closeable }
   it { should validate_presence_of :date }
   it { should validate_presence_of :finish_time }
   it { should validate_presence_of :start_time }
@@ -31,7 +31,7 @@ RSpec.describe ClosingDay, type: :model do
   describe "Start time and Finish time validation" do
     context "given start time is over than finish time and finish time is early than start time" do
       it "should invalid" do
-        obj = FactoryBot.build_stubbed(:company_closing_day,
+        obj = FactoryBot.create(:closing_day_for_company,
           finish_time: Time.current.change({hour: 8, min: 0, sec: 0}),
           start_time: Time.current.change({hour: 18, min: 0, sec: 0}))
         expect(obj.valid?).to be false

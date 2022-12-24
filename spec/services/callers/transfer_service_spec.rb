@@ -14,9 +14,9 @@ RSpec.describe Callers::TransferService, type: :service do
     @service2 = FactoryBot.create(:service, company: Company.first, letter: "B")
 
     (1..6).each do |d|
-      FactoryBot.create(:company_working_day, workable: @company, day: d)
-      FactoryBot.create(:service_working_day, workable: @service, day: d)
-      FactoryBot.create(:service_working_day, workable: @service2, day: d)
+      FactoryBot.create(:working_day_for_company, workable: @company, day: d)
+      FactoryBot.create(:working_day_for_service, workable: @service, day: d)
+      FactoryBot.create(:working_day_for_service, workable: @service2, day: d)
     end
 
     @first_queue = PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)

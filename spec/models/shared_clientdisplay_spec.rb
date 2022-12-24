@@ -22,5 +22,5 @@ require "rails_helper"
 RSpec.describe SharedClientdisplay, type: :model do
   it { should belong_to :clientdisplay_able }
   it { should belong_to :client_display }
-  it { should validate_uniqueness_of(:counter_id).scoped_to(:client_display_id).ignoring_case_sensitivity }
+  it { should validate_uniqueness_of(:client_display_id).scoped_to(:clientdisplay_able_id, :clientdisplay_able_type).ignoring_case_sensitivity }
 end
