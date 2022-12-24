@@ -52,6 +52,7 @@
 #
 class User < ApplicationRecord
   include Permisi::Actable
+  has_many :user_counters
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

@@ -19,7 +19,7 @@
 #  index_counters_on_service_id             (service_id)
 #
 class Counter < ApplicationRecord
-  has_many :counter_client_displays
+  has_many :client_displays, as: :clientdisplay_able
   has_many :user_counters
 
   belongs_to :service

@@ -93,7 +93,7 @@ ActiveRecord::Base.transaction do
       client_display = ClientDisplay.create(
         client_display_type: "p10", ip_address: Faker::Internet.unique.ip_v4_address, location: "Di depan Pendaftaran 1", building: Building.first
       )
-      CounterClientDisplay.create(counter: counter, client_display: client_display)
+      SharedClientDisplay.create(counter: counter, client_display: client_display)
     end
 
     User.all.each do |user|

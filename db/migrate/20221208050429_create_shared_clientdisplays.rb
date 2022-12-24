@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateCounterClientdisplays < ActiveRecord::Migration[7.0]
+class CreateSharedClientdisplays < ActiveRecord::Migration[7.0]
   def change
     create_table :shared_clientdisplays do |t|
       t.references :clientdisplay_able, polymorphic: true

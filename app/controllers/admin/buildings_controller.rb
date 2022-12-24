@@ -22,7 +22,7 @@ module Admin
     # Override this if you have certain roles that require a subset
     # this will be used to set the records shown on the `index` action.
     #
-    def scoped_resource      
+    def scoped_resource
       current_company.resource_class
     end
 

@@ -1,26 +1,27 @@
 # == Schema Information
 #
-# Table name: company_working_days
+# Table name: working_days
 #
-#  id           :bigint           not null, primary key
-#  closing_time :time
-#  day          :integer
-#  deleted_at   :datetime
-#  open_time    :time
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  company_id   :bigint
+#  id            :bigint           not null, primary key
+#  closing_time  :time
+#  day           :integer
+#  deleted_at    :datetime
+#  open_time     :time
+#  workable_type :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  workable_id   :bigint
 #
 # Indexes
 #
-#  index_company_working_days_on_company_id          (company_id)
-#  index_company_working_days_on_day_and_company_id  (day,company_id) UNIQUE
-#  index_company_working_days_on_deleted_at          (deleted_at)
+#  index_working_days_on_day_and_workable_id_and_workable_type  (day,workable_id,workable_type) UNIQUE
+#  index_working_days_on_deleted_at                             (deleted_at)
+#  index_working_days_on_workable                               (workable_type,workable_id)
 #
 require "rails_helper"
 
 RSpec.describe WorkingDay, type: :model do
-  it { should belong_to :company }
+  it { should belong_to :workable }
   it { should validate_numericality_of(:day).is_greater_than_or_equal_to(1) }
   it { should validate_numericality_of(:day).is_less_than_or_equal_to(7) }
   it { should validate_numericality_of(:day).only_integer }

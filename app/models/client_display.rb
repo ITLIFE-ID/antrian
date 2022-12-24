@@ -22,11 +22,10 @@
 class ClientDisplay < ApplicationRecord
   enum client_display_type: {tv: "TV", tab: "TAB", kiosk: "KIOSK", p10: "P10"}
 
-  has_many :service_clientdisplays
-  has_many :service, through: :service_clientdisplays
-  has_many :play_queue_voices
-  has_many :play_lists
-  has_many :counter_client_display
+  has_many :shared_clientdisplays
+  has_many :services, through: :shared_clientdisplays, source: :shared_clientdisplays, source_type: 'Service'
+  has_many :counters, through: :shared_clientdisplays, source: :shared_clientdisplays, source_type: 'Counter'  
+  has_many :play_lists  
 
   belongs_to :building
 

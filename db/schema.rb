@@ -155,18 +155,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["name"], name: "index_companies_on_name", unique: true
   end
 
-  create_table "counter_client_displays", force: :cascade do |t|
-    t.bigint "counter_id"
-    t.bigint "client_display_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["client_display_id"], name: "index_counter_client_displays_on_client_display_id"
-    t.index ["counter_id", "client_display_id"], name: "index_counter_client_displays_on_counter_and_client_display", unique: true
-    t.index ["counter_id"], name: "index_counter_client_displays_on_counter_id"
-    t.index ["deleted_at"], name: "index_counter_client_displays_on_deleted_at"
-  end
-
   create_table "counters", force: :cascade do |t|
     t.bigint "service_id"
     t.integer "number", default: 0
@@ -237,18 +225,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["order_number", "company_id"], name: "index_satisfaction_indices_on_order_number_and_company_id", unique: true
   end
 
-  create_table "service_clientdisplays", force: :cascade do |t|
-    t.bigint "service_id"
-    t.bigint "client_display_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["client_display_id"], name: "index_service_clientdisplays_on_client_display_id"
-    t.index ["deleted_at"], name: "index_service_clientdisplays_on_deleted_at"
-    t.index ["service_id", "client_display_id"], name: "index_service_clientdisplays_on_service_and_client_display", unique: true
-    t.index ["service_id"], name: "index_service_clientdisplays_on_service_id"
-  end
-
   create_table "service_types", force: :cascade do |t|
     t.bigint "company_id"
     t.string "name"
@@ -280,6 +256,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.index ["letter", "company_id"], name: "index_services_on_letter_and_company_id", unique: true
     t.index ["parent_id"], name: "index_services_on_parent_id"
     t.index ["service_type_id"], name: "index_services_on_service_type_id"
+  end
+
+  create_table "shared_clientdisplays", force: :cascade do |t|
+    t.string "clientdisplay_able_type"
+    t.bigint "clientdisplay_able_id"
+    t.bigint "client_display_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["client_display_id"], name: "index_shared_clientdisplays_on_client_display_id"
+    t.index ["clientdisplay_able_id", "clientdisplay_able_type"], name: "index_shared_clientdisplays_on_client_display", unique: true
+    t.index ["clientdisplay_able_type", "clientdisplay_able_id"], name: "index_shared_clientdisplays_on_clientdisplay_able"
+    t.index ["deleted_at"], name: "index_shared_clientdisplays_on_deleted_at"
   end
 
   create_table "today_queues", force: :cascade do |t|

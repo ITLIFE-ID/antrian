@@ -13,8 +13,8 @@ RSpec.describe PrintTicketService, type: :service do
 
     @print_ticket_at_kiosk = {print_ticket_location: :kiosk, service_id: @service}
     (1..6).each do |d|
-      FactoryBot.create(:company_working_day, company: @company, day: d)
-      FactoryBot.create(:service_working_day, service: @service, day: d)
+      FactoryBot.create(:company_working_day, workable: @company, day: d)
+      FactoryBot.create(:service_working_day, workable: @service, day: d)
     end
   end
 

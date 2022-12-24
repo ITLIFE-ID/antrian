@@ -16,7 +16,7 @@ class WorkingDayDashboard < Administrate::BaseDashboard
     versions: Field::HasMany,
     workable: Field::Polymorphic,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

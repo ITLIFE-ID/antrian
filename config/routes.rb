@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  
-  mount Sidekiq::Web => :sidekiq  
+  mount Sidekiq::Web => :sidekiq
 
   devise_for :users
   devise_for :administrators
@@ -41,7 +40,6 @@ Rails.application.routes.draw do
     resources :permisi_actors
 
     resources :client_displays
-    
 
     resources :play_lists do
       get ":type", as: "musics", to: "play_lists#index", on: :collection, defaults: {type: "music"}

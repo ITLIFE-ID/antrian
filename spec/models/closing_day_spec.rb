@@ -1,21 +1,22 @@
 # == Schema Information
 #
-# Table name: company_closing_days
+# Table name: closing_days
 #
-#  id          :bigint           not null, primary key
-#  date        :date
-#  deleted_at  :datetime
-#  finish_time :datetime
-#  start_time  :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  company_id  :bigint
+#  id             :bigint           not null, primary key
+#  closeable_type :string
+#  date           :date
+#  deleted_at     :datetime
+#  finish_time    :datetime
+#  start_time     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  closeable_id   :bigint
 #
 # Indexes
 #
-#  index_company_closing_days_on_company_id           (company_id)
-#  index_company_closing_days_on_date_and_company_id  (date,company_id) UNIQUE
-#  index_company_closing_days_on_deleted_at           (deleted_at)
+#  index_closing_days_on_closeable                                 (closeable_type,closeable_id)
+#  index_closing_days_on_date_and_closeable_id_and_closeable_type  (date,closeable_id,closeable_type) UNIQUE
+#  index_closing_days_on_deleted_at                                (deleted_at)
 #
 require "rails_helper"
 
