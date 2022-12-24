@@ -22,9 +22,12 @@ require "rails_helper"
 
 RSpec.describe WorkingDay, type: :model do
   it { should belong_to :workable }
+  it { should have_db_column(:workable_id).of_type(:integer) }
+  it { should have_db_column(:workable_type).of_type(:string) }
   it { should validate_numericality_of(:day).is_greater_than_or_equal_to(1) }
   it { should validate_numericality_of(:day).is_less_than_or_equal_to(7) }
   it { should validate_numericality_of(:day).only_integer }
+  subject { described_class.new(workable_id: 1, workable_type: Counter) }
   it { should validate_uniqueness_of(:day).scoped_to(:workable_id, :workable_type).ignoring_case_sensitivity }
 
   describe "Open time and Closing time validation" do

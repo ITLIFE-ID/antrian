@@ -22,5 +22,8 @@ require "rails_helper"
 RSpec.describe SharedClientdisplay, type: :model do
   it { should belong_to :clientdisplay_able }
   it { should belong_to :client_display }
+  it { should have_db_column(:clientdisplay_able_id).of_type(:integer) }
+  it { should have_db_column(:clientdisplay_able_type).of_type(:string) }
+  subject { described_class.new(clientdisplay_able_id: 1, clientdisplay_able_type: Counter) }
   it { should validate_uniqueness_of(:client_display_id).scoped_to(:clientdisplay_able_id, :clientdisplay_able_type).ignoring_case_sensitivity }
 end

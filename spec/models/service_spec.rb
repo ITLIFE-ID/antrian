@@ -28,8 +28,8 @@
 require "rails_helper"
 
 RSpec.describe Service, type: :model do
-  it { should have_many :service_working_days }
-  it { should have_many :service_closing_days }
+  it { should have_many :working_days }
+  it { should have_many :closing_days }
   it { should have_many :service_clientdisplays }
   it { should have_many :counters }
 

@@ -30,7 +30,8 @@
 class Service < ApplicationRecord
   has_many :working_days, as: :workable
   has_many :closing_days, as: :closeable
-  has_many :client_displays, as: :clientdisplay_able  
+  has_many :service_clientdisplays, as: :clientdisplay_able  
+  has_many :client_displays, through: :service_clientdisplays
   
   has_many :service_buildings
   has_many :counters

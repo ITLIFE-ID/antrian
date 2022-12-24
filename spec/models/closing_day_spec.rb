@@ -27,13 +27,15 @@ RSpec.describe ClosingDay, type: :model do
   it { should validate_presence_of :start_time }
   it { should_not allow_value("Date").for(:date) }
   it { should allow_value(Time.current).for(:date) }
+  subject { described_class.new(closeable_id: 1, closeable_type: Counter) }
+  it { should validate_uniqueness_of(:date).scoped_to(:closeable_id, :closeable_type).ignoring_case_sensitivity }
 
   describe "Start time and Finish time validation" do
     context "given start time is over than finish time and finish time is early than start time" do
       it "should invalid" do
         obj = FactoryBot.create(:closing_day_for_company,
           finish_time: Time.current.change({hour: 8, min: 0, sec: 0}),
-          start_time: Time.current.change({hour: 18, min: 0, sec: 0}))
+          start_time: Time.current.change({hour: 18, min: 0, sec: 0}))          
         expect(obj.valid?).to be false
       end
     end
