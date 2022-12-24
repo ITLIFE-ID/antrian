@@ -1,0 +1,3 @@
+update_lesson_status_job:
+  cron: "0 11 * * *"
+  class: "BackupDataBaseWorker"

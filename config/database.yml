@@ -20,4 +20,4 @@ test:
 
 production:
   <<: *default
-  database: antrian_prod
+  database: queue_system

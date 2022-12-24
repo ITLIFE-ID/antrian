@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  authenticate :administrators do
-    mount Sidekiq::Web => :sidekiq
-  end
+  
+  mount Sidekiq::Web => :sidekiq  
 
   devise_for :users
   devise_for :administrators
