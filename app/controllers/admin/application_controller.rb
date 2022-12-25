@@ -8,7 +8,7 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :set_paper_trail_whodunnit
     add_breadcrumb "Home", :admin_root_path
-    before_action :authenticate_administrator!
+    # before_action :authenticate_administrator!
 
     def new
       add_breadcrumb I18n.t("new")

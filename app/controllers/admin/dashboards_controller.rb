@@ -20,7 +20,7 @@ module Admin
         {name: t("total_online_queue"), value: BackupQueue.total_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
       ]
 
-      build_summary(@summary)
+      build_summary
 
       render "index"
     end
@@ -34,7 +34,7 @@ module Admin
         {name: t("total_online_queue"), value: TodayQueue.total_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
       ]
 
-      build_summary(@summary)
+      build_summary
 
       render "index"
     end
@@ -46,7 +46,7 @@ module Admin
         {name: t("total_future_online_queue"), value: TodayQueue.total_future_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
       ]
 
-      build_summary(@summary)
+      build_summary
 
       render "index"
     end

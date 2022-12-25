@@ -11,12 +11,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboards#today"
 
-    resources :dashboards do
-      get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
-      get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
-      get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
-    end
-
+    resources :administrators
+    resources :users
     resources :companies
     resources :buildings
     resources :services
@@ -27,10 +23,7 @@ Rails.application.routes.draw do
     resources :counter_client_displays
 
     resources :voiceover_buildings
-    resources :voice_overs
-
-    resources :working_days
-    resources :closing_days
+    resources :voice_overs    
 
     resources :satisfaction_indices
     resources :user_satisfaction_indices
@@ -40,6 +33,22 @@ Rails.application.routes.draw do
     resources :permisi_actors
 
     resources :client_displays
+
+    resources :working_days do
+      get ":type", as: "company", to: "working_days#index", on: :collection, defaults: {type: "company"}
+      get ":type", as: "service", to: "working_days#index", on: :collection, defaults: {type: "service"}
+    end
+
+    resources :closing_days do
+      get ":type", as: "company", to: "closing_days#index", on: :collection, defaults: {type: "company"}
+      get ":type", as: "service", to: "closing_days#index", on: :collection, defaults: {type: "service"}
+    end
+
+    resources :dashboards do
+      get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
+      get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
+      get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
+    end
 
     resources :play_lists do
       get ":type", as: "musics", to: "play_lists#index", on: :collection, defaults: {type: "music"}
@@ -58,10 +67,7 @@ Rails.application.routes.draw do
     resources :backup_queues do
       get ":type", as: "offline", to: "backup_queues#index", on: :collection, defaults: {type: "offline "}
       get ":type", as: "online", to: "backup_queues#index", on: :collection, defaults: {type: "online"}
-    end
-
-    resources :administrators
-    resources :users
+    end    
   end
 
   namespace :api, defaults: {format: :json} do
