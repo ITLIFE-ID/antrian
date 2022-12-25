@@ -14,7 +14,6 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at: Field::DateTime,
     current_sign_in_at: Field::DateTime,
     current_sign_in_ip: Field::String,
-    deleted_at: Field::DateTime,
     email: Field::String,
     encrypted_password: Field::String,
     failed_attempts: Field::Number,
@@ -43,7 +42,8 @@ class UserDashboard < Administrate::BaseDashboard
     unlock_token: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -93,7 +93,6 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count
     unconfirmed_email
     unlock_token
-    versions
     created_at
     updated_at
     deleted_at
@@ -108,7 +107,6 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at
     current_sign_in_at
     current_sign_in_ip
-    deleted_at
     email
     encrypted_password
     failed_attempts
@@ -135,7 +133,6 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count
     unconfirmed_email
     unlock_token
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

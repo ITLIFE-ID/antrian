@@ -10,12 +10,12 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     company: Field::BelongsTo,
-    deleted_at: Field::DateTime,
     name: Field::String,
     order_number: Field::Number,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,7 +26,6 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     company
-    deleted_at
     name
   ].freeze
 
@@ -37,7 +36,6 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
     company
     name
     order_number
-    versions
     created_at
     updated_at
     deleted_at
@@ -48,10 +46,8 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     company
-    deleted_at
     name
     order_number
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

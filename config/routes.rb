@@ -10,20 +10,35 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "dashboards#today"
-
     resources :administrators
     resources :users
-    resources :companies
-    resources :buildings
-    resources :services
+
+    concern :workable do
+      resources :working_days
+    end
+
+    concern :closeable do
+      resources :closing_days
+    end
+
+    resources :companies do
+      resource :working_days
+      resource :closing_days
+    end
+
+    resources :services do
+      resource :working_days
+      resource :closing_days
+    end
+
     resources :service_types
     resources :counters
-    resources :user_counters
+
     resources :service_clientdisplays
     resources :counter_client_displays
 
     resources :voiceover_buildings
-    resources :voice_overs    
+    resources :voice_overs
 
     resources :satisfaction_indices
     resources :user_satisfaction_indices
@@ -33,16 +48,6 @@ Rails.application.routes.draw do
     resources :permisi_actors
 
     resources :client_displays
-
-    resources :working_days do
-      get ":type", as: "company", to: "working_days#index", on: :collection, defaults: {type: "company"}
-      get ":type", as: "service", to: "working_days#index", on: :collection, defaults: {type: "service"}
-    end
-
-    resources :closing_days do
-      get ":type", as: "company", to: "closing_days#index", on: :collection, defaults: {type: "company"}
-      get ":type", as: "service", to: "closing_days#index", on: :collection, defaults: {type: "service"}
-    end
 
     resources :dashboards do
       get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
@@ -67,7 +72,7 @@ Rails.application.routes.draw do
     resources :backup_queues do
       get ":type", as: "offline", to: "backup_queues#index", on: :collection, defaults: {type: "offline "}
       get ":type", as: "online", to: "backup_queues#index", on: :collection, defaults: {type: "online"}
-    end    
+    end
   end
 
   namespace :api, defaults: {format: :json} do

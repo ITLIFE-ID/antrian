@@ -28,7 +28,6 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     id
     closeable
     date
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,12 +36,12 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     id
     closeable
     date
-    deleted_at
-    finish_time
     start_time
+    finish_time
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -51,10 +50,8 @@ class ClosingDayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     closeable
     date
-    deleted_at
-    finish_time
     start_time
-    versions
+    finish_time
   ].freeze
 
   # COLLECTION_FILTERS

@@ -11,12 +11,12 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
     id: Field::Number,
     actor_id: Field::Number,
     administrator: Field::BelongsTo,
-    deleted_at: Field::DateTime,
     permisi_role: Field::BelongsTo,
     role_id: Field::Number,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,7 +28,6 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
     id
     actor_id
     administrator
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -39,7 +38,6 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
     administrator
     permisi_role
     role_id
-    versions
     created_at
     updated_at
     deleted_at
@@ -51,10 +49,8 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     actor_id
     administrator
-    deleted_at
     permisi_role
     role_id
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

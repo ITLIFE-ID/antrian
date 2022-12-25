@@ -141,7 +141,7 @@ class QueueService < ApplicationService
     check.open_time < Time.current && check.closing_time > Time.current
   end
 
-  def is_closed?(closeable)    
+  def is_closed?(closeable)
     check = ClosingDay.find_by(date: selected_date, closeable: closeable)
 
     return false if check.blank?

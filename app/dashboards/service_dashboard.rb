@@ -15,7 +15,6 @@ class ServiceDashboard < Administrate::BaseDashboard
     closed: Field::Boolean,
     company: Field::BelongsTo,
     counters: Field::HasMany,
-    deleted_at: Field::DateTime,
     letter: Field::String,
     max_quota: Field::Number,
     name: Field::String,
@@ -28,7 +27,8 @@ class ServiceDashboard < Administrate::BaseDashboard
     service_working_days: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,9 +38,14 @@ class ServiceDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    name
+    service_type
+    leter
+    max_quota
+    parent
+    priority
     active
     children
-    client_displays
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -63,7 +68,6 @@ class ServiceDashboard < Administrate::BaseDashboard
     service_closing_days
     service_type
     service_working_days
-    versions
     created_at
     updated_at
     deleted_at
@@ -73,24 +77,14 @@ class ServiceDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    active
-    children
-    client_displays
-    closed
-    company
-    counters
-    deleted_at
     letter
-    max_quota
-    name
-    parent
-    priority
-    service_buildings
-    service_clientdisplays
-    service_closing_days
     service_type
-    service_working_days
-    versions
+    name
+    max_quota
+    priority
+    active
+    closed
+    parent
   ].freeze
 
   # COLLECTION_FILTERS

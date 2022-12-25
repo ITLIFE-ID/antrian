@@ -10,13 +10,13 @@ class PlayListDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     client_display: Field::BelongsTo,
-    deleted_at: Field::DateTime,
     file_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     playing: Field::Boolean,
     title: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,7 +27,6 @@ class PlayListDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     client_display
-    deleted_at
     file_type
   ].freeze
 
@@ -36,13 +35,12 @@ class PlayListDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     client_display
-    deleted_at
     file_type
     playing
     title
-    versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -50,11 +48,9 @@ class PlayListDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     client_display
-    deleted_at
     file_type
     playing
     title
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

@@ -30,8 +30,8 @@
 class Service < ApplicationRecord
   has_many :working_days, as: :workable
   has_many :closing_days, as: :closeable
-  has_many :shared_clientdisplays, as: :clientdisplay_able    
-  
+  has_many :shared_clientdisplays, as: :clientdisplay_able
+
   has_many :service_buildings
   has_many :counters
   has_many :children, class_name: "Service", foreign_key: "parent_id", inverse_of: :parent

@@ -10,7 +10,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     client_display: Field::BelongsTo,
-    counter: Field::BelongsTo,
+    clientdisplay_able: Field::Polymorphic,
     deleted_at: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
@@ -25,7 +25,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     client_display
-    counter
+    clientdisplay_able
     deleted_at
   ].freeze
 
@@ -34,7 +34,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     client_display
-    counter
+    clientdisplay_able
     deleted_at
     versions
     created_at
@@ -46,7 +46,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     client_display
-    counter
+    clientdisplay_able
     deleted_at
     versions
   ].freeze
@@ -63,10 +63,10 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how counter client displays are displayed
+  # Overwrite this method to customize how shared clientdisplays are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(counter_client_display)
-  #   "SharedClientDisplay ##{counter_client_display.id}"
+  # def display_resource(shared_clientdisplay)
+  #   "SharedClientdisplay ##{shared_clientdisplay.id}"
   # end
 end

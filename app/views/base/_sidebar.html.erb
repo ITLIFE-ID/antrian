@@ -26,8 +26,8 @@
         <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("schedule"), icon: ""}, 
           child: [
-            {name: t("working_day"), path: company_admin_working_days_path},
-            {name: t("closing_day"), path: company_admin_closing_days_path},          
+            {name: t("working_day"), path: admin_working_days_path(:company)},
+            {name: t("closing_day"), path: admin_closing_days_path(:company)},
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_buildings_path, name: t("building"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("setting")}, 
@@ -40,8 +40,8 @@
         <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t("type"), icon: ""%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("schedule"), icon: ""}, 
           child: [            
-            {name: t("working_day"), path: service_admin_working_days_path},
-            {name: t("closing_day"), path: service_admin_closing_days_path},
+            {name: t("working_day"), path: admin_service_working_days_path},
+            {name: t("closing_day"), path: admin_service_closing_days_path},
           ]%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("counter"), icon: "fa-shop"}, 
           child: [

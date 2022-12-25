@@ -11,13 +11,13 @@ class CounterDashboard < Administrate::BaseDashboard
     id: Field::Number,
     closed: Field::Boolean,
     counter_client_displays: Field::HasMany,
-    deleted_at: Field::DateTime,
     number: Field::Number,
     service: Field::BelongsTo,
     user_counters: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,21 +27,18 @@ class CounterDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    service
+    number
     closed
-    counter_client_displays
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    closed
-    counter_client_displays
-    number
     service
-    user_counters
-    versions
+    number
+    closed
     created_at
     updated_at
     deleted_at
@@ -51,13 +48,9 @@ class CounterDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    closed
-    counter_client_displays
-    deleted_at
-    number
     service
-    user_counters
-    versions
+    number
+    closed
   ].freeze
 
   # COLLECTION_FILTERS

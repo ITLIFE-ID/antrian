@@ -32,10 +32,10 @@ RSpec.describe PrintTicketService, type: :service do
         closeable: @company,
         start_time: Time.current.change({hour: 8, min: 0, sec: 0}),
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
-      )      
+      )
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
-          
+
       expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".company_is_closed", value: Date.today.to_s))).to be true
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe PrintTicketService, type: :service do
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
       )
 
-      print_ticket = described_class.execute(**@print_ticket_at_kiosk)      
+      print_ticket = described_class.execute(**@print_ticket_at_kiosk)
       expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
     end
   end
@@ -85,7 +85,7 @@ RSpec.describe PrintTicketService, type: :service do
 
       WorkingDay.find_by(day: Date.today.wday, workable: @service).destroy
 
-      print_ticket = described_class.execute(**@print_ticket_at_kiosk)      
+      print_ticket = described_class.execute(**@print_ticket_at_kiosk)
       expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true
     end
   end

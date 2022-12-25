@@ -9,7 +9,6 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    deleted_at: Field::DateTime,
     officer_name: Field::String,
     rating: Field::Number,
     review: Field::String,
@@ -18,7 +17,8 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     today_queue: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,7 +28,6 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    deleted_at
     officer_name
     rating
   ].freeze
@@ -43,7 +42,6 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     satifcation_index_name
     satisfaction_index
     today_queue
-    versions
     created_at
     updated_at
     deleted_at
@@ -53,14 +51,12 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    deleted_at
     officer_name
     rating
     review
     satifcation_index_name
     satisfaction_index
     today_queue
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

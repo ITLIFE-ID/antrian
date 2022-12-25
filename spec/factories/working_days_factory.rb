@@ -38,5 +38,5 @@ FactoryBot.define do
 
     factory :working_day_for_company, traits: %i[default for_company]
     factory :working_day_for_service, traits: %i[default for_service]
-  end  
+  end
 end
