@@ -10,11 +10,11 @@ class UserCounterDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     counter: Field::BelongsTo,
+    deleted_at: Field::DateTime,
     user: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,8 +24,9 @@ class UserCounterDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    user
     counter
+    deleted_at
+    user
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -33,10 +34,11 @@ class UserCounterDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     counter
+    deleted_at
     user
+    versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -44,7 +46,9 @@ class UserCounterDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     counter
+    deleted_at
     user
+    versions
   ].freeze
 
   # COLLECTION_FILTERS

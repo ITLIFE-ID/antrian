@@ -11,24 +11,24 @@ class ServiceDashboard < Administrate::BaseDashboard
     id: Field::Number,
     active: Field::Boolean,
     children: Field::HasMany,
-    client_displays: Field::HasMany,
     closed: Field::Boolean,
+    closing_days: Field::HasMany,
     company: Field::BelongsTo,
     counters: Field::HasMany,
+    deleted_at: Field::DateTime,
     letter: Field::String,
     max_quota: Field::Number,
+    max_service_time: Field::Number,
     name: Field::String,
     parent: Field::BelongsTo,
     priority: Field::Boolean,
     service_buildings: Field::HasMany,
-    service_clientdisplays: Field::HasMany,
-    service_closing_days: Field::HasMany,
     service_type: Field::BelongsTo,
-    service_working_days: Field::HasMany,
+    shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
+    working_days: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,14 +38,9 @@ class ServiceDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    name
-    service_type
-    leter
-    max_quota
-    parent
-    priority
     active
     children
+    closed
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -54,37 +49,48 @@ class ServiceDashboard < Administrate::BaseDashboard
     id
     active
     children
-    client_displays
     closed
+    closing_days
     company
     counters
+    deleted_at
     letter
     max_quota
+    max_service_time
     name
     parent
     priority
     service_buildings
-    service_clientdisplays
-    service_closing_days
     service_type
-    service_working_days
+    shared_clientdisplays
+    versions
+    working_days
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    letter
-    service_type
-    name
-    max_quota
-    priority
     active
+    children
     closed
+    closing_days
+    company
+    counters
+    deleted_at
+    letter
+    max_quota
+    max_service_time
+    name
     parent
+    priority
+    service_buildings
+    service_type
+    shared_clientdisplays
+    versions
+    working_days
   ].freeze
 
   # COLLECTION_FILTERS

@@ -10,12 +10,12 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     company: Field::BelongsTo,
+    deleted_at: Field::DateTime,
     name: Field::String,
     slug: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,6 +25,8 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    company
+    deleted_at
     name
   ].freeze
 
@@ -32,19 +34,24 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    company
+    deleted_at
     name
     slug
+    versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    company
+    deleted_at
     name
     slug
+    versions
   ].freeze
 
   # COLLECTION_FILTERS

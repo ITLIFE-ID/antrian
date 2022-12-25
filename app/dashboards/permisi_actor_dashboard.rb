@@ -11,10 +11,10 @@ class PermisiActorDashboard < Administrate::BaseDashboard
     id: Field::Number,
     aka_id: Field::Number,
     aka_type: Field::String,
+    deleted_at: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,6 +26,7 @@ class PermisiActorDashboard < Administrate::BaseDashboard
     id
     aka_id
     aka_type
+    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -34,9 +35,10 @@ class PermisiActorDashboard < Administrate::BaseDashboard
     id
     aka_id
     aka_type
+    deleted_at
+    versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -45,6 +47,8 @@ class PermisiActorDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     aka_id
     aka_type
+    deleted_at
+    versions
   ].freeze
 
   # COLLECTION_FILTERS

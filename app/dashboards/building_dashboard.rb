@@ -11,12 +11,11 @@ class BuildingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     client_displays: Field::HasMany,
     company: Field::BelongsTo,
+    deleted_at: Field::DateTime,
     name: Field::String,
-    service_buildings: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,17 +25,22 @@ class BuildingDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    name
+    client_displays
+    company
+    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    client_displays
+    company
+    deleted_at
     name
+    versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -45,8 +49,9 @@ class BuildingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     client_displays
     company
+    deleted_at
     name
-    service_buildings
+    versions
   ].freeze
 
   # COLLECTION_FILTERS
@@ -64,7 +69,7 @@ class BuildingDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how buildings are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(building)
-    building.name
-  end
+  # def display_resource(building)
+  #   "Building ##{building.id}"
+  # end
 end

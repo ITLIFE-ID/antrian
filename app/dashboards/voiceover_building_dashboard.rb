@@ -11,11 +11,11 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     building: Field::BelongsTo,
     day: Field::Number,
+    deleted_at: Field::DateTime,
     versions: Field::HasMany,
     voice_over: Field::BelongsTo,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -27,6 +27,7 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id
     building
     day
+    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,10 +36,11 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id
     building
     day
+    deleted_at
+    versions
     voice_over
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -47,6 +49,8 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     building
     day
+    deleted_at
+    versions
     voice_over
   ].freeze
 

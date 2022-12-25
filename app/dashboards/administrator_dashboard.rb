@@ -15,7 +15,7 @@ class AdministratorDashboard < Administrate::BaseDashboard
     confirmed_at: Field::DateTime,
     current_sign_in_at: Field::DateTime,
     current_sign_in_ip: Field::String,
-
+    deleted_at: Field::DateTime,
     email: Field::String,
     encrypted_password: Field::String,
     failed_attempts: Field::Number,
@@ -32,8 +32,7 @@ class AdministratorDashboard < Administrate::BaseDashboard
     unlock_token: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -43,30 +42,67 @@ class AdministratorDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    email
-    name
-    phone_number
+    company
+    confirmation_sent_at
+    confirmation_token
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    company
+    confirmation_sent_at
+    confirmation_token
+    confirmed_at
+    current_sign_in_at
+    current_sign_in_ip
+    deleted_at
     email
+    encrypted_password
+    failed_attempts
+    last_sign_in_at
+    last_sign_in_ip
+    locked_at
     name
     phone_number
+    remember_created_at
+    reset_password_sent_at
+    reset_password_token
+    sign_in_count
+    unconfirmed_email
+    unlock_token
+    versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    company
+    confirmation_sent_at
+    confirmation_token
+    confirmed_at
+    current_sign_in_at
+    current_sign_in_ip
+    deleted_at
     email
+    encrypted_password
+    failed_attempts
+    last_sign_in_at
+    last_sign_in_ip
+    locked_at
     name
     phone_number
+    remember_created_at
+    reset_password_sent_at
+    reset_password_token
+    sign_in_count
+    unconfirmed_email
+    unlock_token
+    versions
   ].freeze
 
   # COLLECTION_FILTERS

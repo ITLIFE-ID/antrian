@@ -11,17 +11,16 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     id: Field::Number,
     building: Field::BelongsTo,
     client_display_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    counter_client_display: Field::HasMany,
+    counters: Field::HasMany,
+    deleted_at: Field::DateTime,
     ip_address: Field::String,
     location: Field::String,
     play_lists: Field::HasMany,
-    play_queue_voices: Field::HasMany,
-    service: Field::HasMany,
-    service_clientdisplays: Field::HasMany,
+    services: Field::HasMany,
+    shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,7 +32,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     id
     building
     client_display_type
-    counter_client_display
+    counters
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,16 +41,16 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     id
     building
     client_display_type
-    counter_client_display
+    counters
+    deleted_at
     ip_address
     location
     play_lists
-    play_queue_voices
-    service
-    service_clientdisplays
+    services
+    shared_clientdisplays
+    versions
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -60,13 +59,14 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     building
     client_display_type
-    counter_client_display
+    counters
+    deleted_at
     ip_address
     location
     play_lists
-    play_queue_voices
-    service
-    service_clientdisplays
+    services
+    shared_clientdisplays
+    versions
   ].freeze
 
   # COLLECTION_FILTERS

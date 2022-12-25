@@ -11,14 +11,17 @@ class CompanyDashboard < Administrate::BaseDashboard
     id: Field::Number,
     address: Field::String,
     api_key: Field::String,
+    closing_days: Field::HasMany,
+    deleted_at: Field::DateTime,
     latitude: Field::String,
     longitude: Field::String,
     name: Field::String,
     phone_number: Field::String,
+    services: Field::HasMany,
     versions: Field::HasMany,
+    working_days: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    deleted_at: Field::DateTime
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,25 +31,28 @@ class CompanyDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    name
-    phone_number
     address
     api_key
+    closing_days
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    name
-    phone_number
     address
     api_key
+    closing_days
+    deleted_at
     latitude
     longitude
+    name
+    phone_number
+    services
+    versions
+    working_days
     created_at
     updated_at
-    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -55,10 +61,15 @@ class CompanyDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     address
     api_key
+    closing_days
+    deleted_at
     latitude
     longitude
     name
     phone_number
+    services
+    versions
+    working_days
   ].freeze
 
   # COLLECTION_FILTERS
@@ -76,7 +87,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how companies are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(company)
-    company.name
-  end
+  # def display_resource(company)
+  #   "Company ##{company.id}"
+  # end
 end
