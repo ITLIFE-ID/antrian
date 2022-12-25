@@ -19,7 +19,7 @@
 require "rails_helper"
 
 RSpec.describe Counter, type: :model do
-  it { should have_many :counter_client_displays }
+  it { should have_many :shared_clientdisplays }
   it { should have_many :user_counters }
   it { should belong_to :service }
   it { should validate_numericality_of(:number).is_greater_than_or_equal_to(0) }

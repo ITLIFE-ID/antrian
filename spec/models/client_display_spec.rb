@@ -21,9 +21,8 @@ require "rails_helper"
 
 RSpec.describe ClientDisplay, type: :model do
   it { should have_many :shared_clientdisplays }
-  it { should have_many(:services).through(:shared_clientdisplays) }
-  it { should have_many :counters }
-  it { should have_many(:counters).through(:shared_clientdisplays) }
+  it { should have_many(:services) }  
+  it { should have_many(:counters) }
   it { should belong_to :building }
   it { should validate_presence_of :client_display_type }
   it { should validate_presence_of :ip_address }

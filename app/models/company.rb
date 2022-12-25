@@ -23,6 +23,7 @@
 class Company < ApplicationRecord
   has_many :working_days, as: :workable
   has_many :closing_days, as: :closeable
+  has_many :services
 
   validates_presence_of :name, :address, :api_key, :phone_number
   validates_uniqueness_of :name

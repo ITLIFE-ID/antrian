@@ -30,7 +30,7 @@ require "rails_helper"
 RSpec.describe Service, type: :model do
   it { should have_many :working_days }
   it { should have_many :closing_days }
-  it { should have_many :service_clientdisplays }
+  it { should have_many :shared_clientdisplays }
   it { should have_many :counters }
 
   it { should belong_to :service_type }
@@ -43,7 +43,6 @@ RSpec.describe Service, type: :model do
   it { should validate_numericality_of(:max_quota).is_less_than_or_equal_to(999) }
   it { should validate_numericality_of(:max_quota).only_integer }
   it { should validate_presence_of(:letter) }
-  it { should have_many(:client_displays).through(:service_clientdisplays) }
 
   describe "#parent & #children" do
     context "given a child has a parent" do

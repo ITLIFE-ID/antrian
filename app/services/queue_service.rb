@@ -25,6 +25,10 @@ class QueueService < ApplicationService
     Service.find_by_id(service_id) || counter&.service
   end
 
+  def company
+    service.company
+  end
+
   def find_queue
     TodayQueue.where("DATE(print_ticket_time) = ?", selected_date.to_s)
   end
@@ -129,16 +133,16 @@ class QueueService < ApplicationService
     date.blank? ? "offline" : "online"
   end
 
-  def is_not_working_day?(klass)
-    check = klass.find_by(day: selected_date.wday)
+  def is_not_working_day?(workable)
+    check = WorkingDay.find_by(day: selected_date.wday, workable: workable)
 
     return true if check.blank?
 
     check.open_time < Time.current && check.closing_time > Time.current
   end
 
-  def is_closed?(klass)
-    check = klass.find_by(date: selected_date)
+  def is_closed?(closeable)    
+    check = ClosingDay.find_by(date: selected_date, closeable: closeable)
 
     return false if check.blank?
 
@@ -174,11 +178,11 @@ class QueueService < ApplicationService
   end
 
   def is_company_close_this_day?
-    raise I18n.t(".company_is_closed", value: selected_date.to_s) if is_closed?(ClosingDay)
+    raise I18n.t(".company_is_closed", value: selected_date.to_s) if is_closed?(company)
   end
 
   def is_service_close_this_day?
-    raise I18n.t(".service_is_closed", value: selected_date.to_s) if is_closed?(ClosingDay)
+    raise I18n.t(".service_is_closed", value: selected_date.to_s) if is_closed?(service)
   end
 
   def is_quota_exceed?
@@ -186,10 +190,10 @@ class QueueService < ApplicationService
   end
 
   def is_company_working_this_day?
-    raise I18n.t(".company_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(WorkingDay)
+    raise I18n.t(".company_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(company)
   end
 
   def is_service_working_this_day?
-    raise I18n.t(".service_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(WorkingDay)
+    raise I18n.t(".service_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(service)
   end
 end
