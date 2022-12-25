@@ -36,8 +36,7 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
     company
     deleted_at
     name
-    order_number
-    versions
+    order_number    
     created_at
     updated_at
   ].freeze
@@ -48,8 +47,7 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     company
     name
-    order_number
-    versions
+    order_number    
   ].freeze
 
   # COLLECTION_FILTERS

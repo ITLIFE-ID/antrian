@@ -36,8 +36,7 @@ class WorkingDayDashboard < Administrate::BaseDashboard
     id
     closing_time
     day
-    open_time
-    versions
+    open_time    
     workable
     created_at
     updated_at
@@ -50,8 +49,7 @@ class WorkingDayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     closing_time
     day
-    open_time
-    versions
+    open_time    
     workable
   ].freeze
 

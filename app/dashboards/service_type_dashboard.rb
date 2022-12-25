@@ -36,8 +36,7 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
     company
     deleted_at
     name
-    slug
-    versions
+    slug    
     created_at
     updated_at
   ].freeze
@@ -48,8 +47,7 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     company
     name
-    slug
-    versions
+    slug    
   ].freeze
 
   # COLLECTION_FILTERS

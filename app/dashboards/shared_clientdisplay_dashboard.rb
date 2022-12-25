@@ -34,8 +34,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
     id
     client_display
     clientdisplay_able
-    deleted_at
-    versions
+    deleted_at    
     created_at
     updated_at
   ].freeze
@@ -45,8 +44,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     client_display
-    clientdisplay_able
-    versions
+    clientdisplay_able    
   ].freeze
 
   # COLLECTION_FILTERS

@@ -40,8 +40,7 @@ class CounterDashboard < Administrate::BaseDashboard
     number
     service
     shared_clientdisplays
-    user_counters
-    versions
+    user_counters    
     created_at
     updated_at
   ].freeze
@@ -54,8 +53,7 @@ class CounterDashboard < Administrate::BaseDashboard
     number
     service
     shared_clientdisplays
-    user_counters
-    versions
+    user_counters    
   ].freeze
 
   # COLLECTION_FILTERS

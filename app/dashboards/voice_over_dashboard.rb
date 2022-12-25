@@ -31,13 +31,12 @@ class VoiceOverDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    deleted_at
+    id    
     name
-    slug
-    versions
+    slug    
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -46,7 +45,6 @@ class VoiceOverDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     slug
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

@@ -31,8 +31,11 @@ Rails.application.routes.draw do
       resource :closing_days
     end
 
+    resources :buildings
+
     resources :service_types
     resources :counters
+    resources :user_counters
 
     resources :service_clientdisplays
     resources :counter_client_displays

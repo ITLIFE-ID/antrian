@@ -34,8 +34,7 @@ class PermisiActorDashboard < Administrate::BaseDashboard
     id
     aka_id
     aka_type
-    deleted_at
-    versions
+    deleted_at    
     created_at
     updated_at
   ].freeze
@@ -45,8 +44,7 @@ class PermisiActorDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     aka_id
-    aka_type
-    versions
+    aka_type    
   ].freeze
 
   # COLLECTION_FILTERS

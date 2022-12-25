@@ -35,8 +35,7 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id
     building
     day
-    deleted_at
-    versions
+    deleted_at    
     voice_over
     created_at
     updated_at
@@ -47,8 +46,7 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     building
-    day
-    versions
+    day    
     voice_over
   ].freeze
 

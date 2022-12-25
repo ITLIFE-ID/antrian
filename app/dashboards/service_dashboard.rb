@@ -62,8 +62,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     priority
     service_buildings
     service_type
-    shared_clientdisplays
-    versions
+    shared_clientdisplays    
     working_days
     created_at
     updated_at
@@ -87,8 +86,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     priority
     service_buildings
     service_type
-    shared_clientdisplays
-    versions
+    shared_clientdisplays    
     working_days
   ].freeze
 

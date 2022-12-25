@@ -95,8 +95,7 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count
     unconfirmed_email
     unlock_token
-    user_counters
-    versions
+    user_counters    
     created_at
     updated_at
   ].freeze
@@ -136,8 +135,7 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count
     unconfirmed_email
     unlock_token
-    user_counters
-    versions
+    user_counters    
   ].freeze
 
   # COLLECTION_FILTERS

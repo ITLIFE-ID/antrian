@@ -34,8 +34,7 @@ class UserCounterDashboard < Administrate::BaseDashboard
     id
     counter
     deleted_at
-    user
-    versions
+    user    
     created_at
     updated_at
   ].freeze
@@ -45,8 +44,7 @@ class UserCounterDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     counter
-    user
-    versions
+    user    
   ].freeze
 
   # COLLECTION_FILTERS

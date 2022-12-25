@@ -46,8 +46,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     location
     play_lists
     services
-    shared_clientdisplays
-    versions
+    shared_clientdisplays    
     created_at
     updated_at
     deleted_at
@@ -64,8 +63,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     location
     play_lists
     services
-    shared_clientdisplays
-    versions
+    shared_clientdisplays    
   ].freeze
 
   # COLLECTION_FILTERS

@@ -21,7 +21,7 @@ module Admin
       super
     end
 
-    def current_company
+    def set_current_company
       # @current_company ||= current_administrator.company
     end
 

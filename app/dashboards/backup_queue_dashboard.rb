@@ -93,8 +93,7 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     service
     service_type_slug
     start_time
-    uniq_number
-    versions
+    uniq_number    
   ].freeze
 
   # COLLECTION_FILTERS

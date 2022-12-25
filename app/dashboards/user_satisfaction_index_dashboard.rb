@@ -42,8 +42,7 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     review
     satifcation_index_name
     satisfaction_index
-    today_queue
-    versions
+    today_queue    
     created_at
     updated_at
   ].freeze
@@ -57,8 +56,7 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     review
     satifcation_index_name
     satisfaction_index
-    today_queue
-    versions
+    today_queue    
   ].freeze
 
   # COLLECTION_FILTERS

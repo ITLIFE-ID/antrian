@@ -38,8 +38,7 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
     administrator
     deleted_at
     permisi_role
-    role_id
-    versions
+    role_id    
     created_at
     updated_at
   ].freeze
@@ -51,8 +50,7 @@ class PermisiActorRoleDashboard < Administrate::BaseDashboard
     actor_id
     administrator
     permisi_role
-    role_id
-    versions
+    role_id    
   ].freeze
 
   # COLLECTION_FILTERS

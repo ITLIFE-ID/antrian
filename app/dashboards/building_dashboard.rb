@@ -35,8 +35,7 @@ class BuildingDashboard < Administrate::BaseDashboard
     id
     client_displays
     company
-    name
-    versions
+    name    
     created_at
     updated_at
     deleted_at
@@ -48,8 +47,7 @@ class BuildingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     client_displays
     company
-    name
-    versions
+    name    
   ].freeze
 
   # COLLECTION_FILTERS

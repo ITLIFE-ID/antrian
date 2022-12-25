@@ -37,8 +37,7 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     closeable
     date
     finish_time
-    start_time
-    versions
+    start_time    
     created_at
     updated_at
     deleted_at
@@ -51,8 +50,7 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     closeable
     date
     finish_time
-    start_time
-    versions
+    start_time    
   ].freeze
 
   # COLLECTION_FILTERS

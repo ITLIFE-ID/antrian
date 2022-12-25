@@ -71,7 +71,6 @@ class AdministratorDashboard < Administrate::BaseDashboard
     sign_in_count
     unconfirmed_email
     unlock_token
-    versions
     created_at
     updated_at
     deleted_at
@@ -100,8 +99,7 @@ class AdministratorDashboard < Administrate::BaseDashboard
     reset_password_token
     sign_in_count
     unconfirmed_email
-    unlock_token
-    versions
+    unlock_token    
   ].freeze
 
   # COLLECTION_FILTERS

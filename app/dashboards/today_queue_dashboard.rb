@@ -67,8 +67,7 @@ class TodayQueueDashboard < Administrate::BaseDashboard
     service
     service_type_slug
     start_time
-    uniq_number
-    versions
+    uniq_number    
     created_at
     updated_at
   ].freeze
@@ -95,7 +94,6 @@ class TodayQueueDashboard < Administrate::BaseDashboard
     service_type_slug
     start_time
     uniq_number
-    versions
   ].freeze
 
   # COLLECTION_FILTERS

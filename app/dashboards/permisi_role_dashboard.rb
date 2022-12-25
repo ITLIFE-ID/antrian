@@ -36,8 +36,7 @@ class PermisiRoleDashboard < Administrate::BaseDashboard
     deleted_at
     name
     permissions
-    slug
-    versions
+    slug  
     created_at
     updated_at
   ].freeze
@@ -48,8 +47,7 @@ class PermisiRoleDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     permissions
-    slug
-    versions
+    slug    
   ].freeze
 
   # COLLECTION_FILTERS

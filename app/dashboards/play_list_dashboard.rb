@@ -38,8 +38,7 @@ class PlayListDashboard < Administrate::BaseDashboard
     deleted_at
     file_type
     playing
-    title
-    versions
+    title 
     created_at
     updated_at
   ].freeze
@@ -51,8 +50,7 @@ class PlayListDashboard < Administrate::BaseDashboard
     client_display
     file_type
     playing
-    title
-    versions
+    title    
   ].freeze
 
   # COLLECTION_FILTERS

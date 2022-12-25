@@ -8,6 +8,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-seed_file = Rails.env.development? ? "development_seed.rb" : "#{ENV.fetch("client", nil)}_seed.rb"
+seed_file = Rails.env.development? ? "development_seed.rb" : "#{ENV.fetch("client", "production")}_seed.rb"
 
 load File.join(Rails.root, "db", "seeds", seed_file)
