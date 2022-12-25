@@ -56,7 +56,7 @@ RSpec.describe Callers::TransferService, type: :service do
     it "add and error" do
       ClosingDay.create(
         date: Time.current,
-        closeable: @service,
+        closeable: @service2,
         start_time: Time.current.change({hour: 8, min: 0, sec: 0}),
         finish_time: Time.current.change({hour: 18, min: 0, sec: 0})
       )
