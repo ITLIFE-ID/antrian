@@ -26,7 +26,6 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
     id
     client_display
     clientdisplay_able
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -47,7 +46,6 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     client_display
     clientdisplay_able
-    deleted_at
     versions
   ].freeze
 

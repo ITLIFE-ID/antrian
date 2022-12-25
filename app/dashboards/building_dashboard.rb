@@ -27,7 +27,6 @@ class BuildingDashboard < Administrate::BaseDashboard
     id
     client_displays
     company
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,11 +35,11 @@ class BuildingDashboard < Administrate::BaseDashboard
     id
     client_displays
     company
-    deleted_at
     name
     versions
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -49,7 +48,6 @@ class BuildingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     client_displays
     company
-    deleted_at
     name
     versions
   ].freeze

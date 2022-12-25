@@ -27,7 +27,6 @@ class PlayListDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     client_display
-    deleted_at
     file_type
   ].freeze
 
@@ -50,7 +49,6 @@ class PlayListDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     client_display
-    deleted_at
     file_type
     playing
     title

@@ -81,7 +81,6 @@ class TodayQueueDashboard < Administrate::BaseDashboard
     children
     counter
     date
-    deleted_at
     finish_time
     letter
     note

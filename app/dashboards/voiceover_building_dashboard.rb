@@ -27,7 +27,6 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id
     building
     day
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -49,7 +48,6 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     building
     day
-    deleted_at
     versions
     voice_over
   ].freeze

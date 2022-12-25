@@ -28,7 +28,6 @@ class CounterDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     closed
-    deleted_at
     number
   ].freeze
 
@@ -52,7 +51,6 @@ class CounterDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     closed
-    deleted_at
     number
     service
     shared_clientdisplays

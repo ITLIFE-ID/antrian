@@ -43,7 +43,6 @@ class CompanyDashboard < Administrate::BaseDashboard
     address
     api_key
     closing_days
-    deleted_at
     latitude
     longitude
     name
@@ -53,6 +52,7 @@ class CompanyDashboard < Administrate::BaseDashboard
     working_days
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -62,7 +62,6 @@ class CompanyDashboard < Administrate::BaseDashboard
     address
     api_key
     closing_days
-    deleted_at
     latitude
     longitude
     name

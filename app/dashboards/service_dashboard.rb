@@ -79,7 +79,6 @@ class ServiceDashboard < Administrate::BaseDashboard
     closing_days
     company
     counters
-    deleted_at
     letter
     max_quota
     max_service_time

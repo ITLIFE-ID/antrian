@@ -26,7 +26,6 @@ class PermisiActorDashboard < Administrate::BaseDashboard
     id
     aka_id
     aka_type
-    deleted_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -47,7 +46,6 @@ class PermisiActorDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     aka_id
     aka_type
-    deleted_at
     versions
   ].freeze
 

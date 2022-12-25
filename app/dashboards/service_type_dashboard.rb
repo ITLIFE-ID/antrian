@@ -26,7 +26,6 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     company
-    deleted_at
     name
   ].freeze
 
@@ -48,7 +47,6 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     company
-    deleted_at
     name
     slug
     versions

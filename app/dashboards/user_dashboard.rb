@@ -110,7 +110,6 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at
     current_sign_in_at
     current_sign_in_ip
-    deleted_at
     email
     encrypted_password
     failed_attempts
