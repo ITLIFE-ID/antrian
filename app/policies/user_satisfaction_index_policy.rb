@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class UserSatisfactionIndexPolicy < ApplicationPolicy
   # See https://actionpolicy.evilmartians.io/#/writing_policies
   #

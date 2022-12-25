@@ -1,4 +1,4 @@
-class WorkingDayPolicy < ApplicationPolicy
+class PermisiActorRolePolicy < ApplicationPolicy
   # See https://actionpolicy.evilmartians.io/#/writing_policies
   #
   # def index?
