@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/thoughtbot/administrate.git
-  revision: 1673be53d0329bd1cbcbb9886a24a184585aedd5
+  revision: e1bfd5c917c415cfab6fbb1abfb0b3057b48c113
   specs:
     administrate (0.18.0)
       actionpack (>= 5.0)
@@ -348,7 +348,7 @@ GEM
       activesupport (>= 3.2.0)
       zeitwerk (~> 2.4, >= 2.4.2)
     pg (1.4.5)
-    phonelib (0.7.5)
+    phonelib (0.7.6)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)

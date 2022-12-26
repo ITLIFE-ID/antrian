@@ -6,10 +6,11 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    add_breadcrumb "Home", :admin_root_path
+    before_action :authenticate_administrator!
+    authorize :user, through: :current_administrator
     before_action :set_paper_trail_whodunnit
     before_action :set_current_company
-    add_breadcrumb "Home", :admin_root_path
-    # before_action :authenticate_administrator!
 
     def new
       add_breadcrumb I18n.t("new")
@@ -22,7 +23,27 @@ module Admin
     end
 
     def set_current_company
-      @current_company ||= Company.second      
+      @current_company ||= current_administrator.company
+    end
+
+    def scoped_resource_class
+      authorized_scope(resource_class.all)
+    end
+
+    def company_services
+      @company_services ||= company.services
+    end
+
+    def company_buildings
+      @company_buildings ||= company.buildings
+    end
+
+    def company_satisfaction_indices
+      @company_satisfaction_indices ||= company.satisfaction_indices
+    end
+
+    def is_super_admin?
+      current_administrator.id == 1
     end
 
     # Override this value to specify the number of elements to display at a time

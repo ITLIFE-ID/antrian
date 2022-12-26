@@ -3,19 +3,19 @@ module Admin
     add_breadcrumb I18n.t("service")
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
-    
+
     def create
-      resource = @current_company.services.new(resource_params)
+      resource = scoped_resource_class.new(resource_params)
       authorize_resource(resource)
 
       if resource.save
         redirect_to(
           after_resource_created_path(resource),
-          notice: translate_with_resource("create.success"),
+          notice: translate_with_resource("create.success")
         )
       else
         render :new, locals: {
-          page: Administrate::Page::Form.new(dashboard, resource),
+          page: Administrate::Page::Form.new(dashboard, resource)
         }, status: :unprocessable_entity
       end
     end
@@ -39,7 +39,7 @@ module Admin
     # this will be used to set the records shown on the `index` action.
     #
     def scoped_resource
-      @current_company.services
+      scoped_resource_class
     end
 
     # Override `resource_params` if you want to transform the submitted

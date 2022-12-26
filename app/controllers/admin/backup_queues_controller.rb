@@ -24,11 +24,7 @@ module Admin
     # this will be used to set the records shown on the `index` action.
     #
     def scoped_resource
-      if params.key? :type
-        resource_class.send(params[:type])
-      else
-        resource_class
-      end
+      resource_class.where(service: company_services)
     end
 
     # Override `resource_params` if you want to transform the submitted

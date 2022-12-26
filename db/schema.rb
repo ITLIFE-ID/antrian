@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_26_080019) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_26_131815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,11 +66,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_080019) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "otp_auth_secret"
+    t.string "otp_recovery_secret"
+    t.boolean "otp_enabled", default: false, null: false
+    t.boolean "otp_mandatory", default: false, null: false
+    t.datetime "otp_enabled_on"
+    t.integer "otp_failed_attempts", default: 0, null: false
+    t.integer "otp_recovery_counter", default: 0, null: false
+    t.string "otp_persistence_seed"
+    t.string "otp_session_challenge"
+    t.datetime "otp_challenge_expires"
     t.index ["company_id"], name: "index_administrators_on_company_id"
     t.index ["confirmation_token"], name: "index_administrators_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_administrators_on_deleted_at"
     t.index ["email", "company_id"], name: "index_administrators_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_administrators_on_email", unique: true
+    t.index ["otp_challenge_expires"], name: "index_administrators_on_otp_challenge_expires"
+    t.index ["otp_session_challenge"], name: "index_administrators_on_otp_session_challenge", unique: true
     t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_administrators_on_unlock_token", unique: true
   end

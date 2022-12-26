@@ -1,22 +1,18 @@
 {
   "name": "app",
   "private": "true",
-  "dependencies": {
-    "@easepick/bundle": "^1.2.0",
+  "dependencies": {    
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@popperjs/core": "^2.11.6",
-    "admin-lte": "^3.2.0",
-    "autoprefixer": "^10.4.13",
+    "admin-lte": "^3.2.0",    
     "bootstrap": "4.6.2",
     "bootstrap-icons": "^1.10.2",
     "bootstrap-switch": "^3.4.0",
     "esbuild": "^0.16.7",
     "highcharts": "^10.3.2",
-    "jquery": "^3.6.2",
-    "moment": "^2.29.4",
-    "postcss": "^8.4.20",
+    "jquery": "^3.6.2",        
     "sass": "^1.56.2",
     "select2": "^4.1.0-rc.0"
   },

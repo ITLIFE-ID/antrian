@@ -21,6 +21,7 @@ to display a collection of resources in an HTML table.
   <thead>
     <tr>
       <% collection_presenter.attribute_types.each do |attr_name, attr_type| %>
+        <% next if authorized_scope(resource_class, type: :field_authorization, scope_options: {field: attr_name})%>
         <th tabindex="0" aria-controls="example1" rowspan="1" colspan="1" class="sorting cell-label
         cell-label--<%= attr_type.html_class %>
         cell-label--<%= collection_presenter.ordered_html_class(attr_name) %>
@@ -54,6 +55,7 @@ to display a collection of resources in an HTML table.
           <% end %>
           >
         <% collection_presenter.attributes_for(resource).each do |attribute| %>
+          <% next if authorized_scope(resource, type: :field_authorization, scope_options: {attribute: attribute}) %>
           <td class="cell-data cell-data--<%= attribute.html_class %>">
             <% if accessible_action?(resource, :show) -%>
               <a href="<%= polymorphic_path([namespace, resource]) -%>"

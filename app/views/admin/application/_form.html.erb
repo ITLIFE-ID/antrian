@@ -35,6 +35,7 @@ and renders all form fields for a resource's editable attributes.
             </div>
           <% end %>
           <% page.attributes(controller.action_name).each do |attribute| -%>
+            <% next if authorized_scope(page.resource, type: :field_authorization, scope_options: {attribute: attribute})%>
             <div class="field-unit field-unit--<%= attribute.html_class %> field-unit--<%= requireness(attribute) %>">
               <%= render_field attribute, f: f %>
             </div>
