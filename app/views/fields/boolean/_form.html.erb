@@ -14,10 +14,9 @@ By default, the input is a checkbox.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/Boolean
 %>
-
 <div class="field-unit__label">
   <%= f.label field.attribute %>
 </div>
-<div class="field-unit__field">
-  <%= f.check_box field.attribute %>
+<div class="field-unit__field" data-controller="bootstrap-switch">
+  <%= f.check_box field.attribute, {class: "bootstrap-swotch", "data-off-color": "danger", "data-on-color": "success"} %>
 </div>
