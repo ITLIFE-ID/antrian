@@ -11,10 +11,10 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
     id: Field::Number,
     client_display: Field::BelongsTo,
     clientdisplay_able: Field::Polymorphic,
-    deleted_at: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -34,9 +34,9 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
     id
     client_display
     clientdisplay_able
-    deleted_at    
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -44,7 +44,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     client_display
-    clientdisplay_able    
+    clientdisplay_able
   ].freeze
 
   # COLLECTION_FILTERS

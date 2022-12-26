@@ -11,11 +11,11 @@ class BuildingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     client_displays: Field::HasMany,
     company: Field::BelongsTo,
-    deleted_at: Field::DateTime,
     name: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,17 +25,16 @@ class BuildingDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    name
     client_displays
-    company
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    name
     client_displays
-    company
-    name    
     created_at
     updated_at
     deleted_at
@@ -45,9 +44,7 @@ class BuildingDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    client_displays
-    company
-    name    
+    name
   ].freeze
 
   # COLLECTION_FILTERS

@@ -14,7 +14,6 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at: Field::DateTime,
     current_sign_in_at: Field::DateTime,
     current_sign_in_ip: Field::String,
-    deleted_at: Field::DateTime,
     email: Field::String,
     encrypted_password: Field::String,
     failed_attempts: Field::Number,
@@ -44,7 +43,8 @@ class UserDashboard < Administrate::BaseDashboard
     user_counters: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -54,28 +54,27 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    confirmation_sent_at
-    confirmation_token
-    confirmed_at
+    email
+    name
+    phone_number
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    name
+    email
     confirmation_sent_at
     confirmation_token
     confirmed_at
     current_sign_in_at
     current_sign_in_ip
-    deleted_at
-    email
     encrypted_password
     failed_attempts
     last_sign_in_at
     last_sign_in_ip
     locked_at
-    name
     otp_auth_secret
     otp_challenge_expires
     otp_enabled
@@ -95,47 +94,19 @@ class UserDashboard < Administrate::BaseDashboard
     sign_in_count
     unconfirmed_email
     unlock_token
-    user_counters    
+    user_counters
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    confirmation_sent_at
-    confirmation_token
-    confirmed_at
-    current_sign_in_at
-    current_sign_in_ip
     email
-    encrypted_password
-    failed_attempts
-    last_sign_in_at
-    last_sign_in_ip
-    locked_at
     name
-    otp_auth_secret
-    otp_challenge_expires
-    otp_enabled
-    otp_enabled_on
-    otp_failed_attempts
-    otp_mandatory
-    otp_persistence_seed
-    otp_recovery_counter
-    otp_recovery_secret
-    otp_session_challenge
     phone_number
-    refresh_token
-    refresh_token_created_at
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
-    sign_in_count
-    unconfirmed_email
-    unlock_token
-    user_counters    
   ].freeze
 
   # COLLECTION_FILTERS

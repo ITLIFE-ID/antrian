@@ -15,7 +15,6 @@ class ServiceDashboard < Administrate::BaseDashboard
     closing_days: Field::HasMany,
     company: Field::BelongsTo,
     counters: Field::HasMany,
-    deleted_at: Field::DateTime,
     letter: Field::String,
     max_quota: Field::Number,
     max_service_time: Field::Number,
@@ -28,7 +27,8 @@ class ServiceDashboard < Administrate::BaseDashboard
     versions: Field::HasMany,
     working_days: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -38,56 +38,58 @@ class ServiceDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    active
-    children
+    service_type
+    letter
+    name
+    max_quota
+    max_service_time
+    priority
     closed
+    active
+    parent
+    working_days
+    closing_days
+    counters
+    service_buildings
+    shared_clientdisplays
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    active
-    children
-    closed
-    closing_days
-    company
-    counters
-    deleted_at
+    service_type
     letter
+    name
     max_quota
     max_service_time
-    name
-    parent
     priority
-    service_buildings
-    service_type
-    shared_clientdisplays    
+    closed
+    active
+    parent
     working_days
+    closing_days
+    counters
+    service_buildings
+    shared_clientdisplays
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    active
-    children
-    closed
-    closing_days
-    company
-    counters
+    service_type
     letter
+    name
     max_quota
     max_service_time
-    name
-    parent
     priority
-    service_buildings
-    service_type
-    shared_clientdisplays    
-    working_days
+    closed
+    active
+    parent
   ].freeze
 
   # COLLECTION_FILTERS

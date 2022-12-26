@@ -13,7 +13,6 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     children: Field::HasMany,
     counter: Field::BelongsTo,
     date: Field::Date,
-    deleted_at: Field::DateTime,
     finish_time: Field::DateTime,
     letter: Field::String,
     note: Field::String,
@@ -30,7 +29,8 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     uniq_number: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -40,32 +40,42 @@ class BackupQueueDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    attend
-    children
+    letter
+    number
+    date
     counter
+    service
+    print_ticket_time
+    start_time
+    finish_time
+    print_ticket_location
+    print_ticket_method
+    priority
+    process_duration
+    parent
+    attend
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    attend
-    children
-    counter
-    date
-    finish_time
     letter
-    note
     number
-    parent
+    date
+    counter
+    service
+    print_ticket_time
+    start_time
+    finish_time
     print_ticket_location
     print_ticket_method
-    print_ticket_time
     priority
     process_duration
-    service
+    parent
+    attend
+    note
     service_type_slug
-    start_time
     uniq_number
     created_at
     updated_at
@@ -75,26 +85,7 @@ class BackupQueueDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
-    attend
-    children
-    counter
-    date
-    finish_time
-    letter
-    note
-    number
-    parent
-    print_ticket_location
-    print_ticket_method
-    print_ticket_time
-    priority
-    process_duration
-    service
-    service_type_slug
-    start_time
-    uniq_number    
-  ].freeze
+  FORM_ATTRIBUTES = %i[].freeze
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search

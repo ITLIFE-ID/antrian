@@ -11,12 +11,12 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     id: Field::Number,
     closeable: Field::Polymorphic,
     date: Field::Date,
-    deleted_at: Field::DateTime,
     finish_time: Field::DateTime,
     start_time: Field::DateTime,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,6 +28,8 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     id
     closeable
     date
+    start_time
+    finish_time
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,8 +38,8 @@ class ClosingDayDashboard < Administrate::BaseDashboard
     id
     closeable
     date
+    start_time
     finish_time
-    start_time    
     created_at
     updated_at
     deleted_at
@@ -49,8 +51,8 @@ class ClosingDayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     closeable
     date
+    start_time
     finish_time
-    start_time    
   ].freeze
 
   # COLLECTION_FILTERS

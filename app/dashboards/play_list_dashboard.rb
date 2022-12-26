@@ -10,13 +10,13 @@ class PlayListDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     client_display: Field::BelongsTo,
-    deleted_at: Field::DateTime,
     file_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     playing: Field::Boolean,
     title: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,6 +26,8 @@ class PlayListDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    title
+    file_type
     client_display
     file_type
   ].freeze
@@ -34,23 +36,23 @@ class PlayListDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    client_display
-    deleted_at
+    title
     file_type
+    client_display
     playing
-    title 
     created_at
     updated_at
+    deleted_at
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    client_display
+    title
     file_type
+    client_display
     playing
-    title    
   ].freeze
 
   # COLLECTION_FILTERS

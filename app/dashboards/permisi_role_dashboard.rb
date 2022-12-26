@@ -9,13 +9,13 @@ class PermisiRoleDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    deleted_at: Field::DateTime,
     name: Field::String,
     permissions: Field::String.with_options(searchable: false),
     slug: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -36,7 +36,7 @@ class PermisiRoleDashboard < Administrate::BaseDashboard
     deleted_at
     name
     permissions
-    slug  
+    slug
     created_at
     updated_at
   ].freeze
@@ -47,7 +47,7 @@ class PermisiRoleDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     permissions
-    slug    
+    slug
   ].freeze
 
   # COLLECTION_FILTERS

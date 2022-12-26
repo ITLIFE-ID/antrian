@@ -7,7 +7,7 @@ ActiveRecord::Base.transaction do
     phone_number: "0293491127",
     latitude: "-7.3346557",
     longitude: "110.1783978"
-  ) 
+  )
 
   Administrator.create(email: "capiltemanggung@jatengprov.co.id", password: "Password000", name: "Admin capil temanggung",
     phone_number: "0293491127", company: Company.second)
@@ -24,34 +24,34 @@ ActiveRecord::Base.transaction do
 
   ServiceType.create(name: "Layanan", company: Company.second)
 
-  debugger
   Service.create(
     active: true,
-    letter: "A",    
+    letter: "A",
     priority: false,
     name: "Kependudukan",
     parent: nil,
     service_type: ServiceType.first,
-    company: Company.second)
+    company: Company.second
+  )
 
   Service.create(active: true,
-    letter: "B",    
+    letter: "B",
     priority: false,
     name: "Akte",
     parent: nil,
     service_type: ServiceType.first,
     company: Company.second)
 
-  Service.create(active: true,    
-    letter: "C",    
+  Service.create(active: true,
+    letter: "C",
     priority: false,
     name: "Sertifikat",
     parent: nil,
     service_type: ServiceType.first,
     company: Company.second)
 
-  Service.create(active: true,    
-    letter: "D",    
+  Service.create(active: true,
+    letter: "D",
     priority: false,
     name: "Pindah / Datang",
     parent: nil,
@@ -63,10 +63,10 @@ ActiveRecord::Base.transaction do
   User.create(name: "Amel", email: "amel@gmal.com", phone_number: "+6282121217917", password: "Password000")
 
   (1..6).each do |d|
-    WorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00", workable: Company.second)    
+    WorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00", workable: Company.second)
 
     Company.second.services.each do |service|
-      WorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00", workable: service)      
+      WorkingDay.create(day: d, closing_time: "18::00:00", open_time: "07:00:00", workable: service)
     end
   end
 
@@ -75,7 +75,7 @@ ActiveRecord::Base.transaction do
       counter = Counter.create(service: service, number: i)
 
       client_display = ClientDisplay.create(
-        client_display_type: "p10", ip_address: Faker::Internet.unique.ip_v4_address, 
+        client_display_type: "p10", ip_address: Faker::Internet.unique.ip_v4_address,
         location: "Di depan Pendaftaran 1", building: Building.first
       )
 

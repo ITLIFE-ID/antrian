@@ -11,12 +11,12 @@ class WorkingDayDashboard < Administrate::BaseDashboard
     id: Field::Number,
     closing_time: Field::Time,
     day: Field::Number,
-    deleted_at: Field::DateTime,
     open_time: Field::Time,
     versions: Field::HasMany,
     workable: Field::Polymorphic,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -26,18 +26,20 @@ class WorkingDayDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    closing_time
+    workable
     day
+    open_time
+    closing_time
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    closing_time
-    day
-    open_time    
     workable
+    day
+    open_time
+    closing_time
     created_at
     updated_at
     deleted_at
@@ -47,10 +49,10 @@ class WorkingDayDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    closing_time
-    day
-    open_time    
     workable
+    day
+    open_time
+    closing_time
   ].freeze
 
   # COLLECTION_FILTERS
