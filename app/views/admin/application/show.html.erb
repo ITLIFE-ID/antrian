@@ -16,12 +16,12 @@ as well as a link to its edit page.
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
 %>
 <% content_for(:title) { t("administrate.actions.show_resource", name: page.page_title) } %>
-<header class="main-content__header">
-  <h1 class="main-content__page-title">
+<header class="main-content__header p-0">
+  <h1 class="main-content__page-title mb-4">
     <%= content_for(:title) %>
   </h1>
 </header>
-<section class="main-content__body">
+<section class="main-content__body p-0">
   <div class="card">
     <div class="card-header text-right">
       <div>

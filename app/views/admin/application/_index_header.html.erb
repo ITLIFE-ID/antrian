@@ -1,11 +1,8 @@
-<header class="main-content__header">
-  <div class="d-flex justify-content-between">
-    <div>
-      <h1><%= content_for(:title) %></h1>
-    </div>
-    <div>
-      <% if show_search_bar %>
-        <%= render( "search", search_term: search_term, resource_name: display_resource_name(page.resource_name)) %>
-      <% end %>
-    </div>
-  </header>
+<header class="main-content__header justify-content-between p-0">
+  <div style="font-size: 1.8rem"><%= content_for(:title) %></div>
+  <div>
+    <% if show_search_bar %>
+      <%= render( "search", search_term: search_term, resource_name: display_resource_name(page.resource_name)) %>
+    <% end %>
+  </div>
+</header>
