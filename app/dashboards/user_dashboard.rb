@@ -32,6 +32,8 @@ class UserDashboard < Administrate::BaseDashboard
     otp_recovery_secret: Field::String,
     otp_session_challenge: Field::String,
     phone_number: Field::String,
+    password: Field::Password,
+    password_confirmation: Field::Password,
     refresh_token: Field::String,
     refresh_token_created_at: Field::DateTime,
     remember_created_at: Field::DateTime,
@@ -107,6 +109,8 @@ class UserDashboard < Administrate::BaseDashboard
     email
     name
     phone_number
+    password
+    password_confirmation
   ].freeze
 
   # COLLECTION_FILTERS

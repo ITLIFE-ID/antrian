@@ -12,6 +12,7 @@ require "rspec/rails"
 require "devise/jwt/test_helpers"
 require "vcr"
 require "database_cleaner/active_record"
+require "action_policy/rspec/dsl"
 Dir[Rails.root.join("spec/supports/**/*.rb")].sort.each { |f| require f }
 
 VCR.configure do |config|

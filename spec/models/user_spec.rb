@@ -37,9 +37,11 @@
 #  unlock_token             :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  company_id               :bigint
 #
 # Indexes
 #
+#  index_users_on_company_id             (company_id)
 #  index_users_on_confirmation_token     (confirmation_token) UNIQUE
 #  index_users_on_deleted_at             (deleted_at)
 #  index_users_on_email                  (email) UNIQUE

@@ -26,6 +26,7 @@ class Company < ApplicationRecord
   has_many :services
   has_many :satisfaction_indices
   has_many :buildings
+  has_many :users
 
   validates_presence_of :name, :address, :api_key, :phone_number
   validates_uniqueness_of :name

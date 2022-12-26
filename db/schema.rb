@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_26_080019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -362,6 +362,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_182610) do
     t.string "otp_persistence_seed"
     t.string "otp_session_challenge"
     t.datetime "otp_challenge_expires"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
