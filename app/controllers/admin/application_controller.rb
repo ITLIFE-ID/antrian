@@ -22,7 +22,7 @@ module Admin
     end
 
     def set_current_company
-      # @current_company ||= current_administrator.company
+      @current_company ||= Company.second      
     end
 
     # Override this value to specify the number of elements to display at a time
