@@ -9,8 +9,7 @@ module Admin
     add_breadcrumb "Home", :admin_root_path
     before_action :authenticate_administrator!
     authorize :user, through: :current_administrator
-    before_action :set_paper_trail_whodunnit
-    before_action :set_current_company    
+    before_action :set_paper_trail_whodunnit     
 
     def index      
       super
@@ -31,7 +30,7 @@ module Admin
     end
 
     def create
-      resource = resource_class.new(resource_params)      
+      resource = authorized_resource.new(resource_params)      
 
       if resource.save
         redirect_to(
@@ -54,33 +53,13 @@ module Admin
     end
 
     def scoped_resource
-      child_company_resource
+      resource_class
     end
 
     private
-
-    def set_current_company
-      @current_company ||= current_administrator.company
-    end
-
-    def scoped_resource_class
+    def authorized_resource      
       authorized_scope(resource_class.all)
     end
-
-    def child_company_resource
-      return resource_class if is_super_admin?
-
-      if [Building, Service, SatisfactionIndex, User, Administrator].include? resource_class
-        @current_company.send(resource_class.to_s.downcase.pluralize)
-      else
-        scoped_resource_class
-      end
-    end
-
-    def is_super_admin?
-      current_administrator.id == 1
-    end
-
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.
     # def records_per_page

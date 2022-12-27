@@ -16,7 +16,11 @@ class ApplicationPolicy < ActionPolicy::Base
 
   relation_scope do |relation|
     next relation if super_admin?
-    relation.where(company: user.company)
+    next relation if relation.first.class == Company
+          
+    if [Building, Service, SatisfactionIndex, User, Administrator].include? relation
+      relation.where(company: user.company)
+    end
   end
 
   scope_for :field_authorization do |resource, required_options|
