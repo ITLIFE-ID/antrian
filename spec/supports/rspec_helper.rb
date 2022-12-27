@@ -15,7 +15,6 @@
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-require "request_helper"
 require "factory_bot"
 require "rspec/rails"
 require "webmock/rspec"
@@ -147,6 +146,5 @@ RSpec.configure do |config|
   #   # Setting this allows you to use `--seed` to deterministically reproduce
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
-  #   Kernel.srand config.seed
-  config.include RequestHelper
+  #   Kernel.srand config.seed  
 end

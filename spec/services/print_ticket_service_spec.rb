@@ -83,7 +83,7 @@ RSpec.describe PrintTicketService, type: :service do
       t = Time.local(2022, 12, 12, 16, 0, 0)
       Timecop.travel(t)
 
-      WorkingDay.find_by(day: Date.today.wday, workable: @service).destroy
+      WorkingDay.find_by(day: Date.today.wday, workable: @service).really_destroy!
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
       expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true
