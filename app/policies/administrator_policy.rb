@@ -1,9 +1,19 @@
 class AdministratorPolicy < ApplicationPolicy
   # See https://actionpolicy.evilmartians.io/#/writing_policies
   #
-  # def index?
-  #   true
-  # end
+
+  def edit
+    owner?
+  end
+
+  def update
+    owner?
+  end
+
+  def destroy
+    !owner?
+  end
+
   #
   # def update?
   #   # here we can access our context and record
