@@ -1,18 +1,18 @@
 {
   "name": "app",
   "private": "true",
-  "dependencies": {    
+  "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@popperjs/core": "^2.11.6",
-    "admin-lte": "^3.2.0",    
-    "bootstrap": "4.6.2",
+    "admin-lte": "https://github.com/ColorlibHQ/AdminLTE#master",
+    "bootstrap": "5.2.3",
     "bootstrap-icons": "^1.10.2",
     "bootstrap-switch": "^3.4.0",
     "esbuild": "^0.16.7",
     "highcharts": "^10.3.2",
-    "jquery": "^3.6.2",        
+    "jquery": "^3.6.2",
     "sass": "^1.56.2",
     "select2": "^4.1.0-rc.0"
   },

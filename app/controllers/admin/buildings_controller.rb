@@ -5,7 +5,7 @@ module Admin
     # For example, you may want to send an email after a foo is updated.
 
     def create
-      resource = scoped_resource_class.new(resource_params)
+      resource = child_company_resource.new(resource_params)
 
       if resource.save
         redirect_to(
@@ -38,7 +38,7 @@ module Admin
     # this will be used to set the records shown on the `index` action.
     #
     def scoped_resource
-      scoped_resource_class
+      child_company_resource
     end
 
     # Override `resource_params` if you want to transform the submitted
