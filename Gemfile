@@ -87,6 +87,7 @@ group :test do
   gem "vcr"
   gem "webdrivers"
   gem "webmock"
+  gem "cucumber", "~> 8.0"
 end
 
 # security

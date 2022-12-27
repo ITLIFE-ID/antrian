@@ -62,7 +62,7 @@ class VoiceOverDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how voice overs are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(voice_over)
-  #   "VoiceOver ##{voice_over.id}"
-  # end
+  def display_resource(voice_over)
+    voice_over.name
+  end
 end

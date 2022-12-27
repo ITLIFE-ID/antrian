@@ -12,6 +12,10 @@ class UserDashboard < Administrate::BaseDashboard
     confirmation_sent_at: Field::DateTime,
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
+    company: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     current_sign_in_at: Field::DateTime,
     current_sign_in_ip: Field::String,
     email: Field::String,
@@ -65,6 +69,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    company
     name
     email
     confirmation_sent_at
@@ -106,6 +111,7 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    company
     email
     name
     phone_number
@@ -128,7 +134,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    user.name
+  end
 end
