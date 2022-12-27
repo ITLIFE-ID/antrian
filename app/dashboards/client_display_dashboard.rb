@@ -58,8 +58,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     building
     client_display_type
-    ip_address
-    ip_address
+    ip_address    
     location
   ].freeze
 

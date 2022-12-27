@@ -12,6 +12,22 @@ module Admin
     before_action :set_paper_trail_whodunnit
     before_action :set_current_company
 
+
+    def create
+      resource = scoped_resource.new(resource_params)      
+
+      if resource.save
+        redirect_to(
+          after_resource_created_path(resource),
+          notice: translate_with_resource("create.success"),
+        )
+      else
+        render :new, locals: {
+          page: Administrate::Page::Form.new(dashboard, resource),
+        }, status: :unprocessable_entity
+      end
+    end
+    
     def new
       add_breadcrumb I18n.t("new")
       super
