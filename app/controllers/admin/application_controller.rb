@@ -9,9 +9,9 @@ module Admin
     add_breadcrumb "Home", :admin_root_path
     before_action :authenticate_administrator!
     authorize :user, through: :current_administrator
-    before_action :set_paper_trail_whodunnit     
+    before_action :set_paper_trail_whodunnit
 
-    def index      
+    def index
       super
     end
 
@@ -21,6 +21,7 @@ module Admin
 
     def new
       add_breadcrumb I18n.t("new")
+      resource = authorized_resource
       super
     end
 
@@ -30,22 +31,22 @@ module Admin
     end
 
     def create
-      resource = authorized_resource.new(resource_params)      
+      resource = authorized_klass.new(resource_params)
 
       if resource.save
         redirect_to(
           after_resource_created_path(resource),
-          notice: translate_with_resource("create.success"),
+          notice: translate_with_resource("create.success")
         )
       else
         render :new, locals: {
-          page: Administrate::Page::Form.new(dashboard, resource),
+          page: Administrate::Page::Form.new(dashboard, resource)
         }, status: :unprocessable_entity
       end
     end
 
     def update
-     super
+      super
     end
 
     def destroy
@@ -53,12 +54,17 @@ module Admin
     end
 
     def scoped_resource
-      resource_class
+      authorized_resource
     end
 
     private
-    def authorized_resource      
-      authorized_scope(resource_class.all)
+
+    def authorized_klass
+      authorized_scope(resource_class, type: :authorized_klass)
+    end
+
+    def authorized_resource
+      authorized_scope(resource_class, type: :authorized_resource)
     end
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.

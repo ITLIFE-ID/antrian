@@ -11,11 +11,7 @@ class AdministratorPolicy < ApplicationPolicy
   end
 
   def destroy
-    unless super_admin?
-      !owner?
-    else
-      false
-    else
+    false if super_admin? || !owner?
   end
 
   #

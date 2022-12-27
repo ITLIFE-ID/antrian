@@ -14,25 +14,33 @@ class ApplicationPolicy < ActionPolicy::Base
   # For example:
   #
 
-  relation_scope do |relation|
+  scope_for :authorized_klass do |relation|
     next relation if super_admin?
-    next relation if relation.first.class == Company
-          
-    if [Building, Service, SatisfactionIndex, User, Administrator].include? relation
+    next relation if relation.first.instance_of?(Company)
+
+    if scoped_model.include? relation
+      user.company.send(relation.to_s.downcase.pluralize)
+    end
+  end
+
+  scope_for :authorized_resource do |relation|
+    next relation if super_admin?
+    next relation if relation.first.instance_of?(Company)
+
+    if scoped_model.include? relation
       relation.where(company: user.company)
     end
   end
 
   scope_for :field_authorization do |resource, required_options|
     attribute = required_options[:attribute]&.attribute || required_options[:field]
-    klass_for_super_admin_only = [Building, Service, SatisfactionIndex, User, Administrator]
 
-    next false if user.id == 1
+    next false if super_admin?
 
     resource_validation = if required_options.key? :field
-      klass_for_super_admin_only.include? resource
+      scoped_model.include? resource
     else
-      klass_for_super_admin_only.select { |klass| resource.is_a?(klass) }.any?
+      scoped_model.select { |klass| resource.is_a?(klass) }.any?
     end
 
     attribute == :company && resource_validation
@@ -61,5 +69,9 @@ class ApplicationPolicy < ActionPolicy::Base
 
   def allow_super_admins
     allow! if admin? && super_admin?
+  end
+
+  def scoped_model
+    [Building, Service, SatisfactionIndex, User, Administrator, ServiceType]
   end
 end

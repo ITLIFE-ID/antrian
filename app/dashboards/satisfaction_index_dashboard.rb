@@ -36,7 +36,7 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
     id
     company
     name
-    order_number    
+    order_number
     created_at
     updated_at
     deleted_at

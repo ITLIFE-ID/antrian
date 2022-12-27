@@ -23,7 +23,9 @@
             {name: t("future_queue"), path: future_admin_dashboards_path},
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_satisfaction_indices_path, name: t("satisfaction_index"), icon: "fa-face-smile"%>
-        <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
+        <% if current_administrator.id == 1%>
+          <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
+        <%end%>
         <%=render "base/sidebar/single_menu", path: admin_buildings_path, name: t("building"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("setting")}, 
           child: [
