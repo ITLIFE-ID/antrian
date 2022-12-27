@@ -7,16 +7,16 @@ RSpec.describe Callers::TransferService, type: :service do
     t = Time.local(2022, 12, 12, 16, 0, 0)
     Timecop.travel(t)
 
-    @counter = FactoryBot.create(:counter)
+    @counter = create(:counter)
     @company = Company.first
     @service = Service.first
     @service.update(letter: "A")
-    @service2 = FactoryBot.create(:service, company: Company.first, letter: "B")
+    @service2 = create(:service, company: Company.first, letter: "B")
 
     (1..6).each do |d|
-      FactoryBot.create(:working_day_for_company, workable: @company, day: d)
-      FactoryBot.create(:working_day_for_service, workable: @service, day: d)
-      FactoryBot.create(:working_day_for_service, workable: @service2, day: d)
+      create(:working_day_for_company, workable: @company, day: d)
+      create(:working_day_for_service, workable: @service, day: d)
+      create(:working_day_for_service, workable: @service2, day: d)
     end
 
     @first_queue = PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)

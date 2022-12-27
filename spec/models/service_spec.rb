@@ -47,8 +47,8 @@ RSpec.describe Service, type: :model do
   describe "#parent & #children" do
     context "given a child has a parent" do
       it "should be able to do parent tree" do
-        c1 = FactoryBot.create(:service)
-        c2 = FactoryBot.create(:service, parent: c1)
+        c1 = create(:service)
+        c2 = create(:service, parent: c1)
 
         expect(c1.children).to include(c2)
         expect(c2.parent).to eq c1

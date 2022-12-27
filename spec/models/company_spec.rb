@@ -37,21 +37,21 @@ RSpec.describe Company, type: :model do
   describe "Phone number validation" do
     context "given string for phone number" do
       it "should invalid" do
-        obj = FactoryBot.build_stubbed(:company, phone_number: "aaa")
+        obj = build_stubbed(:company, phone_number: "aaa")
         expect(obj.valid?).to be false
       end
     end
 
     context "given invalid area code" do
       it "should invalid" do
-        obj = FactoryBot.build_stubbed(:company, phone_number: "+182121217937")
+        obj = build_stubbed(:company, phone_number: "+182121217937")
         expect(obj.valid?).to be false
       end
     end
 
     context "given valid" do
       it "should valid" do
-        obj = FactoryBot.build_stubbed(:company, phone_number: "+6282121217937")
+        obj = build_stubbed(:company, phone_number: "+6282121217937")
         expect(obj.valid?).to be true
       end
     end

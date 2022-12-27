@@ -33,7 +33,7 @@ RSpec.describe WorkingDay, type: :model do
   describe "Open time and Closing time validation" do
     context "given Open time is over than Closing time and Closing time is early than Open time" do
       it "should invalid" do
-        obj = FactoryBot.build_stubbed(:working_day_for_company,
+        obj = build_stubbed(:working_day_for_company,
           closing_time: Time.current.change({hour: 8, min: 0, sec: 0}),
           open_time: Time.current.change({hour: 18, min: 0, sec: 0}))
         expect(obj.valid?).to be false

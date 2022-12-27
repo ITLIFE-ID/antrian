@@ -7,14 +7,14 @@ RSpec.describe PrintTicketService, type: :service do
     t = Time.local(2022, 12, 12, 16, 0, 0)
     Timecop.travel(t)
 
-    FactoryBot.create(:counter)
+    create(:counter)
     @company = Company.first
     @service = Service.first
 
     @print_ticket_at_kiosk = {print_ticket_location: :kiosk, service_id: @service}
     (1..6).each do |d|
-      FactoryBot.create(:working_day_for_company, workable: @company, day: d)
-      FactoryBot.create(:working_day_for_service, workable: @service, day: d)
+      create(:working_day_for_company, workable: @company, day: d)
+      create(:working_day_for_service, workable: @service, day: d)
     end
   end
 

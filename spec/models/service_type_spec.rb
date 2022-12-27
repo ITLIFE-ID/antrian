@@ -28,7 +28,7 @@ RSpec.describe ServiceType, type: :model do
   describe "Slug auto fill" do
     context "given slug is blank" do
       it "should fill from name and upcase" do
-        obj = FactoryBot.build_stubbed(:service_type, name: "pendaftaran", slug: "")
+        obj = build_stubbed(:service_type, name: "pendaftaran", slug: "")
         expect(obj.slug).to eq "PENDAFTARAN"
       end
     end

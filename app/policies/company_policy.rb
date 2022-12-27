@@ -1,4 +1,6 @@
 class CompanyPolicy < ApplicationPolicy
+  skip_pre_check :allow_admins
+  pre_check :allow_super_admins
   # See https://actionpolicy.evilmartians.io/#/writing_policies
   #
   # def index?

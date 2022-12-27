@@ -53,7 +53,7 @@ RSpec.describe TodayQueue, type: :model do
   describe "Start time and finish time validation" do
     context "given Start time is over than finish time and finish time is early than Start time" do
       it "should invalid" do
-        obj = FactoryBot.build_stubbed(:today_queue,
+        obj = build_stubbed(:today_queue,
           finish_time: Time.current.change({hour: 8, min: 0, sec: 0}),
           start_time: Time.current.change({hour: 18, min: 0, sec: 0}))
 
@@ -65,8 +65,8 @@ RSpec.describe TodayQueue, type: :model do
   describe "#parent & #children" do
     context "given a child has a parent" do
       it "should be able to do parent tree" do
-        c1 = FactoryBot.create(:queue_offline_from_kiosk)
-        c2 = FactoryBot.create(:queue_offline_from_kiosk, parent: c1)
+        c1 = create(:queue_offline_from_kiosk)
+        c2 = create(:queue_offline_from_kiosk, parent: c1)
 
         expect(c1.children).to include(c2)
         expect(c2.parent).to eq c1
@@ -77,7 +77,7 @@ RSpec.describe TodayQueue, type: :model do
   describe "Achived queue" do
     context "given today queue inserted" do
       it "should save to backup queue" do
-        today_queue = FactoryBot.create(:queue_offline_from_kiosk)
+        today_queue = create(:queue_offline_from_kiosk)
         backup_queue = BackupQueue.first
         expect(today_queue.id).to eq backup_queue.id
       end

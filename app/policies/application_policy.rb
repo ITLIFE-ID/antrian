@@ -2,6 +2,7 @@
 
 # Base class for application policies
 class ApplicationPolicy < ActionPolicy::Base
+  pre_check :allow_admins
   # Configure additional authorization contexts here
   # (`user` is added by default).
   #
@@ -12,30 +13,6 @@ class ApplicationPolicy < ActionPolicy::Base
   # Define shared methods useful for most policies.
   # For example:
   #
-
-  def new
-    admin?
-  end
-
-  def index
-    admin?
-  end
-
-  def create
-    admin?
-  end
-
-  def edit
-    admin?
-  end
-
-  def update
-    admin?
-  end
-
-  def destroy
-    admin?
-  end
 
   relation_scope do |relation|
     next relation if super_admin?
@@ -72,5 +49,13 @@ class ApplicationPolicy < ActionPolicy::Base
 
   def super_admin?
     user.id == 1
+  end
+
+  def allow_admins
+    allow! if admin?
+  end
+
+  def allow_super_admins
+    allow! if admin? && super_admin?
   end
 end
