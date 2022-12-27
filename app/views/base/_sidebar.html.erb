@@ -7,8 +7,9 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="info">
-        <a href="#" class="d-block"><%="#{current_administrator.name} - #{current_administrator.company.name}"%></a>
+      <div class="info d-flex justify-content-between">
+        <%=link_to "#{current_administrator.name} - #{current_administrator.company.name}", root_path, class: "mr-5" %>
+        <%=link_to :logout, destroy_administrator_session_path, method: :delete%>
       </div>
     </div>
     <!-- SidebarSearch Form -->

@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :administrators
 
-  root to: "admin/dashboards#today"
+  root to: redirect("admin/dashboards/today")
 
   namespace :admin do
-    root to: "dashboards#today"
+    root to: redirect("admin/dashboards/today")
     resources :administrators
     resources :users
 
