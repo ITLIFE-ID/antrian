@@ -105,9 +105,6 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    acts_as_paranoid (0.8.1)
-      activerecord (>= 5.2, < 7.1)
-      activesupport (>= 5.2, < 7.1)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
@@ -339,6 +336,8 @@ GEM
       activerecord (>= 6.0)
       request_store (~> 1.4)
     parallel (1.22.1)
+    paranoia (2.6.1)
+      activerecord (>= 5.1, < 7.1)
     parser (3.1.3.0)
       ast (~> 2.4.1)
     pdf-core (0.9.0)
@@ -569,7 +568,6 @@ PLATFORMS
 DEPENDENCIES
   aasm
   action_policy
-  acts_as_paranoid
   administrate!
   annotate!
   aws-sdk-s3
@@ -603,6 +601,7 @@ DEPENDENCIES
   mqtt!
   noticed
   paper_trail
+  paranoia
   permisi
   pg
   phonelib

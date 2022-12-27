@@ -49,7 +49,7 @@ to display a collection of resources in an HTML table.
   </thead>
   <tbody>
     <% resources.each do |resource| %>
-      <tr class="js-table-row"
+      <tr class="js-table-row <%="bg-danger" if resource.deleted_at.present?%>"
           <% if accessible_action?(resource, :show) %>
             <%= %(tabindex=0 role=link data-url=#{polymorphic_path([namespace, resource])}) %>
           <% end %>

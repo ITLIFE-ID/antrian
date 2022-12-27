@@ -116,7 +116,7 @@ gem "mqtt", github: "njh/ruby-mqtt"
 gem "noticed"
 
 gem "aasm"
-gem "acts_as_paranoid"
+gem "paranoia"
 gem "aws-sdk-s3"
 gem "devise-otp"
 gem "devise_token_auth"

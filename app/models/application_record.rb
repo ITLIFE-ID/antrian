@@ -4,4 +4,6 @@ class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
   acts_as_paranoid
   has_paper_trail
+
+  default_scope { with_deleted }
 end

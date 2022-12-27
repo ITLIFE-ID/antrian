@@ -22,10 +22,10 @@
 class SatisfactionIndex < ApplicationRecord
   belongs_to :company
   validates :name, presence: true,
-    uniqueness: {scope: :company_id, case_sensitive: false, message: "Nama index kepuasan tidak boleh sama"}
+    uniqueness: {scope: :company_id, case_sensitive: false, message: "Tidak boleh sama"}
 
   validates :order_number, presence: true,
-    uniqueness: {scope: :company_id, message: "Urutan index kepuasan tidak boleh sama"},
+    uniqueness: {scope: :company_id, message: "Tidak boleh sama"},
     numericality: {only_integer: true, greater_than: 0}
 
   def name=(value)

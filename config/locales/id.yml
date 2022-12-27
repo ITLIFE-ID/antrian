@@ -1,4 +1,8 @@
 id:
+  administrate:
+    actions:
+      permanent_destroy: Hapus permanen
+      edit_and_restore: Perbarui dan Restore
   service_not_found: Service not found
   counter_not_found: Counter not found
   queue_is_not_available: Queue is not available
