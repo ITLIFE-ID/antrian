@@ -15,7 +15,10 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     ip_address: Field::String,
     location: Field::String,
     play_lists: Field::HasMany,
-    services: Field::HasMany,
+    services: Field::HasMany.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,

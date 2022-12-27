@@ -11,7 +11,10 @@ class CounterDashboard < Administrate::BaseDashboard
     id: Field::Number,
     closed: Field::Boolean,
     number: Field::Number,
-    service: Field::BelongsTo,
+    service: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     shared_clientdisplays: Field::HasMany,
     user_counters: Field::HasMany,
     versions: Field::HasMany,

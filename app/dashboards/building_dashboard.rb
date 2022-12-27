@@ -10,7 +10,10 @@ class BuildingDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     client_displays: Field::HasMany,
-    company: Field::BelongsTo,
+    company: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     name: Field::String,
     versions: Field::HasMany,
     created_at: Field::DateTime,

@@ -13,7 +13,10 @@ class ServiceDashboard < Administrate::BaseDashboard
     children: Field::HasMany,
     closed: Field::Boolean,
     closing_days: Field::HasMany,
-    company: Field::BelongsTo,
+    company: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     counters: Field::HasMany,
     letter: Field::String,
     max_quota: Field::Number,
@@ -22,7 +25,10 @@ class ServiceDashboard < Administrate::BaseDashboard
     parent: Field::BelongsTo,
     priority: Field::Boolean,
     service_buildings: Field::HasMany,
-    service_type: Field::BelongsTo,
+    service_type: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
     working_days: Field::HasMany,

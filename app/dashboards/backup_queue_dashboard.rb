@@ -23,7 +23,10 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     print_ticket_time: Field::DateTime,
     priority: Field::Boolean,
     process_duration: Field::Number,
-    service: Field::BelongsTo,
+    service: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     service_type_slug: Field::String,
     start_time: Field::DateTime,
     uniq_number: Field::String,

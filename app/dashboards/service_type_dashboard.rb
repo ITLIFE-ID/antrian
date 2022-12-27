@@ -9,7 +9,10 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    company: Field::BelongsTo,
+    company: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     name: Field::String,
     slug: Field::String,
     versions: Field::HasMany,
