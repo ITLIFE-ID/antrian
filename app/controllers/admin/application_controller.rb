@@ -10,18 +10,10 @@ module Admin
     before_action :authenticate_administrator!
     authorize :user, through: :current_administrator
     before_action :set_paper_trail_whodunnit
-
-    def index
-      super
-    end
-
-    def show
-      super
-    end
+    before_action :set_current_company
 
     def new
       add_breadcrumb I18n.t("new")
-      resource = authorized_resource
       super
     end
 
@@ -30,42 +22,14 @@ module Admin
       super
     end
 
-    def create
-      resource = authorized_klass.new(resource_params)
-
-      if resource.save
-        redirect_to(
-          after_resource_created_path(resource),
-          notice: translate_with_resource("create.success")
-        )
-      else
-        render :new, locals: {
-          page: Administrate::Page::Form.new(dashboard, resource)
-        }, status: :unprocessable_entity
-      end
+    def set_current_company
+      @current_company ||= current_administrator.company
     end
 
-    def update
-      super
+    def super_admin?
+      current_administrator.id == 1
     end
 
-    def destroy
-      super
-    end
-
-    def scoped_resource
-      authorized_resource
-    end
-
-    private
-
-    def authorized_klass
-      authorized_scope(resource_class, type: :authorized_klass)
-    end
-
-    def authorized_resource
-      authorized_scope(resource_class, type: :authorized_resource)
-    end
     # Override this value to specify the number of elements to display at a time
     # on index pages. Defaults to 20.
     # def records_per_page

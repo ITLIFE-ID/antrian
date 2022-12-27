@@ -48,12 +48,6 @@
             {name: t("music"), path: musics_admin_play_lists_path},
             {name: t("video"), path: videos_admin_play_lists_path},            
           ]%>
-        <%=render "base/sidebar/nested_menu", parent: {name: t("permission"), icon: "fa-user-shield"}, 
-          child: [
-            {name: t("permisi_role"), path: admin_permisi_roles_path},
-            {name: t("permisi_actor"), path: admin_permisi_actors_path},
-            {name: t("permisi_actor_role"), path: admin_permisi_actor_roles_path}            
-          ]%>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
