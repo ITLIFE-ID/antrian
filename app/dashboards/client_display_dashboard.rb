@@ -17,10 +17,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     ),
     ip_address: Field::String,
     location: Field::String,
-    play_lists: .with_options(
-      searchable: true,
-      searchable_fields: ['title'],
-    ),
+    play_lists: Field::HasMany,
     services: Field::HasMany.with_options(
       searchable: true,
       searchable_fields: ["name"]

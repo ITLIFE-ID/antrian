@@ -22,7 +22,7 @@ By default, it renders:
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= render "javascript" %>
+    <%= render "stylesheet" %>
     <%= csp_meta_tag if defined?(csp_meta_tag) %>
   </head>
   <body data-scrollbar-auto-hide="n" class="hold-transition sidebar-mini layout-fixed">
@@ -34,7 +34,7 @@ By default, it renders:
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <%= render_breadcrumbs :separator => ' / ' %>
+                <%= render_breadcrumbs :separator => ' / ' %> <%="/ "+params[:type] if params.key? :type%>
               </div>
               <!-- /.col -->
             </div>
