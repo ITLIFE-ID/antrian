@@ -12,33 +12,32 @@ module Admin
     before_action :set_paper_trail_whodunnit
     before_action :set_current_company
 
-
     def create
-      resource = scoped_resource.new(resource_params)      
+      resource = scoped_resource.new(resource_params)
 
       if resource.save
         redirect_to(
           after_resource_created_path(resource),
-          notice: translate_with_resource("create.success"),
+          notice: translate_with_resource("create.success")
         )
       else
         render :new, locals: {
-          page: Administrate::Page::Form.new(dashboard, resource),
+          page: Administrate::Page::Form.new(dashboard, resource)
         }, status: :unprocessable_entity
       end
     end
 
-    def update    
-      requested_resource.restore if requested_resource.deleted?      
+    def update
+      requested_resource.restore if requested_resource.deleted?
 
-      if requested_resource.update(resource_params)        
+      if requested_resource.update(resource_params)
         redirect_to(
           after_resource_updated_path(requested_resource),
-          notice: translate_with_resource("update.success"),
+          notice: translate_with_resource("update.success")
         )
       else
         render :edit, locals: {
-          page: Administrate::Page::Form.new(dashboard, requested_resource),
+          page: Administrate::Page::Form.new(dashboard, requested_resource)
         }, status: :unprocessable_entity
       end
     end

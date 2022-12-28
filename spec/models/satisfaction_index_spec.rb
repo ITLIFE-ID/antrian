@@ -22,7 +22,7 @@ require "rails_helper"
 RSpec.describe SatisfactionIndex, type: :model do
   it { should belong_to :company }
   it { should validate_presence_of :name }
-  it { should validate_presence_of :order_number }  
+  it { should validate_presence_of :order_number }
   it { should validate_uniqueness_of(:name).scoped_to(:company_id).case_insensitive.with_message("Tidak boleh sama") }
   it { should validate_uniqueness_of(:order_number).scoped_to(:company_id).ignoring_case_sensitivity.with_message("Tidak boleh sama") }
 end

@@ -10,10 +10,10 @@ class WorkingDayDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     closing_time: Field::Time,
-    day: Field::Number,
+    day: Field::Select.with_options(collection: Date::DAYNAMES),
     open_time: Field::Time,
     versions: Field::HasMany,
-    workable: Field::Polymorphic,
+    workable: Field::Polymorphic.with_options(classes: [Company, Service]),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     deleted_at: Field::DateTime

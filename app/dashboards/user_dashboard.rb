@@ -14,7 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at: Field::DateTime,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     current_sign_in_at: Field::DateTime,
     current_sign_in_ip: Field::String,

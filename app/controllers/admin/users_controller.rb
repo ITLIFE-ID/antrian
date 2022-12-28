@@ -24,7 +24,7 @@ module Admin
     #
 
     def scoped_resource
-      super_admin?? resource_class : @current_company.users
+      super_admin? ? resource_class : @current_company.users
     end
 
     # Override `resource_params` if you want to transform the submitted

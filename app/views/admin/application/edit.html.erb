@@ -17,6 +17,9 @@ It displays a header, and renders the `_form` partial to do the heavy lifting.
 <% content_for(:title) { t("administrate.actions.edit_resource", name: page.page_title) } %>
 <header class="main-content__header p-0">
   <h1 class="main-content__page-title mb-4">
+    <%= link_to  :back do%>
+      <i class="fa-regular fa-circle-left mr-4"></i>
+    <% end%>
     <%= content_for(:title) %>
   </h1>
   <div>

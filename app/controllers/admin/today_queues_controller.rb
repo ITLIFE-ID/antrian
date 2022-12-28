@@ -24,7 +24,7 @@ module Admin
     # this will be used to set the records shown on the `index` action.
     #
     def scoped_resource
-      super_admin?? resource_class : @current_company.today_queues
+      super_admin? ? resource_class : @current_company.today_queues
     end
 
     # Override `resource_params` if you want to transform the submitted

@@ -11,7 +11,7 @@ class ServiceTypeDashboard < Administrate::BaseDashboard
     id: Field::Number,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     name: Field::String,
     slug: Field::String,

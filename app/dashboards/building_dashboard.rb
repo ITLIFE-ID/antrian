@@ -12,7 +12,7 @@ class BuildingDashboard < Administrate::BaseDashboard
     client_displays: Field::HasMany,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     name: Field::String,
     versions: Field::HasMany,

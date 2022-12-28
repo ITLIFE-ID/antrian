@@ -11,7 +11,7 @@ class PlayListDashboard < Administrate::BaseDashboard
     id: Field::Number,
     client_display: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['location'],
+      searchable_fields: ["location"]
     ),
     file_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     playing: Field::Boolean,

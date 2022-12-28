@@ -17,7 +17,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     play_lists: Field::HasMany,
     services: Field::HasMany.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
@@ -61,7 +61,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     building
     client_display_type
-    ip_address    
+    ip_address
     location
   ].freeze
 

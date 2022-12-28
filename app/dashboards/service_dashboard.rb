@@ -15,7 +15,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     closing_days: Field::HasMany,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     counters: Field::HasMany,
     letter: Field::String,
@@ -23,10 +23,10 @@ class ServiceDashboard < Administrate::BaseDashboard
     max_service_time: Field::Number,
     name: Field::String,
     parent: Field::BelongsTo,
-    priority: Field::Boolean,    
+    priority: Field::Boolean,
     service_type: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
@@ -55,7 +55,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     parent
     working_days
     closing_days
-    counters    
+    counters
     shared_clientdisplays
   ].freeze
 
@@ -75,7 +75,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     parent
     working_days
     closing_days
-    counters    
+    counters
     shared_clientdisplays
     created_at
     updated_at
@@ -113,7 +113,7 @@ class ServiceDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how services are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(service)
-  #   "Service ##{service.id}"
-  # end
+  def display_resource(service)
+    service.name
+  end
 end

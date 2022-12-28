@@ -13,7 +13,7 @@ class CounterDashboard < Administrate::BaseDashboard
     number: Field::Number,
     service: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     shared_clientdisplays: Field::HasMany,
     user_counters: Field::HasMany,

@@ -21,7 +21,6 @@ require "webmock/rspec"
 require "database_cleaner/active_record"
 
 RSpec.configure do |config|
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.include FactoryBot::Syntax::Methods
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -69,7 +68,6 @@ RSpec.configure do |config|
     end
   end
 
-  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -146,5 +144,5 @@ RSpec.configure do |config|
   #   # Setting this allows you to use `--seed` to deterministically reproduce
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
-  #   Kernel.srand config.seed  
+  #   Kernel.srand config.seed
 end

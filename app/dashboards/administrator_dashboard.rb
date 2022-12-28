@@ -11,7 +11,7 @@ class AdministratorDashboard < Administrate::BaseDashboard
     id: Field::Number,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     confirmation_sent_at: Field::DateTime,
     confirmation_token: Field::String,
