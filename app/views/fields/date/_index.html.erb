@@ -15,7 +15,6 @@ as a localized date string.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/Date
 %>
-
 <% if field.data %>
-  <%= field.date %>
+  <%= DateTime.parse(field.date).strftime("%d-%m-%Y") %>
 <% end %>

@@ -3,6 +3,8 @@ id:
     actions:
       permanent_destroy: Hapus permanen
       edit_and_restore: Perbarui dan Restore
+  add: Tambah
+  destroy: Hapus
   service_type: Tipe Layanan
   service_not_found: Service not found
   counter_not_found: Counter not found

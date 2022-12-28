@@ -11,6 +11,7 @@ module Admin
     authorize :user, through: :current_administrator
     before_action :set_paper_trail_whodunnit
     before_action :set_current_company
+    before_action :set_administrate_thread
 
     def create
       resource = scoped_resource.new(resource_params)
@@ -52,12 +53,17 @@ module Admin
       super
     end
 
-    def set_current_company
-      @current_company ||= current_administrator.company
+    def set_current_company          
+      @current_company ||= current_administrator.company      
     end
 
     def super_admin?
       current_administrator.id == 1
+    end
+
+    def set_administrate_thread
+      Thread.current[:super_admin] = super_admin?
+      Thread.current[:current_company] = @current_company
     end
 
     # Override this value to specify the number of elements to display at a time

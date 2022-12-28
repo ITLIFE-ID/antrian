@@ -31,8 +31,9 @@ It renders the `_table` partial to display details about the resources.
     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4 row mb-3">
       <div class="col-sm-12 col-md-2 px-0">
         <%if accessible_action?(new_resource, :new)%>
-          <%= link_to(t("administrate.actions.new_resource", name: display_resource_name(page.resource_name, singular: true).downcase), 
-        [:new, namespace, page.resource_path.to_sym], class: "button btn btn-primary") %>
+          <%= link_to([:new, namespace, page.resource_path.to_sym], class: "button btn btn-primary") do%>
+            <i class="fa-solid fa-circle-plus mr-2"></i> <%=t("add")%>
+          <% end%>
         <% end%>
       </div>
       <div class="col-sm-12 col-md-10">
