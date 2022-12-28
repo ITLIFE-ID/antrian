@@ -13,7 +13,7 @@ class WorkingDayDashboard < Administrate::BaseDashboard
     day: Field::Select.with_options(collection: Date::DAYNAMES.rotate(1).each_with_index.map{|k,v| [k,v+1]}),
     open_time: Field::Time,
     versions: Field::HasMany,
-    workable: Field::Polymorphic.with_options(classes: [Company, Service]),
+    workable: Field::Polymorphic.with_options(classes: Thread.current[:super_admin]? [Company, Service] : [Service]),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     deleted_at: Field::DateTime
