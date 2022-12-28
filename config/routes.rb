@@ -12,33 +12,26 @@ Rails.application.routes.draw do
     root to: redirect("admin/dashboards/today")
     resources :administrators
     resources :users
-
-    concern :workable do
+    
+    resources :companies do
       resources :working_days
-    end
-
-    concern :closeable do
       resources :closing_days
     end
 
-    resources :companies do
-      resource :working_days
-      resource :closing_days
+    resources :services do
+      resources :working_days
+      resources :closing_days
     end
 
-    resources :services do
-      resource :working_days
-      resource :closing_days
-    end
+    resources :working_days
+    resources :closing_days
 
     resources :buildings
-
     resources :service_types
     resources :counters
     resources :user_counters
 
-    resources :service_clientdisplays
-    resources :counter_client_displays
+    resources :shared_clientdisplays    
 
     resources :voiceover_buildings
     resources :voice_overs

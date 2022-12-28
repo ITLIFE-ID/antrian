@@ -17,30 +17,34 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <% if current_administrator.id == 1%>
+          <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
+        <%end%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("dashboard"), icon: "fa-dashboard"}, 
           child: [
             {name: t("past_queue"), path: past_admin_dashboards_path},
             {name: t("today_queue"), path: today_admin_dashboards_path},            
             {name: t("future_queue"), path: future_admin_dashboards_path},
           ]%>
-        <%=render "base/sidebar/single_menu", path: admin_satisfaction_indices_path, name: t("satisfaction_index"), icon: "fa-face-smile"%>
-        <% if current_administrator.id == 1%>
-          <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
-        <%end%>
         <%=render "base/sidebar/single_menu", path: admin_buildings_path, name: t("building"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("setting")}, 
           child: [
             {name: t("client_display"), path: admin_client_displays_path},
-            {name: t("service_clientdisplay"), path: admin_service_clientdisplays_path},
+            {name: t("service_clientdisplay"), path: nil},
             {name: t("voiceover_buildings"), path: admin_voiceover_buildings_path},            
           ]%>
-        <%=render "base/sidebar/single_menu", path: admin_services_path, name: t("service"), icon: "fa-landmark"%>
-        <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t("type"), icon: ""%>
-        <%=render "base/sidebar/nested_menu", parent: {name: t("counter"), icon: "fa-shop"}, 
+        <%=render "base/sidebar/single_menu", path: admin_satisfaction_indices_path, name: t("satisfaction_index"), icon: "fa-face-smile"%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t("schedule"), icon: "fa-clock"}, 
+          child: [            
+            {name: t("working_days"), path: admin_working_days_path},
+            {name: t("closing_days"), path: admin_closing_days_path},            
+          ]%>
+        <%=render "base/sidebar/single_menu", path: admin_services_path, name: t("service"), icon: "fa-hand-holding-heart"%>
+        <%=render "base/sidebar/nested_menu", parent: {name: t("counter"), icon: "fa-handshake-angle"}, 
           child: [
             {name: t("list"), path: admin_counters_path},
             {name: t("user_counter"), path: admin_user_counters_path},
-            {name: t("counter_clientdisplay"), path: admin_counter_client_displays_path},
+            {name: t("counter_clientdisplay"), path:nil},
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_users_path, name: t("user"), icon: "fa-users"%>
         <%=render "base/sidebar/single_menu", path: admin_voice_overs_path, name: t("voice_over"), icon: "fa-user-astronaut"%>
@@ -49,6 +53,7 @@
             {name: t("music"), path: musics_admin_play_lists_path},
             {name: t("video"), path: videos_admin_play_lists_path},            
           ]%>
+        <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t("service_type"), icon: "fa-landmark"%>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

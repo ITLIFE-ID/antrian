@@ -23,8 +23,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     max_service_time: Field::Number,
     name: Field::String,
     parent: Field::BelongsTo,
-    priority: Field::Boolean,
-    service_buildings: Field::HasMany,
+    priority: Field::Boolean,    
     service_type: Field::BelongsTo.with_options(
       searchable: true,
       searchable_fields: ['name'],
@@ -56,8 +55,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     parent
     working_days
     closing_days
-    counters
-    service_buildings
+    counters    
     shared_clientdisplays
   ].freeze
 
@@ -77,8 +75,7 @@ class ServiceDashboard < Administrate::BaseDashboard
     parent
     working_days
     closing_days
-    counters
-    service_buildings
+    counters    
     shared_clientdisplays
     created_at
     updated_at
