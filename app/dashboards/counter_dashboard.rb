@@ -14,7 +14,7 @@ class CounterDashboard < Administrate::BaseDashboard
     service: Field::BelongsTo.with_options(
       searchable: true,
       searchable_fields: ["name"],
-      scope: -> { Thread.current[:super_admin]? Service.all : Service.where(company: Thread.current[:current_company]) }
+      scope: -> { Thread.current[:super_admin] ? Service.all : Service.where(company: Thread.current[:current_company]) }
     ),
     shared_clientdisplays: Field::HasMany,
     user_counters: Field::HasMany,

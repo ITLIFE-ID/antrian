@@ -18,7 +18,7 @@ class CompanyDashboard < Administrate::BaseDashboard
     phone_number: Field::String,
     services: Field::HasMany.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     versions: Field::HasMany,
     working_days: Field::HasMany,

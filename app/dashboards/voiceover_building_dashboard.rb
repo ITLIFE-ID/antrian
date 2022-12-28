@@ -11,13 +11,13 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     building: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     day: Field::Number,
     versions: Field::HasMany,
     voice_over: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

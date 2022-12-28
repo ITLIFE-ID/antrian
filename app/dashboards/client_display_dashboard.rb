@@ -13,7 +13,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     client_display_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     counters: Field::HasMany.with_options(
       searchable: true,
-      searchable_fields: ['number'],
+      searchable_fields: ["number"]
     ),
     ip_address: Field::String,
     location: Field::String,

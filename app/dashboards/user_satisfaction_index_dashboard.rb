@@ -15,7 +15,7 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     satifcation_index_name: Field::String,
     satisfaction_index: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     today_queue: Field::BelongsTo,
     versions: Field::HasMany,

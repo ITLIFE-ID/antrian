@@ -11,11 +11,11 @@ class UserCounterDashboard < Administrate::BaseDashboard
     id: Field::Number,
     counter: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['number'],
+      searchable_fields: ["number"]
     ),
     user: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ['name'],
+      searchable_fields: ["name"]
     ),
     versions: Field::HasMany,
     created_at: Field::DateTime,
