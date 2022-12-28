@@ -53,6 +53,15 @@ module Admin
       super
     end
 
+    def destroy      
+      if requested_resource.deleted? ? requested_resource.really_destroy! : requested_resource.destroy
+        flash[:notice] = translate_with_resource("destroy.success")
+      else
+        flash[:error] = requested_resource.errors.full_messages.join("<br/>")
+      end
+      redirect_to after_resource_destroyed_path(requested_resource)
+    end
+
     def set_current_company          
       @current_company ||= current_administrator.company      
     end
