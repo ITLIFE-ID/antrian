@@ -22,11 +22,14 @@ class ServiceDashboard < Administrate::BaseDashboard
     max_quota: Field::Number,
     max_service_time: Field::Number,
     name: Field::String,
-    parent: Field::BelongsTo,
+    parent: Field::BelongsTo.with_options(
+      scope: -> {Thread.current[:super_admin] ? Service.order(name: :asc) : Thread.current[:current_company].services.order(name: :asc)}
+    ),
     priority: Field::Boolean,
     service_type: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ["name"]
+      searchable_fields: ["name"],
+      scope: -> {Thread.current[:super_admin] ? ServiceType.order(name: :asc) : Thread.current[:current_company].service_types.order(name: :asc)}
     ),
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,

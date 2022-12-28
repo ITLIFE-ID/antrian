@@ -1,6 +1,7 @@
 require "administrate/base_dashboard"
 
-class CounterDashboard < Administrate::BaseDashboard
+class CounterDashboard < BaseDashboard
+
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -14,7 +15,7 @@ class CounterDashboard < Administrate::BaseDashboard
     service: Field::BelongsTo.with_options(
       searchable: true,
       searchable_fields: ["name"],
-      scope: -> { Thread.current[:super_admin] ? Service.all : Service.where(company: Thread.current[:current_company]) }
+      scope: -> { AdministrateHelper.scoped_services(Thread.current[:scope]) }
     ),
     shared_clientdisplays: Field::HasMany,
     user_counters: Field::HasMany,

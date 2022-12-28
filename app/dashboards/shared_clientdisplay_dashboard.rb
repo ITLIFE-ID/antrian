@@ -10,7 +10,12 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     client_display: Field::BelongsTo,
-    clientdisplay_able: Field::Polymorphic,
+    clientdisplay_able: Field::Polymorphic.with_options(      
+      classes: [
+        Thread.current[:super_admin] ? Service : Service.where(company: Thread.current[:current_company]), 
+        Thread.current[:super_admin] ? Counter : Counter, 
+      ]
+    ),
     versions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

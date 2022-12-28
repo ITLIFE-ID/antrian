@@ -9,7 +9,9 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    building: Field::BelongsTo,
+    building: Field::BelongsTo.with_options(
+      scope: -> { Thread.current[:super_admin] ? Building.all : Building.where(company: Thread.current[:current_company]) }
+    ),
     client_display_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     counters: Field::HasMany.with_options(
       searchable: true,
@@ -83,7 +85,7 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how client displays are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(client_display)
-  #   "ClientDisplay ##{client_display.id}"
-  # end
+  def display_resource(client_display)
+    "#{client_display.building.name}/#{client_display.location}/#{client_display.ip_address}"
+  end
 end

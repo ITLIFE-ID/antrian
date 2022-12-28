@@ -29,7 +29,8 @@ class Company < ApplicationRecord
   has_many :users
   has_many :administrators
   has_many :client_displays, through: :buildings
-  has_many :counters, through: :service
+  has_many :counters, through: :services
+  has_many :service_types  
 
   validates_presence_of :name, :address, :api_key, :phone_number
   validates_uniqueness_of :name

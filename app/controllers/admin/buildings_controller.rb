@@ -22,7 +22,7 @@ module Admin
     # this will be used to set the records shown on the `index` action.
     #
     def scoped_resource
-      super_admin? ? resource_class : @current_company.buildings
+      AdministrateHelper.scoped_buildings(Thread.current[:scope]) 
     end
     # end
     # Override `resource_params` if you want to transform the submitted

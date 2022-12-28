@@ -48,7 +48,7 @@
         <%=render "base/sidebar/nested_menu", parent: {name: t("setting")}, 
           child: [
             {name: t("client_display"), path: admin_client_displays_path},
-            {name: t("service_clientdisplay"), path: nil},
+            {name: t("service_clientdisplay"), path: admin_shared_clientdisplays_path},
             {name: t("voiceover_buildings"), path: admin_voiceover_buildings_path},            
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_satisfaction_indices_path, name: t("satisfaction_index"), icon: "fa-face-smile"%>

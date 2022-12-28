@@ -25,7 +25,8 @@ class BackupQueueDashboard < Administrate::BaseDashboard
     process_duration: Field::Number,
     service: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ["name"]
+      searchable_fields: ["name"],
+      scope: -> { AdministrateHelper.scoped_services(Thread.current[:scope]) }
     ),
     service_type_slug: Field::String,
     start_time: Field::DateTime,
