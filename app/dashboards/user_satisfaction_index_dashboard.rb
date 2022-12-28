@@ -13,7 +13,10 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     rating: Field::Number,
     review: Field::String,
     satifcation_index_name: Field::String,
-    satisfaction_index: Field::BelongsTo,
+    satisfaction_index: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     today_queue: Field::BelongsTo,
     versions: Field::HasMany,
     created_at: Field::DateTime,

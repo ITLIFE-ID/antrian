@@ -16,7 +16,10 @@ class CompanyDashboard < Administrate::BaseDashboard
     longitude: Field::String,
     name: Field::String,
     phone_number: Field::String,
-    services: Field::HasMany,
+    services: Field::HasMany.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     versions: Field::HasMany,
     working_days: Field::HasMany,
     created_at: Field::DateTime,

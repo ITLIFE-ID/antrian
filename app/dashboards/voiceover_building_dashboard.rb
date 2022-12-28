@@ -9,10 +9,16 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    building: Field::BelongsTo,
+    building: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     day: Field::Number,
     versions: Field::HasMany,
-    voice_over: Field::BelongsTo,
+    voice_over: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     deleted_at: Field::DateTime

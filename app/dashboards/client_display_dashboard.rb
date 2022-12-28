@@ -11,10 +11,16 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
     id: Field::Number,
     building: Field::BelongsTo,
     client_display_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    counters: Field::HasMany,
+    counters: Field::HasMany.with_options(
+      searchable: true,
+      searchable_fields: ['number'],
+    ),
     ip_address: Field::String,
     location: Field::String,
-    play_lists: Field::HasMany,
+    play_lists: .with_options(
+      searchable: true,
+      searchable_fields: ['title'],
+    ),
     services: Field::HasMany.with_options(
       searchable: true,
       searchable_fields: ["name"]

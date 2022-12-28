@@ -9,7 +9,10 @@ class BuildingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    client_displays: Field::HasMany,
+    client_displays: .with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
     company: Field::BelongsTo.with_options(
       searchable: true,
       searchable_fields: ["name"]
