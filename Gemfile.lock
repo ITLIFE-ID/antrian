@@ -20,19 +20,6 @@ GIT
   specs:
     mqtt (0.5.0)
 
-GIT
-  remote: https://github.com/thoughtbot/administrate.git
-  revision: e1bfd5c917c415cfab6fbb1abfb0b3057b48c113
-  specs:
-    administrate (0.18.0)
-      actionpack (>= 5.0)
-      actionview (>= 5.0)
-      activerecord (>= 5.0)
-      jquery-rails (>= 4.0)
-      kaminari (>= 1.0)
-      sassc-rails (~> 2.1)
-      selectize-rails (~> 0.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -107,6 +94,14 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    administrate (0.18.0)
+      actionpack (>= 5.0)
+      actionview (>= 5.0)
+      activerecord (>= 5.0)
+      jquery-rails (>= 4.0)
+      kaminari (>= 1.0)
+      sassc-rails (~> 2.1)
+      selectize-rails (~> 0.6)
     ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.684.0)
@@ -598,7 +593,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   action_policy
-  administrate!
+  administrate
   annotate!
   aws-sdk-s3
   better_errors

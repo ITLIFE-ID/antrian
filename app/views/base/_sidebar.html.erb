@@ -8,8 +8,10 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="info d-flex justify-content-between">
-        <%=link_to "#{current_administrator.name} - #{current_administrator.company.name}", root_path, class: "mr-5" %>
-        <%=link_to :logout, destroy_administrator_session_path, method: :delete%>
+        <%=link_to "#{current_administrator.name} - #{current_administrator.company.name}", root_path, class: "mr-3" %>
+        <%=link_to destroy_administrator_session_path, method: :delete, class: "font-weight-bold text-danger" do%>
+          Logout <i class="fa fa-sign-out ml-1" aria-hidden="true"></i>
+        <%end%>
       </div>
     </div>
     <!-- SidebarSearch Form -->

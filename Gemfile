@@ -92,7 +92,7 @@ end
 
 # security
 gem "action_policy"
-gem "administrate", github: "thoughtbot/administrate"
+gem "administrate"
 gem "devise"
 gem "devise-jwt"
 gem "permisi"

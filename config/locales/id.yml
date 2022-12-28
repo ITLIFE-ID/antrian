@@ -86,8 +86,8 @@ id:
       backup_queue: Antrian sebelumnya
       building: Gedung
       client_display: Display layar
-      company_closing_day: Hari tutup
-      company_working_day: Hari Kerja
+      closing_day: Hari tutup
+      working_day: Hari Kerja
       company: Perusahan     
       counter_clientdisplay: Display loket
       counter: Loket

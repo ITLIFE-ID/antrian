@@ -20,13 +20,15 @@ to do the heavy lifting.
     name: display_resource_name(page.resource_name).titleize
   ) %>
 <% end %>
-<header class="main-content__header p-0">
-  <h1 class="main-content__page-title mb-4">
+<header class="main-content__header p-0 mb-4 border-bottom-0">
+  <div class="mr-4">
+    <%= link_to  :back do%>
+      <i class="fa-regular fa-circle-left fa-xl"></i>
+    <% end%>
+  </div>
+  <h1 class="main-content__page-title">
     <%= content_for(:title) %>
   </h1>
-  <div>
-    <%= link_to t("administrate.actions.back"), :back, class: "button" %>
-  </div>
 </header>
 <section class="main-content__body p-0">
   <%= render "form", page: page %>
