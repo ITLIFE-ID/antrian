@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class CounterDashboard < BaseDashboard
+class CounterDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -76,7 +76,7 @@ class CounterDashboard < BaseDashboard
   # Overwrite this method to customize how counters are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(counter)
-  #   "Counter ##{counter.id}"
-  # end
+  def display_resource(counter)
+    "Loket ##{counter.number}"
+  end
 end

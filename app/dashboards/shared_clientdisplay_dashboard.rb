@@ -13,7 +13,7 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
       scope: -> { AdministrateHelper.scoped_client_displays(Thread.current[:scope]) }
     ),
     clientdisplay_able: Field::Polymorphic.with_options(
-      classes: AdministrateHelper.polymorph_schedule(Thread.current[:scope])
+      classes: AdministrateHelper.polymorph_shared_client_display(Thread.current[:scope])
     ),
     versions: Field::HasMany,
     created_at: Field::DateTime,

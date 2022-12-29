@@ -33,10 +33,18 @@ module AdministrateHelper
   end
 
   def self.scoped_service_types(scope)
-    scope.first ? ClientDisplay.order(name: :asc) : scope.second.service_typs
+    scope.first ? ClientDisplay.order(name: :asc) : scope.second.service_types
   end
 
   def self.polymorph_schedule(scope)
+    if scope.first
+      [Company, Service]
+    else
+      [Company.where(id: scope.second.id), Service.where(company: scope.second)]
+    end
+  end
+
+  def self.polymorph_shared_client_display(scope)
     if scope.first
       [Service, Counter]
     else
