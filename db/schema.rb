@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_26_131815) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_29_035743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -179,6 +179,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_131815) do
     t.index ["service_id"], name: "index_counters_on_service_id"
   end
 
+  create_table "file_storages", force: :cascade do |t|
+    t.string "file_able_type"
+    t.bigint "file_able_id"
+    t.bigint "company_id"
+    t.string "title"
+    t.string "file_type"
+    t.datetime "deleted_at"
+    t.index ["company_id"], name: "index_file_storages_on_company_id"
+    t.index ["file_able_type", "file_able_id"], name: "index_file_storages_on_file_able"
+  end
+
   create_table "permisi_actor_roles", force: :cascade do |t|
     t.bigint "actor_id"
     t.bigint "role_id"
@@ -214,8 +225,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_131815) do
 
   create_table "play_lists", force: :cascade do |t|
     t.bigint "client_display_id"
-    t.string "title"
-    t.string "file_type"
     t.boolean "playing", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

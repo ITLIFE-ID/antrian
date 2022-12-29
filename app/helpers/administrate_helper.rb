@@ -40,7 +40,7 @@ module AdministrateHelper
     scope.first ? PlayList.order(title: :asc) : PlayList.where(client_display: scope.second.client_displays)
   end
 
-  def self.polymorph_schedule(scope)    
+  def self.polymorph_schedule(scope)
     if scope.first
       [Company, Service]
     else

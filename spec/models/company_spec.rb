@@ -22,6 +22,17 @@ require "rails_helper"
 
 RSpec.describe Company, type: :model do
   it { should have_many :satisfaction_indices }
+
+  it { should have_many :services }
+  it { should have_many :satisfaction_indices }
+  it { should have_many :buildings }
+  it { should have_many :users }
+  it { should have_many :administrators }
+  it { should have_many(:client_displays).through(:buildings) }
+  it { should have_many(:counters).through(:services) }
+  it { should have_many :service_types }
+  it { should have_many :file_storages }
+
   it { should validate_presence_of :name }
   it { should validate_presence_of :address }
   it { should validate_presence_of :api_key }

@@ -6,9 +6,7 @@
 #
 #  id                :bigint           not null, primary key
 #  deleted_at        :datetime
-#  file_type         :string
 #  playing           :boolean          default(FALSE)
-#  title             :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  client_display_id :bigint
