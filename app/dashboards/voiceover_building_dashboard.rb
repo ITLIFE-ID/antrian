@@ -11,7 +11,8 @@ class VoiceoverBuildingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     building: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ["name"]
+      searchable_fields: ["name"],
+      scope: -> { AdministrateHelper.scoped_buildings(Thread.current[:scope]) }
     ),
     day: Field::Number,
     versions: Field::HasMany,

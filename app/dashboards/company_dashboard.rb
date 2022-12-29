@@ -11,15 +11,12 @@ class CompanyDashboard < Administrate::BaseDashboard
     id: Field::Number,
     address: Field::String,
     api_key: Field::String,
-    closing_days: Field::HasMany,
+    closing_days: Field::HasMany.with_options,
     latitude: Field::String,
     longitude: Field::String,
     name: Field::String,
     phone_number: Field::String,
-    services: Field::HasMany.with_options(
-      searchable: true,
-      searchable_fields: ["name"]
-    ),
+    services: Field::HasMany.with_options,
     versions: Field::HasMany,
     working_days: Field::HasMany,
     created_at: Field::DateTime,

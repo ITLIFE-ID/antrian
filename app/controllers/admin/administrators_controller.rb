@@ -24,7 +24,7 @@ module Admin
     #
 
     def scoped_resource
-      super_admin? ? resource_class : @current_company.administrators
+      AdministrateHelper.scoped_administrators(Thread.current[:scope])
     end
 
     # Override `resource_params` if you want to transform the submitted

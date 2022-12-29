@@ -10,20 +10,14 @@ class ClientDisplayDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     building: Field::BelongsTo.with_options(
-      scope: -> { Thread.current[:super_admin] ? Building.all : Building.where(company: Thread.current[:current_company]) }
+      scope: -> { AdministrateHelper.scoped_buildings(Thread.current[:scope]) }
     ),
     client_display_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    counters: Field::HasMany.with_options(
-      searchable: true,
-      searchable_fields: ["number"]
-    ),
+    counters: Field::HasMany,
     ip_address: Field::String,
     location: Field::String,
     play_lists: Field::HasMany,
-    services: Field::HasMany.with_options(
-      searchable: true,
-      searchable_fields: ["name"]
-    ),
+    services: Field::HasMany,
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,
     created_at: Field::DateTime,

@@ -9,12 +9,11 @@ class SharedClientdisplayDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    client_display: Field::BelongsTo,
-    clientdisplay_able: Field::Polymorphic.with_options(      
-      classes: [
-        Thread.current[:super_admin] ? Service : Service.where(company: Thread.current[:current_company]), 
-        Thread.current[:super_admin] ? Counter : Counter, 
-      ]
+    client_display: Field::BelongsTo.with_options(
+      scope: -> { AdministrateHelper.scoped_client_displays(Thread.current[:scope]) }
+    ),
+    clientdisplay_able: Field::Polymorphic.with_options(
+      classes: AdministrateHelper.polymorph_schedule(Thread.current[:scope])
     ),
     versions: Field::HasMany,
     created_at: Field::DateTime,

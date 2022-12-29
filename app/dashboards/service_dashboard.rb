@@ -15,7 +15,8 @@ class ServiceDashboard < Administrate::BaseDashboard
     closing_days: Field::HasMany,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ["name"]
+      searchable_fields: ["name"],
+      scope: -> { AdministrateHelper.scoped_companies(Thread.current[:scope]) }
     ),
     counters: Field::HasMany,
     letter: Field::String,
@@ -23,13 +24,13 @@ class ServiceDashboard < Administrate::BaseDashboard
     max_service_time: Field::Number,
     name: Field::String,
     parent: Field::BelongsTo.with_options(
-      scope: -> {Thread.current[:super_admin] ? Service.order(name: :asc) : Thread.current[:current_company].services.order(name: :asc)}
+      scope: -> { AdministrateHelper.scoped_services(Thread.current[:scope]) }
     ),
     priority: Field::Boolean,
     service_type: Field::BelongsTo.with_options(
       searchable: true,
       searchable_fields: ["name"],
-      scope: -> {Thread.current[:super_admin] ? ServiceType.order(name: :asc) : Thread.current[:current_company].service_types.order(name: :asc)}
+      scope: -> { AdministrateHelper.scoped_service_types(Thread.current[:scope]) }
     ),
     shared_clientdisplays: Field::HasMany,
     versions: Field::HasMany,

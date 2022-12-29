@@ -55,20 +55,6 @@ Rails.application.routes.draw do
       get ":type", as: "musics", to: "play_lists#index", on: :collection, defaults: {type: "music"}
       get ":type", as: "videos", to: "play_lists#index", on: :collection, defaults: {type: "video"}
     end
-
-    resources :today_queues do
-      get ":type", as: "processed", to: "today_queues#index", on: :collection, defaults: {type: "processed "}
-      get ":type", as: "unprocessed", to: "today_queues#index", on: :collection, defaults: {type: "unprocessed"}
-      get ":type", as: "offline", to: "today_queues#index", on: :collection, defaults: {type: "offline "}
-      get ":type", as: "online", to: "today_queues#index", on: :collection, defaults: {type: "online"}
-      get ":type", as: "future_online", to: "today_queues#index", on: :collection, defaults: {type: "future_online "}
-      get ":type", as: "future_offline", to: "today_queues#index", on: :collection, defaults: {type: "future_offline"}
-    end
-
-    resources :backup_queues do
-      get ":type", as: "offline", to: "backup_queues#index", on: :collection, defaults: {type: "offline "}
-      get ":type", as: "online", to: "backup_queues#index", on: :collection, defaults: {type: "online"}
-    end
   end
 
   namespace :api, defaults: {format: :json} do

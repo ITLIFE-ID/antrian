@@ -9,13 +9,11 @@ class BuildingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    client_displays: Field::HasMany.with_options(
-      searchable: true,
-      searchable_fields: ["name"]
-    ),
+    client_displays: Field::HasMany.with_options,
     company: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ["name"]
+      searchable_fields: ["name"],
+      scope: -> { AdministrateHelper.scoped_companies(Thread.current[:scope]) }
     ),
     name: Field::String,
     versions: Field::HasMany,

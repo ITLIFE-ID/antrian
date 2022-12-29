@@ -71,7 +71,7 @@ module Admin
     end
 
     def set_administrate_thread
-      Thread.current[:scope] = [current_administrator, @current_company]
+      Thread.current[:scope] = [super_admin?, @current_company]
     end
 
     # Override this value to specify the number of elements to display at a time

@@ -9,7 +9,9 @@ class ClosingDayDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    closeable: Field::Polymorphic.with_options(classes: [Company, Service]),
+    closeable: Field::Polymorphic.with_options(
+      classes: AdministrateHelper.polymorph_schedule(Thread.current[:scope])
+    ),
     date: Field::Date,
     finish_time: Field::DateTime,
     start_time: Field::DateTime,

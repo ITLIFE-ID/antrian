@@ -9,7 +9,9 @@ class SatisfactionIndexDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    company: Field::BelongsTo,
+    company: Field::BelongsTo.with_options(
+      scope: -> { AdministrateHelper.scoped_companies(Thread.current[:scope]) }
+    ),
     name: Field::String,
     order_number: Field::Number,
     versions: Field::HasMany,

@@ -14,10 +14,10 @@ module Admin
 
     def past
       @summary = [
-        {name: t("past_queue_performance"), value: "5 antrian / menit", color: "bg-success", detail_path: admin_today_queues_path, skip_pie_chart: true},
-        {name: t("total_queues"), value: BackupQueue.count, color: "bg-primary", detail_path: admin_today_queues_path, skip_pie_chart: true},
-        {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue.count, color: "bg-info", detail_path: admin_today_queues_path},
-        {name: t("total_online_queue"), value: BackupQueue.total_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
+        {name: t("past_queue_performance"), value: "5 antrian / menit", color: "bg-success", skip_pie_chart: true},
+        {name: t("total_queues"), value: BackupQueue.count, color: "bg-primary", skip_pie_chart: true},
+        {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue.count, color: "bg-info"},
+        {name: t("total_online_queue"), value: BackupQueue.total_online_queue.count, color: "bg-success"}
       ]
 
       build_summary
@@ -27,11 +27,11 @@ module Admin
 
     def today
       @summary = [
-        {name: t("total_queues"), value: TodayQueue.total_queue.count, color: "bg-dark", detail_path: admin_today_queues_path},
-        {name: t("total_processed"), value: TodayQueue.total_processed.count, color: "bg-primary", detail_path: admin_today_queues_path},
-        {name: t("total_unprocessed"), value: TodayQueue.total_unprocessed.count, color: "bg-warning", detail_path: admin_today_queues_path},
-        {name: t("total_offline_queue"), value: TodayQueue.total_offline_queue.count, color: "bg-info", detail_path: admin_today_queues_path},
-        {name: t("total_online_queue"), value: TodayQueue.total_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
+        {name: t("total_queues"), value: TodayQueue.total_queue.count, color: "bg-dark"},
+        {name: t("total_processed"), value: TodayQueue.total_processed.count, color: "bg-primary"},
+        {name: t("total_unprocessed"), value: TodayQueue.total_unprocessed.count, color: "bg-warning"},
+        {name: t("total_offline_queue"), value: TodayQueue.total_offline_queue.count, color: "bg-info"},
+        {name: t("total_online_queue"), value: TodayQueue.total_online_queue.count, color: "bg-success"}
       ]
 
       build_summary
@@ -41,9 +41,9 @@ module Admin
 
     def future
       @summary = [
-        {name: t("total_future_queues"), value: TodayQueue.total_future_queue.count, color: "bg-dark", detail_path: admin_today_queues_path},
-        {name: t("total_future_offline_queue"), value: TodayQueue.total_future_offline_queue.count, color: "bg-info", detail_path: admin_today_queues_path},
-        {name: t("total_future_online_queue"), value: TodayQueue.total_future_online_queue.count, color: "bg-success", detail_path: admin_today_queues_path}
+        {name: t("total_future_queues"), value: TodayQueue.total_future_queue.count, color: "bg-dark"},
+        {name: t("total_future_offline_queue"), value: TodayQueue.total_future_offline_queue.count, color: "bg-info"},
+        {name: t("total_future_online_queue"), value: TodayQueue.total_future_online_queue.count, color: "bg-success"}
       ]
 
       build_summary

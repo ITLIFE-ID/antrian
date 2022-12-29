@@ -1,25 +1,46 @@
-module AdministrateHelper  
+module AdministrateHelper
+  # scope.first = is_super_admin, scope.second = @current_company
+  def self.scoped_companies(scope)
+    scope.first ? Company.order(name: :asc) : Company.where(id: scope.second.id)
+  end
+
   def self.scoped_services(scope)
-    is_super_admin(scope.first)? Service.order(name: :asc) : scope.second.services
+    scope.first ? Service.order(name: :asc) : scope.second.services
   end
 
   def self.scoped_counters(scope)
-    is_super_admin(scope.first)? Counter.order(name: :asc) : scope.second.counters
+    scope.first ? Counter.order(name: :asc) : scope.second.counters
   end
 
   def self.scoped_buildings(scope)
-    is_super_admin(scope.first)? Building.order(name: :asc) : scope.second.buildings
+    scope.first ? Building.order(name: :asc) : scope.second.buildings
   end
 
   def self.scoped_satisfaction_indices(scope)
-    is_super_admin(scope.first)? SatisfactionIndex.order(name: :asc) : scope.second.satisfaction_indices
+    scope.first ? SatisfactionIndex.order(name: :asc) : scope.second.satisfaction_indices
   end
 
   def self.scoped_administrators(scope)
-    is_super_admin(scope.first)? Administrator.order(name: :asc) : scope.second.administrators
+    scope.first ? Administrator.order(name: :asc) : scope.second.administrators
   end
 
-  def self.is_super_admin(user)
-    user.id == 1 && user.is_a?(Administrator)
+  def self.scoped_users(scope)
+    scope.first ? User.order(name: :asc) : scope.second.users
+  end
+
+  def self.scoped_client_displays(scope)
+    scope.first ? ClientDisplay.order(name: :asc) : scope.second.client_displays
+  end
+
+  def self.scoped_service_types(scope)
+    scope.first ? ClientDisplay.order(name: :asc) : scope.second.service_typs
+  end
+
+  def self.polymorph_schedule(scope)
+    if scope.first
+      [Service, Counter]
+    else
+      [Service.where(company: scope.second), Counter.where(service: scope.second.services)]
+    end
   end
 end

@@ -15,7 +15,8 @@ class UserSatisfactionIndexDashboard < Administrate::BaseDashboard
     satifcation_index_name: Field::String,
     satisfaction_index: Field::BelongsTo.with_options(
       searchable: true,
-      searchable_fields: ["name"]
+      searchable_fields: ["name"],
+      scope: -> { AdministrateHelper.scoped_satisfaction_indices(Thread.current[:scope]) }
     ),
     today_queue: Field::BelongsTo,
     versions: Field::HasMany,
