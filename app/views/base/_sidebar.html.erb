@@ -44,6 +44,7 @@
             {name: t("today_queue"), path: today_admin_dashboards_path},            
             {name: t("future_queue"), path: future_admin_dashboards_path},
           ]%>
+        <%=render "base/sidebar/single_menu", path: admin_file_storages_path, name: t("file_storage"), icon: "fa-boxes-packing"%>
         <%=render "base/sidebar/single_menu", path: admin_buildings_path, name: t("building"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("setting")}, 
           child: [

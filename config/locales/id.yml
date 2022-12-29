@@ -5,6 +5,7 @@ id:
       edit_and_restore: Perbarui dan Restore
   add: Tambah
   destroy: Hapus
+  file_storage: Media penyimpanan
   service_type: Tipe Layanan
   service_not_found: Service not found
   counter_not_found: Counter not found

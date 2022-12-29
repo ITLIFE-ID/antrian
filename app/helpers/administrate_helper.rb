@@ -36,6 +36,10 @@ module AdministrateHelper
     scope.first ? ClientDisplay.order(name: :asc) : scope.second.service_types
   end
 
+  def self.scoped_file_storages(scope)
+    scope.first ? FileStorage.order(title: :asc) : scope.second.file_storages
+  end
+
   def self.scoped_play_lists(scope)
     scope.first ? PlayList.order(title: :asc) : PlayList.where(client_display: scope.second.client_displays)
   end

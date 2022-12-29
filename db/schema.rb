@@ -185,8 +185,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_29_035743) do
     t.bigint "company_id"
     t.string "title"
     t.string "file_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.index ["company_id"], name: "index_file_storages_on_company_id"
+    t.index ["deleted_at"], name: "index_file_storages_on_deleted_at"
     t.index ["file_able_type", "file_able_id"], name: "index_file_storages_on_file_able"
   end
 

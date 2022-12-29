@@ -42,8 +42,9 @@ Rails.application.routes.draw do
     resources :permisi_roles
     resources :permisi_actor_roles
     resources :permisi_actors
-
     resources :client_displays
+    resources :play_lists
+    resources :file_storages
 
     resources :dashboards do
       get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
