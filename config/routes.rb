@@ -5,54 +5,43 @@ Rails.application.routes.draw do
 
   devise_for :users
   devise_for :administrators
-
+  
   root to: redirect("admin/dashboards/today")
 
   namespace :admin do
     root to: redirect("admin/dashboards/today")
     resources :administrators
-    resources :users
-
+    resources :buildings
+    resources :client_displays
+    resources :closing_days
     resources :companies do
       resources :working_days
       resources :closing_days
     end
-
-    resources :services do
-      resources :working_days
-      resources :closing_days
-    end
-
-    resources :working_days
-    resources :closing_days
-
-    resources :buildings
-    resources :service_types
     resources :counters
-    resources :user_counters
-
-    resources :shared_clientdisplays
-
-    resources :voiceover_buildings
-    resources :voice_overs
-
-    resources :satisfaction_indices
-    resources :user_satisfaction_indices
-
-    resources :permisi_roles
-    resources :permisi_actor_roles
-    resources :permisi_actors
-    resources :client_displays
-    resources :play_lists
-    resources :file_storages
-
     resources :dashboards do
       get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
       get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
       get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
-    end
-
+    end    
+    resources :file_storages
+    resources :permisi_roles
+    resources :permisi_actor_roles
+    resources :permisi_actors  
     resources :play_lists
+    resources :service_types
+    resources :working_days
+    resources :services do
+      resources :working_days
+      resources :closing_days
+    end
+    resources :shared_clientdisplays
+    resources :satisfaction_indices
+    resources :user_counters
+    resources :user_satisfaction_indices
+    resources :users
+    resources :voiceover_buildings
+    resources :voice_overs    
   end
 
   namespace :api, defaults: {format: :json} do
