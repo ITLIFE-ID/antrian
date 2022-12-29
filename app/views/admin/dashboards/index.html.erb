@@ -3,16 +3,16 @@
 <% end %>
 <div class="d-flex justify-content-start align-items-center mb-4">
   <h1 class="mr-4"><%= content_for(:title) %></h1>
-  <div class="<%=@type == "today"? "d-none" : ""%>">
-    <div class="form-group">
-      <div class="input-group">
-        <button type="button" class="btn btn-default float-right daterange" id="daterange">
-          <i class="far fa-calendar-alt"></i> Date range picker
+  <% if @type != "today"%>
+    <div class="form-group mt-3">
+      <div class="input-group" data-controller="daterangepicker">
+        <button type="button" class="btn btn-default float-right" id="daterangepicker">
+          <i class="far fa-calendar-alt"></i> <span id="reportrange">Date range picker</span>
           <i class="fas fa-caret-down"></i>
         </button>
       </div>
     </div>
-  </div>
+  <% end%>
 </div>
 <div class="row">
   <%@summary.each do |s| %>
