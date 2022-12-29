@@ -8,7 +8,8 @@ module Admin
       resource = scoped_resource.new(
         resource_params.merge!(
           file_type: file.content_type.split("/").first, 
-          title: file.original_filename
+          title: file.original_filename,
+          company_id: @current_company.id
         )
       )
 
