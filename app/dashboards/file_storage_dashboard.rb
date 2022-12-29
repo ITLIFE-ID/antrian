@@ -9,7 +9,7 @@ class FileStorageDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    files: Field::ActiveStorage,
+    file: Field::ActiveStorage,
     files_attachments: Field::HasMany,
     files_blobs: Field::HasMany,
     company: Field::BelongsTo.with_options(
@@ -34,7 +34,7 @@ class FileStorageDashboard < Administrate::BaseDashboard
     company
     title
     file_type
-    files  
+    file  
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,8 +42,9 @@ class FileStorageDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     company
-    files            
+    file          
     title    
+    file_type
     created_at
     updated_at
     deleted_at
@@ -54,7 +55,7 @@ class FileStorageDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     company
-    files    
+    file 
   ].freeze
 
   # COLLECTION_FILTERS
@@ -77,6 +78,6 @@ class FileStorageDashboard < Administrate::BaseDashboard
   # end
 
   def permitted_attributes
-    super + [:files => []]
+    super + [:file => []]
   end
 end

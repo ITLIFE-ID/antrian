@@ -22,16 +22,9 @@ class FileStorage < ApplicationRecord
   belongs_to :file_able, polymorphic: true
   belongs_to :company
 
-  has_many_attached :files
-
-  enum file_type: {music: "MUSIC", video: "VIDEO"}
+  has_one_attached :file
+  
   validates_presence_of :title, :file_type
-
-  before_validation :get_mime_and_title
-
-  private
-
-  def get_mime_and_title
-    
-  end
+  validates :file_type, inclusion: { in: %w(audio video),
+    message: "Hanya di perbolehkan file audio dan video saja (MP3/MP4)" }
 end
