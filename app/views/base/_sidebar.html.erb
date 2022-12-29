@@ -62,16 +62,11 @@
         <%=render "base/sidebar/nested_menu", parent: {name: t("counter"), icon: "fa-handshake-angle"}, 
           child: [
             {name: t("list"), path: admin_counters_path},
-            {name: t("user_counter"), path: admin_user_counters_path},
-            {name: t("counter_clientdisplay"), path:nil},
+            {name: t("user_counter"), path: admin_user_counters_path}            
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_users_path, name: t("user"), icon: "fa-users"%>
         <%=render "base/sidebar/single_menu", path: admin_voice_overs_path, name: t("voice_over"), icon: "fa-user-astronaut"%>
-        <%=render "base/sidebar/nested_menu", parent: {name: t("play_list"), icon: "fa-music"}, 
-          child: [
-            {name: t("music"), path: admin_play_lists_path},
-            {name: t("video"), path: admin_play_lists_path},            
-          ]%>
+        <%=render "base/sidebar/single_menu", path: admin_play_lists_path, name: t("play_list"), icon: "fa-music"%>
         <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t("service_type"), icon: "fa-landmark"%>
       </ul>
     </nav>

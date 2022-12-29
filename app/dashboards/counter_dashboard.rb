@@ -77,6 +77,6 @@ class CounterDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(counter)
-    "Loket ##{counter.number}"
+    "Counter #{counter.service.name} No. #{counter.number}"
   end
 end

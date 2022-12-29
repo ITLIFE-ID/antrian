@@ -73,9 +73,9 @@ class FileStorageDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how file storages are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(file_storage)
-  #   "FileStorage ##{file_storage.id}"
-  # end
+  def display_resource(file_storage)
+    file_storage.title
+  end
 
   def permitted_attributes
     super + [:file => []]

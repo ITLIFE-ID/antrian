@@ -23,7 +23,7 @@ id:
   service_working_days: hari kerja layanan
   service_types: tipe layanan
   service_closing_days: jam tutup layanan
-  service_clientdisplay: Layanan pada layar
+  service_clientdisplay: Tampilan Layanan / Loket
   services: layanan
   satisfaction_indices: Index kenyamanan
   permisi_role: Role

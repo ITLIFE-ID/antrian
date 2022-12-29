@@ -54,6 +54,6 @@ class ApplicationPolicy < ActionPolicy::Base
   end
 
   def second_level_model
-    [Building, Service, SatisfactionIndex, User, Administrator, ServiceType]
+    [Building, Service, SatisfactionIndex, User, Administrator, ServiceType, FileStorage]
   end
 end
