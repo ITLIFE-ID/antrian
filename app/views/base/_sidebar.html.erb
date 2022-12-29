@@ -68,8 +68,8 @@
         <%=render "base/sidebar/single_menu", path: admin_voice_overs_path, name: t("voice_over"), icon: "fa-user-astronaut"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("play_list"), icon: "fa-music"}, 
           child: [
-            {name: t("music"), path: musics_admin_play_lists_path},
-            {name: t("video"), path: videos_admin_play_lists_path},            
+            {name: t("music"), path: admin_play_lists_path},
+            {name: t("video"), path: admin_play_lists_path},            
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_service_types_path, name: t("service_type"), icon: "fa-landmark"%>
       </ul>

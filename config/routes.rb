@@ -51,10 +51,7 @@ Rails.application.routes.draw do
       get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
     end
 
-    resources :play_lists do
-      get ":type", as: "musics", to: "play_lists#index", on: :collection, defaults: {type: "music"}
-      get ":type", as: "videos", to: "play_lists#index", on: :collection, defaults: {type: "video"}
-    end
+    resources :play_lists
   end
 
   namespace :api, defaults: {format: :json} do

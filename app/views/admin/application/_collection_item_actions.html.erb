@@ -1,12 +1,12 @@
 <% if existing_action?(collection_presenter.resource_name, :edit) %>
-  <td><%= link_to(
+  <td class="text-center px-4"><%= link_to(
     resource.deleted_at.present?? t("administrate.actions.edit_and_restore"): t("administrate.actions.edit"),    
     [:edit, namespace, resource],
     class: resource.deleted_at.present?? "bg-danger": "action=edit",
   ) if accessible_action?(resource, :edit) %></td>
 <% end %>
 <% if existing_action?(collection_presenter.resource_name, :destroy) %>
-  <td><%= link_to(
+  <td class="text-center px-4"><%= link_to(
     resource.deleted_at.present?? t("administrate.actions.permanent_destroy"): t("administrate.actions.destroy"),
     [namespace, resource],
     class: resource.deleted_at.present?? "bg-danger": "text-color-red",
