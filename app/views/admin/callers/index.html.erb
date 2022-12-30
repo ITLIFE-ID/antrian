@@ -4,6 +4,13 @@
 <div class="card">
   <div class="card-body">
     <div class="row">
+      <div class="col-12">
+        <div class="alert alert-danger" role="alert" id="mqtt-alert">
+          Koneksi gagal ke server, Mohon refresh browser
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-8" data-controller="caller"><%=render "caller"%></div>
       <div class="col-4"><%=render "queue_list"%></div>
     </div>

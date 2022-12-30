@@ -40266,11 +40266,12 @@
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
       function onConnect() {
-        console.log("onConnect");
-        client.subscribe("World");
+        client.subscribe("QUEUE_SYSTEM");
+        $("#mqtt-alert").addClass("alert-success").removeClass("alert-danger").html("Berhasil konek ke server");
       }
       function onConnectionLost(responseObject) {
         if (responseObject.errorCode !== 0) {
+          $("#mqtt-alert").addClass("alert-danger").removeClass("alert-success").html("Koneksi gagal ke server, Mohon refresh browser");
           console.log("onConnectionLost:" + responseObject.errorMessage);
         }
       }
