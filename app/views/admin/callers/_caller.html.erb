@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-12">
-    <select id="counter">
-      <option>Pilih Counter</option>
+    <select id="counter" data-id="<%=params[:counter_id]%>">
+      <option>Pilih Loket</option>
       <%@counters.each do |c|%>
         <option value="<%=c.id%>" <%="selected" if params[:counter_id].to_i == c.id%>><%=c.service.name%> / Loket Nomor <%=c.number%></option>
         <%end%>
@@ -12,7 +12,7 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-info">
         <div class="inner">
-          <h3><%=@current_queue&.letter || "A"%> <%=@current_queue&.number || "000"%></h3>
+          <h3 id="current_queue" data-id="<%=@current_queue&.id%>"><%=@current_queue&.letter || "A"%> <%=@current_queue&.number || "000"%></h3>
           <p>Antrian Sekarang</p>
         </div>
         <div class="icon">
@@ -23,7 +23,7 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-success">
         <div class="inner">
-          <h3><%=@waiting_queues%></h3>
+          <h3 id="waiting_queues"><%=@waiting_queues%></h3>
           <p>Sedang Menunggu</p>
         </div>
         <div class="icon">
@@ -34,7 +34,7 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3><%=@offline_queues%></h3>
+          <h3 id="offline_queues"><%=@offline_queues%></h3>
           <p>Antrian Offline</p>
         </div>
         <div class="icon">
@@ -45,7 +45,7 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3><%=@online_queues%></h3>
+          <h3 id="online_queues"><%=@online_queues%></h3>
           <p>Antrian Online</p>
         </div>
         <div class="icon">
@@ -56,10 +56,10 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <button type="submit" class="btn btn-success btn-lg px-5 font-weight-bolder w-100">Panggil</button>
+      <button type="submit" class="btn btn-success btn-lg px-5 font-weight-bolder w-100" id="call">Panggil</button>
     </div>
     <div class="col-6">
-      <button type="submit" class="btn btn-info btn-lg px-5 font-weight-bolder w-100">Panggil Ulang</button>
+      <button type="submit" class="btn btn-info btn-lg px-5 font-weight-bolder w-100" id="recall">Panggil Ulang</button>
     </div>
   </div>
   <div class="row mt-3">
@@ -71,6 +71,6 @@
       </select>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-danger btn-lg px-5 font-weight-bolder w-100">Pindah</button>
+      <button type="submit" class="btn btn-danger btn-lg px-5 font-weight-bolder w-100" id="switch">Pindah</button>
     </div>
   </div>

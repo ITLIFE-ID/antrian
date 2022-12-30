@@ -19,7 +19,7 @@ module Admin
     end
 
     def set_today_queue
-      @today_queues ||= TodayQueue.where(service: selected_counter.service, attend: false).order(id: :asc)
+      @today_queues ||= TodayQueue.where(service: selected_counter&.service, attend: false).order(id: :asc)
     end
 
     def set_counters
