@@ -14,7 +14,6 @@ to be displayed on a resource's edit form page.
 
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Field/Select
 %>
-
 <div class="field-unit__label">
   <%= f.label field.attribute %>
 </div>
@@ -28,7 +27,7 @@ to be displayed on a resource's edit form page.
         :first,
         field.data,
       ),
-      include_blank: field.include_blank_option
+      {include_blank: field.include_blank_option}, {class: "selectize"}
     ) %>
   <% else %>
     <%= f.select(
@@ -39,7 +38,7 @@ to be displayed on a resource's edit form page.
         :to_s,
         field.data,
       ),
-      include_blank: field.include_blank_option
+      {include_blank: field.include_blank_option}, {class: "selectize"}
     ) %>
   <% end %>
 </div>

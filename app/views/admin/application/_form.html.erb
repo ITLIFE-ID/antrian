@@ -14,7 +14,7 @@ and renders all form fields for a resource's editable attributes.
 [1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Form
 %>
 <div class="card card-default" data-controller="bootstrap-switch">
-  <div class="card-body pt-5">
+  <div class="card-body pt-5" data-controller="selectize">
     <div class="row">
       <div class="col-12">
         <%= form_for([namespace, page.resource], html: { class: "form" }) do |f| %>

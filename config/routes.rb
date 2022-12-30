@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     resources :shared_clientdisplays
     resources :satisfaction_indices
     resources :user_counters
-    resources :user_satisfaction_indices
+    resources :user_satisfaction_indices, only: [:index, :show]
     resources :users
     resources :voiceover_buildings
     resources :voice_overs
