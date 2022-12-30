@@ -49,8 +49,7 @@ module Antrian
     end
 
     config.after_initialize do
-      mqttSub = MQTTSubscriber.new
-      mqttSub.run
+      MQTTSubscriber.new.run
     end
   end
 end

@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 import $ from "jquery"
 import Paho from "paho-mqtt"
+import Swal  from "sweetalert2"
 
 export default class extends Controller {
   connect() {    
@@ -35,9 +36,8 @@ export default class extends Controller {
             counter_id: counter_id
           }
         }
-        var message = new Paho.Message(JSON.stringify(payload));
-        message.destinationName = MQTT_CHANNEL;
-        client.send(message);
+
+        send_message(payload)
       });
       
       $("#recall").click(function(){
@@ -48,9 +48,8 @@ export default class extends Controller {
             id: current_queue_id            
           }
         }
-        var message = new Paho.Message(JSON.stringify(payload));
-        message.destinationName = MQTT_CHANNEL;
-        client.send(message);
+
+        send_message(payload)
       });
 
       $("#transfer").click(function(){
@@ -63,12 +62,33 @@ export default class extends Controller {
             transfer: true
           }
         }
-        
-        var message = new Paho.Message(JSON.stringify(payload));
-        message.destinationName = MQTT_CHANNEL;
-        client.send(message);
+
+        send_message(payload)
       });
     }
+
+    function send_message(payload){
+      const message = new Paho.Message(JSON.stringify(payload));
+      message.destinationName = MQTT_CHANNEL;
+      client.send(message);
+      toast(payload)
+    }
+
+    function toast(payload){
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+      });
+
+      
+      Toast.fire({
+        icon: 'success',
+        title: payload["action"]
+      })
+    }
+    
 
     // called when the client loses its connection
     function onConnectionLost(responseObject) {
