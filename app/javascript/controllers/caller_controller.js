@@ -1,24 +1,39 @@
 import { Controller } from "@hotwired/stimulus"
-import mqtt from "mqtt"
+import Paho from "paho-mqtt"
 
 export default class extends Controller {
   connect() {    
-    const client  = mqtt.connect('mqtt://localhost:1883')
-    
-    client.on('connect', function () {
-      client.subscribe('QUEUE_SYSTEM', function (err) {
-        if (!err) {
-          console.log("Mqtt","OK")
-          console.log("Subscribe", "QUEUE_SYSTEM")
-        }
-      })
-    })
-    
-    client.on('message', function (topic, message) {
-      // message is Buffer
-      console.log("Topic", topic)
-      message.toString("Message", message)
-      client.end()
-    })
+    // Create a client instance
+    var client = new Paho.Client("localhost", Number(8080), "Caller");
+
+    // set callback handlers
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+
+    // connect the client
+    client.connect({onSuccess:onConnect});
+
+
+    // called when the client connects
+    function onConnect() {
+      // Once a connection has been made, make a subscription and send a message.
+      console.log("onConnect");
+      client.subscribe("World");
+      // message = new Paho.Message("Hello");
+      // message.destinationName = "World";
+      // client.send(message);
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+      if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:"+responseObject.errorMessage);
+      }
+    }
+
+    // called when a message arrives
+    function onMessageArrived(message) {
+      console.log("onMessageArrived:"+message.payloadString);
+    }
   }
 }

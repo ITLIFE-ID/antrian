@@ -6,6 +6,7 @@
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.4",
     "@popperjs/core": "^2.11.6",
+    "add": "^2.0.6",
     "admin-lte": "https://github.com/ColorlibHQ/AdminLTE#master",
     "bootstrap": "5.2.3",
     "bootstrap-icons": "^1.10.2",
@@ -15,7 +16,7 @@
     "highcharts": "^10.3.2",
     "jquery": "^3.6.2",
     "moment": "^2.29.4",
-    "mqtt": "^4.3.7",
+    "paho-mqtt": "^1.1.0",
     "sass": "^1.56.2",
     "selectize": "^0.12.6"
   },
