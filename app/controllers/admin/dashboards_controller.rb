@@ -12,41 +12,56 @@ module Admin
     end
 
     def past
-      @summary = [
-        {name: t("past_queue_performance"), value: "#{BackupQueue.performance(start_date, end_date)} antrian / menit", color: "bg-success", skip_pie_chart: true},
-        {name: t("total_queues"), value: BackupQueue.total_queue(start_date, end_date).count, color: "bg-primary", skip_pie_chart: true},
-        {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue(start_date, end_date).count, color: "bg-info"},
-        {name: t("total_online_queue"), value: BackupQueue.total_online_queue(start_date, end_date).count, color: "bg-success"}
+      @online_vs_offline = [
+        {name: t("total_offline_queue"), y: BackupQueue.total_offline_queue(start_date, end_date).count, color: "bg-info"},
+        {name: t("total_online_queue"), y: BackupQueue.total_online_queue(start_date, end_date).count, color: "bg-success"}
       ]
 
-      build_summary
+      @summary = [
+        {name: t("past_queue_performance"), y: "#{BackupQueue.performance(start_date, end_date)} antrian / menit", color: "bg-success"},
+        {name: t("total_queues"), y: BackupQueue.total_queue(start_date, end_date).count, color: "bg-primary"}
+      ] << @online_vs_offline
+
+      @pie_chart = [{element: :online_vs_offline, data: @online_vs_offline}]
 
       render "index"
     end
 
     def today
-      @summary = [
-        {name: t("today_queue_performance"), value: "#{TodayQueue.performance} antrian / menit", color: "bg-dark"},
-        {name: t("total_queues"), value: TodayQueue.total_queue.count, color: "bg-dark"},
-        {name: t("total_processed"), value: TodayQueue.total_processed.count, color: "bg-primary"},
-        {name: t("total_unprocessed"), value: TodayQueue.total_unprocessed.count, color: "bg-warning"},
-        {name: t("total_offline_queue"), value: TodayQueue.total_offline_queue.count, color: "bg-info"},
-        {name: t("total_online_queue"), value: TodayQueue.total_online_queue.count, color: "bg-success"}
+      @online_vs_offline = [
+        {name: t("total_offline_queue"), y: TodayQueue.total_offline_queue.count, color: "bg-info"},
+        {name: t("total_online_queue"), y: TodayQueue.total_online_queue.count, color: "bg-success"}
       ]
 
-      build_summary
+      @processed_vs_unprocessed = [
+        {name: t("total_processed"), y: TodayQueue.total_processed.count, color: "bg-primary"},
+        {name: t("total_unprocessed"), y: TodayQueue.total_unprocessed.count, color: "bg-warning"}
+      ]
+
+      @summary = [
+        {name: t("today_queue_performance"), y: "#{TodayQueue.performance} antrian / menit", color: "bg-dark"},
+        {name: t("total_queues"), y: TodayQueue.total_queue.count, color: "bg-dark"}
+      ] << @online_vs_offline << @processed_vs_unprocessed
+
+      @pie_chart = [
+        {element: :online_vs_offline, data: @online_vs_offline},
+        {element: :processed_vs_unprocessed, data: @processed_vs_unprocessed}
+      ]
 
       render "index"
     end
 
     def future
-      @summary = [
-        {name: t("total_future_queues"), value: TodayQueue.total_future_queue.count, color: "bg-dark"},
-        {name: t("total_future_offline_queue"), value: TodayQueue.total_future_offline_queue.count, color: "bg-info"},
-        {name: t("total_future_online_queue"), value: TodayQueue.total_future_online_queue.count, color: "bg-success"}
+      @online_vs_offline = [
+        {name: t("total_future_offline_queue"), y: TodayQueue.total_future_offline_queue.count, color: "bg-info"},
+        {name: t("total_future_online_queue"), y: TodayQueue.total_future_online_queue.count, color: "bg-success"}
       ]
 
-      build_summary
+      @summary = [
+        {name: t("total_future_queues"), y: TodayQueue.total_future_queue.count, color: "bg-dark"}
+      ] << @online_vs_offline
+
+      @pie_chart = [{element: :online_vs_offline, data: @online_vs_offline}]
 
       render "index"
     end
@@ -72,10 +87,6 @@ module Admin
     def set_summary_title
       @summary_title = t("#{@type}_queue")
       add_breadcrumb @summary_title
-    end
-
-    def build_summary
-      @pie_chart_data_summary = @summary.map { |x| {name: x[:name], y: x[:value]} unless x[:skip_pie_chart] }.compact.to_json.html_safe
     end
 
     def start_date

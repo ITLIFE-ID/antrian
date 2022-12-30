@@ -17,11 +17,11 @@
   <% end%>
 </div>
 <div class="row">
-  <%@summary.each do |s| %>
+  <%@summary.flatten.each do |s| %>
     <div class="col-lg-3 col-6">
       <div class="small-box <%=s[:color]%>">
         <div class="inner">
-          <h3><%=s[:value]%></h3>
+          <h3><%=s[:y]%></h3>
           <p><%=t(".#{s[:name]}")%></p>
         </div>
         <div class="icon">
@@ -35,103 +35,9 @@
   <% end%>
 </div>
 <div class="row">
-  <div class="col-6">
-    <div id="summary"></div>
-  </div>
-  <div class="col-6">
-    <div id="user_satisfaction"></div>
-  </div>
-</div>
-<script>
-  // Data retrieved from https://netmarketshare.com/
-  // Radialize the colors
-  Highcharts.setOptions({
-    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
-      return {
-        radialGradient: {
-          cx: 0.5,
-          cy: 0.3,
-          r: 0.7
-        },
-        stops: [
-          [0, color],
-          [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
-        ]
-      };
-    })
-  });
-
-  // Summary
-  Highcharts.chart('summary', {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: {
-      text: '<%=@summary_title%>'
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-      point: {
-          valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-          connectorColor: 'silver'
-        }
-      }
-    },
-    series: [{
-      name: 'Share',
-      data: <%=@pie_chart_data_summary%>
-    }]
-  });
-
-  // User Satisfaction
-  <% if @user_satisfaction.present?%>
-  Highcharts.chart('user_satisfaction', {
-    chart: {
-      plotBackgroundColor: null,
-      plotBorderWidth: null,
-      plotShadow: false,
-      type: 'pie'
-    },
-    title: {
-      text: '<%=@user_satisfaction_title%>'
-    },
-    tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-      point: {
-          valueSuffix: '%'
-      }
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-          connectorColor: 'silver'
-        }
-      }
-    },
-    series: [{
-      name: 'Share',
-      data: <%=@pie_chart_date_user_satisfaction%>
-    }]
-  });
+  <%@pie_chart.each do |p|%>
+    <div class="col-<%=12/@pie_chart.count%>">
+      <%=render "pie_charts", element: p[:element], data: p[:data].to_json.html_safe %>
+    </div>
   <% end%>
-</script>
+</div>
