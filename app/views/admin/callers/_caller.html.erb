@@ -1,14 +1,11 @@
 <div class="row mb-3">
-  <div class="col-6">
+  <div class="col-12">
     <select id="counter">
       <option>Pilih Counter</option>
       <%@counters.each do |c|%>
-        <option value="<%=c.id%>" <%="selected='selected'" if params[:counter_id] == c.id%>><%=c.service.name%> / Loket Nomor <%=c.number%></option>
+        <option value="<%=c.id%>" <%="selected" if params[:counter_id].to_i == c.id%>><%=c.service.name%> / Loket Nomor <%=c.number%></option>
         <%end%>
       </select>
-    </div>
-    <div class="col-6 font-weight-bolder" style="font-size: 20px">
-      Counter Terpilih: <%=@counter_name%>
     </div>
   </div>
   <div class="row">

@@ -40254,7 +40254,8 @@
       (0, import_jquery3.default)("#counter").selectize({
         onChange: function(value, isOnInitialize) {
           window.location.href = "?counter_id=" + value;
-        }
+        },
+        create: true
       });
       (0, import_jquery3.default)(".selectize-input").css("padding-top", "13px").css("padding-bottom", "14px").css("font-size", "18px");
     }

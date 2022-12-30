@@ -3,7 +3,7 @@ require "administrate/custom_dashboard"
 
 module Admin
   class CallersController < Admin::ApplicationController
-    before_action :set_counters, :set_counter_name, :set_today_queue
+    before_action :set_counters, :set_today_queue
     add_breadcrumb I18n.t("caller")
 
     def index
@@ -28,10 +28,6 @@ module Admin
 
     def selected_counter
       Counter.find_by(id: params[:counter_id]) || @counters.first
-    end
-
-    def set_counter_name
-      @counter_name ||= "#{selected_counter.service.name} / Loket No. #{selected_counter.number}"
     end
   end
 end
