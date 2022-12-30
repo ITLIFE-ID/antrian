@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :buildings
     resources :client_displays
     resources :closing_days
+    resources :callers, only: [:index]
     resources :companies do
       resources :working_days
       resources :closing_days

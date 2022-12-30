@@ -1,4 +1,4 @@
-# app/dashboards/stat_dashboard.rb
+# app/dashboards/dashboard_dashboard.rb
 require "administrate/custom_dashboard"
 
 class DashboardDashboard < Administrate::CustomDashboard
