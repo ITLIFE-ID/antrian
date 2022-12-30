@@ -36024,10 +36024,6 @@
       (0, import_jquery2.default)("#daterangepicker").daterangepicker(
         {
           ranges: {
-            "Today": [(0, import_moment.default)(), (0, import_moment.default)()],
-            "Yesterday": [(0, import_moment.default)().subtract(1, "days"), (0, import_moment.default)().subtract(1, "days")],
-            "Last 7 Days": [(0, import_moment.default)().subtract(6, "days"), (0, import_moment.default)()],
-            "Last 30 Days": [(0, import_moment.default)().subtract(29, "days"), (0, import_moment.default)()],
             "This Month": [(0, import_moment.default)().startOf("month"), (0, import_moment.default)().endOf("month")],
             "Last Month": [(0, import_moment.default)().subtract(1, "month").startOf("month"), (0, import_moment.default)().subtract(1, "month").endOf("month")]
           },
@@ -36035,6 +36031,7 @@
           endDate: (0, import_moment.default)()
         },
         function(start3, end2) {
+          window.location.href = "?start_date=" + start3.format("D-MM-YYYY") + "&end_date=" + end2.format("D-MM-YYYY");
           (0, import_jquery2.default)("#reportrange").html(start3.format("MMMM D, YYYY") + " - " + end2.format("MMMM D, YYYY"));
         }
       );

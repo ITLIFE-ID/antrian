@@ -3,11 +3,13 @@
 <% end %>
 <div class="d-flex justify-content-start align-items-center mb-4">
   <h1 class="mr-4"><%= content_for(:title) %></h1>
-  <% if @type != "today"%>
+  <% if @type == "past"%>
     <div class="form-group mt-3">
       <div class="input-group" data-controller="daterangepicker">
         <button type="button" class="btn btn-default float-right" id="daterangepicker">
-          <i class="far fa-calendar-alt"></i> <span id="reportrange">Date range picker</span>
+          <i class="far fa-calendar-alt"></i> <span id="reportrange">
+            <%=params[:start_date].present? && params[:end_date].present? ? "#{params[:start_date]} Sampai #{params[:end_date]}": "Rentang tanggal"%>
+          </span>
           <i class="fas fa-caret-down"></i>
         </button>
       </div>

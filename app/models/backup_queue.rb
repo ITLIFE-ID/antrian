@@ -35,6 +35,7 @@
 #  index_today_queues_on_service_id                                 (service_id)
 #
 class BackupQueue < TodayQueue
-  scope :total_offline_queue, -> { where(print_ticket_method: "offline") }
-  scope :total_online_queue, -> { where(print_ticket_method: "online") }
+  scope :total_queue, -> (start_date, end_date) {where(date: start_date..end_date)}
+  scope :total_offline_queue, ->(start_date, end_date) { where(print_ticket_method: "offline").where(date: start_date..end_date) }
+  scope :total_online_queue, ->(start_date, end_date) { where(print_ticket_method: "online").where(date: start_date..end_date) }
 end

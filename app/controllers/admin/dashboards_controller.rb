@@ -15,9 +15,9 @@ module Admin
     def past
       @summary = [
         {name: t("past_queue_performance"), value: "5 antrian / menit", color: "bg-success", skip_pie_chart: true},
-        {name: t("total_queues"), value: BackupQueue.count, color: "bg-primary", skip_pie_chart: true},
-        {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue.count, color: "bg-info"},
-        {name: t("total_online_queue"), value: BackupQueue.total_online_queue.count, color: "bg-success"}
+        {name: t("total_queues"), value: BackupQueue.total_queue(start_date, end_date).count, color: "bg-primary", skip_pie_chart: true},
+        {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue(start_date, end_date).count, color: "bg-info"},
+        {name: t("total_online_queue"), value: BackupQueue.total_online_queue(start_date, end_date).count, color: "bg-success"}
       ]
 
       build_summary
@@ -76,6 +76,14 @@ module Admin
 
     def build_summary
       @pie_chart_data_summary = @summary.map { |x| {name: x[:name], y: x[:value]} unless x[:skip_pie_chart] }.compact.to_json.html_safe
+    end
+
+    def start_date
+      params[:start_date].present?? Date.parse(params[:start_date]).strftime("%Y-%m-%d"): Date.today
+    end
+
+    def end_date
+      params[:start_date].present?? Date.parse(params[:end_date]).strftime("%Y-%m-%d"): Date.today
     end
   end
 end
