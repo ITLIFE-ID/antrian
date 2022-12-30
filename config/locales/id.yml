@@ -67,9 +67,9 @@ id:
   role: Role
   actor: Aktor
   actor_role: Role aktor
-  user_counter: Petugas loket
+  user_counter: Pengguna loket
   voice_over: Pengisi suara
-  user: Petugas
+  user: Pengguna
   counter: Loket
   service: Layanan
   working_day: Hari kerja

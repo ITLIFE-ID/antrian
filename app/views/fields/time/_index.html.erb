@@ -13,7 +13,6 @@ By default, the attribute is rendered as a text tag.
   A wrapper around the time attributes pulled from the model.
 
 %>
-
 <% if field.data %>
-  <%= field.time %>
+  <%= DateTime.parse(field.time).strftime("%H:%M") %>
 <% end %>
