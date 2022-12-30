@@ -6774,7 +6774,7 @@
             return Constructor;
           };
         }();
-        var $5 = _jquery2.default || window.jQuery || window.$;
+        var $6 = _jquery2.default || window.jQuery || window.$;
         function getClasses(options, id) {
           var state = options.state, size = options.size, disabled = options.disabled, readonly = options.readonly, indeterminate = options.indeterminate, inverse = options.inverse;
           return [state ? "on" : "off", size, disabled ? "disabled" : void 0, readonly ? "readonly" : void 0, indeterminate ? "indeterminate" : void 0, inverse ? "inverse" : void 0, id ? "id-" + id : void 0].filter(function(v) {
@@ -6887,7 +6887,7 @@
               _this4.$wrapper.toggleClass(prvgetClass.call(_this4, "off")).toggleClass(prvgetClass.call(_this4, "on"));
               if (!skip) {
                 if (_this4.$element.is(":radio")) {
-                  $5('[name="' + _this4.$element.attr("name") + '"]').not(_this4.$element).prop("checked", false).trigger("change.bootstrapSwitch", true);
+                  $6('[name="' + _this4.$element.attr("name") + '"]').not(_this4.$element).prop("checked", false).trigger("change.bootstrapSwitch", true);
                 }
                 _this4.$element.trigger("switchChange.bootstrapSwitch", [state]);
               }
@@ -6995,10 +6995,10 @@
         }
         function prvformHandler() {
           function isBootstrapSwitch() {
-            return $5(this).data("bootstrap-switch");
+            return $6(this).data("bootstrap-switch");
           }
           function performReset() {
-            return $5(this).bootstrapSwitch("state", this.checked);
+            return $6(this).bootstrapSwitch("state", this.checked);
           }
           var $form = this.$element.closest("form");
           if ($form.data("bootstrap-switch")) {
@@ -7012,7 +7012,7 @@
         }
         function prvgetClasses(classes) {
           var _this8 = this;
-          if (!$5.isArray(classes)) {
+          if (!$6.isArray(classes)) {
             return [prvgetClass.call(this, classes)];
           }
           return classes.map(function(v) {
@@ -7024,26 +7024,26 @@
             var _this9 = this;
             var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
             _classCallCheck(this, BootstrapSwitch2);
-            this.$element = $5(element);
-            this.options = $5.extend({}, $5.fn.bootstrapSwitch.defaults, prvgetElementOptions.call(this), options);
+            this.$element = $6(element);
+            this.options = $6.extend({}, $6.fn.bootstrapSwitch.defaults, prvgetElementOptions.call(this), options);
             this.prevOptions = {};
-            this.$wrapper = $5("<div>", {
+            this.$wrapper = $6("<div>", {
               class: function _class() {
                 return getClasses(_this9.options, _this9.$element.attr("id")).map(function(v) {
                   return prvgetClass.call(_this9, v);
                 }).concat([_this9.options.baseClass], prvgetClasses.call(_this9, _this9.options.wrapperClass)).join(" ");
               }
             });
-            this.$container = $5("<div>", { class: prvgetClass.call(this, "container") });
-            this.$on = $5("<span>", {
+            this.$container = $6("<div>", { class: prvgetClass.call(this, "container") });
+            this.$on = $6("<span>", {
               html: this.options.onText,
               class: prvgetClass.call(this, "handle-on") + " " + prvgetClass.call(this, this.options.onColor)
             });
-            this.$off = $5("<span>", {
+            this.$off = $6("<span>", {
               html: this.options.offText,
               class: prvgetClass.call(this, "handle-off") + " " + prvgetClass.call(this, this.options.offColor)
             });
-            this.$label = $5("<span>", {
+            this.$label = $6("<span>", {
               html: this.options.labelText,
               class: prvgetClass.call(this, "label")
             });
@@ -7057,7 +7057,7 @@
               var changeState = _this9.options.onSwitchChange.apply(element, args);
               if (changeState === false) {
                 if (_this9.$element.is(":radio")) {
-                  $5('[name="' + _this9.$element.attr("name") + '"]').trigger("previousState.bootstrapSwitch", true);
+                  $6('[name="' + _this9.$element.attr("name") + '"]').trigger("previousState.bootstrapSwitch", true);
                 } else {
                   _this9.$element.trigger("previousState.bootstrapSwitch", true);
                 }
@@ -7092,7 +7092,7 @@
                 return this.$element;
               }
               if (this.$element.is(":radio")) {
-                $5('[name="' + this.$element.attr("name") + '"]').trigger("setPreviousOptions.bootstrapSwitch");
+                $6('[name="' + this.$element.attr("name") + '"]').trigger("setPreviousOptions.bootstrapSwitch");
               } else {
                 this.$element.trigger("setPreviousOptions.bootstrapSwitch");
               }
@@ -7325,7 +7325,7 @@
               if (typeof value === "undefined") {
                 return this.options.wrapperClass;
               }
-              var wrapperClass2 = value || $5.fn.bootstrapSwitch.defaults.wrapperClass;
+              var wrapperClass2 = value || $6.fn.bootstrapSwitch.defaults.wrapperClass;
               this.$wrapper.removeClass(prvgetClasses.call(this, this.options.wrapperClass).join(" "));
               this.$wrapper.addClass(prvgetClasses.call(this, wrapperClass2).join(" "));
               this.options.wrapperClass = wrapperClass2;
@@ -7350,7 +7350,7 @@
               if (typeof value === "undefined") {
                 return this.options.onInit;
               }
-              this.options.onInit = value || $5.fn.bootstrapSwitch.defaults.onInit;
+              this.options.onInit = value || $6.fn.bootstrapSwitch.defaults.onInit;
               return this.$element;
             }
           }, {
@@ -7359,7 +7359,7 @@
               if (typeof value === "undefined") {
                 return this.options.onSwitchChange;
               }
-              this.options.onSwitchChange = value || $5.fn.bootstrapSwitch.defaults.onSwitchChange;
+              this.options.onSwitchChange = value || $6.fn.bootstrapSwitch.defaults.onSwitchChange;
               return this.$element;
             }
           }, {
@@ -7381,7 +7381,7 @@
             args[_key2 - 1] = arguments[_key2];
           }
           function reducer(ret, next) {
-            var $this = $5(next);
+            var $this = $6(next);
             var existingData = $this.data("bootstrap-switch");
             var data = existingData || new BootstrapSwitch(next, option);
             if (!existingData) {
@@ -7394,9 +7394,9 @@
           }
           return Array.prototype.reduce.call(this, reducer, this);
         }
-        $5.fn.bootstrapSwitch = bootstrapSwitch;
-        $5.fn.bootstrapSwitch.Constructor = BootstrapSwitch;
-        $5.fn.bootstrapSwitch.defaults = {
+        $6.fn.bootstrapSwitch = bootstrapSwitch;
+        $6.fn.bootstrapSwitch.Constructor = BootstrapSwitch;
+        $6.fn.bootstrapSwitch.defaults = {
           state: true,
           size: null,
           animate: true,
@@ -7618,7 +7618,7 @@
             e2 = e2.replace(G, s2), G.lastIndex = 0, n2 -= 1;
           return e2;
         }
-        var Z = /\d/, z = /\d\d/, $5 = /\d{3}/, q = /\d{4}/, J = /[+-]?\d{6}/, B = /\d\d?/, Q = /\d\d\d\d?/, X = /\d\d\d\d\d\d?/, K = /\d{1,3}/, ee = /\d{1,4}/, te = /[+-]?\d{1,6}/, ne = /\d+/, se = /[+-]?\d+/, ie = /Z|[+-]\d\d:?\d\d/gi, re = /Z|[+-]\d\d(?::?\d\d)?/gi, ae = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i, oe = {};
+        var Z = /\d/, z = /\d\d/, $6 = /\d{3}/, q = /\d{4}/, J = /[+-]?\d{6}/, B = /\d\d?/, Q = /\d\d\d\d?/, X = /\d\d\d\d\d\d?/, K = /\d{1,3}/, ee = /\d{1,4}/, te = /[+-]?\d{1,6}/, ne = /\d+/, se = /[+-]?\d+/, ie = /Z|[+-]\d\d:?\d\d/gi, re = /Z|[+-]\d\d(?::?\d\d)?/gi, ae = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i, oe = {};
         function ue(e2, n2, s2) {
           oe[e2] = b(n2) ? n2 : function(e3, t2) {
             return e3 && s2 ? s2 : n2;
@@ -8205,7 +8205,7 @@
           t2[ye] = D(e2.match(B)[0]);
         });
         var un = Te("Date", true);
-        I("DDD", ["DDDD", 3], "DDDo", "dayOfYear"), C("dayOfYear", "DDD"), F("dayOfYear", 4), ue("DDD", K), ue("DDDD", $5), ce(["DDD", "DDDD"], function(e2, t2, n2) {
+        I("DDD", ["DDDD", 3], "DDDo", "dayOfYear"), C("dayOfYear", "DDD"), F("dayOfYear", 4), ue("DDD", K), ue("DDDD", $6), ce(["DDD", "DDDD"], function(e2, t2, n2) {
           n2._dayOfYear = D(e2);
         }), I("m", ["mm", 2], 0, "minute"), C("minute", "m"), F("minute", 14), ue("m", B), ue("mm", B, z), ce(["m", "mm"], ve);
         var ln = Te("Minutes", false);
@@ -8227,7 +8227,7 @@
           return 1e5 * this.millisecond();
         }), I(0, ["SSSSSSSSS", 9], 0, function() {
           return 1e6 * this.millisecond();
-        }), C("millisecond", "ms"), F("millisecond", 16), ue("S", K, Z), ue("SS", K, z), ue("SSS", K, $5), hn = "SSSS"; hn.length <= 9; hn += "S")
+        }), C("millisecond", "ms"), F("millisecond", 16), ue("S", K, Z), ue("SS", K, z), ue("SSS", K, $6), hn = "SSSS"; hn.length <= 9; hn += "S")
           ue(hn, ne);
         function cn(e2, t2) {
           t2[we] = D(1e3 * ("0." + e2));
@@ -12718,10 +12718,10 @@
         } else {
           root.daterangepicker = factory(root.moment, root.jQuery);
         }
-      })(exports, function(moment2, $5) {
+      })(exports, function(moment2, $6) {
         var DateRangePicker = function(element, options, cb) {
           this.parentEl = "body";
-          this.element = $5(element);
+          this.element = $6(element);
           this.startDate = moment2().startOf("day");
           this.endDate = moment2().endOf("day");
           this.minDate = false;
@@ -12771,11 +12771,11 @@
           this.rightCalendar = {};
           if (typeof options !== "object" || options === null)
             options = {};
-          options = $5.extend(this.element.data(), options);
-          if (typeof options.template !== "string" && !(options.template instanceof $5))
+          options = $6.extend(this.element.data(), options);
+          if (typeof options.template !== "string" && !(options.template instanceof $6))
             options.template = '<div class="daterangepicker"><div class="ranges"></div><div class="drp-calendar left"><div class="calendar-table"></div><div class="calendar-time"></div></div><div class="drp-calendar right"><div class="calendar-table"></div><div class="calendar-time"></div></div><div class="drp-buttons"><span class="drp-selected"></span><button class="cancelBtn" type="button"></button><button class="applyBtn" disabled="disabled" type="button"></button> </div></div>';
-          this.parentEl = options.parentEl && $5(options.parentEl).length ? $5(options.parentEl) : $5(this.parentEl);
-          this.container = $5(options.template).appendTo(this.parentEl);
+          this.parentEl = options.parentEl && $6(options.parentEl).length ? $6(options.parentEl) : $6(this.parentEl);
+          this.container = $6(options.template).appendTo(this.parentEl);
           if (typeof options.locale === "object") {
             if (typeof options.locale.direction === "string")
               this.locale.direction = options.locale.direction;
@@ -12889,8 +12889,8 @@
           }
           var start3, end2, range;
           if (typeof options.startDate === "undefined" && typeof options.endDate === "undefined") {
-            if ($5(this.element).is(":text")) {
-              var val = $5(this.element).val(), split = val.split(this.locale.separator);
+            if ($6(this.element).is(":text")) {
+              var val = $6(this.element).val(), split = val.split(this.locale.separator);
               start3 = end2 = null;
               if (split.length == 2) {
                 start3 = moment2(split[0], this.locale.format);
@@ -12974,19 +12974,19 @@
             this.container.find(".cancelBtn").addClass(this.cancelButtonClasses);
           this.container.find(".applyBtn").html(this.locale.applyLabel);
           this.container.find(".cancelBtn").html(this.locale.cancelLabel);
-          this.container.find(".drp-calendar").on("click.daterangepicker", ".prev", $5.proxy(this.clickPrev, this)).on("click.daterangepicker", ".next", $5.proxy(this.clickNext, this)).on("mousedown.daterangepicker", "td.available", $5.proxy(this.clickDate, this)).on("mouseenter.daterangepicker", "td.available", $5.proxy(this.hoverDate, this)).on("change.daterangepicker", "select.yearselect", $5.proxy(this.monthOrYearChanged, this)).on("change.daterangepicker", "select.monthselect", $5.proxy(this.monthOrYearChanged, this)).on("change.daterangepicker", "select.hourselect,select.minuteselect,select.secondselect,select.ampmselect", $5.proxy(this.timeChanged, this));
-          this.container.find(".ranges").on("click.daterangepicker", "li", $5.proxy(this.clickRange, this));
-          this.container.find(".drp-buttons").on("click.daterangepicker", "button.applyBtn", $5.proxy(this.clickApply, this)).on("click.daterangepicker", "button.cancelBtn", $5.proxy(this.clickCancel, this));
+          this.container.find(".drp-calendar").on("click.daterangepicker", ".prev", $6.proxy(this.clickPrev, this)).on("click.daterangepicker", ".next", $6.proxy(this.clickNext, this)).on("mousedown.daterangepicker", "td.available", $6.proxy(this.clickDate, this)).on("mouseenter.daterangepicker", "td.available", $6.proxy(this.hoverDate, this)).on("change.daterangepicker", "select.yearselect", $6.proxy(this.monthOrYearChanged, this)).on("change.daterangepicker", "select.monthselect", $6.proxy(this.monthOrYearChanged, this)).on("change.daterangepicker", "select.hourselect,select.minuteselect,select.secondselect,select.ampmselect", $6.proxy(this.timeChanged, this));
+          this.container.find(".ranges").on("click.daterangepicker", "li", $6.proxy(this.clickRange, this));
+          this.container.find(".drp-buttons").on("click.daterangepicker", "button.applyBtn", $6.proxy(this.clickApply, this)).on("click.daterangepicker", "button.cancelBtn", $6.proxy(this.clickCancel, this));
           if (this.element.is("input") || this.element.is("button")) {
             this.element.on({
-              "click.daterangepicker": $5.proxy(this.show, this),
-              "focus.daterangepicker": $5.proxy(this.show, this),
-              "keyup.daterangepicker": $5.proxy(this.elementChanged, this),
-              "keydown.daterangepicker": $5.proxy(this.keydown, this)
+              "click.daterangepicker": $6.proxy(this.show, this),
+              "focus.daterangepicker": $6.proxy(this.show, this),
+              "keyup.daterangepicker": $6.proxy(this.elementChanged, this),
+              "keydown.daterangepicker": $6.proxy(this.keydown, this)
             });
           } else {
-            this.element.on("click.daterangepicker", $5.proxy(this.toggle, this));
-            this.element.on("keydown.daterangepicker", $5.proxy(this.toggle, this));
+            this.element.on("click.daterangepicker", $6.proxy(this.toggle, this));
+            this.element.on("keydown.daterangepicker", $6.proxy(this.toggle, this));
           }
           this.updateElement();
         };
@@ -13216,7 +13216,7 @@
             html += "<tr>";
             if (this.showWeekNumbers || this.showISOWeekNumbers)
               html += '<th class="week">' + this.locale.weekLabel + "</th>";
-            $5.each(this.locale.daysOfWeek, function(index, dayOfWeek2) {
+            $6.each(this.locale.daysOfWeek, function(index, dayOfWeek2) {
               html += "<th>" + dayOfWeek2 + "</th>";
             });
             html += "</tr>";
@@ -13393,7 +13393,7 @@
           },
           move: function() {
             var parentOffset = { top: 0, left: 0 }, containerTop, drops = this.drops;
-            var parentRightEdge = $5(window).width();
+            var parentRightEdge = $6(window).width();
             if (!this.parentEl.is("body")) {
               parentOffset = {
                 top: this.parentEl.offset().top - this.parentEl.scrollTop(),
@@ -13425,7 +13425,7 @@
             this.container.toggleClass("drop-up", drops == "up");
             if (this.opens == "left") {
               var containerRight = parentRightEdge - this.element.offset().left - this.element.outerWidth();
-              if (containerWidth + containerRight > $5(window).width()) {
+              if (containerWidth + containerRight > $6(window).width()) {
                 this.container.css({
                   top: containerTop,
                   right: "auto",
@@ -13446,7 +13446,7 @@
                   right: "auto",
                   left: 9
                 });
-              } else if (containerLeft + containerWidth > $5(window).width()) {
+              } else if (containerLeft + containerWidth > $6(window).width()) {
                 this.container.css({
                   top: containerTop,
                   left: "auto",
@@ -13461,7 +13461,7 @@
               }
             } else {
               var containerLeft = this.element.offset().left - parentOffset.left;
-              if (containerLeft + containerWidth > $5(window).width()) {
+              if (containerLeft + containerWidth > $6(window).width()) {
                 this.container.css({
                   top: containerTop,
                   left: "auto",
@@ -13479,11 +13479,11 @@
           show: function(e) {
             if (this.isShowing)
               return;
-            this._outsideClickProxy = $5.proxy(function(e2) {
+            this._outsideClickProxy = $6.proxy(function(e2) {
               this.outsideClick(e2);
             }, this);
-            $5(document).on("mousedown.daterangepicker", this._outsideClickProxy).on("touchend.daterangepicker", this._outsideClickProxy).on("click.daterangepicker", "[data-toggle=dropdown]", this._outsideClickProxy).on("focusin.daterangepicker", this._outsideClickProxy);
-            $5(window).on("resize.daterangepicker", $5.proxy(function(e2) {
+            $6(document).on("mousedown.daterangepicker", this._outsideClickProxy).on("touchend.daterangepicker", this._outsideClickProxy).on("click.daterangepicker", "[data-toggle=dropdown]", this._outsideClickProxy).on("focusin.daterangepicker", this._outsideClickProxy);
+            $6(window).on("resize.daterangepicker", $6.proxy(function(e2) {
               this.move(e2);
             }, this));
             this.oldStartDate = this.startDate.clone();
@@ -13505,8 +13505,8 @@
             if (!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate))
               this.callback(this.startDate.clone(), this.endDate.clone(), this.chosenLabel);
             this.updateElement();
-            $5(document).off(".daterangepicker");
-            $5(window).off(".daterangepicker");
+            $6(document).off(".daterangepicker");
+            $6(window).off(".daterangepicker");
             this.container.hide();
             this.element.trigger("hide.daterangepicker", this);
             this.isShowing = false;
@@ -13519,7 +13519,7 @@
             }
           },
           outsideClick: function(e) {
-            var target = $5(e.target);
+            var target = $6(e.target);
             if (e.type == "focusin" || target.closest(this.element).length || target.closest(this.container).length || target.closest(".calendar-table").length)
               return;
             this.hide();
@@ -13553,7 +13553,7 @@
             }
           },
           clickPrev: function(e) {
-            var cal = $5(e.target).parents(".drp-calendar");
+            var cal = $6(e.target).parents(".drp-calendar");
             if (cal.hasClass("left")) {
               this.leftCalendar.month.subtract(1, "month");
               if (this.linkedCalendars)
@@ -13564,7 +13564,7 @@
             this.updateCalendars();
           },
           clickNext: function(e) {
-            var cal = $5(e.target).parents(".drp-calendar");
+            var cal = $6(e.target).parents(".drp-calendar");
             if (cal.hasClass("left")) {
               this.leftCalendar.month.add(1, "month");
             } else {
@@ -13575,40 +13575,40 @@
             this.updateCalendars();
           },
           hoverDate: function(e) {
-            if (!$5(e.target).hasClass("available"))
+            if (!$6(e.target).hasClass("available"))
               return;
-            var title = $5(e.target).attr("data-title");
+            var title = $6(e.target).attr("data-title");
             var row = title.substr(1, 1);
             var col = title.substr(3, 1);
-            var cal = $5(e.target).parents(".drp-calendar");
+            var cal = $6(e.target).parents(".drp-calendar");
             var date = cal.hasClass("left") ? this.leftCalendar.calendar[row][col] : this.rightCalendar.calendar[row][col];
             var leftCalendar = this.leftCalendar;
             var rightCalendar = this.rightCalendar;
             var startDate = this.startDate;
             if (!this.endDate) {
               this.container.find(".drp-calendar tbody td").each(function(index, el) {
-                if ($5(el).hasClass("week"))
+                if ($6(el).hasClass("week"))
                   return;
-                var title2 = $5(el).attr("data-title");
+                var title2 = $6(el).attr("data-title");
                 var row2 = title2.substr(1, 1);
                 var col2 = title2.substr(3, 1);
-                var cal2 = $5(el).parents(".drp-calendar");
+                var cal2 = $6(el).parents(".drp-calendar");
                 var dt = cal2.hasClass("left") ? leftCalendar.calendar[row2][col2] : rightCalendar.calendar[row2][col2];
                 if (dt.isAfter(startDate) && dt.isBefore(date) || dt.isSame(date, "day")) {
-                  $5(el).addClass("in-range");
+                  $6(el).addClass("in-range");
                 } else {
-                  $5(el).removeClass("in-range");
+                  $6(el).removeClass("in-range");
                 }
               });
             }
           },
           clickDate: function(e) {
-            if (!$5(e.target).hasClass("available"))
+            if (!$6(e.target).hasClass("available"))
               return;
-            var title = $5(e.target).attr("data-title");
+            var title = $6(e.target).attr("data-title");
             var row = title.substr(1, 1);
             var col = title.substr(3, 1);
-            var cal = $5(e.target).parents(".drp-calendar");
+            var cal = $6(e.target).parents(".drp-calendar");
             var date = cal.hasClass("left") ? this.leftCalendar.calendar[row][col] : this.rightCalendar.calendar[row][col];
             if (this.endDate || date.isBefore(this.startDate, "day")) {
               if (this.timePicker) {
@@ -13702,7 +13702,7 @@
             this.element.trigger("cancel.daterangepicker", this);
           },
           monthOrYearChanged: function(e) {
-            var isLeft = $5(e.target).closest(".drp-calendar").hasClass("left"), leftOrRight = isLeft ? "left" : "right", cal = this.container.find(".drp-calendar." + leftOrRight);
+            var isLeft = $6(e.target).closest(".drp-calendar").hasClass("left"), leftOrRight = isLeft ? "left" : "right", cal = this.container.find(".drp-calendar." + leftOrRight);
             var month = parseInt(cal.find(".monthselect").val(), 10);
             var year = cal.find(".yearselect").val();
             if (!isLeft) {
@@ -13735,7 +13735,7 @@
             this.updateCalendars();
           },
           timeChanged: function(e) {
-            var cal = $5(e.target).closest(".drp-calendar"), isLeft = cal.hasClass("left");
+            var cal = $6(e.target).closest(".drp-calendar"), isLeft = cal.hasClass("left");
             var hour = parseInt(cal.find(".hourselect").val(), 10);
             var minute = parseInt(cal.find(".minuteselect").val(), 10);
             if (isNaN(minute)) {
@@ -13819,10 +13819,10 @@
             this.element.removeData();
           }
         };
-        $5.fn.daterangepicker = function(options, callback) {
-          var implementOptions = $5.extend(true, {}, $5.fn.daterangepicker.defaultOptions, options);
+        $6.fn.daterangepicker = function(options, callback) {
+          var implementOptions = $6.extend(true, {}, $6.fn.daterangepicker.defaultOptions, options);
           this.each(function() {
-            var el = $5(this);
+            var el = $6(this);
             if (el.data("daterangepicker"))
               el.data("daterangepicker").remove();
             el.data("daterangepicker", new DateRangePicker(el, implementOptions, callback));
@@ -14274,7 +14274,7 @@
         } else {
           root.Selectize = factory(root.jQuery, root.Sifter, root.MicroPlugin);
         }
-      })(exports, function($5, Sifter, MicroPlugin) {
+      })(exports, function($6, Sifter, MicroPlugin) {
         "use strict";
         var highlight = function($element, pattern) {
           if (typeof pattern === "string" && !pattern.length)
@@ -14306,7 +14306,7 @@
             highlight2(this);
           });
         };
-        $5.fn.removeHighlight = function() {
+        $6.fn.removeHighlight = function() {
           return this.find("span.highlight").each(function() {
             this.parentNode.firstChild.nodeName;
             var parent = this.parentNode;
@@ -14481,7 +14481,7 @@
             return 0;
           }
           if (!Selectize.$testInput) {
-            Selectize.$testInput = $5("<span />").css({
+            Selectize.$testInput = $6("<span />").css({
               position: "absolute",
               top: -99999,
               left: -99999,
@@ -14573,7 +14573,7 @@
           var computedStyle = window.getComputedStyle && window.getComputedStyle(input, null);
           dir = computedStyle ? computedStyle.getPropertyValue("direction") : input.currentStyle && input.currentStyle.direction;
           dir = dir || $input.parents("[dir]:first").attr("dir") || "";
-          $5.extend(self2, {
+          $6.extend(self2, {
             order: 0,
             settings,
             $input,
@@ -14643,13 +14643,13 @@
             { explanation: 'Make sure you either: (1) are using the "standalone" version of Selectize, or (2) require MicroPlugin before you load Selectize.' }
           );
         }
-        $5.extend(Selectize.prototype, {
+        $6.extend(Selectize.prototype, {
           setup: function() {
             var self2 = this;
             var settings = self2.settings;
             var eventNS = self2.eventNS;
-            var $window = $5(window);
-            var $document = $5(document);
+            var $window = $6(window);
+            var $document = $6(document);
             var $input = self2.$input;
             var $wrapper;
             var $control;
@@ -14665,15 +14665,15 @@
             var inputId;
             inputMode = self2.settings.mode;
             classes = $input.attr("class") || "";
-            $wrapper = $5("<div>").addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
-            $control = $5("<div>").addClass(settings.inputClass).addClass("items").appendTo($wrapper);
-            $control_input = $5('<input type="text" autocomplete="off" />').appendTo($control).attr("tabindex", $input.is(":disabled") ? "-1" : self2.tabIndex);
-            $dropdown_parent = $5(settings.dropdownParent || $wrapper);
-            $dropdown = $5("<div>").addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
-            $dropdown_content = $5("<div>").addClass(settings.dropdownContentClass).appendTo($dropdown);
+            $wrapper = $6("<div>").addClass(settings.wrapperClass).addClass(classes).addClass(inputMode);
+            $control = $6("<div>").addClass(settings.inputClass).addClass("items").appendTo($wrapper);
+            $control_input = $6('<input type="text" autocomplete="off" />').appendTo($control).attr("tabindex", $input.is(":disabled") ? "-1" : self2.tabIndex);
+            $dropdown_parent = $6(settings.dropdownParent || $wrapper);
+            $dropdown = $6("<div>").addClass(settings.dropdownClass).addClass(inputMode).hide().appendTo($dropdown_parent);
+            $dropdown_content = $6("<div>").addClass(settings.dropdownContentClass).appendTo($dropdown);
             if (inputId = $input.attr("id")) {
               $control_input.attr("id", inputId + "-selectized");
-              $5("label[for='" + inputId + "']").attr("for", inputId + "-selectized");
+              $6("label[for='" + inputId + "']").attr("for", inputId + "-selectized");
             }
             if (self2.settings.copyClassesToDropdown) {
               $dropdown.addClass(classes);
@@ -14792,7 +14792,7 @@
               tabindex: $input.attr("tabindex")
             };
             $input.attr("tabindex", -1).hide().after(self2.$wrapper);
-            if ($5.isArray(settings.items)) {
+            if ($6.isArray(settings.items)) {
               self2.setValue(settings.items);
               delete settings.items;
             }
@@ -14840,7 +14840,7 @@
                 return '<div class="create">Add <strong>' + escape2(data.input) + "</strong>&hellip;</div>";
               }
             };
-            self2.settings.render = $5.extend({}, templates, self2.settings.render);
+            self2.settings.render = $6.extend({}, templates, self2.settings.render);
           },
           setupCallbacks: function() {
             var key, fn2, callbacks = {
@@ -14880,7 +14880,7 @@
           onMouseDown: function(e) {
             var self2 = this;
             var defaultPrevented = e.isDefaultPrevented();
-            var $target = $5(e.target);
+            var $target = $6(e.target);
             if (self2.isFocused) {
               if (e.target !== self2.$control_input[0]) {
                 if (self2.settings.mode === "single") {
@@ -14913,7 +14913,7 @@
                 if (!pastedText.match(self2.settings.splitOn)) {
                   return;
                 }
-                var splitInput = $5.trim(pastedText).split(self2.settings.splitOn);
+                var splitInput = $6.trim(pastedText).split(self2.settings.splitOn);
                 for (var i = 0, n = splitInput.length; i < n; i++) {
                   self2.createItem(splitInput[i]);
                 }
@@ -15101,7 +15101,7 @@
               e.preventDefault();
               e.stopPropagation();
             }
-            $target = $5(e.currentTarget);
+            $target = $6(e.currentTarget);
             if ($target.hasClass("create")) {
               self2.createItem(null, function() {
                 if (self2.settings.closeAfterSelect) {
@@ -15176,9 +15176,9 @@
             var $last;
             if (self2.settings.mode === "single")
               return;
-            $item = $5($item);
+            $item = $6($item);
             if (!$item.length) {
-              $5(self2.$activeItems).removeClass("active");
+              $6(self2.$activeItems).removeClass("active");
               self2.$activeItems = [];
               if (self2.isFocused) {
                 self2.showInput();
@@ -15198,7 +15198,7 @@
               for (i = begin; i <= end2; i++) {
                 item = self2.$control[0].childNodes[i];
                 if (self2.$activeItems.indexOf(item) === -1) {
-                  $5(item).addClass("active");
+                  $6(item).addClass("active");
                   self2.$activeItems.push(item);
                 }
               }
@@ -15212,7 +15212,7 @@
                 self2.$activeItems.push($item.addClass("active")[0]);
               }
             } else {
-              $5(self2.$activeItems).removeClass("active");
+              $6(self2.$activeItems).removeClass("active");
               self2.$activeItems = [$item.addClass("active")[0]];
             }
             self2.hideInput();
@@ -15227,7 +15227,7 @@
             if (self2.$activeOption)
               self2.$activeOption.removeClass("active");
             self2.$activeOption = null;
-            $option = $5($option);
+            $option = $6($option);
             if (!$option.length)
               return;
             self2.$activeOption = $option.addClass("active");
@@ -15310,10 +15310,10 @@
             }
             if (query !== self2.lastQuery) {
               self2.lastQuery = query;
-              result = self2.sifter.search(query, $5.extend(options, { score: calculateScore }));
+              result = self2.sifter.search(query, $6.extend(options, { score: calculateScore }));
               self2.currentResults = result;
             } else {
-              result = $5.extend(true, {}, self2.currentResults);
+              result = $6.extend(true, {}, self2.currentResults);
             }
             if (settings.hideSelected) {
               for (i = result.items.length - 1; i >= 0; i--) {
@@ -15331,7 +15331,7 @@
               triggerDropdown = true;
             }
             var self2 = this;
-            var query = $5.trim(self2.$control_input.val());
+            var query = $6.trim(self2.$control_input.val());
             var results = self2.search(query);
             var $dropdown_content = self2.$dropdown_content;
             var active_before = self2.$activeOption && hash_key(self2.$activeOption.attr("data-value"));
@@ -15345,7 +15345,7 @@
               option = self2.options[results.items[i].id];
               option_html = self2.render("option", option);
               optgroup = option[self2.settings.optgroupField] || "";
-              optgroups = $5.isArray(optgroup) ? optgroup : [optgroup];
+              optgroups = $6.isArray(optgroup) ? optgroup : [optgroup];
               for (j = 0, k = optgroups && optgroups.length; j < k; j++) {
                 optgroup = optgroups[j];
                 if (!self2.optgroups.hasOwnProperty(optgroup)) {
@@ -15372,7 +15372,7 @@
                 html_children = document.createDocumentFragment();
                 html_children.appendChild(self2.render("optgroup_header", self2.optgroups[optgroup]));
                 html_children.appendChild(groups[optgroup]);
-                html.appendChild(self2.render("optgroup", $5.extend({}, self2.optgroups[optgroup], {
+                html.appendChild(self2.render("optgroup", $6.extend({}, self2.optgroups[optgroup], {
                   html: domToString(html_children),
                   dom: html_children
                 })));
@@ -15397,7 +15397,7 @@
             has_create_option = self2.canCreate(query);
             if (has_create_option) {
               $dropdown_content.prepend(self2.render("option_create", { input: query }));
-              $create = $5($dropdown_content[0].childNodes[0]);
+              $create = $6($dropdown_content[0].childNodes[0]);
             }
             self2.hasOptions = results.items.length > 0 || has_create_option;
             if (self2.hasOptions) {
@@ -15431,7 +15431,7 @@
           },
           addOption: function(data) {
             var i, n, value, self2 = this;
-            if ($5.isArray(data)) {
+            if ($6.isArray(data)) {
               for (i = 0, n = data.length; i < n; i++) {
                 self2.addOption(data[i]);
               }
@@ -15511,7 +15511,7 @@
             }
             if (self2.items.indexOf(value_new) !== -1) {
               $item = self2.getItem(value);
-              $item_new = $5(self2.render("item", data));
+              $item_new = $6(self2.render("item", data));
               if ($item.hasClass("active"))
                 $item_new.addClass("active");
               $item.replaceWith($item_new);
@@ -15542,7 +15542,7 @@
             self2.userOptions = {};
             self2.renderCache = {};
             var options = self2.options;
-            $5.each(self2.options, function(key, value) {
+            $6.each(self2.options, function(key, value) {
               if (self2.items.indexOf(key) == -1) {
                 delete options[key];
               }
@@ -15557,18 +15557,18 @@
           getAdjacentOption: function($option, direction) {
             var $options = this.$dropdown.find("[data-selectable]");
             var index = $options.index($option) + direction;
-            return index >= 0 && index < $options.length ? $options.eq(index) : $5();
+            return index >= 0 && index < $options.length ? $options.eq(index) : $6();
           },
           getElementWithValue: function(value, $els) {
             value = hash_key(value);
             if (typeof value !== "undefined" && value !== null) {
               for (var i = 0, n = $els.length; i < n; i++) {
                 if ($els[i].getAttribute("data-value") === value) {
-                  return $5($els[i]);
+                  return $6($els[i]);
                 }
               }
             }
-            return $5();
+            return $6();
           },
           getItem: function(value) {
             return this.getElementWithValue(value, this.$control.children());
@@ -15579,7 +15579,7 @@
             for (var i = 0; i < childNodes.length; i++) {
               this.buffer.appendChild(childNodes[i]);
             }
-            var items = $5.isArray(values) ? values : [values];
+            var items = $6.isArray(values) ? values : [values];
             for (var i = 0, n = items.length; i < n; i++) {
               this.isPending = i < n - 1;
               this.addItem(items[i], silent);
@@ -15607,7 +15607,7 @@
                 self2.clear(silent);
               if (inputMode === "multi" && self2.isFull())
                 return;
-              $item = $5(self2.render("item", self2.options[value]));
+              $item = $6(self2.render("item", self2.options[value]));
               wasFull = self2.isFull();
               self2.items.splice(self2.caretPos, 0, value);
               self2.insertAtCaret($item);
@@ -15640,7 +15640,7 @@
           removeItem: function(value, silent) {
             var self2 = this;
             var $item, i, idx;
-            $item = value instanceof $5 ? value : self2.getItem(value);
+            $item = value instanceof $6 ? value : self2.getItem(value);
             value = hash_key($item.attr("data-value"));
             i = self2.items.indexOf(value);
             if (i !== -1) {
@@ -15667,7 +15667,7 @@
           createItem: function(input, triggerDropdown) {
             var self2 = this;
             var caret = self2.caretPos;
-            input = input || $5.trim(self2.$control_input.val() || "");
+            input = input || $6.trim(self2.$control_input.val() || "");
             var callback = arguments[arguments.length - 1];
             if (typeof callback !== "function")
               callback = function() {
@@ -15731,7 +15731,7 @@
             var isFull = self2.isFull();
             var isLocked = self2.isLocked;
             self2.$wrapper.toggleClass("rtl", self2.rtl);
-            self2.$control.toggleClass("focus", self2.isFocused).toggleClass("disabled", self2.isDisabled).toggleClass("required", self2.isRequired).toggleClass("invalid", self2.isInvalid).toggleClass("locked", isLocked).toggleClass("full", isFull).toggleClass("not-full", !isFull).toggleClass("input-active", self2.isFocused && !self2.isInputHidden).toggleClass("dropdown-active", self2.isOpen).toggleClass("has-options", !$5.isEmptyObject(self2.options)).toggleClass("has-items", self2.items.length > 0);
+            self2.$control.toggleClass("focus", self2.isFocused).toggleClass("disabled", self2.isDisabled).toggleClass("required", self2.isRequired).toggleClass("invalid", self2.isInvalid).toggleClass("locked", isLocked).toggleClass("full", isFull).toggleClass("not-full", !isFull).toggleClass("input-active", self2.isFocused && !self2.isInputHidden).toggleClass("dropdown-active", self2.isOpen).toggleClass("has-options", !$6.isEmptyObject(self2.options)).toggleClass("has-items", self2.items.length > 0);
             self2.$control_input.data("grow", !isFull && !isLocked);
           },
           isFull: function() {
@@ -15851,7 +15851,7 @@
                 caret++;
               }
               for (i = 0, n = self2.$activeItems.length; i < n; i++) {
-                values.push($5(self2.$activeItems[i]).attr("data-value"));
+                values.push($6(self2.$activeItems[i]).attr("data-value"));
               }
               if (e) {
                 e.preventDefault();
@@ -15935,7 +15935,7 @@
               var j, n, fn2, $children, $child;
               $children = self2.$control.children(":not(input)");
               for (j = 0, n = $children.length; j < n; j++) {
-                $child = $5($children[j]).detach();
+                $child = $6($children[j]).detach();
                 if (j < i) {
                   self2.$control_input.before($child);
                 } else {
@@ -15983,9 +15983,9 @@
               Selectize.$testInput.remove();
               Selectize.$testInput = void 0;
             }
-            $5(window).off(eventNS);
-            $5(document).off(eventNS);
-            $5(document.body).off(eventNS);
+            $6(window).off(eventNS);
+            $6(document).off(eventNS);
+            $6(document.body).off(eventNS);
             delete self2.$input[0].selectize;
           },
           render: function(templateName, data) {
@@ -16006,7 +16006,7 @@
                 return self2.renderCache[templateName][value];
               }
             }
-            html = $5(self2.settings.render[templateName].apply(this, [data, escape_html]));
+            html = $6(self2.settings.render[templateName].apply(this, [data, escape_html]));
             if (templateName === "option" || templateName === "option_create") {
               if (!data[self2.settings.disabledField]) {
                 html.attr("data-selectable", "");
@@ -16087,9 +16087,9 @@
           copyClassesToDropdown: true,
           render: {}
         };
-        $5.fn.selectize = function(settings_user) {
-          var defaults = $5.fn.selectize.defaults;
-          var settings = $5.extend({}, defaults, settings_user);
+        $6.fn.selectize = function(settings_user) {
+          var defaults = $6.fn.selectize.defaults;
+          var settings = $6.extend({}, defaults, settings_user);
           var attr_data = settings.dataAttr;
           var field_label = settings.labelField;
           var field_value = settings.valueField;
@@ -16101,7 +16101,7 @@
             var i, n, values, option;
             var data_raw = $input.attr(attr_data);
             if (!data_raw) {
-              var value = $5.trim($input.val() || "");
+              var value = $6.trim($input.val() || "");
               if (!settings.allowEmptyOption && !value.length)
                 return;
               values = value.split(settings.delimiter);
@@ -16131,7 +16131,7 @@
               return null;
             };
             var addOption = function($option, group) {
-              $option = $5($option);
+              $option = $6($option);
               var value = hash_key($option.val());
               if (!value && !settings.allowEmptyOption)
                 return;
@@ -16140,7 +16140,7 @@
                   var arr = optionsMap[value][field_optgroup];
                   if (!arr) {
                     optionsMap[value][field_optgroup] = group;
-                  } else if (!$5.isArray(arr)) {
+                  } else if (!$6.isArray(arr)) {
                     optionsMap[value][field_optgroup] = [arr, group];
                   } else {
                     arr.push(group);
@@ -16161,7 +16161,7 @@
             };
             var addGroup = function($optgroup) {
               var i2, n2, id, optgroup, $options;
-              $optgroup = $5($optgroup);
+              $optgroup = $6($optgroup);
               id = $optgroup.attr("label");
               if (id) {
                 optgroup = readData($optgroup) || {};
@@ -16170,7 +16170,7 @@
                 optgroup[field_disabled] = $optgroup.prop("disabled");
                 settings_element.optgroups.push(optgroup);
               }
-              $options = $5("option", $optgroup);
+              $options = $6("option", $optgroup);
               for (i2 = 0, n2 = $options.length; i2 < n2; i2++) {
                 addOption($options[i2], id);
               }
@@ -16190,7 +16190,7 @@
             if (this.selectize)
               return;
             var instance;
-            var $input = $5(this);
+            var $input = $6(this);
             var tag_name = this.tagName.toLowerCase();
             var placeholder = $input.attr("placeholder") || $input.attr("data-placeholder");
             if (!placeholder && !settings.allowEmptyOption) {
@@ -16207,15 +16207,15 @@
             } else {
               init_textbox($input, settings_element);
             }
-            instance = new Selectize($input, $5.extend(true, {}, defaults, settings_element, settings_user));
+            instance = new Selectize($input, $6.extend(true, {}, defaults, settings_element, settings_user));
           });
         };
-        $5.fn.selectize.defaults = Selectize.defaults;
-        $5.fn.selectize.support = {
+        $6.fn.selectize.defaults = Selectize.defaults;
+        $6.fn.selectize.support = {
           validity: SUPPORTS_VALIDITY_API
         };
         Selectize.define("drag_drop", function(options) {
-          if (!$5.fn.sortable)
+          if (!$6.fn.sortable)
             throw new Error('The "drag_drop" plugin requires jQuery UI "sortable".');
           if (this.settings.mode !== "multi")
             return;
@@ -16255,7 +16255,7 @@
                   var active = self2.$activeItems ? self2.$activeItems.slice() : null;
                   var values = [];
                   $control.children("[data-value]").each(function() {
-                    values.push($5(this).attr("data-value"));
+                    values.push($6(this).attr("data-value"));
                   });
                   self2.setValue(values);
                   self2.setActiveItem(active);
@@ -16266,7 +16266,7 @@
         });
         Selectize.define("dropdown_header", function(options) {
           var self2 = this;
-          options = $5.extend({
+          options = $6.extend({
             title: "Untitled",
             headerClass: "selectize-dropdown-header",
             titleRowClass: "selectize-dropdown-header-title",
@@ -16280,21 +16280,21 @@
             var original = self2.setup;
             return function() {
               original.apply(self2, arguments);
-              self2.$dropdown_header = $5(options.html(options));
+              self2.$dropdown_header = $6(options.html(options));
               self2.$dropdown.prepend(self2.$dropdown_header);
             };
           }();
         });
         Selectize.define("optgroup_columns", function(options) {
           var self2 = this;
-          options = $5.extend({
+          options = $6.extend({
             equalizeWidth: true,
             equalizeHeight: true
           }, options);
           this.getAdjacentOption = function($option, direction) {
             var $options = $option.closest("[data-group]").find("[data-selectable]");
             var index = $options.index($option) + direction;
-            return index >= 0 && index < $options.length ? $options.eq(index) : $5();
+            return index >= 0 && index < $options.length ? $options.eq(index) : $6();
           };
           this.onKeyDown = function() {
             var original = self2.onKeyDown;
@@ -16335,7 +16335,7 @@
           };
           var equalizeSizes = function() {
             var i, n, height_max, width, width_last, width_parent, $optgroups;
-            $optgroups = $5("[data-group]", self2.$dropdown_content);
+            $optgroups = $6("[data-group]", self2.$dropdown_content);
             n = $optgroups.length;
             if (!n || !self2.$dropdown_content.width())
               return;
@@ -16362,7 +16362,7 @@
           }
         });
         Selectize.define("remove_button", function(options) {
-          options = $5.extend({
+          options = $6.extend({
             label: "&times;",
             title: "Remove",
             className: "remove",
@@ -16373,14 +16373,14 @@
             var self2 = thisRef;
             var html = '<a href="javascript:void(0)" class="' + options2.className + '" tabindex="-1" title="' + escape_html(options2.title) + '">' + options2.label + "</a>";
             var append = function(html_container, html_element) {
-              return $5("<span>").append(html_container).append(html_element);
+              return $6("<span>").append(html_container).append(html_element);
             };
             thisRef.setup = function() {
               var original = self2.setup;
               return function() {
                 if (options2.append) {
-                  var id = $5(self2.$input.context).attr("id");
-                  var selectizer = $5("#" + id);
+                  var id = $6(self2.$input.context).attr("id");
+                  var selectizer = $6("#" + id);
                   var render_item = self2.settings.render.item;
                   self2.settings.render.item = function(data) {
                     return append(render_item.apply(thisRef, arguments), html);
@@ -16417,7 +16417,7 @@
                   e.preventDefault();
                   if (self2.isLocked)
                     return;
-                  var $item = $5(e.currentTarget).parent();
+                  var $item = $6(e.currentTarget).parent();
                   self2.setActiveItem($item);
                   if (self2.deleteSelection()) {
                     self2.setCaret(self2.items.length);
@@ -24359,7 +24359,7 @@
         }), n.default.fn[q] = P._jQueryInterface, n.default.fn[q].Constructor = P, n.default.fn[q].noConflict = function() {
           return n.default.fn[q] = N, P._jQueryInterface;
         };
-        var U = "Dropdown", B = "lte.dropdown", $5 = n.default.fn[U], J = ".dropdown-menu", W = {}, V = function() {
+        var U = "Dropdown", B = "lte.dropdown", $6 = n.default.fn[U], J = ".dropdown-menu", W = {}, V = function() {
           function e2(e3, t3) {
             this._config = t3, this._element = e3;
           }
@@ -24389,7 +24389,7 @@
             V._jQueryInterface.call(n.default(this), "fixPosition");
           }, 1);
         }), n.default.fn[U] = V._jQueryInterface, n.default.fn[U].Constructor = V, n.default.fn[U].noConflict = function() {
-          return n.default.fn[U] = $5, V._jQueryInterface;
+          return n.default.fn[U] = $6, V._jQueryInterface;
         };
         var G = "ExpandableTable", K = "lte.expandableTable", X = n.default.fn[G], Y = ".expandable-body", Z = '[data-widget="expandable-table"]', ee = "aria-expanded", te = function() {
           function e2(e3, t3) {
@@ -40284,12 +40284,22 @@
     }
   };
 
+  // app/javascript/controllers/selectize_controller.js
+  var import_jquery4 = __toESM(require_jquery());
+  var import_selectize2 = __toESM(require_selectize());
+  var selectize_controller_default = class extends Controller {
+    connect() {
+      (0, import_jquery4.default)(".selectize").selectize();
+    }
+  };
+
   // app/javascript/controllers/index.js
   application.register("hello", hello_controller_default);
   application.register("bootstrap-switch", bootstrap_switch_controller_default);
   application.register("daterangepicker", daterangepicker_controller_default);
   application.register("caller", caller_controller_default);
   application.register("mqtt", mqtt_controller_default);
+  application.register("selectize", selectize_controller_default);
 
   // node_modules/@popperjs/core/lib/index.js
   var lib_exports = {};
@@ -42069,14 +42079,14 @@
   var isRTL = () => document.documentElement.dir === "rtl";
   var defineJQueryPlugin = (plugin) => {
     onDOMContentLoaded(() => {
-      const $5 = getjQuery();
-      if ($5) {
+      const $6 = getjQuery();
+      if ($6) {
         const name = plugin.NAME;
-        const JQUERY_NO_CONFLICT = $5.fn[name];
-        $5.fn[name] = plugin.jQueryInterface;
-        $5.fn[name].Constructor = plugin;
-        $5.fn[name].noConflict = () => {
-          $5.fn[name] = JQUERY_NO_CONFLICT;
+        const JQUERY_NO_CONFLICT = $6.fn[name];
+        $6.fn[name] = plugin.jQueryInterface;
+        $6.fn[name].Constructor = plugin;
+        $6.fn[name].noConflict = () => {
+          $6.fn[name] = JQUERY_NO_CONFLICT;
           return plugin.jQueryInterface;
         };
       }
@@ -42279,16 +42289,16 @@
       if (typeof event !== "string" || !element) {
         return null;
       }
-      const $5 = getjQuery();
+      const $6 = getjQuery();
       const typeEvent = getTypeEvent(event);
       const inNamespace = event !== typeEvent;
       let jQueryEvent = null;
       let bubbles = true;
       let nativeDispatch = true;
       let defaultPrevented = false;
-      if (inNamespace && $5) {
-        jQueryEvent = $5.Event(event, args);
-        $5(element).trigger(jQueryEvent);
+      if (inNamespace && $6) {
+        jQueryEvent = $6.Event(event, args);
+        $6(element).trigger(jQueryEvent);
         bubbles = !jQueryEvent.isPropagationStopped();
         nativeDispatch = !jQueryEvent.isImmediatePropagationStopped();
         defaultPrevented = jQueryEvent.isDefaultPrevented();
@@ -45904,7 +45914,7 @@
       return Q.cssPrefix;
     } }), f.FontAwesomeConfig = G;
     var K = [];
-    var $5 = p, J = { size: 16, x: 0, y: 0, rotate: 0, flipX: false, flipY: false };
+    var $6 = p, J = { size: 16, x: 0, y: 0, rotate: 0, flipX: false, flipY: false };
     var c1 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     function s1() {
       for (var c3 = 12, s3 = ""; 0 < c3--; )
@@ -46183,7 +46193,7 @@
       var s3 = c3.content, l3 = c3.width, z3 = c3.height, a3 = c3.transform, e3 = c3.title, C3 = c3.extra, H3 = c3.watchable, t3 = void 0 !== H3 && H3, c3 = u(u(u({}, C3.attributes), e3 ? { title: e3 } : {}), {}, { class: C3.classes.join(" ") });
       t3 && (c3[g] = "");
       H3 = u({}, C3.styles);
-      C1(a3) && (H3.transform = (C3 = (t3 = { transform: a3, startCentered: true, width: l3, height: z3 }).transform, a3 = t3.width, z3 = void 0 === (l3 = t3.height) ? p : l3, t3 = void 0 !== (l3 = t3.startCentered) && l3, l3 = "", l3 += t3 && d ? "translate(".concat(C3.x / $5 - (void 0 === a3 ? p : a3) / 2, "em, ").concat(C3.y / $5 - z3 / 2, "em) ") : t3 ? "translate(calc(-50% + ".concat(C3.x / $5, "em), calc(-50% + ").concat(C3.y / $5, "em)) ") : "translate(".concat(C3.x / $5, "em, ").concat(C3.y / $5, "em) "), l3 += "scale(".concat(C3.size / $5 * (C3.flipX ? -1 : 1), ", ").concat(C3.size / $5 * (C3.flipY ? -1 : 1), ") "), l3 += "rotate(".concat(C3.rotate, "deg) ")), H3["-webkit-transform"] = H3.transform);
+      C1(a3) && (H3.transform = (C3 = (t3 = { transform: a3, startCentered: true, width: l3, height: z3 }).transform, a3 = t3.width, z3 = void 0 === (l3 = t3.height) ? p : l3, t3 = void 0 !== (l3 = t3.startCentered) && l3, l3 = "", l3 += t3 && d ? "translate(".concat(C3.x / $6 - (void 0 === a3 ? p : a3) / 2, "em, ").concat(C3.y / $6 - z3 / 2, "em) ") : t3 ? "translate(calc(-50% + ".concat(C3.x / $6, "em), calc(-50% + ").concat(C3.y / $6, "em)) ") : "translate(".concat(C3.x / $6, "em, ").concat(C3.y / $6, "em) "), l3 += "scale(".concat(C3.size / $6 * (C3.flipX ? -1 : 1), ", ").concat(C3.size / $6 * (C3.flipY ? -1 : 1), ") "), l3 += "rotate(".concat(C3.rotate, "deg) ")), H3["-webkit-transform"] = H3.transform);
       H3 = e1(H3);
       0 < H3.length && (c3.style = H3);
       H3 = [];

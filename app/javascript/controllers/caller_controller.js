@@ -4,7 +4,7 @@ import "selectize"
 
 export default class extends Controller {
   connect() {    
-  $("#service").selectize()    
+  $("#service").selectize()
   $('#counter').selectize({     
       onChange: function(value, isOnInitialize) {                           
         window.location.href="?counter_id="+value          
