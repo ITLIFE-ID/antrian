@@ -47,5 +47,10 @@ module Antrian
       Devise::SessionsController.layout "home"
       # Devise::Mailer.helper :email
     end
+
+    config.after_initialize do
+      mqttSub = MQTTSubscriber.new
+      mqttSub.run
+    end
   end
 end

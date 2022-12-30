@@ -5,10 +5,11 @@ import Paho from "paho-mqtt"
 export default class extends Controller {
   connect() {    
     // Create a client instance
-    var topic = "QUEUE_SYSTEM"
+    var MQTT_CHANNEL = "QUEUE_SYSTEM"
     var counter_id = $("#counter").attr("data-id")
     var service_id = $("#service").val()
     var current_queue_id = $("#current_queue").attr("data-id")
+
     var client = new Paho.Client("localhost", Number(8080), "web_caller_counter_"+counter_id);    
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
@@ -20,7 +21,7 @@ export default class extends Controller {
     // called when the client connects
     function onConnect() {
       // Once a connection has been made, make a subscription and send a message.
-      client.subscribe(topic);
+      client.subscribe(MQTT_CHANNEL);
       $("#mqtt-alert")
       .addClass("alert-success")
       .removeClass("alert-danger")
@@ -35,7 +36,7 @@ export default class extends Controller {
           }
         }
         var message = new Paho.Message(JSON.stringify(payload));
-        message.destinationName = topic;
+        message.destinationName = MQTT_CHANNEL;
         client.send(message);
       });
       
@@ -44,27 +45,27 @@ export default class extends Controller {
           from : "caller",
           action: "recall",
           data: {
-            current_queue_id: current_queue_id,
-            service_id: service_id
+            id: current_queue_id            
           }
         }
         var message = new Paho.Message(JSON.stringify(payload));
-        message.destinationName = topic;
+        message.destinationName = MQTT_CHANNEL;
         client.send(message);
       });
 
-      $("#switch").click(function(){
+      $("#transfer").click(function(){
         const payload = {
           from : "caller",
-          action: "switch",
+          action: "transfer",
           data: {
-            service_id: service_id,
-            current_queue_id: current_queue_id
+            id: current_queue_id,
+            service_id: service_id,            
+            transfer: true
           }
         }
         
         var message = new Paho.Message(JSON.stringify(payload));
-        message.destinationName = topic;
+        message.destinationName = MQTT_CHANNEL;
         client.send(message);
       });
     }

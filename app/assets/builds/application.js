@@ -40266,7 +40266,7 @@
   var import_paho_mqtt = __toESM(require_paho_mqtt());
   var mqtt_controller_default = class extends Controller {
     connect() {
-      var topic = "QUEUE_SYSTEM";
+      var MQTT_CHANNEL = "QUEUE_SYSTEM";
       var counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
       var service_id = (0, import_jquery4.default)("#service").val();
       var current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
@@ -40275,7 +40275,7 @@
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
       function onConnect() {
-        client.subscribe(topic);
+        client.subscribe(MQTT_CHANNEL);
         (0, import_jquery4.default)("#mqtt-alert").addClass("alert-success").removeClass("alert-danger").html("Berhasil konek ke server");
         (0, import_jquery4.default)("#call").click(function() {
           const payload = {
@@ -40286,7 +40286,7 @@
             }
           };
           var message = new import_paho_mqtt.default.Message(JSON.stringify(payload));
-          message.destinationName = topic;
+          message.destinationName = MQTT_CHANNEL;
           client.send(message);
         });
         (0, import_jquery4.default)("#recall").click(function() {
@@ -40294,25 +40294,25 @@
             from: "caller",
             action: "recall",
             data: {
-              current_queue_id,
-              service_id
+              id: current_queue_id
             }
           };
           var message = new import_paho_mqtt.default.Message(JSON.stringify(payload));
-          message.destinationName = topic;
+          message.destinationName = MQTT_CHANNEL;
           client.send(message);
         });
-        (0, import_jquery4.default)("#switch").click(function() {
+        (0, import_jquery4.default)("#transfer").click(function() {
           const payload = {
             from: "caller",
-            action: "switch",
+            action: "transfer",
             data: {
+              id: current_queue_id,
               service_id,
-              current_queue_id
+              transfer: true
             }
           };
           var message = new import_paho_mqtt.default.Message(JSON.stringify(payload));
-          message.destinationName = topic;
+          message.destinationName = MQTT_CHANNEL;
           client.send(message);
         });
       }
