@@ -40245,21 +40245,24 @@
     }
   };
 
-  // app/javascript/controllers/selectize_controller.js
+  // app/javascript/controllers/caller_controller.js
   var import_jquery3 = __toESM(require_jquery());
   var import_selectize = __toESM(require_selectize());
-  var selectize_controller_default = class extends Controller {
+  var caller_controller_default = class extends Controller {
     connect() {
-      (0, import_jquery3.default)(function() {
-        (0, import_jquery3.default)(".selectize").selectize();
-        (0, import_jquery3.default)(".selectize-input").css("padding-top", "13px").css("padding-bottom", "14px").css("font-size", "18px");
+      (0, import_jquery3.default)("#service").selectize();
+      (0, import_jquery3.default)("#counter").selectize({
+        onChange: function(value, isOnInitialize) {
+          window.location.href = "?counter_id=" + value;
+        }
       });
+      (0, import_jquery3.default)(".selectize-input").css("padding-top", "13px").css("padding-bottom", "14px").css("font-size", "18px");
     }
   };
 
-  // app/javascript/controllers/caller_controller.js
+  // app/javascript/controllers/mqtt_controller.js
   var import_paho_mqtt = __toESM(require_paho_mqtt());
-  var caller_controller_default = class extends Controller {
+  var mqtt_controller_default = class extends Controller {
     connect() {
       var client = new import_paho_mqtt.default.Client("localhost", Number(8080), "Caller");
       client.onConnectionLost = onConnectionLost;
@@ -40285,8 +40288,8 @@
   application.register("hello", hello_controller_default);
   application.register("bootstrap-switch", bootstrap_switch_controller_default);
   application.register("daterangepicker", daterangepicker_controller_default);
-  application.register("selectize", selectize_controller_default);
   application.register("caller", caller_controller_default);
+  application.register("mqtt", mqtt_controller_default);
 
   // node_modules/@popperjs/core/lib/index.js
   var lib_exports = {};

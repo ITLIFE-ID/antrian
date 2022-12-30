@@ -1,9 +1,9 @@
-<div data-controller="selectize">
-  <div class="row mb-3">
-    <div class="col-12">
-      <select class="selectize">
-        <%@counters.each do |c|%>
-          <option value="<%=c.id%>"><%=c.service.name%> / Loket Nomor <%=c.number%></option>
+<div class="row mb-3">
+  <div class="col-12">
+    <select id="counter">
+      <option value="">Pilih Counter</option>
+      <%@counters.each do |c|%>
+        <option value="<%=c.id%>" <%="selected" if params[:counter_id] == c.id%>><%=c.service.name%> / Loket Nomor <%=c.number%></option>
         <%end%>>
       </select>
     </div>
@@ -64,7 +64,7 @@
   </div>
   <div class="row mt-3">
     <div class="col-8">
-      <select class="selectize">
+      <select id="service">
         <%@services.each do |s|%>
           <option value="<%=s.id%>"><%=s.name%></option>
         <%end%>
@@ -74,4 +74,3 @@
       <button type="submit" class="btn btn-danger btn-lg px-5 font-weight-bolder w-100">Pindah</button>
     </div>
   </div>
-</div>

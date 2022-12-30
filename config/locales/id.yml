@@ -52,6 +52,7 @@ id:
   today_queue_performance: Performa antrian hari ini
   past_queue_user_satisfaction: Tingkat kepuasan antrian sebelumnya
   types: Tipe
+  caller: Tombol panggil
   working_days: Hari Kerja
   closing_days: Hari tutup
   total_future_queues: Total antrian
