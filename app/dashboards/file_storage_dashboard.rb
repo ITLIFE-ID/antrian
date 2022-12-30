@@ -14,7 +14,7 @@ class FileStorageDashboard < Administrate::BaseDashboard
     files_blobs: Field::HasMany,
     company: Field::BelongsTo.with_options(
       scope: -> { AdministrateHelper.scoped_companies(Thread.current[:scope]) }
-    ),    
+    ),
     file_able: Field::Polymorphic,
     file_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     title: Field::String,
@@ -34,7 +34,7 @@ class FileStorageDashboard < Administrate::BaseDashboard
     company
     title
     file_type
-    file  
+    file
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,8 +42,8 @@ class FileStorageDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     company
-    file          
-    title    
+    file
+    title
     file_type
     created_at
     updated_at
@@ -55,7 +55,7 @@ class FileStorageDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     company
-    file 
+    file
   ].freeze
 
   # COLLECTION_FILTERS
@@ -78,6 +78,6 @@ class FileStorageDashboard < Administrate::BaseDashboard
   end
 
   def permitted_attributes
-    super + [:file => []]
+    super + [file: []]
   end
 end

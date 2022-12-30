@@ -13,7 +13,7 @@ class PlayListDashboard < Administrate::BaseDashboard
       searchable: true,
       searchable_fields: ["location"],
       scope: -> { AdministrateHelper.scoped_client_displays(Thread.current[:scope]) }
-    ),    
+    ),
     file_storages: Field::HasMany.with_options(
       scope: -> { AdministrateHelper.scoped_file_storages(Thread.current[:scope]) }
     ),
@@ -21,7 +21,7 @@ class PlayListDashboard < Administrate::BaseDashboard
     versions: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    deleted_at: Field::DateTime,
+    deleted_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -39,9 +39,9 @@ class PlayListDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    client_display    
+    client_display
     file_storages
-    playing    
+    playing
     created_at
     updated_at
     deleted_at
@@ -51,9 +51,9 @@ class PlayListDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    client_display    
+    client_display
     file_storages
-    playing    
+    playing
   ].freeze
 
   # COLLECTION_FILTERS

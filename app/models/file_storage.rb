@@ -23,8 +23,8 @@ class FileStorage < ApplicationRecord
   belongs_to :company
 
   has_one_attached :file
-  
+
   validates_presence_of :title, :file_type
-  validates :file_type, inclusion: { in: %w(audio video),
-    message: "Hanya di perbolehkan file audio dan video saja (MP3/MP4)" }
+  validates :file_type, inclusion: {in: %w[audio video],
+                                    message: "Hanya di perbolehkan file audio dan video saja (MP3/MP4)"}
 end

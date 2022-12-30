@@ -2,12 +2,12 @@ module Admin
   class FileStoragesController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
-    
-    def create      
+
+    def create
       file = params[:file_storage][:file]
       resource = scoped_resource.new(
         resource_params.merge!(
-          file_type: file.content_type.split("/").first, 
+          file_type: file.content_type.split("/").first,
           title: file.original_filename,
           company_id: @current_company.id
         )
@@ -22,7 +22,7 @@ module Admin
         render :new, locals: {
           page: Administrate::Page::Form.new(dashboard, resource)
         }, status: :unprocessable_entity
-      end     
+      end
     end
 
     # def update

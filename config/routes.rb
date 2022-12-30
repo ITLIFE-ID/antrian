@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   devise_for :administrators
-  
+
   root to: redirect("admin/dashboards/today")
 
   namespace :admin do
@@ -23,11 +23,11 @@ Rails.application.routes.draw do
       get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
       get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
       get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
-    end    
+    end
     resources :file_storages
     resources :permisi_roles
     resources :permisi_actor_roles
-    resources :permisi_actors  
+    resources :permisi_actors
     resources :play_lists
     resources :service_types
     resources :working_days
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resources :user_satisfaction_indices
     resources :users
     resources :voiceover_buildings
-    resources :voice_overs    
+    resources :voice_overs
   end
 
   namespace :api, defaults: {format: :json} do
