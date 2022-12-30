@@ -18,7 +18,7 @@ module Admin
     end
 
     def set_today_queue
-      @today_queues ||= TodayQueue.where(service_id: permitted_params[:service_id])
+      @today_queues ||= TodayQueue.where(service_id: permitted_params[:service_id], attend: false).order(id: :asc)
     end
   end
 end

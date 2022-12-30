@@ -6,9 +6,9 @@ import { application } from "./application"
 import BootstrapSwitchController from "./bootstrap_switch_controller"
 import HelloController from "./hello_controller"
 import DateRangePickerController from "./daterangepicker_controller"
-import Select2 from "./select2_controller"
+import Selectize from "./selectize_controller"
 
 application.register("hello", HelloController)
 application.register("bootstrap-switch", BootstrapSwitchController)
 application.register("daterangepicker", DateRangePickerController)
-application.register("select2", Select2)
+application.register("selectize", Selectize)
