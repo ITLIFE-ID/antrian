@@ -5,6 +5,7 @@ id:
       edit_and_restore: Perbarui dan Restore
   add: Tambah
   destroy: Hapus
+  user_satisfaction_index: kepuasan pengguna
   file_storage: Media penyimpanan
   service_type: Tipe Layanan
   service_not_found: Service not found
@@ -106,7 +107,7 @@ id:
       service: Layanan
       today_queue: Antrian hari ini
       user_counter: Petugas counter
-      user_satisfaction_index: Index kepuasan pemohon
+      user_satisfaction_index: Index kepuasan pengguna
       user: Pengguna
       voice_over: Pengisi suara
-      voice_over_building: Pengisi suara pada gedung
+      voice_over_building: Pengisi suara pada gedung      

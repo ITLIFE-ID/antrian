@@ -25,9 +25,9 @@ Rails.application.routes.draw do
       get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
     end
     resources :file_storages
-    resources :permisi_roles
-    resources :permisi_actor_roles
-    resources :permisi_actors
+    # resources :permisi_roles
+    # resources :permisi_actor_roles
+    # resources :permisi_actors
     resources :play_lists
     resources :service_types
     resources :working_days

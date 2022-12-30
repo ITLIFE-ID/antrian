@@ -53,6 +53,7 @@
             {name: t("voiceover_buildings"), path: admin_voiceover_buildings_path},            
           ]%>
         <%=render "base/sidebar/single_menu", path: admin_satisfaction_indices_path, name: t("satisfaction_index"), icon: "fa-face-smile"%>
+        <%=render "base/sidebar/single_menu", path: admin_user_satisfaction_indices_path, name: t("user_satisfaction_index"), icon: "fa-face-smile-wink"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("schedule"), icon: "fa-clock"}, 
           child: [            
             {name: t("working_days"), path: admin_working_days_path},
