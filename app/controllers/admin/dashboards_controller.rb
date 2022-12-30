@@ -14,7 +14,7 @@ module Admin
 
     def past
       @summary = [
-        {name: t("past_queue_performance"), value: "5 antrian / menit", color: "bg-success", skip_pie_chart: true},
+        {name: t("past_queue_performance"), value: "#{BackupQueue.performance(start_date, end_date)} antrian / menit", color: "bg-success", skip_pie_chart: true},
         {name: t("total_queues"), value: BackupQueue.total_queue(start_date, end_date).count, color: "bg-primary", skip_pie_chart: true},
         {name: t("total_offline_queue"), value: BackupQueue.total_offline_queue(start_date, end_date).count, color: "bg-info"},
         {name: t("total_online_queue"), value: BackupQueue.total_online_queue(start_date, end_date).count, color: "bg-success"}
@@ -27,6 +27,7 @@ module Admin
 
     def today
       @summary = [
+        {name: t("today_queue_performance"), value: "#{TodayQueue.performance} antrian / menit", color: "bg-dark"},
         {name: t("total_queues"), value: TodayQueue.total_queue.count, color: "bg-dark"},
         {name: t("total_processed"), value: TodayQueue.total_processed.count, color: "bg-primary"},
         {name: t("total_unprocessed"), value: TodayQueue.total_unprocessed.count, color: "bg-warning"},

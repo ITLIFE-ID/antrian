@@ -49,6 +49,7 @@ id:
   today_queue_performance: Performa antrian hari ini
   today_queue_user_satisfaction: Tingkat kepuasan antrian hari ini
   past_queue_performance: Performa antrian sebelumnya
+  today_queue_performance: Performa antrian hari ini
   past_queue_user_satisfaction: Tingkat kepuasan antrian sebelumnya
   types: Tipe
   working_days: Hari Kerja

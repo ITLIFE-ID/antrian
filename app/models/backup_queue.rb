@@ -38,4 +38,10 @@ class BackupQueue < TodayQueue
   scope :total_queue, -> (start_date, end_date) {where(date: start_date..end_date)}
   scope :total_offline_queue, ->(start_date, end_date) { where(print_ticket_method: "offline").where(date: start_date..end_date) }
   scope :total_online_queue, ->(start_date, end_date) { where(print_ticket_method: "online").where(date: start_date..end_date) }
+  scope :performance, ->(start_date, end_date) {
+    @backup_queues ||= BackupQueue.where(date: start_date..end_date)
+    return 0 if @backup_queues.blank?
+    total_duration = @backup_queues.sum(&:process_duration) / 60 #seconds to minutes
+    @backup_queues.count / total_duration
+  }
 end

@@ -72,6 +72,14 @@ class TodayQueue < ApplicationRecord
   scope :total_future_offline_queue, -> { where("date > ?", Date.today).where(print_ticket_method: "offline") }
   scope :total_future_online_queue, -> { where("date > ?", Date.today).where(date: Date.today, print_ticket_method: "online") }
 
+  scope :performance, -> {
+    @today_queue ||= TodayQueue.where(date: Date.today)
+    return 0 if @today_queue.blank?
+    total_duration = @today_queue.sum(&:process_duration) / 60 #seconds to minutes
+    @today_queue.count / total_duration
+  }
+  
+
   def letter=(value)
     super(value&.upcase)
   end
