@@ -119,7 +119,7 @@ class QueueService < ApplicationService
         total_queue_left: total_queue_left
       }
 
-      mqtt_client.publish(ENV["MQTT_CHANNEL"], result.to_json) if mqtt_client.message.blank?
+      mqtt_client.publish(ENV["MQTT_CHANNEL"], result.to_json)
     rescue => e
       errors.add(:mqtt, e)
     end

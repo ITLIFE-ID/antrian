@@ -1,6 +1,6 @@
 <div class="row mb-3">
   <div class="col-12">
-    <select id="counter" data-id="<%=params[:counter_id]%>">
+    <select id="counter" data-id="<%=params[:counter_id]%>" data-service-id="<%=@selected_counter&.service&.id%>">
       <option>Pilih Loket</option>
       <%@counters.each do |c|%>
         <option value="<%=c.id%>" <%="selected" if params[:counter_id].to_i == c.id%>><%=c.service.name%> / Loket Nomor <%=c.number%></option>
@@ -23,7 +23,7 @@
     <div class="col-lg-3 col-6">
       <div class="small-box bg-success">
         <div class="inner">
-          <h3 id="waiting_queues"><%=@waiting_queues%></h3>
+          <h3 id="total_queue_left"><%=@total_queue_left%></h3>
           <p>Sedang Menunggu</p>
         </div>
         <div class="icon">
@@ -59,7 +59,7 @@
       <button type="submit" class="btn btn-success btn-lg px-5 font-weight-bolder w-100" id="call">Panggil</button>
     </div>
     <div class="col-6">
-      <button type="submit" class="btn btn-info btn-lg px-5 font-weight-bolder w-100" id="recall">Panggil Ulang</button>
+      <button type="submit" class="btn btn-info btn-lg px-5 font-weight-bolder w-100 recall">Panggil Ulang</button>
     </div>
   </div>
   <div class="row mt-3">

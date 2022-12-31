@@ -8,6 +8,7 @@ export default class extends Controller {
     // Create a client instance
     var MQTT_CHANNEL = "QUEUE_SYSTEM"
     var counter_id = $("#counter").attr("data-id")
+    var current_service_id = parseInt($("#counter").attr("data-service-id"))
     var service_id = $("#service").val()
     var current_queue_id = $("#current_queue").attr("data-id")
 
@@ -40,7 +41,7 @@ export default class extends Controller {
         send_message(payload)
       });
       
-      $("#recall").click(function(){
+      $(".recall").click(function(){
         const payload = {
           from : "caller",
           action: "recall",
@@ -81,7 +82,6 @@ export default class extends Controller {
         showConfirmButton: false,
         timer: 3000
       });
-
       
       Toast.fire({
         icon: 'success',
@@ -89,7 +89,6 @@ export default class extends Controller {
       })
     }
     
-
     // called when the client loses its connection
     function onConnectionLost(responseObject) {
       if (responseObject.errorCode !== 0) {
@@ -103,6 +102,14 @@ export default class extends Controller {
 
     // called when a message arrives
     function onMessageArrived(message) {
+      var data = JSON.parse(message.payloadString)      
+      
+      if(data["action"] == "PRINT_TICKET"){        
+        if(current_service_id == data["service_id"]["id"]){   
+          toast({action: "Ada antrian baru"})
+          $("#total_queue_left").html(data["total_queue_left"])  
+        }        
+      }
       console.log("onMessageArrived:"+message.payloadString);
     }
   }

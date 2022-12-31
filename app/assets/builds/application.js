@@ -42834,6 +42834,7 @@
     connect() {
       var MQTT_CHANNEL = "QUEUE_SYSTEM";
       var counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
+      var current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
       var service_id = (0, import_jquery4.default)("#service").val();
       var current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
       var client = new import_paho_mqtt.default.Client("localhost", Number(8080), "web_caller_counter_" + counter_id);
@@ -42853,7 +42854,7 @@
           };
           send_message(payload);
         });
-        (0, import_jquery4.default)("#recall").click(function() {
+        (0, import_jquery4.default)(".recall").click(function() {
           const payload = {
             from: "caller",
             action: "recall",
@@ -42901,6 +42902,13 @@
         }
       }
       function onMessageArrived(message) {
+        var data = JSON.parse(message.payloadString);
+        if (data["action"] == "PRINT_TICKET") {
+          if (current_service_id == data["service_id"]["id"]) {
+            toast({ action: "Ada antrian baru" });
+            (0, import_jquery4.default)("#total_queue_left").html(data["total_queue_left"]);
+          }
+        }
         console.log("onMessageArrived:" + message.payloadString);
       }
     }
