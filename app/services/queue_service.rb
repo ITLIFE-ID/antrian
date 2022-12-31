@@ -116,7 +116,7 @@ class QueueService < ApplicationService
         play_voice_queue_text: play_voice_queue_text,
         service_id: service_id,
         counter_id: counter_id,
-        total_queue_left: total_queue_left + 1
+        total_queue_left: total_queue_left
       }
 
       mqtt_client.publish(ENV["MQTT_CHANNEL"], result.to_json)
