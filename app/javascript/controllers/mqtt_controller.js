@@ -7,8 +7,7 @@ export default class extends Controller {
   connect() {    
     // Create a client instance
     var MQTT_CHANNEL = "QUEUE_SYSTEM"
-    var counter_id = $("#counter").attr("data-id")
-    var current_service_id = parseInt($("#counter").attr("data-service-id"))
+    var counter_id = $("#counter").attr("data-id")    
     var service_id = $("#service").val()
     var current_queue_id = $("#current_queue").attr("data-id")
 
@@ -102,15 +101,16 @@ export default class extends Controller {
 
     // called when a message arrives
     function onMessageArrived(message) {
-      var data = JSON.parse(message.payloadString)      
-      
-      if(data["action"] == "PRINT_TICKET"){        
-        if(current_service_id == data["service_id"]["id"]){   
-          toast({action: "Ada antrian baru"})
+      var current_service_id = parseInt($("#counter").attr("data-service-id"))
+
+      var data = JSON.parse(message.payloadString)            
+      if(data["action"] == "PRINT_TICKET"){                 
+        if(current_service_id == data["service_id"]){           
+          toast({action: "Ada antrian baru"})          
           $("#total_queue_left").html(data["total_queue_left"])  
         }        
       }
-      console.log("onMessageArrived:"+message.payloadString);
+      // console.log("onMessageArrived:"+message.payloadString);
     }
   }
 }
