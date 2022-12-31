@@ -1,0 +1,14 @@
+ID;group_layanan_ID;prefix;prefix_voice;voice;description;sub_description;ruang;video;background_color;text_color;nomor_antrian_color;max_antrian;max_antrian_online;tanggal_set;active;tv_hide;kiosk_hide;android_hide;jam_mulai_tiket;jam_selesai_tiket;jam_mulai_kiosk;jam_selesai_kiosk;jam_mulai_tv;jam_selesai_tv;hari_aktif;verifikasi;priority;icon;urut;jadwal;sisa_antrian;tanggal_non_aktif;online;info;max_waktu_pelayanan
+1;;;LOKET;PENDAFTARAN;PENDAFTARAN;-;LOKET;;#009e3b;#ffffff;#000000;0;;1511629200;1;0;0;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;1;1;;;0;;
+2;;;RUANG;-;VCT,IMS,IVA;-;RUANG 2;;#009e3b;#ffffff;#000000;0;;1511629200;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;2;1;;;0;;
+3;;;RUANG;-;KB;-;RUANG 3;;#009e3b;#ffffff;#000000;0;;1511629200;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;3;1;;;0;;
+4;0;;RUANG;-;KESEHATAN GIGI;-;RUANG 4;-;#009e3b;#ffffff;#000000;0;0;1519923600;1;0;1;0;06:45:00;10:00:00;06:45:00;10:00:00;06:45:00;10:00:00;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;4;1;;;0;;0
+5;0;;RUANG;OBAT;FARMASI;-;RUANG 5;-;#009e3b;#ffffff;#000000;0;0;1511629200;0;0;1;0;09:48:00;09:48:00;09:48:00;09:48:00;09:48:00;09:48:00;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;5;1;;;0;;0
+6;;;RUANG;-;ANAK & KESEHATAN REMAJA;-;RUANG 6;;#009e3b;#ffffff;#000000;0;;1511629200;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;6;1;;;0;;
+7;;;RUANG;-;PROLANIS, JIWA;-;RUANG 7;;#009e3b;#ffffff;#000000;0;;1511629200;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;7;1;;;0;;
+8;0;;RUANG;-;USILA (>55THN);-;RUANG 8;-;#009e3b;#ffffff;#000000;0;;;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;8;1;;;0;;
+9;;;RUANG;-;PENGOBATAN UMUM , KIR KESEHATAN;-;RUANG 9;;#009e3b;#ffffff;#000000;0;;;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;9;1;;;0;;
+10;;;RUANG;-;IBU HAMIL DAN CALON PENGANTIN;-;RUANG 10;;#009e3b;#ffffff;#000000;0;;;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;10;1;;;0;;
+11;;;RUANG;-;IMUNISASI;-;RUANG 11;;#009e3b;#ffffff;#000000;0;;;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;11;1;;;0;;
+12;;;RUANG;-;P2, KIR HAJI;-;RUANG 12;;#009e3b;#ffffff;#000000;0;;;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;12;1;;;0;;
+13;;;RUANG;-;UGD;-;UGD;;#009e3b;#ffffff;#000000;0;;;1;0;1;0;;;;;;;"[""1"",""2"",""3"",""4"",""5"",""6""]";0;0;;13;1;;;0;;

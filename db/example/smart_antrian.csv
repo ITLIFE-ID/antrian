@@ -1,0 +1,7 @@
+ID;layanan_ID;last_layanan_ID;old_antrian_ID;display_loket_ID;prefix;antrian_no;status_print;loket_no;sid;user_ID;loket_call;tingkat_kepuasan;tanggal;ambil;mulai;akhir;leave;pending;detail;detail_android;priority;active;google_token;lokasi_ambil;central_loket_start;central_loket_end;central_loket_khusus;tanggal_booking;sync_online;pc_name;metode_pembayaran_ID
+22683;1;1;;1;;1;0;2;1001;1;1;-;2022-12-31;08:13:52;08:18:24;08:34:43;1;0;;;0;;;kiosk;;;;;0;DESKTOP-VD50BPC;
+22684;3;3;22683;;;1;0;0;0;0;0;-;2022-12-31;08:19:48;;;0;0;;;0;;;kiosk;;;;;0;DESKTOP-VD50BPC;
+22685;1;1;;1;;2;0;2;1001;1;1;-;2022-12-31;08:33:54;08:34:43;;1;0;;;0;;;kiosk;;;;;0;DESKTOP-VD50BPC;
+22686;9;9;22685;;;2;0;0;0;0;0;-;2022-12-31;08:35:53;;;0;0;;;0;;;kiosk;;;;;0;DESKTOP-VD50BPC;
+22687;1;1;;;;3;0;0;0;0;0;-;2022-12-31;08:42:15;;;0;0;;;0;;;kiosk;;;;;0;;
+22688;1;1;;;;4;0;0;0;0;0;-;2022-12-31;08:42:20;;;0;0;;;0;;;kiosk;;;;;0;;
