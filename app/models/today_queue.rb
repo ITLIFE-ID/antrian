@@ -62,18 +62,20 @@ class TodayQueue < ApplicationRecord
   validates_date :date, on_or_after: :today
 
   after_save { BackupQueue.upsert(attributes) }
-  scope :total_queue, -> { where(date: Date.today) }
-  scope :total_processed, -> { where(date: Date.today, attend: true).where.not(finish_time: nil) }
-  scope :total_unprocessed, -> { where(date: Date.today, attend: false, finish_time: nil) }
-  scope :total_offline_queue, -> { where(date: Date.today, print_ticket_method: "offline") }
-  scope :total_online_queue, -> { where(date: Date.today, print_ticket_method: "online") }
+  scope :total_queue, ->(service) { where(date: Date.today, service: service) }
+  scope :total_queue_left, ->(service) { total_queue(service).where(attend: false) }
+  scope :current_queue, ->(counter) { where(date: Date.today, counter: counter.service, attend: false).order(id: :desc) }
+  scope :total_processed, ->(service) { total_queue(service).where(attend: true).where.not(finish_time: nil) }
+  scope :total_unprocessed, ->(service) { total_queue(service).where(attend: false, finish_time: nil) }
+  scope :total_offline_queue, ->(service) { total_queue(service).where(print_ticket_method: "offline") }
+  scope :total_online_queue, ->(service) { total_queue(service).where(print_ticket_method: "online") }
 
-  scope :total_future_queue, -> { where("date > ?", Date.today) }
-  scope :total_future_offline_queue, -> { where("date > ?", Date.today).where(print_ticket_method: "offline") }
-  scope :total_future_online_queue, -> { where("date > ?", Date.today).where(date: Date.today, print_ticket_method: "online") }
+  scope :total_future_queue, ->(service) { where("date > ?", Date.today, service: services) }
+  scope :total_future_offline_queue, ->(service) { total_future_queue(service).where(print_ticket_method: "offline") }
+  scope :total_future_online_queue, ->(service) { total_future_queue(service).where(print_ticket_method: "online") }
 
-  scope :performance, -> {
-    @today_queue ||= TodayQueue.where(date: Date.today)
+  scope :performance, ->(service) {
+    @today_queue ||= total_queue(service)
     return 0 if @today_queue.blank?
     total_duration = @today_queue.sum(&:process_duration) / 60 # seconds to minutes
     @today_queue.count / total_duration

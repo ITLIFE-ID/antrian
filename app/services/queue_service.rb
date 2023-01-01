@@ -79,6 +79,14 @@ class QueueService < ApplicationService
     available_queue_to_call_in_service&.count.to_i
   end
 
+  def total_offline_queues
+    available_queue_to_call_in_service.where(print_ticket_method: "offline")&.count.to_i
+  end
+
+  def total_offline_queues
+    available_queue_to_call_in_service.where(print_ticket_method: "online")&.count.to_i
+  end
+
   def letter
     last_queue_in_counter.first&.letter || service.letter
   end
@@ -116,7 +124,9 @@ class QueueService < ApplicationService
         play_voice_queue_text: play_voice_queue_text,
         service_id: service_id,
         counter_id: counter_id,
-        total_queue_left: total_queue_left
+        total_queue_left: total_queue_left,
+        total_offline_queues: total_offline_queues,
+        total_online_queues: total_online_queues
       }
 
       mqtt_client.publish(ENV["MQTT_CHANNEL"], result.to_json)

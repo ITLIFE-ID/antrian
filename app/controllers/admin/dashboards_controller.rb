@@ -13,8 +13,8 @@ module Admin
 
     def past
       @online_vs_offline = [
-        {name: t("total_offline_queue"), y: BackupQueue.total_offline_queue(start_date, end_date).count, color: "bg-info"},
-        {name: t("total_online_queue"), y: BackupQueue.total_online_queue(start_date, end_date).count, color: "bg-success"}
+        {name: t("total_offline_queue"), y: BackupQueue.total_offline_queue(start_date, end_date, @current_company.service).count, color: "bg-info"},
+        {name: t("total_online_queue"), y: BackupQueue.total_online_queue(start_date, end_date, @current_company.service).count, color: "bg-success"}
       ]
 
       @summary = [
@@ -29,18 +29,18 @@ module Admin
 
     def today
       @online_vs_offline = [
-        {name: t("total_offline_queue"), y: TodayQueue.total_offline_queue.count, color: "bg-info"},
-        {name: t("total_online_queue"), y: TodayQueue.total_online_queue.count, color: "bg-success"}
+        {name: t("total_offline_queue"), y: TodayQueue.total_offline_queue(@current_company.service).count, color: "bg-info"},
+        {name: t("total_online_queue"), y: TodayQueue.total_online_queue(@current_company.service).count, color: "bg-success"}
       ]
 
       @processed_vs_unprocessed = [
-        {name: t("total_processed"), y: TodayQueue.total_processed.count, color: "bg-primary"},
-        {name: t("total_unprocessed"), y: TodayQueue.total_unprocessed.count, color: "bg-warning"}
+        {name: t("total_processed"), y: TodayQueue.total_processed(@current_company.service).count, color: "bg-primary"},
+        {name: t("total_unprocessed"), y: TodayQueue.total_unprocessed(@current_company.service).count, color: "bg-warning"}
       ]
 
       @summary = [
-        {name: t("today_queue_performance"), y: "#{TodayQueue.performance} antrian / menit", color: "bg-dark"},
-        {name: t("total_queues"), y: TodayQueue.total_queue.count, color: "bg-dark"}
+        {name: t("today_queue_performance"), y: "#{TodayQueue.performance(@current_company.service)} antrian / menit", color: "bg-dark"},
+        {name: t("total_queues"), y: TodayQueue.total_queue(@current_company.service).count, color: "bg-dark"}
       ] << @online_vs_offline << @processed_vs_unprocessed
 
       @pie_chart = [

@@ -3,26 +3,21 @@ require "administrate/custom_dashboard"
 
 module Admin
   class CallersController < Admin::ApplicationController
-    before_action :set_selected_counter, :set_today_queue
+    before_action :set_selected_counter
     add_breadcrumb I18n.t("caller")
 
-    def index
+    def index      
       @counters = Counter.where(service: @current_company.services)
       @services = @current_company.services
-      @current_queue = TodayQueue.where(counter: @selected_counter, attend: false).order(id: :desc).first
-      @total_queue_left = @today_queues.count
-      @offline_queues = TodayQueue.total_offline_queue.count
-      @online_queues = TodayQueue.total_online_queue.count
+      @today_queues = TodayQueue.total_queue(@selected_counter&.service)
+      @current_queue = TodayQueue.current_queue(@selected_counter).first      
+      @total_queue_left = TodayQueue.total_queue_left(@selected_counter&.service).count
+      @total_offline_queues = TodayQueue.total_offline_queue(set_selected_counter.service).count
+      @total_online_queues = TodayQueue.total_online_queue(set_selected_counter.service).count      
     end
 
     def permitted_params
       params.permit(:today_queue_id, :service_id, :counter_id)
-    end
-
-    def set_today_queue
-      @today_queues ||= TodayQueue
-        .where(attend: false, service: @selected_counter&.service)
-        .order(id: :asc)
     end
 
     def set_selected_counter

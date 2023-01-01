@@ -108,9 +108,11 @@ export default class extends Controller {
         if(current_service_id == data["service_id"]){           
           toast({action: "Ada antrian baru"})          
           $("#total_queue_left").html(data["total_queue_left"])  
+          $("#total_offline_queues").html(data["total_offline_queues"])  
+          $("#total_online_queues").html(data["total_online_queues"])  
         }        
       }
-      // console.log("onMessageArrived:"+message.payloadString);
+      console.log("onMessageArrived:"+message.payloadString);
     }
   }
 }
