@@ -83,7 +83,7 @@ class QueueService < ApplicationService
     available_queue_to_call_in_service.where(print_ticket_method: "offline")&.count.to_i
   end
 
-  def total_offline_queues
+  def total_online_queues
     available_queue_to_call_in_service.where(print_ticket_method: "online")&.count.to_i
   end
 
@@ -144,8 +144,8 @@ class QueueService < ApplicationService
   end
 
   def is_not_working_day?(workable)
-    check = WorkingDay.find_by(day: selected_date.wday, workable: workable)
-
+    check = WorkingDay.find_by(day: selected_day, workable: workable)
+    
     return true if check.blank?
 
     check.open_time < Time.current && check.closing_time > Time.current
@@ -157,6 +157,13 @@ class QueueService < ApplicationService
     return false if check.blank?
 
     check.start_time < Time.current && check.finish_time > Time.current
+  end
+
+  def selected_day
+    Date::DAYNAMES.rotate(1)
+    .each_with_index.map { |k, v| [k, v + 1] }
+    .select{|x| x.first == selected_date.strftime("%A")}
+    .first.second
   end
 
   def is_queue_exists?

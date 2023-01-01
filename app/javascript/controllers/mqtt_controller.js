@@ -104,9 +104,10 @@ export default class extends Controller {
       var current_service_id = parseInt($("#counter").attr("data-service-id"))
 
       var data = JSON.parse(message.payloadString)            
-      if(data["action"] == "PRINT_TICKET"){                 
+      if(data["action"] == "PRINT_TICKET" || data["ACTION"] == "CALL"){                 
         if(current_service_id == data["service_id"]){           
           toast({action: "Ada antrian baru"})          
+          $("#current_queue").html(data["current_queue_in_counter_text"])
           $("#total_queue_left").html(data["total_queue_left"])  
           $("#total_offline_queues").html(data["total_offline_queues"])  
           $("#total_online_queues").html(data["total_online_queues"])  

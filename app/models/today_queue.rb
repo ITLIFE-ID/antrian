@@ -64,7 +64,7 @@ class TodayQueue < ApplicationRecord
   after_save { BackupQueue.upsert(attributes) }
   scope :total_queue, ->(service) { where(date: Date.today, service: service) }
   scope :total_queue_left, ->(service) { total_queue(service).where(attend: false) }
-  scope :current_queue, ->(counter) { where(date: Date.today, counter: counter.service, attend: false).order(id: :desc) }
+  scope :current_queue, ->(counter) { where(date: Date.today, counter: counter, attend: false).order(id: :desc) }
   scope :total_processed, ->(service) { total_queue(service).where(attend: true).where.not(finish_time: nil) }
   scope :total_unprocessed, ->(service) { total_queue(service).where(attend: false, finish_time: nil) }
   scope :total_offline_queue, ->(service) { total_queue(service).where(print_ticket_method: "offline") }

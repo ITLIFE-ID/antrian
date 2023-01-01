@@ -12,8 +12,8 @@ module Admin
       @today_queues = TodayQueue.total_queue(@selected_counter&.service)
       @current_queue = TodayQueue.current_queue(@selected_counter).first      
       @total_queue_left = TodayQueue.total_queue_left(@selected_counter&.service).count
-      @total_offline_queues = TodayQueue.total_offline_queue(set_selected_counter.service).count
-      @total_online_queues = TodayQueue.total_online_queue(set_selected_counter.service).count      
+      @total_offline_queues = TodayQueue.total_offline_queue(set_selected_counter&.service).count
+      @total_online_queues = TodayQueue.total_online_queue(set_selected_counter&.service).count      
     end
 
     def permitted_params
