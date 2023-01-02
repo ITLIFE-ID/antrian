@@ -42870,8 +42870,11 @@
           toast("Process to " + payload["action"]);
         }
       }
+      function change_status(element, message2) {
+        (0, import_jquery4.default)(element).addClass("alert-success").removeClass("alert-danger").html(message2);
+      }
       function check_server(message2) {
-        (0, import_jquery4.default)("#mqtt-alert").addClass("alert-success").removeClass("alert-danger").html("Berhasil konek ke server");
+        change_status("#mqtt-alert", "Berhasil konek ke server");
         send_message(message2);
       }
       function toast(message2, icon = "success") {
@@ -42888,7 +42891,7 @@
       }
       function onConnectionLost(responseObject) {
         if (responseObject.errorCode !== 0) {
-          (0, import_jquery4.default)("#mqtt-alert").addClass("alert-danger").removeClass("alert-success").html("Koneksi ke server gagal, Mohon refresh browser");
+          change_status("#mqtt-alert", "Koneksi ke server gagal, Mohon refresh browser");
           console.log("onConnectionLost:" + responseObject.errorMessage);
         }
       }
@@ -42910,7 +42913,7 @@
               toast(data["message"], data["status"]);
             }
           } else if (data["action"] == "ready") {
-            (0, import_jquery4.default)("#server-alert").addClass("alert-success").removeClass("alert-danger").html(data["message"]);
+            change_status("#server-alert", data["message"]);
           }
         }
         console.log("onMessageArrived:" + message2.payloadString);

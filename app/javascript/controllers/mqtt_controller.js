@@ -57,12 +57,15 @@ export default class extends Controller {
       }        
     }
 
-    function check_server(message){
-      $("#mqtt-alert")
+    function change_status(element, message){
+      $(element)
       .addClass("alert-success")
       .removeClass("alert-danger")
-      .html("Berhasil konek ke server")    
+      .html(message)
+    }
 
+    function check_server(message){      
+      change_status("#mqtt-alert", "Berhasil konek ke server")
       send_message(message)
     }
 
@@ -83,10 +86,7 @@ export default class extends Controller {
     // called when the client loses its connection
     function onConnectionLost(responseObject) {
       if (responseObject.errorCode !== 0) {
-        $("#mqtt-alert")
-        .addClass("alert-danger")
-        .removeClass("alert-success")
-        .html("Koneksi ke server gagal, Mohon refresh browser")        
+        change_status("#mqtt-alert", "Koneksi ke server gagal, Mohon refresh browser")      
         console.log("onConnectionLost:"+responseObject.errorMessage);
       }
     }
@@ -115,10 +115,7 @@ export default class extends Controller {
           }        
         }
         else if(data["action"] == "ready"){
-          $("#server-alert")
-          .addClass("alert-success")
-          .removeClass("alert-danger")
-          .html(data["message"])      
+          change_status("#server-alert", data["message"]) 
         }
       }
 
