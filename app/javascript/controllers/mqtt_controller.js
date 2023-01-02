@@ -21,14 +21,9 @@ export default class extends Controller {
     client.connect({onSuccess:onConnect});
         
     function onConnect() {      
-      client.subscribe(MQTT_CHANNEL);
-
-      $("#mqtt-alert")
-      .addClass("alert-success")
-      .removeClass("alert-danger")
-      .html("Berhasil konek ke server")    
-
-      send_message($.extend({}, message))
+      client.subscribe(MQTT_CHANNEL);      
+      
+      check_server(message)
 
       $("#call").click(function(){        
         send_message($.extend({}, message, {action: "call"}))
@@ -47,6 +42,7 @@ export default class extends Controller {
             transfer: true
           }
         }
+
         send_message($.extend({}, message, data))        
       });
     }
@@ -55,7 +51,19 @@ export default class extends Controller {
       const message = new Paho.Message(JSON.stringify(payload));
       message.destinationName = MQTT_CHANNEL;
       client.send(message);
-      toast("Process to "+payload["action"])
+
+      if(payload["action"] != "check_server"){
+        toast("Process to "+payload["action"])
+      }        
+    }
+
+    function check_server(message){
+      $("#mqtt-alert")
+      .addClass("alert-success")
+      .removeClass("alert-danger")
+      .html("Berhasil konek ke server")    
+
+      send_message(message)
     }
 
     function toast(message, icon="success"){

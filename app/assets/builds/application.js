@@ -42843,8 +42843,7 @@
       client.connect({ onSuccess: onConnect });
       function onConnect() {
         client.subscribe(MQTT_CHANNEL);
-        (0, import_jquery4.default)("#mqtt-alert").addClass("alert-success").removeClass("alert-danger").html("Berhasil konek ke server");
-        send_message(import_jquery4.default.extend({}, message));
+        check_server(message);
         (0, import_jquery4.default)("#call").click(function() {
           send_message(import_jquery4.default.extend({}, message, { action: "call" }));
         });
@@ -42867,7 +42866,13 @@
         const message2 = new import_paho_mqtt.default.Message(JSON.stringify(payload));
         message2.destinationName = MQTT_CHANNEL;
         client.send(message2);
-        toast("Process to " + payload["action"]);
+        if (payload["action"] != "check_server") {
+          toast("Process to " + payload["action"]);
+        }
+      }
+      function check_server(message2) {
+        (0, import_jquery4.default)("#mqtt-alert").addClass("alert-success").removeClass("alert-danger").html("Berhasil konek ke server");
+        send_message(message2);
       }
       function toast(message2, icon = "success") {
         var Toast2 = import_sweetalert2.default.mixin({

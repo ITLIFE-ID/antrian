@@ -49,6 +49,7 @@ module Antrian
     end
 
     config.after_initialize do
+      Rails.application.config.mqtt_connect = MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT"))
       MQTTSubscriber.new.run
     end
   end

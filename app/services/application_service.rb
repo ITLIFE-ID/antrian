@@ -4,7 +4,6 @@ class ApplicationService
   extend ActiveModel::Naming
   include ActiveModel::AttributeAssignment
   include ActiveModel::Validations
-  include MqttHelper
 
   attr_accessor :errors
 

@@ -1,6 +1,4 @@
 class QueueService < ApplicationService
-  include MqttHelper
-
   attr_accessor :id, :counter_id, :date, :print_ticket_location, :service_id, :attend, :transfer
 
   def user_attend_to_counter
@@ -122,7 +120,7 @@ class QueueService < ApplicationService
         missed_queues: TodayQueue.missed_queues(service).to_json
       }
 
-      mqtt_client.publish(ENV["MQTT_CHANNEL"], result.to_json)
+      Rails.application.config.mqtt_connect.publish(ENV["MQTT_CHANNEL"], result.to_json)
     rescue => e
       return_errors(e)
     end

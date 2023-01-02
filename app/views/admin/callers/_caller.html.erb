@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-12">
     <select id="counter" data-id="<%=params[:counter_id]%>" data-service-id="<%=@selected_counter&.service&.id%>">
-      <option>Pilih Loket</option>
+      <option value="-">Pilih Loket</option>
       <%@counters.each do |c|%>
         <option value="<%=c.id%>" <%="selected" if params[:counter_id].to_i == c.id%>><%=c.service.name%> / Loket Nomor <%=c.number%></option>
         <%end%>
