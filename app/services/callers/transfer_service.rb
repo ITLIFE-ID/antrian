@@ -52,7 +52,7 @@ module Callers
         mqtt_publish!("TRANSFER")
       end
     rescue => e
-      errors.add(:transfer_service, e.message)
+      return_errors(e)
     end
 
     private

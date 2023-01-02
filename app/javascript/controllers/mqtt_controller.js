@@ -71,10 +71,10 @@ export default class extends Controller {
       const message = new Paho.Message(JSON.stringify(payload));
       message.destinationName = MQTT_CHANNEL;
       client.send(message);
-      toast(payload)
+      toast("Process to "+payload["action"])
     }
 
-    function toast(payload){
+    function toast(message, icon="success"){
       var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -83,8 +83,8 @@ export default class extends Controller {
       });
       
       Toast.fire({
-        icon: 'success',
-        title: payload["action"]
+        icon: icon,
+        title: message
       })
     }
     
@@ -103,16 +103,25 @@ export default class extends Controller {
     function onMessageArrived(message) {
       var current_service_id = parseInt($("#counter").attr("data-service-id"))
 
-      var data = JSON.parse(message.payloadString)            
+      var data = JSON.parse(message.payloadString)   
+
       if(data["action"] == "PRINT_TICKET" || data["ACTION"] == "CALL"){                 
-        if(current_service_id == data["service_id"]){           
-          toast({action: "Ada antrian baru"})          
+        if(current_service_id == data["service_id"]){                     
           $("#current_queue").html(data["current_queue_in_counter_text"])
           $("#total_queue_left").html(data["total_queue_left"])  
           $("#total_offline_queues").html(data["total_offline_queues"])  
           $("#total_online_queues").html(data["total_online_queues"])  
         }        
       }
+
+      if(data["from"] == "server" && data["action"] == "receive"){
+        let counter_id = $("#counter").attr("data-id")
+
+        if(counter_id == data["source"]["counter_id"]){
+          toast(data["message"], data["status"])
+        }        
+      }
+
       console.log("onMessageArrived:"+message.payloadString);
     }
   }

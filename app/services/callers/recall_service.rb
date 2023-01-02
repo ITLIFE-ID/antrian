@@ -7,7 +7,7 @@ module Callers
 
       mqtt_publish!("RECALL")
     rescue => e
-      errors.add(:recall_service, e.message)
+      return_errors(e)
     end
 
     private

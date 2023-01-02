@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div class="col-8" data-controller="caller"><%=render "caller"%></div>
-      <div class="col-4"><%=render "queue_list"%></div>
+      <div class="col-4"><%=render "missed_queues", missed_queues: @missed_queues%></div>
     </div>
   </div>
 </div>

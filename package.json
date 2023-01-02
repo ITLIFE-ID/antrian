@@ -15,6 +15,7 @@
     "esbuild": "^0.16.7",
     "highcharts": "^10.3.2",
     "jquery": "^3.6.2",
+    "jsgrid": "^1.5.3",
     "moment": "^2.29.4",
     "paho-mqtt": "^1.1.0",
     "sass": "^1.56.2",

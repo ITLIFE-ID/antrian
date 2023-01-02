@@ -8,11 +8,11 @@ class QueueService < ApplicationService
   end
 
   def find_queue_by_id
-    TodayQueue.find_by_id(id)
+    @find_queue_by_id ||= TodayQueue.find_by_id(id)
   end
 
   def counter
-    Counter.find_by_id(counter_id)
+    @counter ||= Counter.find_by_id(counter_id)
   end
 
   def counter_number_to_text
@@ -20,53 +20,53 @@ class QueueService < ApplicationService
   end
 
   def service
-    return Service.find_by_id(service_id) if transfer
+    return @service ||= Service.find_by_id(service_id) if transfer
 
-    Service.find_by_id(service_id) || counter&.service
+    @service ||= Service.find_by_id(service_id) || counter&.service
   end
 
   def company
-    service.company
+    @company ||= service.company
   end
 
   def find_queue
-    TodayQueue.where("DATE(print_ticket_time) = ?", selected_date.to_s)
+    @find_queue ||= TodayQueue.where("DATE(print_ticket_time) = ?", selected_date.to_s)
   end
 
   def queue_in_service
-    find_queue.where(service: service)
+    @queue_in_service ||= find_queue.where(service: service)
   end
 
   def queue_in_counter
-    find_queue.where(counter: counter)
+    @queue_in_counter ||= find_queue.where(counter: counter)
   end
 
   def last_queue_in_counter
-    queue_in_counter.order(id: :desc).limit(1)
+    @last_queue_in_counter ||= queue_in_counter.order(id: :desc).limit(1)
   end
 
   def last_queue_in_counter_available_to_recall
-    last_queue_in_counter.where(attend: false)
+    @last_queue_in_counter_available_to_recall ||= last_queue_in_counter.where(attend: false)
   end
 
   def last_queue_in_service
-    queue_in_service.order(id: :desc).limit(1)
+    @last_queue_in_service ||= queue_in_service.order(id: :desc).limit(1)
   end
 
   def available_queue_to_call_in_service
-    queue_in_service.where(counter: nil)
+    @available_queue_to_call_in_service ||= queue_in_service.where(counter: nil)
   end
 
   def available_regular_queue_to_call
-    available_queue_to_call_in_service.order(id: :asc).limit(1)
+    @available_regular_queue_to_call ||= available_queue_to_call_in_service.order(id: :asc).limit(1)
   end
 
   def available_priority_queue_to_call
-    available_queue_to_call_in_service.where(priority: true).order(id: :asc).limit(1)
+    @available_priority_queue_to_call ||= available_queue_to_call_in_service.where(priority: true).order(id: :asc).limit(1)
   end
 
   def available_queue_to_call
-    available_priority_queue_to_call&.first || available_regular_queue_to_call&.first
+    @available_queue_to_call ||= available_priority_queue_to_call&.first || available_regular_queue_to_call&.first
   end
 
   def next_queue_number
@@ -76,31 +76,23 @@ class QueueService < ApplicationService
   end
 
   def total_queue_left
-    available_queue_to_call_in_service&.count.to_i
-  end
-
-  def total_offline_queues
-    available_queue_to_call_in_service.where(print_ticket_method: "offline")&.count.to_i
-  end
-
-  def total_online_queues
-    available_queue_to_call_in_service.where(print_ticket_method: "online")&.count.to_i
+    @total_queue_left ||= available_queue_to_call_in_service&.count.to_i
   end
 
   def letter
-    last_queue_in_counter.first&.letter || service.letter
+    @letter ||= last_queue_in_counter.first&.letter || service.letter
   end
 
   def number
-    last_queue_in_counter.first&.number.to_i
+    @number ||= last_queue_in_counter.first&.number.to_i
   end
 
   def number_to_text
-    Terbilang.convert(number).upcase
+    @number_to_text ||= Terbilang.convert(number).upcase
   end
 
   def current_queue_in_counter_text
-    "#{letter} #{number.to_s.rjust(3, "0")}"
+    @current_queue_in_counter_text ||= ApplicationHelper.queue_number_formater(letter, number)
   end
 
   def selected_date
@@ -125,13 +117,14 @@ class QueueService < ApplicationService
         service_id: service_id,
         counter_id: counter_id,
         total_queue_left: total_queue_left,
-        total_offline_queues: total_offline_queues,
-        total_online_queues: total_online_queues
+        total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
+        total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
+        missed_queues: TodayQueue.missed_queues(service).to_json
       }
 
       mqtt_client.publish(ENV["MQTT_CHANNEL"], result.to_json)
     rescue => e
-      errors.add(:mqtt, e)
+      return_errors(e)
     end
   end
 
@@ -145,7 +138,7 @@ class QueueService < ApplicationService
 
   def is_not_working_day?(workable)
     check = WorkingDay.find_by(day: selected_day, workable: workable)
-    
+
     return true if check.blank?
 
     check.open_time < Time.current && check.closing_time > Time.current
@@ -161,9 +154,8 @@ class QueueService < ApplicationService
 
   def selected_day
     Date::DAYNAMES.rotate(1)
-    .each_with_index.map { |k, v| [k, v + 1] }
-    .select{|x| x.first == selected_date.strftime("%A")}
-    .first.second
+      .each_with_index.map { |k, v| [k, v + 1] }
+      .find { |x| x.first == selected_date.strftime("%A") }.second
   end
 
   def is_queue_exists?

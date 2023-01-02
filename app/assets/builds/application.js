@@ -42880,9 +42880,9 @@
         const message = new import_paho_mqtt.default.Message(JSON.stringify(payload));
         message.destinationName = MQTT_CHANNEL;
         client.send(message);
-        toast(payload);
+        toast("Process to " + payload["action"]);
       }
-      function toast(payload) {
+      function toast(message, icon = "success") {
         var Toast2 = import_sweetalert2.default.mixin({
           toast: true,
           position: "top-end",
@@ -42890,8 +42890,8 @@
           timer: 3e3
         });
         Toast2.fire({
-          icon: "success",
-          title: payload["action"]
+          icon,
+          title: message
         });
       }
       function onConnectionLost(responseObject) {
@@ -42903,12 +42903,18 @@
       function onMessageArrived(message) {
         var current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
         var data = JSON.parse(message.payloadString);
-        if (data["action"] == "PRINT_TICKET") {
+        if (data["action"] == "PRINT_TICKET" || data["ACTION"] == "CALL") {
           if (current_service_id == data["service_id"]) {
-            toast({ action: "Ada antrian baru" });
+            (0, import_jquery4.default)("#current_queue").html(data["current_queue_in_counter_text"]);
             (0, import_jquery4.default)("#total_queue_left").html(data["total_queue_left"]);
             (0, import_jquery4.default)("#total_offline_queues").html(data["total_offline_queues"]);
             (0, import_jquery4.default)("#total_online_queues").html(data["total_online_queues"]);
+          }
+        }
+        if (data["from"] == "server" && data["action"] == "receive") {
+          let counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
+          if (counter_id2 == data["source"]["counter_id"]) {
+            toast(data["message"], data["status"]);
           }
         }
         console.log("onMessageArrived:" + message.payloadString);
