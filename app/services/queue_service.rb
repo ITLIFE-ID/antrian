@@ -13,10 +13,6 @@ class QueueService < ApplicationService
     @counter ||= Counter.find_by_id(counter_id)
   end
 
-  def counter_number_to_text
-    Terbilang.convert(counter&.number).upcase
-  end
-
   def service
     return @service ||= Service.find_by_id(service_id) if transfer
 
@@ -25,6 +21,10 @@ class QueueService < ApplicationService
 
   def company
     @company ||= service.company
+  end
+
+  def counter_number_to_text
+    Terbilang.convert(counter&.number).upcase
   end
 
   def find_queue
@@ -114,7 +114,7 @@ class QueueService < ApplicationService
         play_voice_queue_text: play_voice_queue_text,
         service_id: service_id,
         counter_id: counter_id,
-        total_queue_left: total_queue_left,
+        total_queue_left: TodayQueue.total_queue_left(service).count.to_i,
         total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
         total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
         missed_queues: TodayQueue.missed_queues(service).to_json
@@ -134,6 +134,12 @@ class QueueService < ApplicationService
     date.blank? ? "offline" : "online"
   end
 
+  def selected_day
+    Date::DAYNAMES.rotate(1)
+      .each_with_index.map { |k, v| [k, v + 1] }
+      .find { |x| x.first == selected_date.strftime("%A") }.second
+  end
+
   def is_not_working_day?(workable)
     check = WorkingDay.find_by(day: selected_day, workable: workable)
 
@@ -148,12 +154,6 @@ class QueueService < ApplicationService
     return false if check.blank?
 
     check.start_time < Time.current && check.finish_time > Time.current
-  end
-
-  def selected_day
-    Date::DAYNAMES.rotate(1)
-      .each_with_index.map { |k, v| [k, v + 1] }
-      .find { |x| x.first == selected_date.strftime("%A") }.second
   end
 
   def is_queue_exists?
