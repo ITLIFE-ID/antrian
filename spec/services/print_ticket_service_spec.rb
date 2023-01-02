@@ -21,7 +21,7 @@ RSpec.describe PrintTicketService, type: :service do
   context "is_service_exists?" do
     it "add and error" do
       print_ticket = described_class.execute(service_id: 0)
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_not_found"))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".service_not_found"))).to be true
     end
   end
 
@@ -36,7 +36,7 @@ RSpec.describe PrintTicketService, type: :service do
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
 
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".company_is_closed", value: Date.today.to_s))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".company_is_closed", value: Date.today.to_s))).to be true
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe PrintTicketService, type: :service do
       )
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe PrintTicketService, type: :service do
 
       @service.update(closed: true)
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_temporary_closed", value: Date.today.to_s))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".service_temporary_closed", value: Date.today.to_s))).to be true
     end
   end
 
@@ -74,7 +74,7 @@ RSpec.describe PrintTicketService, type: :service do
       Timecop.travel(t)
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".company_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".company_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true
     end
   end
 
@@ -86,7 +86,7 @@ RSpec.describe PrintTicketService, type: :service do
       WorkingDay.find_by(day: Date.today.wday, workable: @service).really_destroy!
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".service_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".service_is_closed", value: Date::DAYNAMES[Date.today.wday]))).to be true
     end
   end
 
@@ -98,7 +98,7 @@ RSpec.describe PrintTicketService, type: :service do
 
       print_ticket = described_class.execute(**@print_ticket_at_kiosk)
 
-      expect(print_ticket.errors.added?(:print_ticket_service, I18n.t(".quota_is_exceed", max_quota: @service.max_quota))).to be true
+      expect(print_ticket.errors.added?(:base, I18n.t(".quota_is_exceed", max_quota: @service.max_quota))).to be true
     end
   end
 

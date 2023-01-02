@@ -27,14 +27,14 @@ RSpec.describe Callers::TransferService, type: :service do
   context "is_queue_exists?" do
     it "add and error" do
       transfer = described_class.execute(id: 0, service_id: @service2, counter_id: @counter, transfer: 1)
-      expect(transfer.errors.added?(:transfer_service, I18n.t(".queue_not_found"))).to be true
+      expect(transfer.errors.added?(:base, I18n.t(".queue_not_found"))).to be true
     end
   end
 
   context "is_service_exists?" do
     it "add and error" do
       transfer = described_class.execute(id: TodayQueue.first, service_id: 0, counter_id: @counter, transfer: 1)
-      expect(transfer.errors.added?(:transfer_service, I18n.t(".service_not_found"))).to be true
+      expect(transfer.errors.added?(:base, I18n.t(".service_not_found"))).to be true
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe Callers::TransferService, type: :service do
       )
 
       transfer = described_class.execute(id: TodayQueue.first, service_id: @service2, transfer: 1)
-      expect(transfer.errors.added?(:transfer_service, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
+      expect(transfer.errors.added?(:base, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe Callers::TransferService, type: :service do
       )
 
       transfer = described_class.execute(id: TodayQueue.first, service_id: @service2, transfer: 1)
-      expect(transfer.errors.added?(:transfer_service, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
+      expect(transfer.errors.added?(:base, I18n.t(".service_is_closed", value: Date.today.to_s))).to be true
     end
   end
 

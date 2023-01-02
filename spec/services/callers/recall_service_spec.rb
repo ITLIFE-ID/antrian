@@ -23,7 +23,7 @@ RSpec.describe Callers::RecallService, type: :service do
   context "is_counter_exists?" do
     it "add and error" do
       recall_queue = described_class.execute(counter_id: 0)
-      expect(recall_queue.errors.added?(:recall_service, I18n.t(".counter_not_found"))).to be true
+      expect(recall_queue.errors.added?(:base, I18n.t(".counter_not_found"))).to be true
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe Callers::RecallService, type: :service do
 
       recall_queue = described_class.execute(counter_id: @counter)
 
-      expect(recall_queue.errors.added?(:recall_service, I18n.t(".last_queue_not_available_to_recall"))).to be true
+      expect(recall_queue.errors.added?(:base, I18n.t(".last_queue_not_available_to_recall"))).to be true
     end
   end
 
