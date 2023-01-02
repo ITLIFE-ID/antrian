@@ -76,10 +76,11 @@ class TodayQueue < ApplicationRecord
   scope :total_future_online_queue, ->(service) { total_future_queue(service).where(print_ticket_method: "online") }
 
   scope :performance, ->(service) {
-    @today_queue ||= total_queue(service)
-    return 0 if @today_queue.blank?
-    total_duration = @today_queue.sum(&:process_duration) / 60 # seconds to minutes
-    @today_queue.count / total_duration
+    today_queue ||= total_queue(service).select { |x| x.process_duration.present? }
+    return 0 if today_queue.blank?
+
+    total_duration = today_queue.sum(&:process_duration) / 60 # seconds to minutes
+    today_queue.count / total_duration
   }
 
   def letter=(value)

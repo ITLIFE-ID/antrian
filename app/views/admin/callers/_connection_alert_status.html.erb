@@ -1,0 +1,14 @@
+<% if params[:counter_id].present?%>
+  <div class="row">
+    <div class="col-6">
+      <div class="alert alert-danger" role="alert" id="mqtt-alert" data-controller="mqtt">
+        Koneksi ke server gagal, Mohon refresh browser
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="alert alert-danger" role="alert" id="server-alert" data-controller="mqtt">
+        Server tidak siap menerima request
+      </div>
+    </div>
+  </div>
+<%end%>

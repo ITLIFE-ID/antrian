@@ -1,10 +1,8 @@
 class MQTTSubscriber
   def run
     Thread.new do
-      MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT")) do |c|
-        # If you pass a block to the get method, then it will loop
-
-        c.publish(ENV["MQTT_CHANNEL"], {from: "server", action: "SERVER_READY", message: "SERVER SIAP MENERIMA AKSI"}.to_json)
+      mqtt_connect do |c|
+        publish_server_ready
 
         c.get(ENV["MQTT_CHANNEL"]) do |topic, message|
           return nil unless ENV["MQTT_CHANNEL"] == topic
@@ -19,12 +17,13 @@ class MQTTSubscriber
             when "transfer"
               Callers::RecallService.execute(message["data"])
             else
-              "Forbiden action"
+              publish_server_ready(message["data"])
             end
 
             mqtt_callback(response, message)
           elsif message["from"] == "kiosk"
             # PrintTicketService.execute()
+            mqtt_callback(response, message)
           end
         end
       end
@@ -34,15 +33,22 @@ class MQTTSubscriber
   private
 
   def mqtt_callback(result, message)
+    response = {from: "server", action: "receive", to: message["data"], status: "success"}
     content = if result.success?
-      {from: "server", action: "receive", source: message["data"], message: "Berhasil #{message["action"]}", status: "success"}
+      response.merge(message: "Berhasil #{message["action"]}")
     else
-      {from: "server", action: "receive", source: message["data"], message: "TERJADI KESALAHAN", status: "error"}
-
+      response.merge(message: "Terjadi kesalahan sistem", status: "error")
     end
 
-    MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT")) do |c|
-      c.publish(ENV["MQTT_CHANNEL"], content.to_json)
-    end
+    mqtt_connect.publish(ENV["MQTT_CHANNEL"], content.to_json)
+  end
+
+  def publish_server_ready(to = nil)
+    response = {from: "server", action: "server_ready", to: to, message: "Server siap menerima request", status: "success"}
+    mqtt_connect.publish(ENV["MQTT_CHANNEL"], response.to_json)
+  end
+
+  def mqtt_connect
+    MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT"))
   end
 end

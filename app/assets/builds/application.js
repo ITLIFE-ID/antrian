@@ -42836,36 +42836,23 @@
       var counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
       var service_id = (0, import_jquery4.default)("#service").val();
       var current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
-      var client = new import_paho_mqtt.default.Client("localhost", Number(8080), "web_caller_counter_" + counter_id);
+      var message = { from: "caller", action: "check_server", data: { counter_id } };
+      var client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_" + counter_id);
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
       function onConnect() {
         client.subscribe(MQTT_CHANNEL);
         (0, import_jquery4.default)("#mqtt-alert").addClass("alert-success").removeClass("alert-danger").html("Berhasil konek ke server");
+        send_message(import_jquery4.default.extend({}, message));
         (0, import_jquery4.default)("#call").click(function() {
-          const payload = {
-            from: "caller",
-            action: "call",
-            data: {
-              counter_id
-            }
-          };
-          send_message(payload);
+          send_message(import_jquery4.default.extend({}, message, { action: "call" }));
         });
         (0, import_jquery4.default)(".recall").click(function() {
-          const payload = {
-            from: "caller",
-            action: "recall",
-            data: {
-              id: current_queue_id
-            }
-          };
-          send_message(payload);
+          send_message(import_jquery4.default.extend({}, message, { action: "recall", data: { id: current_queue_id } }));
         });
         (0, import_jquery4.default)("#transfer").click(function() {
-          const payload = {
-            from: "caller",
+          let data = {
             action: "transfer",
             data: {
               id: current_queue_id,
@@ -42873,16 +42860,16 @@
               transfer: true
             }
           };
-          send_message(payload);
+          send_message(import_jquery4.default.extend({}, message, data));
         });
       }
       function send_message(payload) {
-        const message = new import_paho_mqtt.default.Message(JSON.stringify(payload));
-        message.destinationName = MQTT_CHANNEL;
-        client.send(message);
+        const message2 = new import_paho_mqtt.default.Message(JSON.stringify(payload));
+        message2.destinationName = MQTT_CHANNEL;
+        client.send(message2);
         toast("Process to " + payload["action"]);
       }
-      function toast(message, icon = "success") {
+      function toast(message2, icon = "success") {
         var Toast2 = import_sweetalert2.default.mixin({
           toast: true,
           position: "top-end",
@@ -42891,18 +42878,18 @@
         });
         Toast2.fire({
           icon,
-          title: message
+          title: message2
         });
       }
       function onConnectionLost(responseObject) {
         if (responseObject.errorCode !== 0) {
-          (0, import_jquery4.default)("#mqtt-alert").addClass("alert-danger").removeClass("alert-success").html("Koneksi gagal ke server, Mohon refresh browser");
+          (0, import_jquery4.default)("#mqtt-alert").addClass("alert-danger").removeClass("alert-success").html("Koneksi ke server gagal, Mohon refresh browser");
           console.log("onConnectionLost:" + responseObject.errorMessage);
         }
       }
-      function onMessageArrived(message) {
+      function onMessageArrived(message2) {
         var current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
-        var data = JSON.parse(message.payloadString);
+        var data = JSON.parse(message2.payloadString);
         if (data["action"] == "PRINT_TICKET" || data["ACTION"] == "CALL") {
           if (current_service_id == data["service_id"]) {
             (0, import_jquery4.default)("#current_queue").html(data["current_queue_in_counter_text"]);
@@ -42911,13 +42898,17 @@
             (0, import_jquery4.default)("#total_online_queues").html(data["total_online_queues"]);
           }
         }
-        if (data["from"] == "server" && data["action"] == "receive") {
-          let counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
-          if (counter_id2 == data["source"]["counter_id"]) {
-            toast(data["message"], data["status"]);
+        if (data["from"] == "server") {
+          if (data["action"] == "receive") {
+            let counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
+            if (counter_id2 == data["to"]["counter_id"]) {
+              toast(data["message"], data["status"]);
+            }
+          } else if (data["action"] == "ready") {
+            (0, import_jquery4.default)("#server-alert").addClass("alert-success").removeClass("alert-danger").html(data["message"]);
           }
         }
-        console.log("onMessageArrived:" + message.payloadString);
+        console.log("onMessageArrived:" + message2.payloadString);
       }
     }
   };

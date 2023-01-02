@@ -10,51 +10,36 @@ export default class extends Controller {
     var counter_id = $("#counter").attr("data-id")    
     var service_id = $("#service").val()
     var current_queue_id = $("#current_queue").attr("data-id")
+    var message = { from : "caller", action: "check_server", data: {counter_id: counter_id}}
 
-    var client = new Paho.Client("localhost", Number(8080), "web_caller_counter_"+counter_id);    
+    var client = new Paho.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_"+counter_id);    
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
 
     // connect the client
     client.connect({onSuccess:onConnect});
-    
-    // called when the client connects
-    function onConnect() {
-      // Once a connection has been made, make a subscription and send a message.
+        
+    function onConnect() {      
       client.subscribe(MQTT_CHANNEL);
+
       $("#mqtt-alert")
       .addClass("alert-success")
       .removeClass("alert-danger")
-      .html("Berhasil konek ke server")      
+      .html("Berhasil konek ke server")    
 
-      $("#call").click(function(){
-        const payload = {
-          from : "caller",
-          action: "call",
-          data: {
-            counter_id: counter_id
-          }
-        }
+      send_message($.extend({}, message))
 
-        send_message(payload)
+      $("#call").click(function(){        
+        send_message($.extend({}, message, {action: "call"}))
       });
       
       $(".recall").click(function(){
-        const payload = {
-          from : "caller",
-          action: "recall",
-          data: {
-            id: current_queue_id            
-          }
-        }
-
-        send_message(payload)
+        send_message($.extend({}, message, {action: "recall", data: {id: current_queue_id}}))        
       });
 
       $("#transfer").click(function(){
-        const payload = {
-          from : "caller",
+        let data = {
           action: "transfer",
           data: {
             id: current_queue_id,
@@ -62,8 +47,7 @@ export default class extends Controller {
             transfer: true
           }
         }
-
-        send_message(payload)
+        send_message($.extend({}, message, data))        
       });
     }
 
@@ -94,7 +78,7 @@ export default class extends Controller {
         $("#mqtt-alert")
         .addClass("alert-danger")
         .removeClass("alert-success")
-        .html("Koneksi gagal ke server, Mohon refresh browser")        
+        .html("Koneksi ke server gagal, Mohon refresh browser")        
         console.log("onConnectionLost:"+responseObject.errorMessage);
       }
     }
@@ -114,12 +98,20 @@ export default class extends Controller {
         }        
       }
 
-      if(data["from"] == "server" && data["action"] == "receive"){
-        let counter_id = $("#counter").attr("data-id")
+      if(data["from"] == "server"){
+        if(data["action"] == "receive"){
+          let counter_id = $("#counter").attr("data-id")
 
-        if(counter_id == data["source"]["counter_id"]){
-          toast(data["message"], data["status"])
-        }        
+          if(counter_id == data["to"]["counter_id"]){
+            toast(data["message"], data["status"])
+          }        
+        }
+        else if(data["action"] == "ready"){
+          $("#server-alert")
+          .addClass("alert-success")
+          .removeClass("alert-danger")
+          .html(data["message"])      
+        }
       }
 
       console.log("onMessageArrived:"+message.payloadString);
