@@ -21,7 +21,7 @@ RSpec.describe Callers::CallService, type: :service do
 
   context "is_counter_exists?" do
     it "add and error" do
-      call_queue = described_class.execute(counter_id: 0)      
+      call_queue = described_class.execute(counter_id: 0)
       expect(call_queue.errors.added?(:base, I18n.t(".counter_not_found"))).to be true
     end
   end

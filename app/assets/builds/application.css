@@ -80669,3 +80669,10 @@ a.text-muted:hover {
 .jsgrid-pager-page {
   padding: 0.2em 0.6em;
 }
+
+.show-calendar.show-ranges {
+  width: 44% !important;
+}
+.show-calendar.single {
+  width: 20% !important;
+}

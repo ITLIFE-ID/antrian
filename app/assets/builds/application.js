@@ -42832,12 +42832,12 @@
   var import_sweetalert2 = __toESM(require_sweetalert2_all());
   var mqtt_controller_default = class extends Controller {
     connect() {
-      var MQTT_CHANNEL = "QUEUE_SYSTEM";
-      var counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
-      var service_id = (0, import_jquery4.default)("#service").val();
-      var current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
-      var message = { from: "caller", action: "check_server", data: { counter_id } };
-      var client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_" + counter_id);
+      const MQTT_CHANNEL = "QUEUE_SYSTEM";
+      const counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
+      const message = { from: "caller", action: "check_server", data: { counter_id } };
+      const current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
+      const date = (0, import_jquery4.default)("#date").val();
+      const client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_" + counter_id);
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
@@ -42845,18 +42845,53 @@
         client.subscribe(MQTT_CHANNEL);
         check_server(message);
         (0, import_jquery4.default)("#call").click(function() {
-          send_message(import_jquery4.default.extend({}, message, { action: "call" }));
+          if ((0, import_jquery4.default)("#current_queue").attr("data-id") != "") {
+            import_sweetalert2.default.fire({
+              title: "Apakah hadir di loket?",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Hadir"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                send_message(import_jquery4.default.extend({}, message, { action: "call", data: { counter_id, attend: true } }));
+              }
+              send_message(import_jquery4.default.extend({}, message, { action: "call", data: { counter_id, attend: false } }));
+            });
+          } else {
+            send_message(import_jquery4.default.extend({}, message, { action: "call", data: { counter_id, attend: null } }));
+          }
         });
         (0, import_jquery4.default)(".recall").click(function() {
-          send_message(import_jquery4.default.extend({}, message, { action: "recall", data: { id: current_queue_id } }));
+          const current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
+          send_message(import_jquery4.default.extend({}, message, { action: "recall", data: { id: current_queue_id, counter_id } }));
         });
         (0, import_jquery4.default)("#transfer").click(function() {
+          const service_id = (0, import_jquery4.default)("#service").val();
+          const current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
           let data = {
             action: "transfer",
             data: {
               id: current_queue_id,
               service_id,
-              transfer: true
+              transfer: true,
+              counter_id
+            }
+          };
+          send_message(import_jquery4.default.extend({}, message, data));
+        });
+        (0, import_jquery4.default)("#print_ticket").click(function() {
+          const service_id = (0, import_jquery4.default)("#service").val();
+          const counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
+          if (counter_id2 == "")
+            return alert("Pilih counter");
+          let data = {
+            action: "print_ticket",
+            data: {
+              service_id,
+              date,
+              print_ticket_location: "counter"
             }
           };
           send_message(import_jquery4.default.extend({}, message, data));
@@ -42896,23 +42931,26 @@
         }
       }
       function onMessageArrived(message2) {
-        var current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
-        var data = JSON.parse(message2.payloadString);
-        if (data["action"] == "PRINT_TICKET" || data["ACTION"] == "CALL") {
-          if (current_service_id == data["service_id"]) {
+        const data = JSON.parse(message2.payloadString);
+        const action = data["action"];
+        const from = data["from"];
+        if (current_service_id == data["service_id"]) {
+          if (action == "CALL") {
             (0, import_jquery4.default)("#current_queue").html(data["current_queue_in_counter_text"]);
+          } else if (action == "PRINT_TICKET") {
             (0, import_jquery4.default)("#total_queue_left").html(data["total_queue_left"]);
             (0, import_jquery4.default)("#total_offline_queues").html(data["total_offline_queues"]);
             (0, import_jquery4.default)("#total_online_queues").html(data["total_online_queues"]);
+            (0, import_jquery4.default)("#missed_queues").html(data["missed_queues"]);
           }
         }
-        if (data["from"] == "server") {
-          if (data["action"] == "receive") {
-            let counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
-            if (counter_id2 == data["to"]["counter_id"]) {
+        if (from == "server") {
+          let to_counter_id = data["to"]["counter_id"];
+          if (action == "receive") {
+            if (counter_id == to_counter_id) {
               toast(data["message"], data["status"]);
             }
-          } else if (data["action"] == "ready") {
+          } else if (action == "ready") {
             change_status("#server-alert", data["message"]);
           }
         }

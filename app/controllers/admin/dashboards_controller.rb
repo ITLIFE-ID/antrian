@@ -18,8 +18,8 @@ module Admin
       ]
 
       @summary = [
-        {name: t("past_queue_performance"), y: "#{BackupQueue.performance(start_date, end_date)} antrian / menit", color: "bg-success"},
-        {name: t("total_queues"), y: BackupQueue.total_queue(start_date, end_date).count, color: "bg-primary"}
+        {name: t("past_queue_performance"), y: "#{BackupQueue.performance(start_date, end_date, @current_company.services)} antrian / menit", color: "bg-success"},
+        {name: t("total_queues"), y: BackupQueue.total_queue(start_date, end_date, @current_company.services).count, color: "bg-primary"}
       ] << @online_vs_offline
 
       @pie_chart = [{element: :online_vs_offline, data: @online_vs_offline}]

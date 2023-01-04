@@ -66,7 +66,7 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-8">
+    <div class="col-4">
       <select id="service">
         <%@services.each do |s|%>
           <option value="<%=s.id%>"><%=s.name%></option>
@@ -74,6 +74,19 @@
       </select>
     </div>
     <div class="col-4">
-      <button type="submit" class="btn btn-danger btn-lg px-5 font-weight-bolder w-100" id="transfer">Pindah</button>
+      <div class="form-group">
+        <div class="input-group" data-controller="daterangepicker">
+          <input type="text" class="form-control py-4" placeholder="dd/mm/yyyy" value="<%=Date.today.to_s%>" id="date">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-danger btn-lg font-weight-bolder w-100" id="transfer">Pindah</button>
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-success btn-lg font-weight-bolder w-100" id="print_ticket">Cetak</button>
     </div>
   </div>

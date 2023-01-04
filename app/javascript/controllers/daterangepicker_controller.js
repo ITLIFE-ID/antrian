@@ -4,7 +4,7 @@ import moment from "daterangepicker/moment.min"
 import "daterangepicker"
 
 export default class extends Controller {
-  connect() {       
+  connect() {         
     $('#daterangepicker').daterangepicker(
       {
         ranges   : {

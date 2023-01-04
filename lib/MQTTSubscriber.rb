@@ -34,7 +34,7 @@ class MQTTSubscriber
     content = if result.success?
       response.merge(message: "Berhasil #{message["action"]}")
     else
-      response.merge(message: "Terjadi kesalahan sistem", status: "error")
+      response.merge(message: result.error_messages, status: "error")
     end
 
     Rails.application.config.mqtt_connect.publish(ENV["MQTT_CHANNEL"], content.to_json)

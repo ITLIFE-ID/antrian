@@ -1,30 +1,38 @@
 class QueueService < ApplicationService
   attr_accessor :id, :counter_id, :date, :print_ticket_location, :service_id, :attend, :transfer
 
-  def user_attend_to_counter
-    attend || false
+  def company
+    @company ||= service.company
   end
 
-  def find_queue_by_id
-    @find_queue_by_id ||= TodayQueue.find_by_id(id)
+  def service
+    @service ||= if transfer
+      Service.find_by_id(service_id)
+    else
+      Service.find_by_id(service_id) || counter&.service
+    end
   end
 
   def counter
     @counter ||= Counter.find_by_id(counter_id)
   end
 
-  def service
-    return @service ||= Service.find_by_id(service_id) if transfer
-
-    @service ||= Service.find_by_id(service_id) || counter&.service
+  def find_queue_by_id
+    @find_queue_by_id ||= TodayQueue.find_by_id(id)
   end
 
-  def company
-    @company ||= service.company
+  def user_attend_to_counter
+    attend || false
+  end
+
+  def selected_date
+    Date.parse(date)
+  rescue
+    Date.today
   end
 
   def counter_number_to_text
-    Terbilang.convert(counter&.number).upcase
+    Terbilang.convert(counter&.number)&.upcase
   end
 
   def find_queue
@@ -40,11 +48,7 @@ class QueueService < ApplicationService
   end
 
   def last_queue_in_counter
-    @last_queue_in_counter ||= queue_in_counter.order(id: :desc).limit(1)
-  end
-
-  def last_queue_in_counter_available_to_recall
-    @last_queue_in_counter_available_to_recall ||= last_queue_in_counter.where(attend: false)
+    @last_queue_in_counter ||= TodayQueue.current_queue(counter)
   end
 
   def last_queue_in_service
@@ -90,13 +94,7 @@ class QueueService < ApplicationService
   end
 
   def current_queue_in_counter_text
-    @current_queue_in_counter_text ||= ApplicationHelper.queue_number_formater(letter, number)
-  end
-
-  def selected_date
-    Date.parse(date)
-  rescue
-    Date.today
+    @current_queue_in_counter_text ||= queue_number_formater(letter, number)
   end
 
   def is_date_today?
@@ -110,15 +108,16 @@ class QueueService < ApplicationService
       result = {
         action: action,
         queue_number_to_print: queue_number_to_print,
-        current_queue_in_counter_text: current_queue_in_counter_text,
         play_voice_queue_text: play_voice_queue_text,
         service_id: service_id,
         counter_id: counter_id,
         total_queue_left: TodayQueue.total_queue_left(service).count.to_i,
         total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
         total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
-        missed_queues: TodayQueue.missed_queues(service).to_json
+        missed_queues: missed_queues
       }
+
+      result = result.merge!(current_queue_in_counter_text: current_queue_in_counter_text) if counter_id.present?
 
       Rails.application.config.mqtt_connect.publish(ENV["MQTT_CHANNEL"], result.to_json)
     rescue => e
@@ -132,6 +131,25 @@ class QueueService < ApplicationService
 
   def print_ticket_method
     date.blank? ? "offline" : "online"
+  end
+
+  def missed_queues
+    rows = []
+    TodayQueue.missed_queues(service).each do |x|
+      queue_number = queue_number_formater(x.letter, x.number)
+      badge = (x.print_ticket_method == "online") ? "bg-danger" : "bg-warning"
+      priority = x.priority ? "Di utamakan" : "Normal"
+
+      rows << "<tr>
+        <td>#{queue_number}<span class='badge #{badge}'>#{queue_number}</span></td>
+        <td>#{priority}</td>
+      <td>
+        <button type='submit' class='btn btn-info font-weight-bolder w-100 recall' data-id='#{x.id}'>Panggil Ulang</button>
+      </td>
+    </tr>"
+    end
+
+    rows
   end
 
   def selected_day
@@ -161,7 +179,7 @@ class QueueService < ApplicationService
   end
 
   def is_latest_queue_in_counter_available_to_recall?
-    raise I18n.t(".last_queue_not_available_to_recall") if last_queue_in_counter_available_to_recall.blank?
+    raise I18n.t(".last_queue_not_available_to_recall") if find_queue_by_id.blank?
   end
 
   def is_counter_exists?

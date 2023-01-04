@@ -12,6 +12,7 @@ module Admin
     before_action :set_paper_trail_whodunnit
     before_action :set_current_company
     before_action :set_administrate_thread
+    helper ApplicationHelper
 
     def create
       resource = scoped_resource.new(resource_params)

@@ -4,6 +4,7 @@ class ApplicationService
   extend ActiveModel::Naming
   include ActiveModel::AttributeAssignment
   include ActiveModel::Validations
+  include ApplicationHelper
 
   attr_accessor :errors
 
@@ -31,8 +32,8 @@ class ApplicationService
   end
 
   def return_errors(e)
-    # Sentry.capture_message(e.message)
-    # Rails.logger.error(e.message)
+    Sentry.capture_message(e.message)
+    Rails.logger.error(e.message)
     errors.add(:base, e.message)
   end
 end

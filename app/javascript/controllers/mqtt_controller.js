@@ -6,13 +6,13 @@ import Swal  from "sweetalert2"
 export default class extends Controller {
   connect() {    
     // Create a client instance
-    var MQTT_CHANNEL = "QUEUE_SYSTEM"
-    var counter_id = $("#counter").attr("data-id")    
-    var service_id = $("#service").val()
-    var current_queue_id = $("#current_queue").attr("data-id")
-    var message = { from : "caller", action: "check_server", data: {counter_id: counter_id}}
+    const MQTT_CHANNEL = "QUEUE_SYSTEM"
+    const counter_id = $("#counter").attr("data-id")        
+    const message = { from : "caller", action: "check_server", data: {counter_id: counter_id}}
+    const current_service_id = parseInt($("#counter").attr("data-service-id"))
+    const date = $("#date").val()
 
-    var client = new Paho.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_"+counter_id);    
+    const client = new Paho.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_"+counter_id);    
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
@@ -25,21 +25,62 @@ export default class extends Controller {
       
       check_server(message)
 
-      $("#call").click(function(){        
-        send_message($.extend({}, message, {action: "call"}))
+      $("#call").click(function(){  
+        if($('#current_queue').attr("data-id") != ""){          
+          Swal.fire({
+            title: 'Apakah hadir di loket?',          
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hadir'
+          }).then((result) => {
+            if (result.isConfirmed) { 
+              send_message($.extend({}, message, {action: "call", data: {counter_id: counter_id, attend: true}}))
+            }
+            send_message($.extend({}, message, {action: "call", data: {counter_id: counter_id, attend: false}}))
+          })      
+        }
+        else{
+          send_message($.extend({}, message, {action: "call", data: {counter_id: counter_id, attend: null}}))
+        }        
       });
       
       $(".recall").click(function(){
-        send_message($.extend({}, message, {action: "recall", data: {id: current_queue_id}}))        
+        const current_queue_id = $("#current_queue").attr("data-id")
+        send_message($.extend({}, message, {action: "recall", data: {id: current_queue_id, counter_id: counter_id}}))        
       });
 
       $("#transfer").click(function(){
+        const service_id = $("#service").val()
+        const current_queue_id = $("#current_queue").attr("data-id")
+
         let data = {
           action: "transfer",
           data: {
             id: current_queue_id,
             service_id: service_id,            
-            transfer: true
+            transfer: true,
+            counter_id: counter_id
+          }
+        }
+
+        send_message($.extend({}, message, data))        
+      });
+
+      $("#print_ticket").click(function(){
+        const service_id = $("#service").val()
+        const counter_id = $("#counter").attr("data-id") 
+
+        if(counter_id == "")
+          return alert("Pilih counter")
+          
+        let data = {
+          action: "print_ticket",
+          data: {            
+            service_id: service_id,            
+            date: date,
+            print_ticket_location: "counter"
           }
         }
 
@@ -92,29 +133,32 @@ export default class extends Controller {
     }
 
     // called when a message arrives
-    function onMessageArrived(message) {
-      var current_service_id = parseInt($("#counter").attr("data-service-id"))
-
-      var data = JSON.parse(message.payloadString)   
-
-      if(data["action"] == "PRINT_TICKET" || data["ACTION"] == "CALL"){                 
-        if(current_service_id == data["service_id"]){                     
+    function onMessageArrived(message) {      
+      const data = JSON.parse(message.payloadString)
+      const action = data["action"]
+      const from = data["from"]
+                     
+      if(current_service_id == data["service_id"]){                            
+        if(action == "CALL"){
           $("#current_queue").html(data["current_queue_in_counter_text"])
+        }
+        else if(action == "PRINT_TICKET"){  
           $("#total_queue_left").html(data["total_queue_left"])  
           $("#total_offline_queues").html(data["total_offline_queues"])  
           $("#total_online_queues").html(data["total_online_queues"])  
+          $("#missed_queues").html(data["missed_queues"])
         }        
       }
 
-      if(data["from"] == "server"){
-        if(data["action"] == "receive"){
-          let counter_id = $("#counter").attr("data-id")
+      if(from == "server"){                
+        let to_counter_id =  data["to"]["counter_id"]
 
-          if(counter_id == data["to"]["counter_id"]){
+        if(action == "receive"){          
+          if(counter_id == to_counter_id){
             toast(data["message"], data["status"])
           }        
         }
-        else if(data["action"] == "ready"){
+        else if(action == "ready"){
           change_status("#server-alert", data["message"]) 
         }
       }

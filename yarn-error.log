@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/nw00039/.nvm/versions/node/v16.15.0/bin/node /Users/nw00039/.nvm/versions/node/v16.15.0/bin/yarn add jquery.dataTables
+  /Users/nw00039/.nvm/versions/node/v16.15.0/bin/node /Users/nw00039/.nvm/versions/node/v16.15.0/bin/yarn add Inputmask
 
 PATH: 
-  /Users/nw00039/.bun/bin:/Users/nw00039/.bun/bin:/Users/nw00039/.rbenv/shims:/Users/nw00039/.rbenv/bin:/Users/nw00039/.rbenv/bin:/opt/homebrew/bin:/opt/homebrew/opt/openjdk/bin:/Users/nw00039/.pyenv/shims:/Users/nw00039/.pyenv/bin:/Users/nw00039/.nvm/versions/node/v16.15.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/nw00039/.bun/bin:/Users/nw00039/.rbenv/shims:/Users/nw00039/.rbenv/bin:/opt/homebrew/bin:/Users/nw00039/.sdkman/candidates/java/current/bin:/opt/homebrew/opt/openjdk/bin:/Users/nw00039/.pyenv/shims:/Users/nw00039/.pyenv/bin:/Users/nw00039/.nvm/versions/node/v16.15.0/bin:/opt/homebrew/sbin:/Users/nw00039/.cargo/bin:/Users/nw00039/flutter/bin:/Users/nw00039/Downloads/flutter/bin:/Users/nw00039/Documents/flutter/bin:/usr/local/go/bin:/Users/nw00039/Documents/loved/antrian/flutter/bin:/Users/nw00039/Downloads/flutter/bin:/Users/nw00039/Documents/flutter/bin
+  /Users/nw00039/.bun/bin:/Users/nw00039/.bun/bin:/Users/nw00039/.rbenv/shims:/Users/nw00039/.rbenv/bin:/Users/nw00039/.rbenv/bin:/opt/homebrew/bin:/Users/nw00039/.sdkman/candidates/java/current/bin:/opt/homebrew/opt/openjdk/bin:/Users/nw00039/.pyenv/shims:/Users/nw00039/.pyenv/bin:/Users/nw00039/.nvm/versions/node/v16.15.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/nw00039/.cargo/bin:/usr/local/go/bin:/Users/nw00039/flutter/bin:/Users/nw00039/Downloads/flutter/bin:/Users/nw00039/Documents/flutter/bin
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/jquery.dataTables: Not found
+  Error: https://registry.yarnpkg.com/Inputmask: Not found
       at Request.params.callback [as _callback] (/Users/nw00039/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:66145:18)
       at Request.self.callback (/Users/nw00039/.nvm/versions/node/v16.15.0/lib/node_modules/yarn/lib/cli.js:140890:22)
       at Request.emit (node:events:527:28)
@@ -40,10 +40,12 @@ npm manifest:
       "bootstrap": "5.2.3",
       "bootstrap-icons": "^1.10.2",
       "bootstrap-switch": "^3.4.0",
+      "datepicker": "^0.0.0",
       "daterangepicker": "^3.1.0",
       "esbuild": "^0.16.7",
       "highcharts": "^10.3.2",
       "jquery": "^3.6.2",
+      "jquery-inputmask": "^1.0.1",
       "jsgrid": "^1.5.3",
       "moment": "^2.29.4",
       "paho-mqtt": "^1.1.0",
@@ -875,6 +877,11 @@ Lockfile:
     dependencies:
       jquery ">=1.7"
   
+  datepicker@^0.0.0:
+    version "0.0.0"
+    resolved "https://registry.yarnpkg.com/datepicker/-/datepicker-0.0.0.tgz#9c2001fbcb1938abc180d42fc082b62d3a061369"
+    integrity sha512-fLU1tFECIBtQOWOyPVtDZU7y9Cha89ay8WfoZRVhiifPW5AHvxfLQHWnwwxtUi2TVYYI5GrpfI1C2P5Ei0bDdw==
+  
   daterangepicker@^3.1.0:
     version "3.1.0"
     resolved "https://registry.yarnpkg.com/daterangepicker/-/daterangepicker-3.1.0.tgz#718d606614331df3e774c9aba82ccd8838d45da1"
@@ -1329,6 +1336,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
     integrity sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==
+  
+  jquery-inputmask@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/jquery-inputmask/-/jquery-inputmask-1.0.1.tgz#b4e208b32db0a86b284b3aa090386692b79dd516"
+    integrity sha512-fZrn5mf1efC/bIKmVPZpXfKViwfnSV+gVpjfVgpHt5SnTzalwiEMUlgFHo4H8xuYU0oR9RgCl6n/YdT9T/Q1ww==
   
   jquery-knob-chif@^1.2.13:
     version "1.2.13"

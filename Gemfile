@@ -139,3 +139,7 @@ gem "htmlbeautifier", "~> 1.4"
 gem "breadcrumbs_on_rails", "~> 4.1"
 gem "administrate-field-active_storage", "~> 0.4.1"
 gem "marcel", "~> 1.0"
+
+gem "wicked_pdf", "~> 2.6"
+
+gem "wkhtmltopdf-binary", "~> 0.12.6"
