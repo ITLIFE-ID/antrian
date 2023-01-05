@@ -48175,7 +48175,7 @@
     connect() {
       const MQTT_CHANNEL = "QUEUE_SYSTEM";
       const counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
-      const current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
+      const service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
       const client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_" + counter_id);
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
@@ -48224,37 +48224,31 @@
       }
       function onMessageArrived(message) {
         const data = JSON.parse(message.payloadString);
-        if (current_service_id == data.service_id) {
-          if (data.action == "call") {
-            (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
-          } else if (data.call == "print_ticket") {
+        if (data.from == "server") {
+          if (data.action == "print_ticket" && service_id == data.service_id) {
             (0, import_jquery4.default)("#total_queue_left").html(data.total_queue_left);
             (0, import_jquery4.default)("#total_offline_queues").html(data.total_offline_queues);
             (0, import_jquery4.default)("#total_online_queues").html(data.total_online_queues);
             (0, import_jquery4.default)("#missed_queues").html(data.missed_queues);
-          }
-        }
-        if (data.from == "server") {
-          if (data.action == "receive") {
-            if (counter_id == data.to.counter_id) {
-              toast(data.message, data.status);
-            }
-          } else if (data.action == "ready") {
+          } else if (data.action == "ready" && counter_id == data.counter_id) {
             change_status("#server-alert", data.message);
+          } else if (data.action == "receive" && counter_id == data.counter_id) {
+            (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
+            toast(data.message, data.status);
           }
         }
         console.log("onMessageArrived:" + message.payloadString);
       }
       function send_message(action, payload) {
-        const service_id = (0, import_jquery4.default)("#service").val();
-        const current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
+        const service_id2 = (0, import_jquery4.default)("#service").val();
+        const queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
         const counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
         const data = {
           from: "caller",
           action,
-          id: current_queue_id,
+          id: queue_id,
           counter_id: counter_id2,
-          service_id
+          service_id: service_id2
         };
         const message = new import_paho_mqtt.default.Message(JSON.stringify(import_jquery4.default.extend({}, data, payload)));
         message.destinationName = MQTT_CHANNEL;

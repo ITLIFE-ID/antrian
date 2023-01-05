@@ -8,7 +8,7 @@ export default class extends Controller {
     // Create a client instance
     const MQTT_CHANNEL = "QUEUE_SYSTEM"
     const counter_id = $("#counter").attr("data-id")            
-    const current_service_id = parseInt($("#counter").attr("data-service-id"))    
+    const service_id = parseInt($("#counter").attr("data-service-id"))    
 
     const client = new Paho.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_"+counter_id);    
     // set callback handlers
@@ -71,27 +71,19 @@ export default class extends Controller {
     // called when a message arrives
     function onMessageArrived(message) {      
       const data = JSON.parse(message.payloadString)
-      
-      if(current_service_id == data.service_id){                            
-        if(data.action == "call"){
-          $("#current_queue").html(data.current_queue_in_counter_text)
-        }
-        else if(data.call == "print_ticket"){  
+      if(data.from == "server"){                                
+        if(data.action == "print_ticket" && service_id == data.service_id){            
           $("#total_queue_left").html(data.total_queue_left)  
           $("#total_offline_queues").html(data.total_offline_queues)  
           $("#total_online_queues").html(data.total_online_queues)  
-          $("#missed_queues").html(data.missed_queues)
+          $("#missed_queues").html(data.missed_queues)          
         }
-      }
-
-      if(data.from == "server"){
-        if(data.action == "receive"){          
-          if(counter_id == data.to.counter_id){
-            toast(data.message, data.status)
-          }        
+        else if(data.action == "ready" && counter_id == data.counter_id){
+          change_status("#server-alert", data.message)           
         }
-        else if(data.action == "ready"){
-          change_status("#server-alert", data.message) 
+        else if(data.action == "receive" && counter_id == data.counter_id){          
+          $("#current_queue").html(data.current_queue_in_counter_text)
+          toast(data.message, data.status)          
         }
       }
 
@@ -100,13 +92,13 @@ export default class extends Controller {
 
     function send_message(action, payload){
       const service_id = $("#service").val()
-      const current_queue_id = $("#current_queue").attr("data-id")
+      const queue_id = $("#current_queue").attr("data-id")
       const counter_id = $("#counter").attr("data-id") 
       
       const data = {
         from: "caller",
         action: action,
-        id: current_queue_id,
+        id: queue_id,
         counter_id: counter_id,
         service_id: service_id             
       }
