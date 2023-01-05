@@ -5,16 +5,16 @@ class MQTTSubscriber
         return nil unless ENV["MQTT_CHANNEL"] == topic
         message = OpenStruct.new(JSON.parse(message))
 
-        publish_server_ready(message.data) if message.from == "caller" && message.action == "check_server"
-
         if message.from == "caller"
           response = case message.action
           when "call"
-            Callers::CallService.execute(message.data)
+            Callers::CallService.execute(message)
           when "recall"
-            Callers::RecallService.execute(message.data)
+            Callers::RecallService.execute(message)
           when "transfer"
-            Callers::RecallService.execute(message.data)
+            Callers::RecallService.execute(message)
+          when "check_server"
+            publish_server_ready(message.counter_id)
           end
 
           mqtt_callback(response, message)

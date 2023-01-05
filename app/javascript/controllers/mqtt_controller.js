@@ -74,7 +74,7 @@ export default class extends Controller {
       
       if(current_service_id == data.service_id){                            
         if(data.action == "call"){
-          $("#current_queue").html(data["current_queue_in_counter_text"])
+          $("#current_queue").html(data.current_queue_in_counter_text)
         }
         else if(data.call == "print_ticket"){  
           $("#total_queue_left").html(data.total_queue_left)  

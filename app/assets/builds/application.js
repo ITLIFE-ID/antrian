@@ -48226,7 +48226,7 @@
         const data = JSON.parse(message.payloadString);
         if (current_service_id == data.service_id) {
           if (data.action == "call") {
-            (0, import_jquery4.default)("#current_queue").html(data["current_queue_in_counter_text"]);
+            (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
           } else if (data.call == "print_ticket") {
             (0, import_jquery4.default)("#total_queue_left").html(data.total_queue_left);
             (0, import_jquery4.default)("#total_offline_queues").html(data.total_offline_queues);
