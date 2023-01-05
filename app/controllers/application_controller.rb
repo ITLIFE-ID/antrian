@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def permitted_params
-    params.permit(:id, :print_ticket_location, :date, :service_id, :counter_id, :attend, :transfer)
+    params.permit(:id, :print_ticket_location, :date, :service_id, :counter_id, :attend, :transfer, :uuid)
   end
 end

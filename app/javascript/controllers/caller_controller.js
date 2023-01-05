@@ -1,9 +1,17 @@
 import { Controller } from "@hotwired/stimulus"
 import $ from 'jquery';
 import "selectize"
-
+import Pikaday from "pikaday"
 export default class extends Controller {
-  connect() {    
+  connect() {   
+  var picker = new Pikaday(
+    {
+        field: document.getElementById('date'),
+        firstDay: 1,
+        minDate: new Date(),
+        maxDate: new Date(2020, 12, 31),
+        yearRange: [2000,2020]
+    });
   $("#service").selectize()    
   $('#counter').selectize({     
       onChange: function(value, isOnInitialize) {                            
