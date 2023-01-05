@@ -48176,7 +48176,7 @@
       const MQTT_CHANNEL = "QUEUE_SYSTEM";
       const counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
       const service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
-      const client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_" + counter_id);
+      const client = new import_paho_mqtt.default.Client("localhost", Number(8080), "web_caller_from_counter_" + counter_id);
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });

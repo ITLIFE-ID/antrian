@@ -1,12 +1,12 @@
 <% if params[:counter_id].to_i > 0%>
-  <div class="row">
+  <div class="row" data-controller="mqtt">
     <div class="col-6">
-      <div class="alert alert-danger" role="alert" id="mqtt-alert" data-controller="mqtt">
+      <div class="alert alert-danger" role="alert" id="mqtt-alert">
         Koneksi ke server gagal, Mohon refresh browser
       </div>
     </div>
     <div class="col-6">
-      <div class="alert alert-danger" role="alert" id="server-alert" data-controller="mqtt">
+      <div class="alert alert-danger" role="alert" id="server-alert">
         Server tidak siap menerima request
       </div>
     </div>

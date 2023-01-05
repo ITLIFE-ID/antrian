@@ -10,7 +10,7 @@ export default class extends Controller {
     const counter_id = $("#counter").attr("data-id")            
     const service_id = parseInt($("#counter").attr("data-service-id"))    
 
-    const client = new Paho.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_"+counter_id);    
+    const client = new Paho.Client("localhost", Number(8080), "web_caller_from_counter_"+counter_id);    
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
