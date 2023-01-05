@@ -12699,12 +12699,12 @@
     "node_modules/daterangepicker/daterangepicker.js"(exports, module) {
       (function(root, factory) {
         if (typeof define === "function" && define.amd) {
-          define(["moment", "jquery"], function(moment3, jquery) {
+          define(["moment", "jquery"], function(moment4, jquery) {
             if (!jquery.fn)
               jquery.fn = {};
-            if (typeof moment3 !== "function" && moment3.hasOwnProperty("default"))
-              moment3 = moment3["default"];
-            return factory(moment3, jquery);
+            if (typeof moment4 !== "function" && moment4.hasOwnProperty("default"))
+              moment4 = moment4["default"];
+            return factory(moment4, jquery);
           });
         } else if (typeof module === "object" && module.exports) {
           var jQuery = typeof window != "undefined" ? window.jQuery : void 0;
@@ -12713,25 +12713,25 @@
             if (!jQuery.fn)
               jQuery.fn = {};
           }
-          var moment2 = typeof window != "undefined" && typeof window.moment != "undefined" ? window.moment : require_moment();
-          module.exports = factory(moment2, jQuery);
+          var moment3 = typeof window != "undefined" && typeof window.moment != "undefined" ? window.moment : require_moment();
+          module.exports = factory(moment3, jQuery);
         } else {
           root.daterangepicker = factory(root.moment, root.jQuery);
         }
-      })(exports, function(moment2, $7) {
+      })(exports, function(moment3, $7) {
         var DateRangePicker = function(element, options, cb) {
           this.parentEl = "body";
           this.element = $7(element);
-          this.startDate = moment2().startOf("day");
-          this.endDate = moment2().endOf("day");
+          this.startDate = moment3().startOf("day");
+          this.endDate = moment3().endOf("day");
           this.minDate = false;
           this.maxDate = false;
           this.maxSpan = false;
           this.autoApply = false;
           this.singleDatePicker = false;
           this.showDropdowns = false;
-          this.minYear = moment2().subtract(100, "year").format("YYYY");
-          this.maxYear = moment2().add(100, "year").format("YYYY");
+          this.minYear = moment3().subtract(100, "year").format("YYYY");
+          this.maxYear = moment3().add(100, "year").format("YYYY");
           this.showWeekNumbers = false;
           this.showISOWeekNumbers = false;
           this.showCustomRangeLabel = true;
@@ -12754,15 +12754,15 @@
           this.cancelButtonClasses = "btn-default";
           this.locale = {
             direction: "ltr",
-            format: moment2.localeData().longDateFormat("L"),
+            format: moment3.localeData().longDateFormat("L"),
             separator: " - ",
             applyLabel: "Apply",
             cancelLabel: "Cancel",
             weekLabel: "W",
             customRangeLabel: "Custom Range",
-            daysOfWeek: moment2.weekdaysMin(),
-            monthNames: moment2.monthsShort(),
-            firstDay: moment2.localeData().firstDayOfWeek()
+            daysOfWeek: moment3.weekdaysMin(),
+            monthNames: moment3.monthsShort(),
+            firstDay: moment3.localeData().firstDayOfWeek()
           };
           this.callback = function() {
           };
@@ -12804,21 +12804,21 @@
           }
           this.container.addClass(this.locale.direction);
           if (typeof options.startDate === "string")
-            this.startDate = moment2(options.startDate, this.locale.format);
+            this.startDate = moment3(options.startDate, this.locale.format);
           if (typeof options.endDate === "string")
-            this.endDate = moment2(options.endDate, this.locale.format);
+            this.endDate = moment3(options.endDate, this.locale.format);
           if (typeof options.minDate === "string")
-            this.minDate = moment2(options.minDate, this.locale.format);
+            this.minDate = moment3(options.minDate, this.locale.format);
           if (typeof options.maxDate === "string")
-            this.maxDate = moment2(options.maxDate, this.locale.format);
+            this.maxDate = moment3(options.maxDate, this.locale.format);
           if (typeof options.startDate === "object")
-            this.startDate = moment2(options.startDate);
+            this.startDate = moment3(options.startDate);
           if (typeof options.endDate === "object")
-            this.endDate = moment2(options.endDate);
+            this.endDate = moment3(options.endDate);
           if (typeof options.minDate === "object")
-            this.minDate = moment2(options.minDate);
+            this.minDate = moment3(options.minDate);
           if (typeof options.maxDate === "object")
-            this.maxDate = moment2(options.maxDate);
+            this.maxDate = moment3(options.maxDate);
           if (this.minDate && this.startDate.isBefore(this.minDate))
             this.startDate = this.minDate.clone();
           if (this.maxDate && this.endDate.isAfter(this.maxDate))
@@ -12893,11 +12893,11 @@
               var val = $7(this.element).val(), split = val.split(this.locale.separator);
               start2 = end = null;
               if (split.length == 2) {
-                start2 = moment2(split[0], this.locale.format);
-                end = moment2(split[1], this.locale.format);
+                start2 = moment3(split[0], this.locale.format);
+                end = moment3(split[1], this.locale.format);
               } else if (this.singleDatePicker && val !== "") {
-                start2 = moment2(val, this.locale.format);
-                end = moment2(val, this.locale.format);
+                start2 = moment3(val, this.locale.format);
+                end = moment3(val, this.locale.format);
               }
               if (start2 !== null && end !== null) {
                 this.setStartDate(start2);
@@ -12908,13 +12908,13 @@
           if (typeof options.ranges === "object") {
             for (range in options.ranges) {
               if (typeof options.ranges[range][0] === "string")
-                start2 = moment2(options.ranges[range][0], this.locale.format);
+                start2 = moment3(options.ranges[range][0], this.locale.format);
               else
-                start2 = moment2(options.ranges[range][0]);
+                start2 = moment3(options.ranges[range][0]);
               if (typeof options.ranges[range][1] === "string")
-                end = moment2(options.ranges[range][1], this.locale.format);
+                end = moment3(options.ranges[range][1], this.locale.format);
               else
-                end = moment2(options.ranges[range][1]);
+                end = moment3(options.ranges[range][1]);
               if (this.minDate && start2.isBefore(this.minDate))
                 start2 = this.minDate.clone();
               var maxDate = this.maxDate;
@@ -12994,9 +12994,9 @@
           constructor: DateRangePicker,
           setStartDate: function(startDate) {
             if (typeof startDate === "string")
-              this.startDate = moment2(startDate, this.locale.format);
+              this.startDate = moment3(startDate, this.locale.format);
             if (typeof startDate === "object")
-              this.startDate = moment2(startDate);
+              this.startDate = moment3(startDate);
             if (!this.timePicker)
               this.startDate = this.startDate.startOf("day");
             if (this.timePicker && this.timePickerIncrement)
@@ -13017,9 +13017,9 @@
           },
           setEndDate: function(endDate) {
             if (typeof endDate === "string")
-              this.endDate = moment2(endDate, this.locale.format);
+              this.endDate = moment3(endDate, this.locale.format);
             if (typeof endDate === "object")
-              this.endDate = moment2(endDate);
+              this.endDate = moment3(endDate);
             if (!this.timePicker)
               this.endDate = this.endDate.endOf("day");
             if (this.timePicker && this.timePickerIncrement)
@@ -13129,12 +13129,12 @@
             var hour = calendar.month.hour();
             var minute = calendar.month.minute();
             var second = calendar.month.second();
-            var daysInMonth = moment2([year, month]).daysInMonth();
-            var firstDay = moment2([year, month, 1]);
-            var lastDay = moment2([year, month, daysInMonth]);
-            var lastMonth = moment2(firstDay).subtract(1, "month").month();
-            var lastYear = moment2(firstDay).subtract(1, "month").year();
-            var daysInLastMonth = moment2([lastYear, lastMonth]).daysInMonth();
+            var daysInMonth = moment3([year, month]).daysInMonth();
+            var firstDay = moment3([year, month, 1]);
+            var lastDay = moment3([year, month, daysInMonth]);
+            var lastMonth = moment3(firstDay).subtract(1, "month").month();
+            var lastYear = moment3(firstDay).subtract(1, "month").year();
+            var daysInLastMonth = moment3([lastYear, lastMonth]).daysInMonth();
             var dayOfWeek = firstDay.day();
             var calendar = [];
             calendar.firstDay = firstDay;
@@ -13147,9 +13147,9 @@
               startDay -= 7;
             if (dayOfWeek == this.locale.firstDay)
               startDay = daysInLastMonth - 6;
-            var curDate = moment2([lastYear, lastMonth, startDay, 12, minute, second]);
+            var curDate = moment3([lastYear, lastMonth, startDay, 12, minute, second]);
             var col, row;
-            for (var i = 0, col = 0, row = 0; i < 42; i++, col++, curDate = moment2(curDate).add(24, "hour")) {
+            for (var i = 0, col = 0, row = 0; i < 42; i++, col++, curDate = moment3(curDate).add(24, "hour")) {
               if (i > 0 && col % 7 === 0) {
                 col = 0;
                 row++;
@@ -13779,11 +13779,11 @@
               return;
             var dateString = this.element.val().split(this.locale.separator), start2 = null, end = null;
             if (dateString.length === 2) {
-              start2 = moment2(dateString[0], this.locale.format);
-              end = moment2(dateString[1], this.locale.format);
+              start2 = moment3(dateString[0], this.locale.format);
+              end = moment3(dateString[1], this.locale.format);
             }
             if (this.singleDatePicker || start2 === null || end === null) {
-              start2 = moment2(this.element.val(), this.locale.format);
+              start2 = moment3(this.element.val(), this.locale.format);
               end = start2;
             }
             if (!start2.isValid() || !end.isValid())
@@ -16468,28 +16468,28 @@
     "node_modules/pikaday/pikaday.js"(exports, module) {
       (function(root, factory) {
         "use strict";
-        var moment2;
+        var moment3;
         if (typeof exports === "object") {
           try {
-            moment2 = require_moment();
+            moment3 = require_moment();
           } catch (e) {
           }
-          module.exports = factory(moment2);
+          module.exports = factory(moment3);
         } else if (typeof define === "function" && define.amd) {
           define(function(req) {
             var id = "moment";
             try {
-              moment2 = req(id);
+              moment3 = req(id);
             } catch (e) {
             }
-            return factory(moment2);
+            return factory(moment3);
           });
         } else {
           root.Pikaday = factory(root.moment);
         }
-      })(exports, function(moment2) {
+      })(exports, function(moment3) {
         "use strict";
-        var hasMoment = typeof moment2 === "function", hasEventListeners = !!window.addEventListener, document2 = window.document, sto = window.setTimeout, addEvent = function(el, e, callback, capture) {
+        var hasMoment = typeof moment3 === "function", hasEventListeners = !!window.addEventListener, document2 = window.document, sto = window.setTimeout, addEvent = function(el, e, callback, capture) {
           if (hasEventListeners) {
             el.addEventListener(e, callback, !!capture);
           } else {
@@ -16669,7 +16669,7 @@
           var jan4th = new Date(date.getFullYear(), 0, dayInFirstWeek), msPerDay = 24 * 60 * 60 * 1e3, daysBetween = (date.getTime() - jan4th.getTime()) / msPerDay, weekNum = 1 + Math.round((daysBetween - dayShift + prevWeekDay(jan4th.getDay())) / daysPerWeek);
           return weekNum;
         }, renderWeek = function(d, m, y, firstWeekOfYearMinDays) {
-          var date = new Date(y, m, d), week = hasMoment ? moment2(date).isoWeek() : isoWeek(date, firstWeekOfYearMinDays);
+          var date = new Date(y, m, d), week = hasMoment ? moment3(date).isoWeek() : isoWeek(date, firstWeekOfYearMinDays);
           return '<td class="pika-week">' + week + "</td>";
         }, renderRow = function(days, isRTL, pickWholeWeek, isRowSelected) {
           return '<tr class="pika-row' + (pickWholeWeek ? " pick-whole-week" : "") + (isRowSelected ? " is-selected" : "") + '">' + (isRTL ? days.reverse() : days).join("") + "</tr>";
@@ -16807,7 +16807,7 @@
             if (opts.parse) {
               return opts.parse(opts.field.value, opts.format);
             } else if (hasMoment) {
-              var date = moment2(opts.field.value, opts.format, opts.formatStrict);
+              var date = moment3(opts.field.value, opts.format, opts.formatStrict);
               return date && date.isValid() ? date.toDate() : null;
             } else {
               return new Date(Date.parse(opts.field.value));
@@ -16960,15 +16960,15 @@
               return this._o.toString(this._d, format);
             }
             if (hasMoment) {
-              return moment2(this._d).format(format);
+              return moment3(this._d).format(format);
             }
             return this._d.toDateString();
           },
           getMoment: function() {
-            return hasMoment ? moment2(this._d) : null;
+            return hasMoment ? moment3(this._d) : null;
           },
           setMoment: function(date, preventOnSelect) {
-            if (hasMoment && moment2.isMoment(date)) {
+            if (hasMoment && moment3.isMoment(date)) {
               this.setDate(date.toDate(), preventOnSelect);
             }
           },
@@ -48144,6 +48144,7 @@
   var import_jquery3 = __toESM(require_jquery());
   var import_selectize = __toESM(require_selectize());
   var import_pikaday = __toESM(require_pikaday());
+  var import_moment2 = __toESM(require_moment_min());
   var caller_controller_default = class extends Controller {
     connect() {
       var picker = new import_pikaday.default(
@@ -48151,8 +48152,8 @@
           field: document.getElementById("date"),
           firstDay: 1,
           minDate: new Date(),
-          maxDate: new Date(2020, 12, 31),
-          yearRange: [2e3, 2020]
+          maxDate: new Date((0, import_moment2.default)().year(), 12, 31),
+          yearRange: [2023, (0, import_moment2.default)().year()]
         }
       );
       (0, import_jquery3.default)("#service").selectize();

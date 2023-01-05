@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import $ from 'jquery';
 import "selectize"
 import Pikaday from "pikaday"
+import moment from "daterangepicker/moment.min"
 export default class extends Controller {
   connect() {   
   var picker = new Pikaday(
@@ -9,8 +10,8 @@ export default class extends Controller {
         field: document.getElementById('date'),
         firstDay: 1,
         minDate: new Date(),
-        maxDate: new Date(2020, 12, 31),
-        yearRange: [2000,2020]
+        maxDate: new Date(moment().year(), 12, 31),
+        yearRange: [2023,moment().year()]
     });
   $("#service").selectize()    
   $('#counter').selectize({     
