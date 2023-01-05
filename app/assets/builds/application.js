@@ -48175,85 +48175,101 @@
     connect() {
       const MQTT_CHANNEL = "QUEUE_SYSTEM";
       const counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
-      const message = { from: "caller", action: "check_server", data: { counter_id } };
       const current_service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
-      const date = (0, import_jquery4.default)("#date").val();
       const client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_counter_" + counter_id);
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
       function onConnect() {
         client.subscribe(MQTT_CHANNEL);
-        check_server(message);
+        check_server();
         (0, import_jquery4.default)("#call").click(function() {
-          if ((0, import_jquery4.default)("#current_queue").attr("data-id") != "") {
-            import_sweetalert2.default.fire({
-              title: "Apakah hadir di loket?",
-              icon: "question",
-              showCancelButton: true,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Hadir"
-            }).then((result) => {
-              if (result.isConfirmed) {
-                send_message(import_jquery4.default.extend({}, message, { action: "call", data: { counter_id, attend: true } }));
-              }
-              send_message(import_jquery4.default.extend({}, message, { action: "call", data: { counter_id, attend: false } }));
-            });
-          } else {
-            send_message(import_jquery4.default.extend({}, message, { action: "call", data: { counter_id, attend: null } }));
+          if ((0, import_jquery4.default)("#current_queue").attr("data-id") == "") {
+            return send_message("call", { attend: null });
           }
+          import_sweetalert2.default.fire({
+            title: "Apakah hadir di loket?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Hadir"
+          }).then((result) => {
+            if (result.isConfirmed)
+              send_message("call", { attend: true });
+            else
+              send_message("call", { attend: false });
+          });
         });
         (0, import_jquery4.default)(".recall").click(function() {
-          const current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
-          send_message(import_jquery4.default.extend({}, message, { action: "recall", data: { id: current_queue_id, counter_id } }));
+          send_message("recall", {});
         });
         (0, import_jquery4.default)("#transfer").click(function() {
-          const service_id = (0, import_jquery4.default)("#service").val();
-          const current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
-          let data = {
-            action: "transfer",
-            data: {
-              id: current_queue_id,
-              service_id,
-              transfer: true,
-              counter_id
-            }
-          };
-          send_message(import_jquery4.default.extend({}, message, data));
+          send_message("transfer", { transfer: true });
         });
         (0, import_jquery4.default)("#print_ticket").click(function() {
-          const service_id = (0, import_jquery4.default)("#service").val();
-          const counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
-          if (counter_id2 == "")
+          if (counter_id == "")
             return alert("Pilih counter");
           let data = {
-            action: "print_ticket",
-            data: {
-              service_id,
-              date,
-              print_ticket_location: "counter"
-            }
+            date: (0, import_jquery4.default)("#date").val(),
+            print_ticket_location: "counter"
           };
-          send_message(import_jquery4.default.extend({}, message, data));
+          send_message("print_ticket", data);
         });
       }
-      function send_message(payload) {
-        const message2 = new import_paho_mqtt.default.Message(JSON.stringify(payload));
-        message2.destinationName = MQTT_CHANNEL;
-        client.send(message2);
-        if (payload["action"] != "check_server") {
-          toast("Process to " + payload["action"]);
+      function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+          change_status("#mqtt-alert", "Koneksi ke server gagal, Mohon refresh browser");
         }
       }
-      function change_status(element, message2) {
-        (0, import_jquery4.default)(element).addClass("alert-success").removeClass("alert-danger").html(message2);
+      function onMessageArrived(message) {
+        const data = JSON.parse(message.payloadString);
+        if (current_service_id == data.service_id) {
+          if (data.action == "call") {
+            (0, import_jquery4.default)("#current_queue").html(data["current_queue_in_counter_text"]);
+          } else if (data.call == "print_ticket") {
+            (0, import_jquery4.default)("#total_queue_left").html(data.total_queue_left);
+            (0, import_jquery4.default)("#total_offline_queues").html(data.total_offline_queues);
+            (0, import_jquery4.default)("#total_online_queues").html(data.total_online_queues);
+            (0, import_jquery4.default)("#missed_queues").html(data.missed_queues);
+          }
+        }
+        if (data.from == "server") {
+          if (data.action == "receive") {
+            if (counter_id == data.to.counter_id) {
+              toast(data.message, data.status);
+            }
+          } else if (data.action == "ready") {
+            change_status("#server-alert", data.message);
+          }
+        }
+        console.log("onMessageArrived:" + message.payloadString);
       }
-      function check_server(message2) {
+      function send_message(action, payload) {
+        const service_id = (0, import_jquery4.default)("#service").val();
+        const current_queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
+        const counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
+        const data = {
+          from: "caller",
+          action,
+          id: current_queue_id,
+          counter_id: counter_id2,
+          service_id
+        };
+        const message = new import_paho_mqtt.default.Message(JSON.stringify(import_jquery4.default.extend({}, data, payload)));
+        message.destinationName = MQTT_CHANNEL;
+        client.send(message);
+        if (action != "check_server")
+          toast("Process to " + action);
+      }
+      function change_status(element, message) {
+        (0, import_jquery4.default)(element).addClass("alert-success").removeClass("alert-danger").html(message);
+      }
+      function check_server() {
         change_status("#mqtt-alert", "Berhasil konek ke server");
-        send_message(message2);
+        send_message("check_server", {});
       }
-      function toast(message2, icon = "success") {
+      function toast(message, icon = "success") {
         var Toast = import_sweetalert2.default.mixin({
           toast: true,
           position: "top-end",
@@ -48262,40 +48278,8 @@
         });
         Toast.fire({
           icon,
-          title: message2
+          title: message
         });
-      }
-      function onConnectionLost(responseObject) {
-        if (responseObject.errorCode !== 0) {
-          change_status("#mqtt-alert", "Koneksi ke server gagal, Mohon refresh browser");
-          console.log("onConnectionLost:" + responseObject.errorMessage);
-        }
-      }
-      function onMessageArrived(message2) {
-        const data = JSON.parse(message2.payloadString);
-        const action = data["action"];
-        const from = data["from"];
-        if (current_service_id == data["service_id"]) {
-          if (action == "CALL") {
-            (0, import_jquery4.default)("#current_queue").html(data["current_queue_in_counter_text"]);
-          } else if (action == "PRINT_TICKET") {
-            (0, import_jquery4.default)("#total_queue_left").html(data["total_queue_left"]);
-            (0, import_jquery4.default)("#total_offline_queues").html(data["total_offline_queues"]);
-            (0, import_jquery4.default)("#total_online_queues").html(data["total_online_queues"]);
-            (0, import_jquery4.default)("#missed_queues").html(data["missed_queues"]);
-          }
-        }
-        if (from == "server") {
-          let to_counter_id = data["to"]["counter_id"];
-          if (action == "receive") {
-            if (counter_id == to_counter_id) {
-              toast(data["message"], data["status"]);
-            }
-          } else if (action == "ready") {
-            change_status("#server-alert", data["message"]);
-          }
-        }
-        console.log("onMessageArrived:" + message2.payloadString);
       }
     }
   };

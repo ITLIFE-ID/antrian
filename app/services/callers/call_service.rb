@@ -9,7 +9,7 @@ module Callers
 
       available_queue_to_call.update(counter: counter, start_time: Time.current)
 
-      mqtt_publish!("CALL")
+      mqtt_publish!("call")
     rescue => e
       return_errors(e)
     end

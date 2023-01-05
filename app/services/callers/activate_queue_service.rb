@@ -4,7 +4,7 @@ module Callers
   class ActivateQueueService < QueueService
     def execute
       # draft
-      mqtt_publish!("ACTIVATE_QUEUE")
+      mqtt_publish!("activate_queue")
     end
   end
 end

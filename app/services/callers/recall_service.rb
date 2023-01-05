@@ -5,7 +5,7 @@ module Callers
     def execute
       may_i_recall_last_queue_in_my_counter?
 
-      mqtt_publish!("RECALL")
+      mqtt_publish!("recall")
     rescue => e
       return_errors(e)
     end
