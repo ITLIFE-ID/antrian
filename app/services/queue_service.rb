@@ -21,6 +21,10 @@ class QueueService < ApplicationService
     @find_queue_by_id ||= TodayQueue.find_by_id(id)
   end
 
+  def current_queue
+    @current_queue ||= TodayQueue.current_queue(counter)
+  end
+
   def user_attend_to_counter
     attend || false
   end
@@ -35,50 +39,30 @@ class QueueService < ApplicationService
     Terbilang.convert(counter&.number)&.upcase
   end
 
-  def find_queue
-    @find_queue ||= TodayQueue.where("DATE(print_ticket_time) = ?", selected_date.to_s)
-  end
-
-  def queue_in_service
-    @queue_in_service ||= find_queue.where(service: service)
-  end
-
-  def queue_in_counter
-    @queue_in_counter ||= find_queue.where(counter: counter)
-  end
-
   def last_queue_in_counter
     @last_queue_in_counter ||= TodayQueue.current_queue(counter)
   end
 
   def last_queue_in_service
-    @last_queue_in_service ||= queue_in_service.order(id: :desc).limit(1)
-  end
-
-  def available_queue_to_call_in_service
-    @available_queue_to_call_in_service ||= queue_in_service.where(counter: nil)
-  end
-
-  def available_regular_queue_to_call
-    @available_regular_queue_to_call ||= available_queue_to_call_in_service.order(id: :asc).limit(1)
+    @last_queue_in_service ||= TodayQueue.last_queue_in_service(counter)&.first
   end
 
   def available_priority_queue_to_call
-    @available_priority_queue_to_call ||= available_queue_to_call_in_service.where(priority: true).order(id: :asc).limit(1)
+    @available_priority_queue_to_call ||= TodayQueue.total_queue_left(service).where(priority: true).order(id: :asc).limit(1)
   end
 
   def available_queue_to_call
-    @available_queue_to_call ||= available_priority_queue_to_call&.first || available_regular_queue_to_call&.first
+    @available_queue_to_call ||= available_priority_queue_to_call&.first || TodayQueue.last_queue_in_service(counter)&.first
   end
 
   def next_queue_number
-    last_queue_number = last_queue_in_service.try(:first).try(:number).to_i
+    last_queue_number = TodayQueue.last_queue_in_service(counter)&.first.try(:first).try(:number).to_i
 
     last_queue_number + 1
   end
 
   def total_queue_left
-    @total_queue_left ||= available_queue_to_call_in_service&.count.to_i
+    @total_queue_left ||= TodayQueue.total_queue_left(service)&.count.to_i
   end
 
   def letter
@@ -176,6 +160,7 @@ class QueueService < ApplicationService
     check.start_time < Time.current && check.finish_time > Time.current
   end
 
+  # Validations
   def is_queue_exists?
     raise I18n.t(".queue_not_found") if find_queue_by_id.blank?
   end
@@ -193,7 +178,7 @@ class QueueService < ApplicationService
   end
 
   def is_queue_still_available?
-    raise I18n.t(".queue_is_not_available") if available_queue_to_call_in_service.count <= 0
+    raise I18n.t(".queue_is_not_available") if total_queue_left <= 0
   end
 
   def is_service_temporary_closed?

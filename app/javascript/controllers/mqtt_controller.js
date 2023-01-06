@@ -87,7 +87,7 @@ export default class extends Controller {
             else{
               $("#recall").attr("data-id", data.id)  
               $("#current_queue").html(data.current_queue_in_counter_text)              
-              toast(data.message)
+              toast(data.message, data.status)
             }        
           }
         }              

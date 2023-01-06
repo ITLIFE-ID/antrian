@@ -70,6 +70,10 @@ FactoryBot.define do
       print_ticket_location { "counter" }
     end
 
+    trait :from_counter_transfer do
+      print_ticket_location { "counter-transfer" }
+    end
+
     trait :priority_queue do
       priority { true }
     end

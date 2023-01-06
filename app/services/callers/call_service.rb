@@ -5,7 +5,12 @@ module Callers
     def execute
       may_i_call_next_queue?
 
-      last_queue_in_counter.first.update(finish_time: Time.current, attend: user_attend_to_counter, process_duration: process_duration) if last_queue_in_counter.present?
+      if current_queue.present?
+        current_queue.first
+          .update(finish_time: Time.current,
+            attend: user_attend_to_counter,
+            process_duration: process_duration)
+      end
 
       available_queue_to_call.update(counter: counter, start_time: Time.current)
 
