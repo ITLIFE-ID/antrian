@@ -17,7 +17,7 @@
             <td><%=queue_number_formater(t.letter, t.number)%><span class="ml-2 badge <%=t.print_ticket_method == "online" ? "bg-danger" : "bg-warning"%>"><%=t.print_ticket_method%></span></td>
             <td><%=t.priority ? "Di utamakan" : "Normal"%></td>
             <td>
-              <button type="submit" class="btn btn-info font-weight-bolder w-100 recall">Panggil Ulang</button>
+              <button type="button" class="btn btn-info font-weight-bolder w-100 recall" data-id="<%=t.id%>">Panggil Ulang</button>
             </td>
           </tr>
         <%end%>

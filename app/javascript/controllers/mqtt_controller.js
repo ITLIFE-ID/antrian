@@ -10,7 +10,7 @@ export default class extends Controller {
     const counter_id = $("#counter").attr("data-id")            
     const service_id = parseInt($("#counter").attr("data-service-id"))    
 
-    const client = new Paho.Client("localhost", Number(8080), "web_caller_from_counter_"+counter_id);    
+    const client = new Paho.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_from_counter_"+counter_id);    
     // set callback handlers
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
@@ -43,8 +43,8 @@ export default class extends Controller {
       });
       
       $(".recall").click(function(){        
-        send_message("recall", {})        
-      });
+        send_message("recall", {id: $(this).attr("data-id")})
+      });      
 
       $("#transfer").click(function(){              
         send_message("transfer", {transfer: true})        
@@ -97,16 +97,24 @@ export default class extends Controller {
     }
 
     function send_message(action, payload){
-      const service_id = $("#service").val()
+      let target_service_id
+
+      if(action == "transfer"){
+        target_service_id = $("#service").val()
+      }        
+      else{
+        target_service_id = service_id
+      }
+        
       const queue_id = $("#current_queue").attr("data-id")
       const counter_id = $("#counter").attr("data-id") 
-      
+
       const data = {
         from: "caller",
         action: action,
         id: queue_id,
         counter_id: counter_id,
-        service_id: service_id             
+        service_id: target_service_id             
       }
 
       const message = new Paho.Message(JSON.stringify($.extend({}, data, payload)));

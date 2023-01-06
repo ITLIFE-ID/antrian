@@ -48176,7 +48176,7 @@
       const MQTT_CHANNEL = "QUEUE_SYSTEM";
       const counter_id = (0, import_jquery4.default)("#counter").attr("data-id");
       const service_id = parseInt((0, import_jquery4.default)("#counter").attr("data-service-id"));
-      const client = new import_paho_mqtt.default.Client("localhost", Number(8080), "web_caller_from_counter_" + counter_id);
+      const client = new import_paho_mqtt.default.Client("localhost", Number(8080), Math.random().toString(36) + "web_caller_from_counter_" + counter_id);
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
@@ -48203,7 +48203,7 @@
           });
         });
         (0, import_jquery4.default)(".recall").click(function() {
-          send_message("recall", {});
+          send_message("recall", { id: (0, import_jquery4.default)(this).attr("data-id") });
         });
         (0, import_jquery4.default)("#transfer").click(function() {
           send_message("transfer", { transfer: true });
@@ -48246,7 +48246,12 @@
         console.log("onMessageArrived:" + message.payloadString);
       }
       function send_message(action, payload) {
-        const service_id2 = (0, import_jquery4.default)("#service").val();
+        let target_service_id;
+        if (action == "transfer") {
+          target_service_id = (0, import_jquery4.default)("#service").val();
+        } else {
+          target_service_id = service_id;
+        }
         const queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
         const counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
         const data = {
@@ -48254,7 +48259,7 @@
           action,
           id: queue_id,
           counter_id: counter_id2,
-          service_id: service_id2
+          service_id: target_service_id
         };
         const message = new import_paho_mqtt.default.Message(JSON.stringify(import_jquery4.default.extend({}, data, payload)));
         message.destinationName = MQTT_CHANNEL;
