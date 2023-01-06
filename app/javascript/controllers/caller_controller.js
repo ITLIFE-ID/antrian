@@ -3,6 +3,7 @@ import $ from 'jquery';
 import "selectize"
 import Pikaday from "pikaday"
 import moment from "daterangepicker/moment.min"
+
 export default class extends Controller {
   connect() {   
   var picker = new Pikaday(

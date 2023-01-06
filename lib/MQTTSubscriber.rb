@@ -5,17 +5,20 @@ class MQTTSubscriber
     Thread.new do
       Rails.application.config.mqtt_connect.get(MQTT_CHANNEL) do |topic, message|
         return nil unless MQTT_CHANNEL == topic
+
+        message_json = JSON.parse(message).except!("from", "action")
         message = OpenStruct.new(JSON.parse(message))
+
         if message.from == "caller"
           response = case message.action
           when "print_ticket"
-            PrintTicketService.execute(message)
+            PrintTicketService.execute(message_json)
           when "call"
-            Callers::CallService.execute(message)
+            Callers::CallService.execute(message_json)
           when "recall"
-            Callers::RecallService.execute(message)
+            Callers::RecallService.execute(message_json)
           when "transfer"
-            Callers::RecallService.execute(message)
+            Callers::RecallService.execute(message_json)
           when "check_server"
             publish_server_ready(message)
           end
@@ -35,10 +38,10 @@ class MQTTSubscriber
       service_id: message.service_id,
       counter_id: message.counter_id,
       status: :success,
-      message: "Berhasil #{message.action}"
+      message: "Berhasil #{message.action.humanize}"
     }
 
-    response.merge(message: result.error_messages, status: "error") unless result.success?
+    message = message.merge(message: result.error_messages, status: "error") unless result.success?
     mqtt_publish(message)
   end
 

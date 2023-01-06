@@ -48270,6 +48270,7 @@
           showConfirmButton: false,
           timer: 3e3
         });
+        message = message.replace("_", " ");
         Toast.fire({
           icon,
           title: message

@@ -71,7 +71,7 @@ export default class extends Controller {
     // called when a message arrives
     function onMessageArrived(message) {      
       const data = JSON.parse(message.payloadString)
-      if(data.from == "server"){                                
+      if(data.from == "server"){               
         if(data.action == "print_ticket" && service_id == data.service_id){            
           $("#total_queue_left").html(data.total_queue_left)  
           $("#total_offline_queues").html(data.total_offline_queues)  
@@ -130,6 +130,7 @@ export default class extends Controller {
         timer: 3000
       });
       
+      message = message.replace("_", " ")
       Toast.fire({
         icon: icon,
         title: message

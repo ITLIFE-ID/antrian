@@ -106,6 +106,7 @@ class QueueService < ApplicationService
 
     begin
       result = {
+        from: :server,
         action: action,
         queue_number_to_print: queue_number_to_print,
         play_voice_queue_text: play_voice_queue_text,
@@ -130,7 +131,7 @@ class QueueService < ApplicationService
   end
 
   def print_ticket_method
-    date.blank? ? "offline" : "online"
+    (date.blank? || date == Date.today.to_s) ? "offline" : "online"
   end
 
   def missed_queues
@@ -141,7 +142,7 @@ class QueueService < ApplicationService
       priority = x.priority ? "Di utamakan" : "Normal"
 
       rows << "<tr>
-        <td>#{queue_number}<span class='badge #{badge}'>#{queue_number}</span></td>
+        <td>#{queue_number}<span class='ml-2 badge #{badge}'>#{x.print_ticket_method}</span></td>
         <td>#{priority}</td>
       <td>
         <button type='submit' class='btn btn-info font-weight-bolder w-100 recall' data-id='#{x.id}'>Panggil Ulang</button>

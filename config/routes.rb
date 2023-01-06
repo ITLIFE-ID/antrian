@@ -8,45 +8,45 @@ Rails.application.routes.draw do
 
   root to: redirect("admin/dashboards/today")
 
-  authenticated :administrator do
-    resources :digital_receipts, only: [:show], param: :uuid
+  # authenticated :administrator do
+  resources :digital_receipts, only: [:show], param: :uuid
 
-    namespace :admin do
-      root to: redirect("admin/dashboards/today")
-      resources :administrators
-      resources :buildings
-      resources :client_displays
-      resources :closing_days
-      resources :callers, only: [:index]
-      resources :companies do
-        resources :working_days
-        resources :closing_days
-      end
-      resources :counters
-      resources :dashboards do
-        get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
-        get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
-        get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
-      end
-      resources :file_storages
-      # resources :permisi_roles
-      # resources :permisi_actor_roles
-      # resources :permisi_actors
-      resources :play_lists
-      resources :service_types
+  namespace :admin do
+    root to: redirect("admin/dashboards/today")
+    resources :administrators
+    resources :buildings
+    resources :client_displays
+    resources :closing_days
+    resources :callers, only: [:index]
+    resources :companies do
       resources :working_days
-      resources :services do
-        resources :working_days
-        resources :closing_days
-      end
-      resources :shared_clientdisplays
-      resources :satisfaction_indices
-      resources :user_counters
-      resources :user_satisfaction_indices, only: [:index, :show]
-      resources :users
-      resources :voiceover_buildings
-      resources :voice_overs
+      resources :closing_days
     end
+    resources :counters
+    resources :dashboards do
+      get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
+      get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
+      get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
+    end
+    resources :file_storages
+    # resources :permisi_roles
+    # resources :permisi_actor_roles
+    # resources :permisi_actors
+    resources :play_lists
+    resources :service_types
+    resources :working_days
+    resources :services do
+      resources :working_days
+      resources :closing_days
+    end
+    resources :shared_clientdisplays
+    resources :satisfaction_indices
+    resources :user_counters
+    resources :user_satisfaction_indices, only: [:index, :show]
+    resources :users
+    resources :voiceover_buildings
+    resources :voice_overs
+    # end
   end
 
   namespace :api, defaults: {format: :json} do
