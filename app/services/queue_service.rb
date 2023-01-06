@@ -115,7 +115,8 @@ class QueueService < ApplicationService
         total_queue_left: TodayQueue.total_queue_left(service).count.to_i,
         total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
         total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
-        missed_queues: missed_queues
+        missed_queues: missed_queues,
+        missed_queues_count: TodayQueue.missed_queues(service).count
       }
 
       result = result.merge!(current_queue_in_counter_text: current_queue_in_counter_text) if counter_id.present?

@@ -34,7 +34,8 @@ export default class extends Controller {
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Hadir'
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Tidak'
         }).then((result) => {
           if (result.isConfirmed) send_message("call", {attend: true})            
           else send_message("call", {attend: false})
@@ -72,19 +73,24 @@ export default class extends Controller {
     function onMessageArrived(message) {      
       const data = JSON.parse(message.payloadString)
       if(data.from == "server"){               
-        if(data.action == "print_ticket" && service_id == data.service_id){            
+        if(service_id == data.service_id){            
           $("#total_queue_left").html(data.total_queue_left)  
           $("#total_offline_queues").html(data.total_offline_queues)  
           $("#total_online_queues").html(data.total_online_queues)  
-          $("#missed_queues").html(data.missed_queues)          
-        }
-        else if(data.action == "ready" && counter_id == data.counter_id){
-          change_status("#server-alert", data.message)           
-        }
-        else if(data.action == "receive" && counter_id == data.counter_id){          
-          $("#current_queue").html(data.current_queue_in_counter_text)
-          toast(data.message, data.status)          
-        }
+          $("#missed_queues").html(data.missed_queues)     
+          $("#missed_queues_count").html(data.missed_queues_count)     
+
+          if(counter_id == data.counter_id){    
+            if(data.action == "ready" ) {
+              change_status("#server-alert", data.message)
+            }
+            else{
+              $("#recall").attr("data-id", data.id)  
+              $("#current_queue").html(data.current_queue_in_counter_text)              
+              toast(data.message)
+            }        
+          }
+        }              
       }
 
       console.log("onMessageArrived:"+message.payloadString);
@@ -129,8 +135,7 @@ export default class extends Controller {
         showConfirmButton: false,
         timer: 3000
       });
-      
-      message = message.replace("_", " ")
+            
       Toast.fire({
         icon: icon,
         title: message

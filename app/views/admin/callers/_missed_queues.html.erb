@@ -1,25 +1,27 @@
 <div class="card-body table-responsive p-0">
   <div class="card-header">
-    <h3 class="card-title">Antrian Terlewat</h3>
+    <h3 class="card-title">Ada <span id="missed_queues_count"><%=@missed_queues.count%></span> Antrian Terlewat </h3>
   </div>
-  <table class="table table-hover text-nowrap">
-    <thead>
-      <tr>
-        <th>Nomor antrian</th>
-        <th>Prioritas</th>
-        <th>Panggil</th>
-      </tr>
-    </thead>
-    <tbody id="missed_queues">
-      <%@missed_queues.each do |t|%>
+  <div style="height: 300px !important;overflow-y:scroll;">
+    <table class="table table-hover text-nowrap">
+      <thead>
         <tr>
-          <td><%=queue_number_formater(t.letter, t.number)%><span class="ml-2 badge <%=t.print_ticket_method == "online" ? "bg-danger" : "bg-warning"%>"><%=t.print_ticket_method%></span></td>
-          <td><%=t.priority ? "Di utamakan" : "Normal"%></td>
-          <td>
-            <button type="submit" class="btn btn-info font-weight-bolder w-100 recall">Panggil Ulang</button>
-          </td>
+          <th>Nomor antrian</th>
+          <th>Prioritas</th>
+          <th>Panggil</th>
         </tr>
-      <%end%>
-    </tbody>
-  </table>
+      </thead>
+      <tbody id="missed_queues">
+        <%@missed_queues.each do |t|%>
+          <tr>
+            <td><%=queue_number_formater(t.letter, t.number)%><span class="ml-2 badge <%=t.print_ticket_method == "online" ? "bg-danger" : "bg-warning"%>"><%=t.print_ticket_method%></span></td>
+            <td><%=t.priority ? "Di utamakan" : "Normal"%></td>
+            <td>
+              <button type="submit" class="btn btn-info font-weight-bolder w-100 recall">Panggil Ulang</button>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
 </div>
