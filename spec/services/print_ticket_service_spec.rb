@@ -103,9 +103,27 @@ RSpec.describe PrintTicketService, type: :service do
   end
 
   context "Normal condition" do
+    before {
+      @print_ticket = described_class.execute(service_id: @service)
+      @result = OpenStruct.new(@print_ticket.result)
+    }
     it "success to add new queue" do
-      print_ticket = described_class.execute(service_id: @service)
-      expect(print_ticket.success?).to be true
+      expect(@print_ticket.success?).to be true
+    end
+
+    it "should contains expected values" do
+      expect(@result.from).to eq(:server)
+      expect(@result.action).to eq(:print_ticket)
+      expect(@result.service_id).to eq(@service)
+      expect(@result.counter_id).to eq(nil)
+      expect(@result.total_queue_left).to eq(1)
+      expect(@result.total_offline_queues).to eq(1)
+      expect(@result.total_online_queues).to eq(0)
+      expect(@result.missed_queues).to eq(nil)
+      expect(@result.missed_queues_count).to eq(0)
+      expect(@result.current_queue_in_counter_text).to eq(nil)
+      expect(@result.play_voice_queue_text).to eq(nil)
+      expect(@result.queue_number_to_print).to eq("NOMOR ANTRIAN")
     end
   end
 end

@@ -1,5 +1,5 @@
 class QueueService < ApplicationService
-  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer
+  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer, :result
 
   def company
     @company ||= service.company
@@ -30,7 +30,7 @@ class QueueService < ApplicationService
   end
 
   def total_queue_left
-    @total_queue_left ||= queue_left&.count.to_i
+    @total_queue_left ||= queue_left&.count&.to_i
   end
 
   def user_attend_to_counter
@@ -79,29 +79,29 @@ class QueueService < ApplicationService
   end
 
   def mqtt_publish!(action, queue_number_to_print = nil)
-    return if Rails.env.test?
+    message = {
+      from: :server,
+      action: action.to_sym,
+      service_id: service_id,
+      counter_id: counter_id,
+      total_queue_left: total_queue_left,
+      total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
+      total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
+      missed_queues: missed_queues,
+      missed_queues_count: TodayQueue.missed_queues(service).count
+    }
 
-    begin
-      result = {
-        from: :server,
-        action: action,
-        queue_number_to_print: queue_number_to_print,
-        play_voice_queue_text: play_voice_queue_text,
-        service_id: service_id,
-        counter_id: counter_id,
-        total_queue_left: total_queue_left&.count&.to_i,
-        total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
-        total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
-        missed_queues: missed_queues,
-        missed_queues_count: TodayQueue.missed_queues(service).count
-      }
+    message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text) if counter_id.present? && ["call", "recall"].include?(action)
+    message = message.merge!(play_voice_queue_text: play_voice_queue_text) if ["call", "recall"].include? action
+    message = message.merge!(queue_number_to_print: queue_number_to_print) if action == "print_ticket"
 
-      result = result.merge!(current_queue_in_counter_text: current_queue_in_counter_text) if counter_id.present?
-
-      Rails.application.config.mqtt_connect.publish(ENV["MQTT_CHANNEL"], result.to_json)
-    rescue => e
-      return_errors(e)
+    if Rails.env.test?
+      message
+    else
+      Rails.application.config.mqtt_connect.publish(ENV["MQTT_CHANNEL"], message.to_json)
     end
+  rescue => e
+    return_errors(e)
   end
 
   def play_voice_queue_text

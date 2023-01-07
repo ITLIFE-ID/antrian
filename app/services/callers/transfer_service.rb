@@ -49,7 +49,7 @@ module Callers
 
         raise ActiveRecord::Rollback unless new_queue.blank?
 
-        mqtt_publish!("transfer")
+        @result = mqtt_publish!("transfer")
       end
     rescue => e
       return_errors(e)

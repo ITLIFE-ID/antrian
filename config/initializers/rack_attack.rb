@@ -84,7 +84,7 @@ module Rack
     # If you want to return 503 so that the attacker might be fooled into
     # believing that they've successfully broken your app (or you just want to
     # customize the response), then uncomment these lines.
-    throttled_responder = lambda do |env|
+    Rack::Attack.throttled_responder = lambda do |env|
       match_data = env["rack.attack.match_data"]
       now = match_data[:epoch_time]
 
