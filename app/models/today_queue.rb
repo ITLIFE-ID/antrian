@@ -46,7 +46,7 @@ class TodayQueue < ApplicationRecord
   validates_presence_of :letter, :uniq_number, :print_ticket_location, :print_ticket_time, :number,
     :service_type_slug, :date
 
-  validates :letter, presence: true, uniqueness: {scope: %i[service_id number date]}
+  validates :number, presence: true, uniqueness: {scope: %i[service_id letter date]}
 
   validates_numericality_of :number, only_integer: true, greater_than_or_equal_to: 1,
     less_than_or_equal_to: 999
@@ -66,9 +66,9 @@ class TodayQueue < ApplicationRecord
   scope :total_queue, ->(service) { where(date: Date.today, service: service) }
 
   scope :missed_queues, ->(service) { total_queue(service).where.not(counter_id: nil).where(attend: false) }
-  scope :total_queue_left, ->(service) { total_queue(service).where(attend: false, counter: nil) }
-  scope :last_queue_in_service, ->(service) { total_queue_left(service).where(parent_id: nil).order(id: :desc).limit(1) }
-  scope :current_queue, ->(counter) { where(date: Date.today, counter: counter).order(id: :desc).limit(1) }
+  scope :total_queue_left, ->(service) { total_queue(service).where(counter: nil) }
+  scope :last_queue_in_service, ->(service) { total_queue(service).where(parent_id: nil).order(id: :desc).limit(1) }
+  scope :current_queue, ->(counter) { total_queue(counter.service).where(counter: counter).order(id: :desc).limit(1) }
   scope :total_processed, ->(service) { total_queue(service).where(attend: true).where.not(finish_time: nil) }
   scope :total_unprocessed, ->(service) { total_queue(service).where(attend: false, finish_time: nil) }
   scope :total_offline_queue, ->(service) { total_queue(service).where(print_ticket_method: "offline") }

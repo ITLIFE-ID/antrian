@@ -27,7 +27,7 @@ module Callers
     end
 
     def process_duration
-      (Time.current - last_queue_in_counter.first.start_time)
+      (Time.current - current_queue.first.start_time).to_i
     end
   end
 end

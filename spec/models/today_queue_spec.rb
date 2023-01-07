@@ -48,7 +48,7 @@ RSpec.describe TodayQueue, type: :model do
   it { should validate_numericality_of(:process_duration).is_greater_than_or_equal_to(1) }
   it { should validate_numericality_of(:number).is_less_than_or_equal_to(999) }
   it { should validate_numericality_of(:number).only_integer }
-  it { should validate_uniqueness_of(:letter).scoped_to([:service_id, :number, :date]).ignoring_case_sensitivity }
+  it { should validate_uniqueness_of(:number).scoped_to([:service_id, :letter, :date]).ignoring_case_sensitivity }
 
   describe "Start time and finish time validation" do
     context "given Start time is over than finish time and finish time is early than Start time" do
