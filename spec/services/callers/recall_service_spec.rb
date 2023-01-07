@@ -39,7 +39,7 @@ RSpec.describe Callers::RecallService, type: :service do
 
   context "Normal condition" do
     it "success to call next queue" do
-      recall_queue = described_class.execute(counter_id: @counter)
+      recall_queue = described_class.execute(counter_id: @counter, id: TodayQueue.last.id)
       expect(recall_queue.success?).to be true
     end
   end

@@ -134,7 +134,8 @@ class QueueService < ApplicationService
   def selected_day
     Date::DAYNAMES.rotate(1)
       .each_with_index.map { |k, v| [k, v + 1] }
-      .find { |x| x.first == selected_date.strftime("%A") }.second
+      .find { |x| x.first == selected_date.strftime("%A") }
+      .second
   end
 
   def is_not_working_day?(workable)
