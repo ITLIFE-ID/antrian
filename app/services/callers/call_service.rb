@@ -7,7 +7,7 @@ module Callers
 
       if current_queue.present?
         current_queue.first
-          .update(finish_time: Time.current,
+          .update!(finish_time: Time.current,
             attend: user_attend_to_counter,
             process_duration: process_duration)
       end

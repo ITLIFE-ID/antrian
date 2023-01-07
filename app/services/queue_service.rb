@@ -18,19 +18,19 @@ class QueueService < ApplicationService
   end
 
   def find_queue_by_id
-    @find_queue_by_id ||= TodayQueue.find_by_id(id)
+    TodayQueue.find_by_id(id)
   end
 
   def current_queue
-    @current_queue ||= TodayQueue.current_queue(counter)
+    TodayQueue.current_queue(counter)
   end
 
   def queue_left
-    @queue_left ||= TodayQueue.total_queue_left(service)
+    TodayQueue.total_queue_left(service)
   end
 
-  def total_queue_left
-    @total_queue_left ||= queue_left&.count&.to_i
+  def total_queue_left    
+    queue_left&.count&.to_i
   end
 
   def user_attend_to_counter

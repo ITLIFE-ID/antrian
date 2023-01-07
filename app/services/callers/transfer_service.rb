@@ -41,11 +41,11 @@ module Callers
       may_i_transfer_queue_to_another_service?
 
       TodayQueue.transaction do
-        find_queue_by_id.update(attend: true)
+        find_queue_by_id.update!(attend: true)
 
         TodayQueue.where(parent_id: id).delete_all
 
-        new_queue = TodayQueue.create(transfer_queue_attributes)
+        new_queue = TodayQueue.create!(transfer_queue_attributes)
 
         raise ActiveRecord::Rollback unless new_queue.blank?
 

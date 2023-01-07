@@ -37,8 +37,8 @@
 class PrintTicketService < QueueService
   def execute
     may_i_print_ticket?
-
-    current_queue = TodayQueue.create(
+        
+    current_queue = TodayQueue.create!(
       attend: false,
       date: selected_date,
       letter: service.letter,
@@ -55,7 +55,7 @@ class PrintTicketService < QueueService
     current_queue_text = "#{current_queue.letter} #{current_queue.number.to_s.rjust(3, "0")}"
     @result = mqtt_publish!("print_ticket", current_queue_text)
   rescue => e
-    return_errors(e)
+    return_errors(e)    
   end
 
   def may_i_print_ticket?
