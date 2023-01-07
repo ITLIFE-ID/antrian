@@ -86,7 +86,9 @@ export default class extends Controller {
             }
             else{
               $("#recall").attr("data-id", data.id)  
-              $("#current_queue").html(data.current_queue_in_counter_text)              
+              $("#current_queue").html(data.current_queue_in_counter_text)     
+              console.log("aduhai", data)
+              $("#current_queue").attr("data-id", data.id)         
               toast(data.message, data.status)
             }        
           }
@@ -120,6 +122,8 @@ export default class extends Controller {
       const message = new Paho.Message(JSON.stringify($.extend({}, data, payload)));
       message.destinationName = MQTT_CHANNEL;
       client.send(message);
+
+      console.log("send_message", JSON.stringify($.extend({}, data, payload)))
 
       if(action != "check_server") toast("Process to "+action)      
     }

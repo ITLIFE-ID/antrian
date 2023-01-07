@@ -5,8 +5,8 @@ module Callers
     def execute
       may_i_call_next_queue?
 
-      if current_queue.present?
-        current_queue.first
+      if find_queue_by_id.present?
+        find_queue_by_id
           .update!(finish_time: Time.current,
             attend: user_attend_to_counter,
             process_duration: process_duration)
@@ -27,7 +27,7 @@ module Callers
     end
 
     def process_duration
-      (Time.current - current_queue.first.start_time).to_i
+      (Time.current - find_queue_by_id.start_time).to_i
     end
   end
 end

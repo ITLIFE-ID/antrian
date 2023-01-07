@@ -71,6 +71,10 @@ class QueueService < ApplicationService
     queue_number_formater(letter, number)
   end
 
+  def current_queue_in_counter_text_for_recall    
+    queue_number_formater(find_queue_by_id.letter, find_queue_by_id.number)
+  end
+
   def is_date_today?
     selected_date == Date.today
   end
@@ -81,6 +85,7 @@ class QueueService < ApplicationService
       action: action.to_sym,
       service_id: service_id,
       counter_id: counter_id,
+      id: find_queue_by_id.id,
       total_queue_left: total_queue_left,
       total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
       total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
@@ -88,7 +93,11 @@ class QueueService < ApplicationService
       missed_queues_count: TodayQueue.missed_queues(service).count
     }
 
-    message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text) if counter_id.present? && ["call", "recall"].include?(action)
+    message = if counter_id.present? && action == "call"
+      message.merge!(current_queue_in_counter_text: current_queue_in_counter_text)
+    elsif counter_id.present? && action == "recall"
+      message.merge!(current_queue_in_counter_text: current_queue_in_counter_text_for_recall)
+    end
     message = message.merge!(play_voice_queue_text: play_voice_queue_text) if ["call", "recall"].include? action
     message = message.merge!(queue_number_to_print: queue_number_to_print) if action == "print_ticket"
 

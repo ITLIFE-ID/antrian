@@ -48238,6 +48238,8 @@
               } else {
                 (0, import_jquery4.default)("#recall").attr("data-id", data.id);
                 (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
+                console.log("aduhai", data);
+                (0, import_jquery4.default)("#current_queue").attr("data-id", data.id);
                 toast(data.message, data.status);
               }
             }
@@ -48264,6 +48266,7 @@
         const message = new import_paho_mqtt.default.Message(JSON.stringify(import_jquery4.default.extend({}, data, payload)));
         message.destinationName = MQTT_CHANNEL;
         client.send(message);
+        console.log("send_message", JSON.stringify(import_jquery4.default.extend({}, data, payload)));
         if (action != "check_server")
           toast("Process to " + action);
       }
