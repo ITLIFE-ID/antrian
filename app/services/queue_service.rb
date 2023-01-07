@@ -52,10 +52,7 @@ class QueueService < ApplicationService
   end
 
   def next_queue_number
-    TodayQueue.last_queue_in_service(counter)&.first
-      .try(:first)
-      .try(:number)
-      .to_i + 1
+    TodayQueue.last_queue_in_service(service)&.first&.number.to_i + 1
   end
 
   def number_to_text

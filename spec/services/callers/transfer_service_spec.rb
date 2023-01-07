@@ -88,7 +88,7 @@ RSpec.describe Callers::TransferService, type: :service do
       expect(@result.current_queue_in_counter_text).to eq(nil)
       expect(@result.play_voice_queue_text).to eq(nil)
       expect(@result.queue_number_to_print).to eq(nil)
-      expect(TodayQueue.count).to eq(2)
+      expect(TodayQueue.count).to eq(3)
       expect(TodayQueue.last.service).to eq(@service2)
     end
   end

@@ -102,28 +102,55 @@ RSpec.describe PrintTicketService, type: :service do
     end
   end
 
-  context "Normal condition" do
+  describe "Normal condition" do
     before {
       @print_ticket = described_class.execute(**@print_ticket_at_kiosk)
       @result = OpenStruct.new(@print_ticket.result)
+
+      @print_ticket2 = described_class.execute(**@print_ticket_at_kiosk)
+      @result2 = OpenStruct.new(@print_ticket2.result)
     }
-    it "success to add new queue" do
-      expect(@print_ticket.success?).to be true
+
+    context "First time print" do
+      it "success to add new queue" do
+        expect(@print_ticket.success?).to be true
+      end
+
+      it "should contains expected values" do
+        expect(@result.from).to eq(:server)
+        expect(@result.action).to eq(:print_ticket)
+        expect(@result.service_id).to eq(@service.id)
+        expect(@result.counter_id).to eq(nil)
+        expect(@result.total_queue_left).to eq(1)
+        expect(@result.total_offline_queues).to eq(1)
+        expect(@result.total_online_queues).to eq(0)
+        expect(@result.missed_queues).to eq([])
+        expect(@result.missed_queues_count).to eq(0)
+        expect(@result.current_queue_in_counter_text).to eq(nil)
+        expect(@result.play_voice_queue_text).to eq(nil)
+        expect(@result.queue_number_to_print).to eq("#{@service.letter} 001")
+      end
     end
 
-    it "should contains expected values" do
-      expect(@result.from).to eq(:server)
-      expect(@result.action).to eq(:print_ticket)
-      expect(@result.service_id).to eq(@service.id)
-      expect(@result.counter_id).to eq(nil)
-      expect(@result.total_queue_left).to eq(1)
-      expect(@result.total_offline_queues).to eq(1)
-      expect(@result.total_online_queues).to eq(0)
-      expect(@result.missed_queues).to eq([])
-      expect(@result.missed_queues_count).to eq(0)
-      expect(@result.current_queue_in_counter_text).to eq(nil)
-      expect(@result.play_voice_queue_text).to eq(nil)
-      expect(@result.queue_number_to_print).to eq("#{@service.letter} 001")
+    context "Second time print" do
+      it "success to add new queue" do
+        expect(@print_ticket2.success?).to be true
+      end
+
+      it "should contains expected values" do
+        expect(@result2.from).to eq(:server)
+        expect(@result2.action).to eq(:print_ticket)
+        expect(@result2.service_id).to eq(@service.id)
+        expect(@result2.counter_id).to eq(nil)
+        expect(@result2.total_queue_left).to eq(2)
+        expect(@result2.total_offline_queues).to eq(2)
+        expect(@result2.total_online_queues).to eq(0)
+        expect(@result2.missed_queues).to eq([])
+        expect(@result2.missed_queues_count).to eq(0)
+        expect(@result2.current_queue_in_counter_text).to eq(nil)
+        expect(@result2.play_voice_queue_text).to eq(nil)
+        expect(@result2.queue_number_to_print).to eq("#{@service.letter} 002")
+      end
     end
   end
 end
