@@ -1,5 +1,5 @@
 class QueueService < ApplicationService
-  attr_accessor :id, :counter_id, :date, :print_ticket_location, :service_id, :attend, :transfer
+  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer
 
   def company
     @company ||= service.company
@@ -25,6 +25,14 @@ class QueueService < ApplicationService
     @current_queue ||= TodayQueue.current_queue(counter)
   end
 
+  def queue_left
+    @queue_left ||= TodayQueue.total_queue_left(service)
+  end
+
+  def total_queue_left
+    @total_queue_left ||= queue_left&.count.to_i
+  end
+
   def user_attend_to_counter
     attend || false
   end
@@ -39,46 +47,31 @@ class QueueService < ApplicationService
     Terbilang.convert(counter&.number)&.upcase
   end
 
-  def last_queue_in_counter
-    @last_queue_in_counter ||= TodayQueue.current_queue(counter)
-  end
-
-  def last_queue_in_service
-    @last_queue_in_service ||= TodayQueue.last_queue_in_service(counter)&.first
-  end
-
-  def available_priority_queue_to_call
-    @available_priority_queue_to_call ||= TodayQueue.total_queue_left(service).where(priority: true).order(id: :asc).limit(1)
-  end
-
   def available_queue_to_call
-    @available_queue_to_call ||= available_priority_queue_to_call&.first || TodayQueue.last_queue_in_service(counter)&.first
+    queue_left.where(priority: true)&.first || queue_left.where(priority: false)&.first
   end
 
   def next_queue_number
-    last_queue_number = TodayQueue.last_queue_in_service(counter)&.first.try(:first).try(:number).to_i
-
-    last_queue_number + 1
-  end
-
-  def total_queue_left
-    @total_queue_left ||= TodayQueue.total_queue_left(service)&.count.to_i
-  end
-
-  def letter
-    @letter ||= last_queue_in_counter.first&.letter || service.letter
-  end
-
-  def number
-    @number ||= last_queue_in_counter.first&.number.to_i
+    TodayQueue.last_queue_in_service(counter)&.first
+      .try(:first)
+      .try(:number)
+      .to_i + 1
   end
 
   def number_to_text
-    @number_to_text ||= Terbilang.convert(number).upcase
+    Terbilang.convert(number).upcase
+  end
+
+  def number
+    current_queue&.first&.number
+  end
+
+  def letter
+    current_queue&.first&.letter
   end
 
   def current_queue_in_counter_text
-    @current_queue_in_counter_text ||= queue_number_formater(letter, number)
+    queue_number_formater(letter, number)
   end
 
   def is_date_today?
@@ -96,7 +89,7 @@ class QueueService < ApplicationService
         play_voice_queue_text: play_voice_queue_text,
         service_id: service_id,
         counter_id: counter_id,
-        total_queue_left: TodayQueue.total_queue_left(service).count.to_i,
+        total_queue_left: total_queue_left&.count&.to_i,
         total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
         total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
         missed_queues: missed_queues,

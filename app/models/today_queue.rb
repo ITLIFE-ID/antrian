@@ -67,7 +67,7 @@ class TodayQueue < ApplicationRecord
 
   scope :missed_queues, ->(service) { total_queue(service).where.not(counter_id: nil).where(attend: false) }
   scope :total_queue_left, ->(service) { total_queue(service).where(attend: false, counter: nil) }
-  scope :last_queue_in_service, ->(service) { total_queue_left(service).order(id: :desc).limit(1) }
+  scope :last_queue_in_service, ->(service) { total_queue_left(service).order(id: :asc).limit(1) }
   scope :current_queue, ->(counter) { where(date: Date.today, counter: counter).order(id: :desc).limit(1) }
   scope :total_processed, ->(service) { total_queue(service).where(attend: true).where.not(finish_time: nil) }
   scope :total_unprocessed, ->(service) { total_queue(service).where(attend: false, finish_time: nil) }

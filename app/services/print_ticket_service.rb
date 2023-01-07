@@ -60,11 +60,11 @@ class PrintTicketService < QueueService
 
   def may_i_print_ticket?
     is_service_exists?
+    is_company_working_this_day?
+    is_service_working_this_day?
     is_company_close_this_day?
     is_service_close_this_day?
     is_service_temporary_closed?
-    is_company_working_this_day?
-    is_service_working_this_day?
     is_quota_exceed?
   end
 end
