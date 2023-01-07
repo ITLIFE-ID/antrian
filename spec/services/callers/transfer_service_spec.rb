@@ -19,9 +19,9 @@ RSpec.describe Callers::TransferService, type: :service do
       create(:working_day_for_service, workable: @service2, day: d)
     end
 
-    @first_queue = PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)
-    PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)
-    Callers::CallService.execute(counter_id: @counter)
+    @first_queue = PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service.id)
+    PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service.id)
+    Callers::CallService.execute(counter_id: @counter.id)
   end
 
   context "is_queue_exists?" do
@@ -37,6 +37,13 @@ RSpec.describe Callers::TransferService, type: :service do
       expect(transfer.errors.added?(:base, I18n.t(".service_not_found"))).to be true
     end
   end
+
+  context "is_current_service_same_to_target?" do
+    it "add and error" do
+      transfer = described_class.execute(id: TodayQueue.first.id, service_id: @service.id, counter_id: @counter.id, transfer: 1)      
+      expect(transfer.errors.added?(:base, I18n.t(".current_service_same_to_target", value: @service.name))).to be true
+    end
+  end  
 
   context "is_service_close_this_day?" do
     it "add and error" do
@@ -68,10 +75,10 @@ RSpec.describe Callers::TransferService, type: :service do
 
   context "Normal condition" do
     before {
-      @transfer = described_class.execute(id: TodayQueue.first.id, service_id: @service2.id, transfer: true)
+      @transfer = described_class.execute(id: TodayQueue.first.id, counter_id: @counter.id, service_id: @service2.id, transfer: true)
       @result = OpenStruct.new(@transfer.result)
     }
-    it "success to add new queue" do
+    it "success to add new queue" do      
       expect(@transfer.success?).to be true
     end
 
@@ -79,7 +86,7 @@ RSpec.describe Callers::TransferService, type: :service do
       expect(@result.from).to eq(:server)
       expect(@result.action).to eq(:transfer)
       expect(@result.service_id).to eq(@service2.id)
-      expect(@result.counter_id).to eq(nil)
+      expect(@result.counter_id).to eq(@counter.id)
       expect(@result.total_queue_left).to eq(1)
       expect(@result.total_offline_queues).to eq(1)
       expect(@result.total_online_queues).to eq(0)

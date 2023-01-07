@@ -18,7 +18,7 @@ class MQTTSubscriber
           when "recall"
             Callers::RecallService.execute(message_json)
           when "transfer"
-            Callers::RecallService.execute(message_json)
+            Callers::TransferService.execute(message_json)
           when "check_server"
             publish_server_ready(message)
           end

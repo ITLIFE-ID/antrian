@@ -199,4 +199,8 @@ class QueueService < ApplicationService
   def is_service_working_this_day?
     raise I18n.t(".service_is_closed", value: Date::DAYNAMES[selected_date.wday]) if is_not_working_day?(service)
   end
+
+  def is_current_service_same_to_target?
+    raise I18n.t(".current_service_same_to_target", value: service.name) if counter.service == service
+  end
 end

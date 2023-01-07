@@ -62,6 +62,7 @@ module Callers
       is_service_exists?
       is_service_close_this_day?
       is_service_temporary_closed?
+      is_current_service_same_to_target?
     end
 
     def transfer_queue_attributes

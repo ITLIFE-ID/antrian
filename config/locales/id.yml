@@ -51,6 +51,7 @@ id:
   past_queue_performance: Performa antrian sebelumnya
   today_queue_performance: Performa antrian hari ini
   past_queue_user_satisfaction: Tingkat kepuasan antrian sebelumnya
+  current_service_same_to_target: "Layanan target adalah %{value}, tidak boleh sama dengan data sebelumnya"
   types: Tipe
   caller: Tombol panggil
   working_days: Hari Kerja
