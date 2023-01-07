@@ -70,6 +70,7 @@ module Callers
         attend: false,
         print_ticket_time: Time.current,
         print_ticket_location: "counter-transver",
+        print_ticket_method: "offline",
         priority: service.priority,
         service_type_slug: service.service_type.slug,
         start_time: nil,
