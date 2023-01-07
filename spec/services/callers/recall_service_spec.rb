@@ -38,9 +38,28 @@ RSpec.describe Callers::RecallService, type: :service do
   end
 
   context "Normal condition" do
+    before {
+      @recall_queue = described_class.execute(counter_id: @counter.id, id: TodayQueue.last.id, service_id: @service.id)
+      @result = OpenStruct.new(@recall_queue.result)
+    }
+
     it "success to call next queue" do
-      recall_queue = described_class.execute(counter_id: @counter, id: TodayQueue.last.id)
-      expect(recall_queue.success?).to be true
+      expect(@recall_queue.success?).to be true
+    end
+
+    it "should contains expected values" do
+      expect(@result.from).to eq(:server)
+      expect(@result.action).to eq(:recall)
+      expect(@result.service_id).to eq(@service.id)
+      expect(@result.counter_id).to eq(@counter.id)
+      expect(@result.total_queue_left).to eq(0)
+      expect(@result.total_offline_queues).to eq(1)
+      expect(@result.total_online_queues).to eq(0)
+      expect(@result.missed_queues.any?).to be true
+      expect(@result.missed_queues_count).to eq(1)
+      expect(@result.current_queue_in_counter_text).to eq("#{@service.letter} 001")
+      expect(@result.play_voice_queue_text).to eq("NOMOR_ANTRIAN #{@service.letter} #{Terbilang.convert(TodayQueue.first.number)&.upcase} SILAHKAN_MENUJU #{@service.service_type.slug} #{Terbilang.convert(@counter.number)&.upcase}")
+      expect(@result.queue_number_to_print).to eq(nil)
     end
   end
 end

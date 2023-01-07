@@ -67,9 +67,27 @@ RSpec.describe Callers::TransferService, type: :service do
   end
 
   context "Normal condition" do
-    it "success to add tramsfer queue" do
-      transfer = described_class.execute(id: TodayQueue.first, service_id: @service2, transfer: 1)
-      expect(transfer.success?).to be true
+    before {
+      @transfer = described_class.execute(id: TodayQueue.first.id, service_id: @service2.id, transfer: true)
+      @result = OpenStruct.new(@transfer.result)
+    }
+    it "success to add new queue" do
+      expect(@transfer.success?).to be true
+    end
+
+    it "should contains expected values" do
+      expect(@result.from).to eq(:server)
+      expect(@result.action).to eq(:transfer)
+      expect(@result.service_id).to eq(@service2.id)
+      expect(@result.counter_id).to eq(nil)
+      expect(@result.total_queue_left).to eq(2)
+      expect(@result.total_offline_queues).to eq(2)
+      expect(@result.total_online_queues).to eq(0)
+      expect(@result.missed_queues.any?).to be true
+      expect(@result.missed_queues_count).to eq(2)
+      expect(@result.current_queue_in_counter_text).to eq(nil)
+      expect(@result.play_voice_queue_text).to eq(nil)
+      expect(@result.queue_number_to_print).to eq("#{@service.letter} 001")
     end
   end
 end

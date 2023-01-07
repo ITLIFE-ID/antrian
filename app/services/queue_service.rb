@@ -29,7 +29,7 @@ class QueueService < ApplicationService
     TodayQueue.total_queue_left(service)
   end
 
-  def total_queue_left    
+  def total_queue_left
     queue_left&.count&.to_i
   end
 

@@ -47,7 +47,7 @@ module Callers
 
         new_queue = TodayQueue.create!(transfer_queue_attributes)
 
-        raise ActiveRecord::Rollback unless new_queue.blank?
+        raise ActiveRecord::Rollback if new_queue.blank?
 
         @result = mqtt_publish!("transfer")
       end
@@ -66,6 +66,7 @@ module Callers
 
     def transfer_queue_attributes
       find_queue_by_id.attributes.merge!(
+        id: nil,
         attend: false,
         print_ticket_time: Time.current,
         print_ticket_location: "counter-transver",

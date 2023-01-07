@@ -11,7 +11,7 @@ RSpec.describe PrintTicketService, type: :service do
     @company = Company.first
     @service = Service.first
 
-    @print_ticket_at_kiosk = {print_ticket_location: :kiosk, service_id: @service}
+    @print_ticket_at_kiosk = {print_ticket_location: :kiosk, service_id: @service.id}
     (1..6).each do |d|
       create(:working_day_for_company, workable: @company, day: d)
       create(:working_day_for_service, workable: @service, day: d)
@@ -111,10 +111,10 @@ RSpec.describe PrintTicketService, type: :service do
       expect(@print_ticket.success?).to be true
     end
 
-    it "should contains expected values" do           
+    it "should contains expected values" do
       expect(@result.from).to eq(:server)
       expect(@result.action).to eq(:print_ticket)
-      expect(@result.service_id).to eq(@service)
+      expect(@result.service_id).to eq(@service.id)
       expect(@result.counter_id).to eq(nil)
       expect(@result.total_queue_left).to eq(1)
       expect(@result.total_offline_queues).to eq(1)
