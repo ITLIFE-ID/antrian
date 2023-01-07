@@ -120,7 +120,7 @@ class QueueService < ApplicationService
       <td>#{queue_number}<span class='ml-2 badge #{badge}'>#{x.print_ticket_method}</span></td>
       <td>#{priority}</td>
       <td>
-        <button type='button' class='btn btn-info font-weight-bolder w-100'>Panggil Ulang</button>
+        <button type='button' class='btn btn-info font-weight-bolder w-100' onClick='history.go(0)'>Panggil ulang pencet 2x</button>
       </td>
     </tr>"
     end
