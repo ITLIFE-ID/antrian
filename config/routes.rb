@@ -51,17 +51,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: 1) do
-      scope :caller do
-        post :call
-        post :recall
-        post :transfer
-      end
-
-      resources :client_displays do
-        get :preload
-      end
-
-      resources :tickets, only: %i[index create show]
+      resources :load_configs, only: [:index]
+      resources :digital_receipts, only: [:index]
     end
   end
 end

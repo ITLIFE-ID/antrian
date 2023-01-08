@@ -60,11 +60,11 @@ class QueueService < ApplicationService
   end
 
   def number
-    current_queue&.first&.number
+    find_queue_by_id&.number || current_queue&.first&.number
   end
 
   def letter
-    current_queue&.first&.letter
+    find_queue_by_id&.letter || current_queue&.first&.letter
   end
 
   def current_queue_in_counter_text
@@ -90,18 +90,16 @@ class QueueService < ApplicationService
       total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
       total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
       missed_queues: missed_queues,
-      missed_queues_count: TodayQueue.missed_queues(service).count
+      missed_queues_count: TodayQueue.missed_queues(service).count,
+
+      queue_number_to_print: queue_number_to_print
     }
 
-    if counter_id.present? && action == "call"
-      message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text)
-    elsif counter_id.present? && action == "recall"
-      message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text_for_recall)
-    end
-
-    message = message.merge!(play_voice_queue_text: play_voice_queue_text) if ["call", "recall"].include? action
-    message = message.merge!(queue_number_to_print: queue_number_to_print) if action == "print_ticket"
     message = message.merge!(target_service_id: service_id) if action == "transfer"
+    if ["call", "recall"].include? action
+      message = message.merge!(play_voice_queue_text: play_voice_queue_text)
+      message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text)
+    end
 
     if Rails.env.test?
       message

@@ -17,6 +17,8 @@ RSpec.describe Callers::RecallService, type: :service do
     end
 
     PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)
+    PrintTicketService.execute(print_ticket_location: :kiosk, service_id: @service)
+    Callers::CallService.execute(counter_id: @counter)
     Callers::CallService.execute(counter_id: @counter)
   end
 
@@ -39,8 +41,9 @@ RSpec.describe Callers::RecallService, type: :service do
 
   context "Normal condition" do
     before {
-      @recall_queue = described_class.execute(counter_id: @counter.id, id: TodayQueue.last.id, service_id: @service.id)
+      @recall_queue = described_class.execute(counter_id: @counter.id, id: TodayQueue.first.id, service_id: @service.id)
       @result = OpenStruct.new(@recall_queue.result)
+      @first_queue = TodayQueue.first
     }
 
     it "success to call next queue" do
@@ -52,14 +55,14 @@ RSpec.describe Callers::RecallService, type: :service do
       expect(@result.action).to eq(:recall)
       expect(@result.service_id).to eq(@service.id)
       expect(@result.counter_id).to eq(@counter.id)
-      expect(@result.id).to eq(TodayQueue.last.id)
+      expect(@result.id).to eq(@first_queue.id)
       expect(@result.total_queue_left).to eq(0)
-      expect(@result.total_offline_queues).to eq(1)
+      expect(@result.total_offline_queues).to eq(2)
       expect(@result.total_online_queues).to eq(0)
       expect(@result.missed_queues.any?).to be true
-      expect(@result.missed_queues_count).to eq(1)
+      expect(@result.missed_queues_count).to eq(2)
       expect(@result.current_queue_in_counter_text).to eq("#{@service.letter} 001")
-      expect(@result.play_voice_queue_text).to eq("NOMOR_ANTRIAN #{@service.letter} #{Terbilang.convert(TodayQueue.first.number)&.upcase} SILAHKAN_MENUJU #{@service.service_type.slug} #{Terbilang.convert(@counter.number)&.upcase}")
+      expect(@result.play_voice_queue_text).to eq("NOMOR_ANTRIAN #{@service.letter} #{Terbilang.convert(@first_queue.number)&.upcase} SILAHKAN_MENUJU #{@service.service_type.slug} #{Terbilang.convert(@counter.number)&.upcase}")
       expect(@result.queue_number_to_print).to eq(nil)
     end
   end
