@@ -68,7 +68,7 @@
   <div class="row mt-3">
     <div class="col-4">
       <select id="service">
-        <%@services.each do |s|%>
+        <%@services&.each do |s|%>
           <option value="<%=s.id%>"><%=s.name%></option>
         <%end%>
       </select>

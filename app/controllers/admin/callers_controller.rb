@@ -8,7 +8,7 @@ module Admin
 
     def index
       @counters = Counter.where(service: @current_company.services)
-      @services = @current_company.services
+      @services = @current_company.services.where.not(id: @selected_counter.service.id) if @selected_counter.present?
       @missed_queues = TodayQueue.missed_queues(@selected_counter&.service)
       @current_queue = TodayQueue.current_queue(@selected_counter).first if @selected_counter.present?
       @total_queue_left = TodayQueue.total_queue_left(@selected_counter&.service).count

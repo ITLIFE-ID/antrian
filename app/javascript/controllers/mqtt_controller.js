@@ -98,25 +98,19 @@ export default class extends Controller {
       console.log("onMessageArrived:"+message.payloadString);
     }
 
-    function send_message(action, payload){
-      let target_service_id
-
-      if(action == "transfer"){
-        target_service_id = $("#service").val()
-      }        
-      else{
-        target_service_id = service_id
-      }
-        
+    function send_message(action, payload){      
       const queue_id = $("#current_queue").attr("data-id")
       const counter_id = $("#counter").attr("data-id") 
+      const target_service_id = action == "transfer" ? $("#service").val() : service_id
+      const date = action == "transfer" ? $("#date").val() : null
 
       const data = {
         from: "caller",
         action: action,
         id: queue_id,
         counter_id: counter_id,
-        service_id: target_service_id             
+        service_id: target_service_id,
+        date: date          
       }
 
       const message = new Paho.Message(JSON.stringify($.extend({}, data, payload)));
@@ -128,11 +122,20 @@ export default class extends Controller {
       if(action != "check_server") toast("Process to "+action)      
     }
 
-    function change_status(element, message){
-      $(element)
-      .addClass("alert-success")
-      .removeClass("alert-danger")
-      .html(message)
+    function change_status(element, message, status = "success"){
+      if(status == "success"){
+        $(element)
+          .addClass("alert-success")
+          .removeClass("alert-danger")
+          .html(message)
+      }
+      else{
+        $(element)
+          .addClass("alert-danger")
+          .removeClass("alert-success")
+          .html(message)
+      }
+      
     }
 
     function check_server(){            

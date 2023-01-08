@@ -74,9 +74,9 @@ class TodayQueue < ApplicationRecord
   scope :total_offline_queue, ->(service) { total_queue(service).where(print_ticket_method: "offline") }
   scope :total_online_queue, ->(service) { total_queue(service).where(print_ticket_method: "online") }
 
-  scope :total_future_queue, ->(service) { where("date > ?", Date.today, service: services) }
-  scope :total_future_offline_queue, ->(service) { total_future_queue(service).where(print_ticket_method: "offline") }
-  scope :total_future_online_queue, ->(service) { total_future_queue(service).where(print_ticket_method: "online") }
+  scope :total_future_queue, -> { where("date > ?", Date.today) }
+  scope :total_future_offline_queue, -> { total_future_queue.where(print_ticket_method: "offline") }
+  scope :total_future_online_queue, -> { total_future_queue.where(print_ticket_method: "online") }
 
   scope :performance, ->(service) {
     today_queue ||= total_queue(service).select { |x| x.process_duration.present? }

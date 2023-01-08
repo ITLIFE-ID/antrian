@@ -48248,20 +48248,17 @@
         console.log("onMessageArrived:" + message.payloadString);
       }
       function send_message(action, payload) {
-        let target_service_id;
-        if (action == "transfer") {
-          target_service_id = (0, import_jquery4.default)("#service").val();
-        } else {
-          target_service_id = service_id;
-        }
         const queue_id = (0, import_jquery4.default)("#current_queue").attr("data-id");
         const counter_id2 = (0, import_jquery4.default)("#counter").attr("data-id");
+        const target_service_id = action == "transfer" ? (0, import_jquery4.default)("#service").val() : service_id;
+        const date = action == "transfer" ? (0, import_jquery4.default)("#date").val() : null;
         const data = {
           from: "caller",
           action,
           id: queue_id,
           counter_id: counter_id2,
-          service_id: target_service_id
+          service_id: target_service_id,
+          date
         };
         const message = new import_paho_mqtt.default.Message(JSON.stringify(import_jquery4.default.extend({}, data, payload)));
         message.destinationName = MQTT_CHANNEL;
@@ -48270,8 +48267,12 @@
         if (action != "check_server")
           toast("Process to " + action);
       }
-      function change_status(element, message) {
-        (0, import_jquery4.default)(element).addClass("alert-success").removeClass("alert-danger").html(message);
+      function change_status(element, message, status = "success") {
+        if (status == "success") {
+          (0, import_jquery4.default)(element).addClass("alert-success").removeClass("alert-danger").html(message);
+        } else {
+          (0, import_jquery4.default)(element).addClass("alert-danger").removeClass("alert-success").html(message);
+        }
       }
       function check_server() {
         change_status("#mqtt-alert", "Berhasil konek ke server");
