@@ -24,12 +24,13 @@ export default class extends Controller {
       check_server()
 
       $("#call").click(function(){  
-        if($('#current_queue').attr("data-id") == ""){
+        let current_queue = $("#current_queue")
+        if(current_queue.attr("data-id") == ""){
           return send_message("call", {attend: null})
         }
         
         Swal.fire({
-          title: 'Apakah hadir di loket?',          
+          title: 'Apakah antrian '+current_queue.html()+' hadir di loket?',          
           icon: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',

@@ -48184,11 +48184,12 @@
         client.subscribe(MQTT_CHANNEL);
         check_server();
         (0, import_jquery4.default)("#call").click(function() {
-          if ((0, import_jquery4.default)("#current_queue").attr("data-id") == "") {
+          let current_queue = (0, import_jquery4.default)("#current_queue");
+          if (current_queue.attr("data-id") == "") {
             return send_message("call", { attend: null });
           }
           import_sweetalert2.default.fire({
-            title: "Apakah hadir di loket?",
+            title: "Apakah antrian " + current_queue.html() + " hadir di loket?",
             icon: "question",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
