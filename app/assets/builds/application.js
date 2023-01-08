@@ -48206,7 +48206,21 @@
           send_message("recall", { id: (0, import_jquery4.default)(this).attr("data-id") });
         });
         (0, import_jquery4.default)("#transfer").click(function() {
-          send_message("transfer", { transfer: true });
+          let current_queue = (0, import_jquery4.default)("#current_queue").html();
+          let service_name = (0, import_jquery4.default)("#service option:selected").text();
+          let date = (0, import_jquery4.default)("#date").val();
+          import_sweetalert2.default.fire({
+            title: "Apakah antrian " + current_queue + " akan di pindahkan ke layanan " + service_name + " pada tanggal " + date,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak"
+          }).then((result) => {
+            if (result.isConfirmed)
+              send_message("transfer", { transfer: true });
+          });
         });
         (0, import_jquery4.default)("#print_ticket").click(function() {
           if (counter_id == "")
@@ -48230,8 +48244,10 @@
             (0, import_jquery4.default)("#total_queue_left").html(data.total_queue_left);
             (0, import_jquery4.default)("#total_offline_queues").html(data.total_offline_queues);
             (0, import_jquery4.default)("#total_online_queues").html(data.total_online_queues);
-            (0, import_jquery4.default)("#missed_queues").html(data.missed_queues);
-            (0, import_jquery4.default)("#missed_queues_count").html(data.missed_queues_count);
+            if (data.action != "transfer") {
+              (0, import_jquery4.default)("#missed_queues").html(data.missed_queues);
+              (0, import_jquery4.default)("#missed_queues_count").html(data.missed_queues_count);
+            }
             if (counter_id == data.counter_id) {
               if (data.action == "ready") {
                 change_status("#server-alert", data.message);
@@ -48239,10 +48255,10 @@
                 (0, import_jquery4.default)("#recall").attr("data-id", data.id);
                 (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
                 (0, import_jquery4.default)("#current_queue").attr("data-id", data.id);
-                toast(data.message, data.status);
               }
             }
           }
+          toast(data.message, data.status);
         }
         console.log("onMessageArrived:" + message.payloadString);
       }

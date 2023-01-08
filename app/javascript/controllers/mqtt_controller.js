@@ -47,7 +47,22 @@ export default class extends Controller {
       });
 
       $("#transfer").click(function(){  
-        send_message("transfer", {transfer: true})
+        let current_queue = $("#current_queue").html()
+        let service_name = $("#service option:selected").text()
+        let date = $("#date").val()
+        Swal.fire({
+          title: 'Apakah antrian '+current_queue+ " akan di pindahkan ke layanan "+service_name+" pada tanggal "+date,          
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Tidak'
+        }).then((result) => {
+          if (result.isConfirmed) send_message("transfer", {transfer: true})          
+        })   
+
+        
       });
 
       $("#print_ticket").click(function(){
@@ -77,9 +92,11 @@ export default class extends Controller {
           $("#total_queue_left").html(data.total_queue_left)
           $("#total_offline_queues").html(data.total_offline_queues)
           $("#total_online_queues").html(data.total_online_queues)
-          $("#missed_queues").html(data.missed_queues)
-          $("#missed_queues_count").html(data.missed_queues_count)
-
+          if(data.action != "transfer"){
+            $("#missed_queues").html(data.missed_queues)
+            $("#missed_queues_count").html(data.missed_queues_count)
+          }
+          
           if(counter_id == data.counter_id){
             if(data.action == "ready" ) {
               change_status("#server-alert", data.message)
@@ -87,11 +104,12 @@ export default class extends Controller {
             else{
               $("#recall").attr("data-id", data.id)
               $("#current_queue").html(data.current_queue_in_counter_text)
-              $("#current_queue").attr("data-id", data.id)
-              toast(data.message, data.status)
+              $("#current_queue").attr("data-id", data.id)              
             }        
           }
-        }              
+        }  
+        
+        toast(data.message, data.status)
       }
 
       console.log("onMessageArrived:"+message.payloadString);
