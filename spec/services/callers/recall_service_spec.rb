@@ -52,6 +52,7 @@ RSpec.describe Callers::RecallService, type: :service do
       expect(@result.action).to eq(:recall)
       expect(@result.service_id).to eq(@service.id)
       expect(@result.counter_id).to eq(@counter.id)
+      expect(@result.id).to eq(TodayQueue.last.id)
       expect(@result.total_queue_left).to eq(0)
       expect(@result.total_offline_queues).to eq(1)
       expect(@result.total_online_queues).to eq(0)

@@ -48,7 +48,7 @@ class QueueService < ApplicationService
   end
 
   def available_queue_to_call
-    queue_left.where(priority: true)&.first || queue_left.where(priority: false)&.first
+    @available_queue_to_call ||= queue_left.where(priority: true)&.first || queue_left.where(priority: false)&.first
   end
 
   def next_queue_number
@@ -71,7 +71,7 @@ class QueueService < ApplicationService
     queue_number_formater(letter, number)
   end
 
-  def current_queue_in_counter_text_for_recall    
+  def current_queue_in_counter_text_for_recall
     queue_number_formater(find_queue_by_id.letter, find_queue_by_id.number)
   end
 
@@ -79,13 +79,13 @@ class QueueService < ApplicationService
     selected_date == Date.today
   end
 
-  def mqtt_publish!(action, queue_number_to_print = nil)
+  def mqtt_publish!(action, queue_number_to_print = nil, current_queue_id = nil)
     message = {
       from: :server,
       action: action.to_sym,
-      service_id: service_id,
+      service_id: counter&.service&.id || service_id,
       counter_id: counter_id,
-      id: find_queue_by_id.id,
+      id: id || current_queue_id,
       total_queue_left: total_queue_left,
       total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
       total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
@@ -93,13 +93,15 @@ class QueueService < ApplicationService
       missed_queues_count: TodayQueue.missed_queues(service).count
     }
 
-    message = if counter_id.present? && action == "call"
-      message.merge!(current_queue_in_counter_text: current_queue_in_counter_text)
+    if counter_id.present? && action == "call"
+      message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text)
     elsif counter_id.present? && action == "recall"
-      message.merge!(current_queue_in_counter_text: current_queue_in_counter_text_for_recall)
+      message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text_for_recall)
     end
+
     message = message.merge!(play_voice_queue_text: play_voice_queue_text) if ["call", "recall"].include? action
     message = message.merge!(queue_number_to_print: queue_number_to_print) if action == "print_ticket"
+    message = message.merge!(target_service_id: service_id) if action == "transfer"
 
     if Rails.env.test?
       message

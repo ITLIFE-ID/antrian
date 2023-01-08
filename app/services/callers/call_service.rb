@@ -14,7 +14,7 @@ module Callers
 
       available_queue_to_call.update(counter: counter, start_time: Time.current)
 
-      @result = mqtt_publish!("call")
+      @result = mqtt_publish!("call", nil, available_queue_to_call.id)
     rescue => e
       return_errors(e)
     end

@@ -40,10 +40,10 @@ RSpec.describe Callers::TransferService, type: :service do
 
   context "is_current_service_same_to_target?" do
     it "add and error" do
-      transfer = described_class.execute(id: TodayQueue.first.id, service_id: @service.id, counter_id: @counter.id, transfer: 1)      
+      transfer = described_class.execute(id: TodayQueue.first.id, service_id: @service.id, counter_id: @counter.id, transfer: 1)
       expect(transfer.errors.added?(:base, I18n.t(".current_service_same_to_target", value: @service.name))).to be true
     end
-  end  
+  end
 
   context "is_service_close_this_day?" do
     it "add and error" do
@@ -78,15 +78,16 @@ RSpec.describe Callers::TransferService, type: :service do
       @transfer = described_class.execute(id: TodayQueue.first.id, counter_id: @counter.id, service_id: @service2.id, transfer: true)
       @result = OpenStruct.new(@transfer.result)
     }
-    it "success to add new queue" do      
+    it "success to add new queue" do
       expect(@transfer.success?).to be true
     end
 
     it "should contains expected values" do
       expect(@result.from).to eq(:server)
       expect(@result.action).to eq(:transfer)
-      expect(@result.service_id).to eq(@service2.id)
+      expect(@result.service_id).to eq(@counter.service.id)
       expect(@result.counter_id).to eq(@counter.id)
+      expect(@result.id).to eq(TodayQueue.first.id)
       expect(@result.total_queue_left).to eq(1)
       expect(@result.total_offline_queues).to eq(1)
       expect(@result.total_online_queues).to eq(0)
@@ -95,6 +96,7 @@ RSpec.describe Callers::TransferService, type: :service do
       expect(@result.current_queue_in_counter_text).to eq(nil)
       expect(@result.play_voice_queue_text).to eq(nil)
       expect(@result.queue_number_to_print).to eq(nil)
+      expect(@result.target_service_id).to eq(@service2.id)
       expect(TodayQueue.count).to eq(3)
       expect(TodayQueue.last.service).to eq(@service2)
     end
