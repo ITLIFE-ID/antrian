@@ -42,53 +42,52 @@ export default class extends Controller {
         })             
       });
       
-      $(".recall").click(function(){        
+      $(".recall").click(function(){
         send_message("recall", {id: $(this).attr("data-id")})
-      });      
-
-      $("#transfer").click(function(){              
-        send_message("transfer", {transfer: true})        
       });
 
-      $("#print_ticket").click(function(){        
+      $("#transfer").click(function(){  
+        send_message("transfer", {transfer: true})
+      });
+
+      $("#print_ticket").click(function(){
         if(counter_id == "") return alert("Pilih counter")
           
-        let data = {                               
+        let data = {         
           date: $("#date").val(),
-          print_ticket_location: "counter"          
+          print_ticket_location: "counter"
         }
 
-        send_message("print_ticket",data)        
+        send_message("print_ticket",data)
       });
     }
     
     // called when the client loses its connection
-    function onConnectionLost(responseObject) {
+    function onConnectionLost(responseObject){
       if (responseObject.errorCode !== 0) {
-        change_status("#mqtt-alert", "Koneksi ke server gagal, Mohon refresh browser")              
+        change_status("#mqtt-alert", "Koneksi ke server gagal, Mohon refresh browser")
       }
     }
 
     // called when a message arrives
-    function onMessageArrived(message) {      
+    function onMessageArrived(message){
       const data = JSON.parse(message.payloadString)
-      if(data.from == "server"){               
-        if(service_id == data.service_id){            
-          $("#total_queue_left").html(data.total_queue_left)  
-          $("#total_offline_queues").html(data.total_offline_queues)  
-          $("#total_online_queues").html(data.total_online_queues)  
-          $("#missed_queues").html(data.missed_queues)     
-          $("#missed_queues_count").html(data.missed_queues_count)     
+      if(data.from == "server"){
+        if(service_id == data.service_id){
+          $("#total_queue_left").html(data.total_queue_left)
+          $("#total_offline_queues").html(data.total_offline_queues)
+          $("#total_online_queues").html(data.total_online_queues)
+          $("#missed_queues").html(data.missed_queues)
+          $("#missed_queues_count").html(data.missed_queues_count)
 
-          if(counter_id == data.counter_id){    
+          if(counter_id == data.counter_id){
             if(data.action == "ready" ) {
               change_status("#server-alert", data.message)
             }
             else{
-              $("#recall").attr("data-id", data.id)  
-              $("#current_queue").html(data.current_queue_in_counter_text)     
-              console.log("aduhai", data)
-              $("#current_queue").attr("data-id", data.id)         
+              $("#recall").attr("data-id", data.id)
+              $("#current_queue").html(data.current_queue_in_counter_text)
+              $("#current_queue").attr("data-id", data.id)
               toast(data.message, data.status)
             }        
           }

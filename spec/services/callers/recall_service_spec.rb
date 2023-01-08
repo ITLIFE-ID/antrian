@@ -24,7 +24,7 @@ RSpec.describe Callers::RecallService, type: :service do
 
   context "is_counter_exists?" do
     it "add and error" do
-      recall_queue = described_class.execute(counter_id: 0)
+      recall_queue = described_class.execute(action: "recall", counter_id: 0)
       expect(recall_queue.errors.added?(:base, I18n.t(".counter_not_found"))).to be true
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe Callers::RecallService, type: :service do
     it "add and error" do
       TodayQueue.first.update(attend: true, finish_time: Time.current)
 
-      recall_queue = described_class.execute(counter_id: @counter)
+      recall_queue = described_class.execute(action: "recall", counter_id: @counter)
 
       expect(recall_queue.errors.added?(:base, I18n.t(".last_queue_not_available_to_recall"))).to be true
     end
@@ -41,7 +41,7 @@ RSpec.describe Callers::RecallService, type: :service do
 
   context "Normal condition" do
     before {
-      @recall_queue = described_class.execute(counter_id: @counter.id, id: TodayQueue.first.id, service_id: @service.id)
+      @recall_queue = described_class.execute(action: "recall", counter_id: @counter.id, id: TodayQueue.first.id, service_id: @service.id)
       @result = OpenStruct.new(@recall_queue.result)
       @first_queue = TodayQueue.first
     }

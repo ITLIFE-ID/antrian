@@ -48238,7 +48238,6 @@
               } else {
                 (0, import_jquery4.default)("#recall").attr("data-id", data.id);
                 (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
-                console.log("aduhai", data);
                 (0, import_jquery4.default)("#current_queue").attr("data-id", data.id);
                 toast(data.message, data.status);
               }

@@ -6,19 +6,19 @@ class MQTTSubscriber
       Rails.application.config.mqtt_connect.get(MQTT_CHANNEL) do |topic, message|
         return nil unless MQTT_CHANNEL == topic
 
-        message_json = JSON.parse(message).except!("from", "action")
+        message_as_json = JSON.parse(message)
         message = OpenStruct.new(JSON.parse(message))
 
         if message.from == "caller"
           response = case message.action
           when "print_ticket"
-            PrintTicketService.execute(message_json)
+            PrintTicketService.execute(message_as_json)
           when "call"
-            Callers::CallService.execute(message_json)
+            Callers::CallService.execute(message_as_json)
           when "recall"
-            Callers::RecallService.execute(message_json)
+            Callers::RecallService.execute(message_as_json)
           when "transfer"
-            Callers::TransferService.execute(message_json)
+            Callers::TransferService.execute(message_as_json)
           when "check_server"
             publish_server_ready(message)
           end

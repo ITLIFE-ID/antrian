@@ -1,5 +1,5 @@
 class QueueService < ApplicationService
-  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer, :result
+  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer, :result, :action, :from
 
   def company
     @company ||= service.company
@@ -60,11 +60,13 @@ class QueueService < ApplicationService
   end
 
   def number
-    find_queue_by_id&.number || current_queue&.first&.number
+    queue = (action == "call") ? current_queue&.first : find_queue_by_id
+    queue&.number
   end
 
   def letter
-    find_queue_by_id&.letter || current_queue&.first&.letter
+    queue = (action == "call") ? current_queue&.first : find_queue_by_id
+    queue&.letter
   end
 
   def current_queue_in_counter_text
@@ -89,17 +91,17 @@ class QueueService < ApplicationService
       total_queue_left: total_queue_left,
       total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
       total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
-      missed_queues: missed_queues,
       missed_queues_count: TodayQueue.missed_queues(service).count,
-
-      queue_number_to_print: queue_number_to_print
+      queue_number_to_print: queue_number_to_print,
+      missed_queues: missed_queues
     }
 
-    message = message.merge!(target_service_id: service_id) if action == "transfer"
     if ["call", "recall"].include? action
       message = message.merge!(play_voice_queue_text: play_voice_queue_text)
       message = message.merge!(current_queue_in_counter_text: current_queue_in_counter_text)
     end
+
+    message = message.merge!(target_service_id: service_id) if action == "transfer"
 
     if Rails.env.test?
       message
