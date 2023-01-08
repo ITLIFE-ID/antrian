@@ -87,7 +87,7 @@ class QueueService < ApplicationService
       action: action.to_sym,
       service_id: counter&.service&.id || service_id,
       counter_id: counter_id,
-      id: id || current_queue_id,
+      id: current_queue_id || id,
       total_queue_left: total_queue_left,
       total_offline_queues: TodayQueue.total_offline_queue(service).count.to_i,
       total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
