@@ -78,7 +78,8 @@ module Callers
         finish_time: nil,
         counter_id: nil,
         parent_id: find_queue_by_id.id,
-        service_id: service_id
+        service_id: service_id,
+        date: selected_date
       )
     end
   end

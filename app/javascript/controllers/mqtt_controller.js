@@ -89,10 +89,10 @@ export default class extends Controller {
       const data = JSON.parse(message.payloadString)
       if(data.from == "server"){
         if(service_id == data.service_id){
-          $("#total_queue_left").html(data.total_queue_left)
-          $("#total_offline_queues").html(data.total_offline_queues)
-          $("#total_online_queues").html(data.total_online_queues)
           if(data.action != "transfer"){
+            $("#total_queue_left").html(data.total_queue_left)
+            $("#total_offline_queues").html(data.total_offline_queues)
+            $("#total_online_queues").html(data.total_online_queues)          
             $("#missed_queues").html(data.missed_queues)
             $("#missed_queues_count").html(data.missed_queues_count)
           }

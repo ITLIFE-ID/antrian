@@ -73,7 +73,7 @@ RSpec.describe Callers::TransferService, type: :service do
     end
   end
 
-  context "Normal condition" do
+  context "Normal condition transfer same day" do
     before {
       @transfer = described_class.execute(id: TodayQueue.first.id, counter_id: @counter.id, service_id: @service2.id, transfer: true)
       @result = OpenStruct.new(@transfer.result)
@@ -99,6 +99,36 @@ RSpec.describe Callers::TransferService, type: :service do
       expect(@result.target_service_id).to eq(@service2.id)
       expect(TodayQueue.count).to eq(3)
       expect(TodayQueue.last.service).to eq(@service2)
+    end
+  end
+
+  context "Normal condition transfer future day" do
+    before {
+      @transfer = described_class.execute(id: TodayQueue.first.id, counter_id: @counter.id, service_id: @service2.id, transfer: true, date: (Date.today + 2.weeks).to_s)
+      @result = OpenStruct.new(@transfer.result)
+    }
+    it "success to add new queue" do
+      expect(@transfer.success?).to be true
+    end
+
+    it "should contains expected values" do
+      expect(@result.from).to eq(:server)
+      expect(@result.action).to eq(:transfer)
+      expect(@result.service_id).to eq(@counter.service.id)
+      expect(@result.counter_id).to eq(@counter.id)
+      expect(@result.id).to eq(TodayQueue.first.id)
+      expect(@result.total_queue_left).to eq(1)
+      expect(@result.total_offline_queues).to eq(1)
+      expect(@result.total_online_queues).to eq(0)
+      expect(@result.missed_queues.any?).to be false
+      expect(@result.missed_queues_count).to eq(0)
+      expect(@result.current_queue_in_counter_text).to eq(nil)
+      expect(@result.play_voice_queue_text).to eq(nil)
+      expect(@result.queue_number_to_print).to eq(nil)
+      expect(@result.target_service_id).to eq(@service2.id)
+      expect(TodayQueue.count).to eq(3)
+      expect(TodayQueue.last.service).to eq(@service2)
+      expect(TodayQueue.last.print_ticket_time).to eq(@service2)
     end
   end
 end

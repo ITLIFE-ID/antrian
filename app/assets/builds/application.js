@@ -48241,10 +48241,10 @@
         const data = JSON.parse(message.payloadString);
         if (data.from == "server") {
           if (service_id == data.service_id) {
-            (0, import_jquery4.default)("#total_queue_left").html(data.total_queue_left);
-            (0, import_jquery4.default)("#total_offline_queues").html(data.total_offline_queues);
-            (0, import_jquery4.default)("#total_online_queues").html(data.total_online_queues);
             if (data.action != "transfer") {
+              (0, import_jquery4.default)("#total_queue_left").html(data.total_queue_left);
+              (0, import_jquery4.default)("#total_offline_queues").html(data.total_offline_queues);
+              (0, import_jquery4.default)("#total_online_queues").html(data.total_online_queues);
               (0, import_jquery4.default)("#missed_queues").html(data.missed_queues);
               (0, import_jquery4.default)("#missed_queues_count").html(data.missed_queues_count);
             }
