@@ -1,15 +1,8 @@
 #include <ESP8266WiFi.h>
 // As client
-#include <WiFiClient.h>
-#include <ESP8266HTTPClient.h>
-
-//As Service
-#include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
-
 // As subscriber
 #include <PubSubClient.h>
-
 // P10 Library
 #include <DMDESP.h>
 #include <fonts/Arial_bold_14.h>
@@ -27,7 +20,11 @@ const char *mqtt_password = "public";
 const int mqtt_port = 14587;
 String client_id = "display-loket-1";
 
-//OLD will be removed
+//============================================OLD will be removed============================================
+#include <WiFiClient.h>
+#include <ESP8266HTTPClient.h>
+#include <ESP8266WebServer.h>
+
 bool OLD_VERSION = false;
 bool status;
 String HOST = "192.168.0.2";
@@ -41,7 +38,7 @@ String txt_display= "Starting";
 MDNSResponder mdns;
 ESP8266WebServer server(80);
 HTTPClient http;
-// OLD will be removed
+//============================================OLD will be removed============================================
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -52,7 +49,7 @@ DMDESP Disp(DISPLAYS_WIDE, DISPLAYS_HIGH);  // Jumlah Panel P10 yang digunakan (
 //Declare methods
 void draw_text(String, unsigned int, unsigned int, String);
 void draw_text_two_column(String, String);
-bool request(String);
+void request(String, bool);
 
 void setup() {
   Disp.start(); // Jalankan library DMDESP
@@ -66,19 +63,20 @@ void setup() {
     receive_request();
   }
   else{
-    // connect_to_mqtt_broker();
+    connect_to_mqtt_broker();
   }
 }
 
 void loop() {
-  Disp.loop(); // Jalankan Disp loop untuk refresh LED
+  Disp.loop();
   server.handleClient();    
 }
 
 void connect_to_wifi(){
   WiFi.begin(ssid, password);  
 
-  while (WiFi.status() != WL_CONNECTED) {            
+  while (WiFi.status() != WL_CONNECTED) {   
+    Serial.println("WIFI: CONNECTING");        
     delay(500);   
   }
 
@@ -86,26 +84,28 @@ void connect_to_wifi(){
 }
 
 void start_mdns(){
-  if (!mdns.begin(client_id)){
-    Serial.println("MDNS: CREATED");
-  }
+  if (mdns.begin("esp8266", WiFi.localIP())) Serial.println("MDNS: Success");
 }
 
 void receive_request(){
   server.on("/", []() { 
-    draw_text(server.arg("txt"), 0, 0, "big");
+    const String param = server.arg("txt");
+    server.send(200, "text/plain", "{" + param + "}");
+    draw_text(param, 0, 0, "big");
   });
 }
 
 void update_ip_address(){  
-  request(UPDATE_IP_ADDRESS_URL + "?ID="+ID+"&ip_address=" + WiFi.localIP().toString());    
+  const String ip_address= WiFi.localIP().toString();
+  const String url = UPDATE_IP_ADDRESS_URL + "?ID="+ID+"&ip_address=" + ip_address;
+  Serial.println("Update IP Address");
+  request(url, true);    
 }
 
 void get_last_queue_number(){  
-  status = request(GET_LAST_QUEUE_URL + "?display_loket_ID=" + ID);
-  if(status){
-    draw_text()
-  }
+  const String url = GET_LAST_QUEUE_URL + "?display_loket_ID=" + ID;
+  Serial.println("Get last queue number");
+  request(url, false);  
 }
 
 void connect_to_mqtt_broker(){
@@ -114,24 +114,26 @@ void connect_to_mqtt_broker(){
   client.setCallback(callback);
 
   while (!client.connected()) {            
-    draw_text_two_column("mqtt", "connecting");
-    delay(500);
+    draw_text_two_column("MQTT", "CONNECTING");    
 
     client_id += String(WiFi.macAddress());
 
     Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
 
     if (!client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {                
-      Serial.print("Mqtt failed state");
+      Serial.print("MQTT: STATE FAILED");
       Serial.print(" = ");
       Serial.print(client.state());
       status = "failed";        
     }
+
+    delay(500);
   }
+
+  Serial.println("MQTT: CONNECTED");
   // publish and subscribe  
   client.subscribe(topic);
-  client.publish(topic, "Hello mqtt");
-  draw_text_two_column("mqtt", status);
+  // client.publish(topic, "Hello mqtt");  
   delay(5000);
 }
 
@@ -146,17 +148,16 @@ void callback(char *topic, byte *payload, unsigned int length) {
   Serial.println("-----------------------");
 }
 
-void request(String address, bool draw_text){  
+void request(String address, bool must_draw_text){  
   http.begin(espClient, address);
   status = (http.GET() == HTTP_CODE_OK);
   const String response = http.getString();
   
-  if(draw_text) draw_text(response, 0, 0, "big")
+  if(must_draw_text) draw_text(response, 0, 0, "big");
   
-  Serial.print("REQUEST");
-  Serial.print("Request to -> ");
+  Serial.print("REQUEST TO ");
   Serial.print(address);
-  Serial.print("=");
+  Serial.print("->");
   Serial.print(response);
   http.end();
 }
@@ -166,7 +167,8 @@ void draw_text(String message, unsigned int x=0, unsigned int y=0, String size="
   else Disp.setFont(ElektronMart5x6);
   
   Disp.drawText(x, y, message);
-  Serial.println(message);
+  Serial.print("DrawText: ");
+  Serial.print(message);
 }
 
 void draw_text_two_column(String message1, String message2){
