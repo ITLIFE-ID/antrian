@@ -1,3 +1,5 @@
 {
-    "board": "esp8266:esp8266:nodemcuv2"
+    "board": "esp8266:esp8266:nodemcuv2",
+    "sketch": "display_led/p10_http/p10_http.ino",
+    "port": "/dev/tty.usbserial-10"
 }

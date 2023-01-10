@@ -6,18 +6,18 @@
 // P10 Library
 #include <DMDESP.h>
 #include <fonts/Arial_bold_14.h>
-#include <fonts/ElektronMart5x6.h>
+#include <fonts/ElektronMart6x8.h>
 
 // WiFi
 const char *ssid = "Dim Dim 2809"; // Enter your WiFi name
 const char *password = "123452828";  // Enter WiFi password
 
 // MQTT Broker
-const char *mqtt_broker = "4.tcp.ngrok.io";
+const char *mqtt_broker = "8.tcp.ngrok.io";
+const int mqtt_port = 10351;  
 const char *topic = "QUEUE_SYSTEM";
 const char *mqtt_username = "emqx";
 const char *mqtt_password = "public";
-const int mqtt_port = 14587;
 String client_id = "display-loket-1";
 
 //============================================OLD will be removed============================================
@@ -34,12 +34,11 @@ String BASE_URL = "http://" + HOST + "/ANTRIAN/smart/service/";
 String GET_LAST_QUEUE_URL = BASE_URL + "/esp/antrian_akhir_display_simple/";
 String UPDATE_IP_ADDRESS_URL = BASE_URL + "/display_loket/update/";
 String txt_display= "Starting";
-
-MDNSResponder mdns;
 ESP8266WebServer server(80);
 HTTPClient http;
 //============================================OLD will be removed============================================
 
+MDNSResponder mdns;
 WiFiClient espClient;
 PubSubClient client(espClient);
 #define DISPLAYS_WIDE 1 // Kolom Panel
@@ -52,6 +51,7 @@ void draw_text_two_column(String, String);
 void request(String, bool);
 
 void setup() {
+  Serial.begin(115200);
   Disp.start(); // Jalankan library DMDESP
   Disp.setBrightness(255); // 0-255    
   connect_to_wifi();
@@ -113,9 +113,7 @@ void connect_to_mqtt_broker(){
   client.setServer(mqtt_broker, mqtt_port);
   client.setCallback(callback);
 
-  while (!client.connected()) {            
-    draw_text_two_column("MQTT", "CONNECTING");    
-
+  while (!client.connected()) {                
     client_id += String(WiFi.macAddress());
 
     Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
@@ -130,10 +128,11 @@ void connect_to_mqtt_broker(){
     delay(500);
   }
 
+  draw_text_two_column("MQTT", "READY");    
   Serial.println("MQTT: CONNECTED");
   // publish and subscribe  
-  client.subscribe(topic);
-  // client.publish(topic, "Hello mqtt");  
+  client.publish(topic, "Hello mqtt");  
+  client.subscribe(topic);  
   delay(5000);
 }
 
@@ -146,6 +145,7 @@ void callback(char *topic, byte *payload, unsigned int length) {
   }
   Serial.println();
   Serial.println("-----------------------");
+  draw_text("HELMI", 0, 0, "big");
 }
 
 void request(String address, bool must_draw_text){  
@@ -164,11 +164,11 @@ void request(String address, bool must_draw_text){
 
 void draw_text(String message, unsigned int x=0, unsigned int y=0, String size="small"){
   if(size == "big") Disp.setFont(Arial_bold_14);  
-  else Disp.setFont(ElektronMart5x6);
+  else Disp.setFont(ElektronMart6x8);
   
   Disp.drawText(x, y, message);
   Serial.print("DrawText: ");
-  Serial.print(message);
+  Serial.println(message);
 }
 
 void draw_text_two_column(String message1, String message2){
