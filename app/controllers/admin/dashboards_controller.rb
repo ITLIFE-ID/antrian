@@ -90,11 +90,11 @@ module Admin
     end
 
     def start_date
-      params[:start_date].present? ? Date.parse(params[:start_date]).strftime("%Y-%m-%d") : Date.today
+      params[:start_date].present? ? Date.parse(params[:start_date]).strftime("%Y-%m-%d") : Date.today.to_s
     end
 
     def end_date
-      params[:start_date].present? ? Date.parse(params[:end_date]).strftime("%Y-%m-%d") : Date.today
+      params[:start_date].present? ? Date.parse(params[:end_date]).strftime("%Y-%m-%d") : Date.today.to_s
     end
   end
 end
