@@ -5,12 +5,12 @@ class MQTTSubscriber
     Thread.new do
       begin
         Rails.application.config.mqtt_connect.get(MQTT_CHANNEL) do |topic, message|
-          return nil unless MQTT_CHANNEL == topic
-
+          return unless MQTT_CHANNEL == topic          
+                    
           message_as_json = JSON.parse(message)
           message = OpenStruct.new(JSON.parse(message))
 
-          if message.from == "caller"
+          if ["caller", "kiosk"].include? message.from
             response = case message.action
             when "print_ticket"
               PrintTicketService.execute(message_as_json)
