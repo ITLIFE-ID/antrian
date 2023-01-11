@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_29_035743) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_185003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -163,8 +163,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_29_035743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "parent_id"
     t.index ["deleted_at"], name: "index_companies_on_deleted_at"
     t.index ["name"], name: "index_companies_on_name", unique: true
+    t.index ["parent_id"], name: "index_companies_on_parent_id"
   end
 
   create_table "counters", force: :cascade do |t|

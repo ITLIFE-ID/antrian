@@ -12,11 +12,13 @@
 #  phone_number :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  parent_id    :bigint
 #
 # Indexes
 #
 #  index_companies_on_deleted_at  (deleted_at)
 #  index_companies_on_name        (name) UNIQUE
+#  index_companies_on_parent_id   (parent_id)
 #
 require "rails_helper"
 
@@ -44,6 +46,18 @@ RSpec.describe Company, type: :model do
 
   it { should validate_numericality_of(:longitude).is_greater_than_or_equal_to(-180) }
   it { should validate_numericality_of(:longitude).is_less_than_or_equal_to(180) }
+
+  describe "#parent & #children" do
+    context "given a child has a parent" do
+      it "should be able to do parent tree" do
+        c1 = create(:company)
+        c2 = create(:company, parent: c1)
+
+        expect(c1.children).to include(c2)
+        expect(c2.parent).to eq c1
+      end
+    end
+  end
 
   describe "Phone number validation" do
     context "given string for phone number" do
