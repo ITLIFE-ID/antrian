@@ -31,7 +31,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis-rails", "~> 5.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -129,6 +129,7 @@ gem "phonelib"
 gem "prawn"
 gem "resolv"
 gem "rqrcode"
+gem "sentry-ruby"
 gem "sentry-rails"
 gem "terbilang"
 gem "to_bool"
@@ -139,7 +140,5 @@ gem "htmlbeautifier", "~> 1.4"
 gem "breadcrumbs_on_rails", "~> 4.1"
 gem "administrate-field-active_storage", "~> 0.4.1"
 gem "marcel", "~> 1.0"
-
 gem "wicked_pdf", "~> 2.6"
-
 gem "wkhtmltopdf-binary", "~> 0.12.6"
