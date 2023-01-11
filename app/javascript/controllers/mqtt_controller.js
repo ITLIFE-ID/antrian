@@ -95,12 +95,17 @@ export default class extends Controller {
             $("#total_offline_queues").html(data.total_offline_queues)
             $("#total_online_queues").html(data.total_online_queues)          
             $("#missed_queues").html(data.missed_queues)
-            $("#missed_queues_count").html(data.missed_queues_count)
-          }
+            $("#missed_queues_count").html(data.missed_queues_count)            
+          }          
           
           if(counter_id == data.counter_id){
             if(data.action == "ready" ) {
               change_status("#server-alert", data.message)
+            }
+            else if(data.action == "print_ticket"){
+              if(data.unique_number != "" || data.unique_number != null){
+                window.open("digital_receipts?unique_number="+data.unique_number)                
+              }
             }
             else{
               $("#recall").attr("data-id", data.id)

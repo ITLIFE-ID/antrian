@@ -48252,6 +48252,10 @@
             if (counter_id == data.counter_id) {
               if (data.action == "ready") {
                 change_status("#server-alert", data.message);
+              } else if (data.action == "print_ticket") {
+                if (data.unique_number != "" || data.unique_number != null) {
+                  window.open("digital_receipts?unique_number=" + data.unique_number);
+                }
               } else {
                 (0, import_jquery4.default)("#recall").attr("data-id", data.id);
                 (0, import_jquery4.default)("#current_queue").html(data.current_queue_in_counter_text);
