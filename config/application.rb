@@ -25,10 +25,11 @@ module Antrian
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**/*.{rb,yml}").to_s]
     config.i18n.fallbacks = [:en]
     config.assets.debug = true
+    config.active_record.cache_versioning = false
 
     config.active_record.default_timezone = :utc
     config.active_job.queue_adapter = :sidekiq
-    config.autoload_paths += %W[#{config.root}/lib]
+    config.autoload_paths += %W[#{config.root}/lib]    
 
     config.generators do |gen|
       gen.orm :active_record

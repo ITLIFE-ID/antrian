@@ -53,7 +53,7 @@ class PrintTicketService < QueueService
     )
 
     current_queue_text = "#{current_queue.letter} #{current_queue.number.to_s.rjust(3, "0")}"
-    @result = mqtt_publish!("print_ticket", current_queue_text)
+    @result = mqtt_publish!("print_ticket", current_queue_text, current_queue.id, current_queue.uniq_number)
   rescue => e
     return_errors(e)
   end

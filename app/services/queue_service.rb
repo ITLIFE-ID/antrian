@@ -81,7 +81,7 @@ class QueueService < ApplicationService
     selected_date == Date.today
   end
 
-  def mqtt_publish!(action, queue_number_to_print = nil, current_queue_id = nil)
+  def mqtt_publish!(action, queue_number_to_print = nil, current_queue_id = nil, unique_number = nil)    
     message = {
       from: :server,
       action: action.to_sym,
@@ -93,7 +93,8 @@ class QueueService < ApplicationService
       total_online_queues: TodayQueue.total_online_queue(service).count.to_i,
       missed_queues_count: TodayQueue.missed_queues(service).count,
       queue_number_to_print: queue_number_to_print,
-      missed_queues: missed_queues
+      missed_queues: missed_queues,
+      unique_number: unique_number
     }
 
     if ["call", "recall"].include? action

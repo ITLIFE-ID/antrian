@@ -46,13 +46,13 @@ Rails.application.routes.draw do
     resources :users
     resources :voiceover_buildings
     resources :voice_overs
-    # end
+    
+    resources :digital_receipts, only: [:index]
   end
 
   namespace :api, defaults: {format: :json} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: 1) do
-      resources :load_configs, only: [:index]
-      resources :digital_receipts, only: [:index]
+      resources :load_configs, only: [:index]      
     end
   end
 end
