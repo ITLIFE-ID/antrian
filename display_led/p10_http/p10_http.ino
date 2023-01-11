@@ -8,6 +8,7 @@
 #include <fonts/Arial_bold_14.h>
 #include <fonts/ElektronMart6x8.h>
 
+#include <ArduinoJson.h>
 // WiFi
 const char *ssid = "Dim Dim 2809"; // Enter your WiFi name
 const char *password = "123452828";  // Enter WiFi password
@@ -44,11 +45,13 @@ PubSubClient client(espClient);
 #define DISPLAYS_WIDE 1 // Kolom Panel
 #define DISPLAYS_HIGH 1 // Baris Panel
 DMDESP Disp(DISPLAYS_WIDE, DISPLAYS_HIGH);  // Jumlah Panel P10 yang digunakan (KOLOM,BARIS)
+DynamicJsonDocument doc(1024);
 
 //Declare methods
 void draw_text(String, unsigned int, unsigned int, String);
 void draw_text_two_column(String, String);
 void request(String, bool);
+void draw_queue_number(String);
 
 void setup() {
   Serial.begin(115200);
@@ -69,7 +72,8 @@ void setup() {
 
 void loop() {
   Disp.loop();
-  server.handleClient();    
+  server.handleClient();   
+  client.loop(); 
 }
 
 void connect_to_wifi(){
@@ -130,8 +134,7 @@ void connect_to_mqtt_broker(){
 
   draw_text_two_column("MQTT", "READY");    
   Serial.println("MQTT: CONNECTED");
-  // publish and subscribe  
-  client.publish(topic, "Hello mqtt");  
+  // publish and subscribe    
   client.subscribe(topic);  
   delay(5000);
 }
@@ -145,7 +148,26 @@ void callback(char *topic, byte *payload, unsigned int length) {
   }
   Serial.println();
   Serial.println("-----------------------");
-  draw_text("HELMI", 0, 0, "big");
+
+  const String data = String((char*)payload);
+  draw_queue_number(data);
+}
+
+void draw_queue_number(String json){
+  if(!deserializeJson(doc, json)) {
+    Serial.println("parseObject() failed");    
+  }
+  else{
+    const String from = doc["from"];
+    const String action = doc["action"];
+    const String client_display_ip_address = doc["client_display_ip_address"];
+    const String queue_number = doc["current_queue_in_counter_text"];
+    const String ip_address =  WiFi.localIP().toString();
+
+    if(from == "server" && (action == "call" || action == "recall")){    
+      draw_text(queue_number, 0, 0, "big");
+    }
+  }
 }
 
 void request(String address, bool must_draw_text){  
