@@ -52,7 +52,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: 1) do
-      resources :load_configs, only: [:index]      
+      resources :load_configs, only: [:index]
+      resources :callers, only: [:create]
     end
   end
 end
