@@ -50,9 +50,13 @@ module Antrian
       # Devise::Mailer.helper :email
     end
 
-    config.after_initialize do
-      Rails.application.config.mqtt_connect = MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT"))
-      MQTTSubscriber.new.run
+    config.after_initialize do  
+      begin    
+        Rails.application.config.mqtt_connect = MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT"))
+        MQTTSubscriber.new.run
+      rescue => e        
+        ApplicationService.new.return_errors(e)
+      end
     end
   end
 end

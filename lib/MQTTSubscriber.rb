@@ -3,33 +3,29 @@ class MQTTSubscriber
 
   def run
     Thread.new do
-      begin
-        Rails.application.config.mqtt_connect.get(MQTT_CHANNEL) do |topic, message|
-          return unless MQTT_CHANNEL == topic          
-                    
-          message_as_json = JSON.parse(message)
-          message = OpenStruct.new(JSON.parse(message))
+      Rails.application.config.mqtt_connect.get(MQTT_CHANNEL) do |topic, message|
+        return unless MQTT_CHANNEL == topic          
+                  
+        message_as_json = JSON.parse(message)
+        message = OpenStruct.new(JSON.parse(message))
 
-          if ["caller", "kiosk"].include? message.from
-            response = case message.action
-            when "print_ticket"
-              PrintTicketService.execute(message_as_json)
-            when "call"
-              Callers::CallService.execute(message_as_json)
-            when "recall"
-              Callers::RecallService.execute(message_as_json)
-            when "transfer"
-              Callers::TransferService.execute(message_as_json)
-            when "check_server"
-              publish_server_ready(message)
-            end
-
-            mqtt_callback(response, message) unless message.action == "check_server"
+        if ["caller", "kiosk"].include? message.from
+          response = case message.action
+          when "print_ticket"
+            PrintTicketService.execute(message_as_json)
+          when "call"
+            Callers::CallService.execute(message_as_json)
+          when "recall"
+            Callers::RecallService.execute(message_as_json)
+          when "transfer"
+            Callers::TransferService.execute(message_as_json)
+          when "check_server"
+            publish_server_ready(message)
           end
+
+          mqtt_callback(response, message) unless message.action == "check_server"
         end
-      rescue => e
-        ApplicationService.new.return_errors(e)
-      end
+      end    
     end
   end
 
