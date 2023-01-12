@@ -5,7 +5,7 @@ module Admin
     # For example, you may want to send an email after a foo is updated.
     
     def create
-      resource = scoped_resource.new(resource_params)
+      resource = Company.new(resource_params)
 
       if resource.save
         redirect_to(
@@ -18,7 +18,7 @@ module Admin
         }, status: :unprocessable_entity
       end
     end
-    
+
     # def update
     #   super
     #   send_foo_updated_email(requested_resource)
@@ -46,11 +46,15 @@ module Admin
     # empty values into nil values. It uses other APIs such as `resource_class`
     # and `dashboard`:
     #
-    # def resource_params
-    #   params.require(resource_class.model_name.param_key).
-    #     permit(dashboard.permitted_attributes).
-    #     transform_values { |value| value == "" ? nil : value }
-    # end
+    def resource_params
+      p = params.require(resource_class.model_name.param_key).
+        permit(dashboard.permitted_attributes).
+        transform_values { |value| value == "" ? nil : value }
+        
+      p = p.merge(parent_id: @current_company.id) if @current_company.parent_id.blank? && @current_company.id > 1
+      
+      p
+    end
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information

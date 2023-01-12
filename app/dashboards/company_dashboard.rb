@@ -12,6 +12,9 @@ class CompanyDashboard < Administrate::BaseDashboard
     address: Field::String,
     api_key: Field::String,
     closing_days: Field::HasMany.with_options,
+    parent: Field::BelongsTo.with_options(
+      scope: -> { AdministrateHelper.scoped_services(Thread.current[:scope]) }
+    ),
     latitude: Field::String,
     longitude: Field::String,
     name: Field::String,
@@ -44,6 +47,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    parent
     name
     phone_number
     address
@@ -63,8 +67,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     phone_number
-    address
-    api_key
+    address    
     latitude
     longitude
   ].freeze

@@ -1,7 +1,15 @@
 module AdministrateHelper
   # scope.first = is_super_admin, scope.second = @current_company
   def self.scoped_companies(scope)
-    scope.first ? Company.order(name: :asc) : Company.where(id: scope.second.id).or(Company.where(parent_id: scope.second.id))
+    if scope.first
+      Company.order(name: :asc) 
+    else
+      if scope.second.parent_id.blank?
+        Company.where(id: scope.second.id).or(Company.where(parent_id: scope.second.id))
+      else
+        Company.where(id: scope.second.id)
+      end
+    end    
   end
 
   def self.scoped_services(scope)
