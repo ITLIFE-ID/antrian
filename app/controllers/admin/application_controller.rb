@@ -6,6 +6,8 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    include SentryContext
+
     add_breadcrumb "Home", :admin_root_path
     before_action :authenticate_administrator!
     authorize :user, through: :current_administrator
@@ -73,6 +75,10 @@ module Admin
 
     def set_administrate_thread
       Thread.current[:scope] = [super_admin?, @current_company]
+    end
+    
+    def current_user
+      current_administrator
     end
 
     # Override this value to specify the number of elements to display at a time
