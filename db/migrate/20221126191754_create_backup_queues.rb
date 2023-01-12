@@ -19,7 +19,7 @@ class CreateBackupQueues < ActiveRecord::Migration[7.0]
       t.datetime :finish_time
       t.boolean :priority, default: false
 
-      t.string :uniq_number
+      t.string :unique_number
       t.boolean :attend, default: false
       t.string :note
       t.timestamps

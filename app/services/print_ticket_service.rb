@@ -18,7 +18,7 @@
 #  priority              :boolean          default(FALSE)
 #  service_type_slug     :string
 #  start_time            :datetime
-#  uniq_number           :string
+#  unique_number           :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  counter_id            :bigint
@@ -48,12 +48,12 @@ class PrintTicketService < QueueService
       print_ticket_time: selected_date,
       priority: service.priority,
       service_type_slug: service.service_type.slug,
-      uniq_number: SecureRandom.uuid,
+      unique_number: SecureRandom.uuid,
       service: service
     )
 
     current_queue_text = "#{current_queue.letter} #{current_queue.number.to_s.rjust(3, "0")}"
-    @result = mqtt_publish!("print_ticket", current_queue_text, current_queue.id, current_queue.uniq_number)
+    @result = mqtt_publish!("print_ticket", current_queue_text, current_queue.id, current_queue.unique_number)
   rescue => e
     return_errors(e)
   end

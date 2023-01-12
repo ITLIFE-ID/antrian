@@ -17,7 +17,7 @@
 #  process_duration      :integer
 #  service_type_slug     :string
 #  start_time            :datetime
-#  uniq_number           :string
+#  unique_number         :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  counter_id            :bigint
@@ -38,7 +38,7 @@ RSpec.describe TodayQueue, type: :model do
   it { should belong_to :service }
   it { should belong_to(:counter).optional }
   it { should validate_presence_of :letter }
-  it { should validate_presence_of :uniq_number }
+  it { should validate_presence_of :unique_number }
   it { should validate_presence_of :print_ticket_location }
   it { should validate_presence_of :print_ticket_time }
   it { should validate_presence_of :number }

@@ -19,7 +19,7 @@
 #  process_duration      :integer
 #  service_type_slug     :string
 #  start_time            :datetime
-#  uniq_number           :string
+#  unique_number         :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  counter_id            :bigint
@@ -43,7 +43,7 @@ class TodayQueue < ApplicationRecord
   belongs_to :counter, optional: true
 
   validates_inclusion_of [:priority, :attend], in: [false, true]
-  validates_presence_of :letter, :uniq_number, :print_ticket_location, :print_ticket_time, :number,
+  validates_presence_of :letter, :unique_number, :print_ticket_location, :print_ticket_time, :number,
     :service_type_slug, :date
 
   validates :number, presence: true, uniqueness: {scope: %i[service_id letter date]}

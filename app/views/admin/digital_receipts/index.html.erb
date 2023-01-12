@@ -1,1 +1,23 @@
-
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+  </head>
+  <body onload='number_pages' style="font-family: Arial">
+    <div id="header">
+      <%#= wicked_pdf_image_tag 'mysite.jpg' %>
+    </div>
+    <div id="content" style="text-align: center">
+      <div style="font-size: 12px;margin-bottom: 10px"><%=@queue.service.company.name%></div>
+      <div style="font-size: 8px;margin-bottom: 5px"><%=@queue.service.company.address%> | <%=@queue.service.company.phone_number%></div>
+      <div style="font-size: 16px">NOMOR ANTRIAN</div>
+      <h1><%=queue_number_formater(@queue.letter, @queue.number)%></h1>
+      <div style="font-size: 10px; margin-bottom:10px"><%=@queue.service.name.capitalize%></div>
+      <div style="font-size: 10px;margin-bottom: 5px"><%=Time.current.strftime("%A, %d-%m-%Y %H:%M")%></div>
+      <div><%=@qrcode%></div>
+      <%= yield %>
+    </div>
+  </body>
+</html>

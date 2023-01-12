@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_185003) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_190306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_185003) do
     t.datetime "start_time"
     t.datetime "finish_time"
     t.boolean "priority", default: false
-    t.string "uniq_number"
+    t.string "unique_number"
     t.boolean "attend", default: false
     t.string "note"
     t.datetime "created_at", null: false
@@ -311,7 +311,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_185003) do
     t.datetime "start_time"
     t.datetime "finish_time"
     t.boolean "priority", default: false
-    t.string "uniq_number"
+    t.string "unique_number"
     t.boolean "attend", default: false
     t.string "note"
     t.datetime "created_at", null: false

@@ -19,7 +19,7 @@
 #  priority              :boolean          default(FALSE)
 #  service_type_slug     :string
 #  start_time            :datetime
-#  uniq_number           :string
+#  unique_number           :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  counter_id            :bigint
@@ -38,7 +38,7 @@ FactoryBot.define do
     trait :new_queue do
       association :service
       service_type_slug { service.service_type.slug }
-      uniq_number { SecureRandom.uuid }
+      unique_number { SecureRandom.uuid }
       priority { false }
       print_ticket_time { DateTime.current.change({hour: 9, min: 0, sec: 0}) }
       letter { service.letter }

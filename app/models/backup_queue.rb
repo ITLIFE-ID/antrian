@@ -19,7 +19,7 @@
 #  process_duration      :integer
 #  service_type_slug     :string
 #  start_time            :datetime
-#  uniq_number           :string
+#  unique_number         :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  counter_id            :bigint
