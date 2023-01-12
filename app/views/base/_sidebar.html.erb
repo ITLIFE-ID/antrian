@@ -36,9 +36,7 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <%=render "base/sidebar/single_menu", path: admin_callers_path, name: t("callers"), icon: "fa-volume-high"%>
-        <% if current_administrator.id == 1%>
-          <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
-        <%end%>
+        <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>
         <%=render "base/sidebar/nested_menu", parent: {name: t("dashboard"), icon: "fa-dashboard"}, 
           child: [
             {name: t("past_queue"), path: past_admin_dashboards_path},
