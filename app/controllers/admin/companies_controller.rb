@@ -3,7 +3,7 @@ module Admin
     add_breadcrumb I18n.t("company")
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
-    
+
     def create
       resource = Company.new(resource_params)
 
@@ -47,12 +47,12 @@ module Admin
     # and `dashboard`:
     #
     def resource_params
-      p = params.require(resource_class.model_name.param_key).
-        permit(dashboard.permitted_attributes).
-        transform_values { |value| value == "" ? nil : value }
-        
+      p = params.require(resource_class.model_name.param_key)
+        .permit(dashboard.permitted_attributes)
+        .transform_values { |value| (value == "") ? nil : value }
+
       p = p.merge(parent_id: @current_company.id) if @current_company.parent_id.blank? && @current_company.id > 1
-      
+
       p
     end
 

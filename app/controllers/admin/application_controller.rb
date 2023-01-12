@@ -76,7 +76,7 @@ module Admin
     def set_administrate_thread
       Thread.current[:scope] = [super_admin?, @current_company]
     end
-    
+
     def current_user
       current_administrator
     end

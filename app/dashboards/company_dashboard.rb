@@ -67,7 +67,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     phone_number
-    address    
+    address
     latitude
     longitude
   ].freeze

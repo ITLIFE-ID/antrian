@@ -83,7 +83,7 @@ class TodayQueue < ApplicationRecord
     return 0 if today_queue.blank?
 
     total_duration = today_queue.sum(&:process_duration) / 60 # seconds to minutes
-    total_duration > 0 ? today_queue.count / total_duration : 0
+    (total_duration > 0) ? today_queue.count / total_duration : 0
   }
 
   def letter=(value)

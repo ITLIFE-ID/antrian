@@ -29,7 +29,7 @@ module Antrian
 
     config.active_record.default_timezone = :utc
     config.active_job.queue_adapter = :sidekiq
-    config.autoload_paths += %W[#{config.root}/lib]    
+    config.autoload_paths += %W[#{config.root}/lib]
 
     config.generators do |gen|
       gen.orm :active_record
@@ -50,13 +50,11 @@ module Antrian
       # Devise::Mailer.helper :email
     end
 
-    config.after_initialize do  
-      begin    
-        Rails.application.config.mqtt_connect = MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT"))
-        MQTTSubscriber.new.run
-      rescue => e        
-        ApplicationService.new.return_errors(e)
-      end
+    config.after_initialize do
+      Rails.application.config.mqtt_connect = MQTT::Client.connect(host: ENV.fetch("MQTT_HOST"), port: ENV.fetch("MQTT_PORT"))
+      MQTTSubscriber.new.run
+    rescue => e
+      ApplicationService.new.return_errors(e)
     end
   end
 end

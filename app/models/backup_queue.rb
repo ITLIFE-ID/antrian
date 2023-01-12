@@ -43,6 +43,6 @@ class BackupQueue < TodayQueue
     return 0 if backup_queue.blank?
 
     total_duration = backup_queue.sum(&:process_duration) / 60 # seconds to minutes
-    total_duration > 0 ? today_queue.count / total_duration : 0
+    (total_duration > 0) ? today_queue.count / total_duration : 0
   }
 end

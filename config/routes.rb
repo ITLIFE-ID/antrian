@@ -2,16 +2,13 @@
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => :sidekiq
-
-  devise_for :users
   devise_for :administrators
 
   root to: redirect("admin/dashboards/today")
 
   # authenticated :administrator do
-  resources :digital_receipts, only: [:show], param: :uuid
-
   namespace :admin do
+    resources :digital_receipts, only: [:show], param: :uuid
     root to: redirect("admin/dashboards/today")
     resources :administrators
     resources :buildings
@@ -46,12 +43,13 @@ Rails.application.routes.draw do
     resources :users
     resources :voiceover_buildings
     resources :voice_overs
-    
+
     resources :digital_receipts, only: [:index]
   end
 
   namespace :api, defaults: {format: :json} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: 1) do
+      devise_for :users
       resources :load_configs, only: [:index]
       resources :callers, only: [:create]
     end

@@ -11,6 +11,6 @@ module SentryContext
       if verify_authenticity_token && current_user.present?
         Sentry.set_user(id: current_user.id, name: current_user.name, email: current_user.email, user_id: current_user.user_id, role: current_user.role)
       end
-    end  
+    end
   end
 end

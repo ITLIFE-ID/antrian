@@ -1,30 +1,28 @@
-class CallerService < ApplicationService  
+class CallerService < ApplicationService
   MQTT_CHANNEL = ENV["MQTT_CHANNEL"]
   attr_accessor :data
-  
-  def execute        
-    message_as_json = JSON.parse(data)
-    message = OpenStruct.new(message_as_json)
 
-    if ["caller", "kiosk"].include? message.from
-      response = case message.action
-      when "print_ticket"
-        PrintTicketService.execute(message_as_json)
-      when "call"
-        Callers::CallService.execute(message_as_json)
-      when "recall"
-        Callers::RecallService.execute(message_as_json)
-      when "transfer"
-        Callers::TransferService.execute(message_as_json)
-      when "check_server"
-        publish_server_ready(message)
-      end
+  def execute
+    message = OpenStruct.new(data)
 
-      mqtt_callback(response, message) unless message.action == "check_server"
+    response = case message.action
+    when "print_ticket"
+      PrintTicketService.execute(data)
+    when "call"
+      Callers::CallService.execute(data)
+    when "recall"
+      Callers::RecallService.execute(data)
+    when "transfer"
+      Callers::TransferService.execute(data)
+    when "check_server"
+      publish_server_ready(message)
     end
+
+    mqtt_callback(response, message) unless message.action == "check_server"
   end
 
   private
+
   def mqtt_callback(result, message)
     message = {
       from: :server,

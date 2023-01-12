@@ -83,7 +83,7 @@ class QueueService < ApplicationService
     selected_date == Date.today
   end
 
-  def mqtt_publish!(action, queue_number_to_print = nil, current_queue_id = nil, unique_number = nil)    
+  def mqtt_publish!(action, queue_number_to_print = nil, current_queue_id = nil, unique_number = nil)
     message = {
       from: :server,
       action: action.to_sym,
@@ -109,7 +109,7 @@ class QueueService < ApplicationService
     if Rails.env.test?
       message
     else
-      MqttHelper.publish(MQTT_CHANNEL, message.to_json)
+      MqttHelper.publish(MQTT_CHANNEL, message)
     end
   rescue => e
     return_errors(e)

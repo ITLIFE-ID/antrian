@@ -162,7 +162,7 @@ export default class extends Controller {
     }
 
     function check_server(){            
-      change_status("#mqtt-alert", "Berhasil konek ke server")      
+      change_status("#mqtt-alert", "Menggunakan Mqtt Server")      
       send_message("check_server", {})
     }
 

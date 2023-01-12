@@ -7,10 +7,11 @@ module Admin
 
     def index
       @queue = TodayQueue.find_by(unique_number: permitted_params["unique_number"])
-      render pdf: "index", page_size: "A8", margin:  {top: 1, bottom: 1, left: 1, right: 1}
+      render pdf: "index", page_size: "A8", margin: {top: 1, bottom: 1, left: 1, right: 1}
     end
 
-    private 
+    private
+
     def permitted_params
       params.permit(:unique_number)
     end
@@ -29,7 +30,7 @@ module Admin
         size: 120
       )
 
-      @qrcode = IO.binwrite("/tmp/qrcode_queue_number_#{permitted_params["unique_number"]}.png", png.to_s)      
+      @qrcode = IO.binwrite("/tmp/qrcode_queue_number_#{permitted_params["unique_number"]}.png", png.to_s)
     end
   end
 end

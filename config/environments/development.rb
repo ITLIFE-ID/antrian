@@ -20,7 +20,7 @@ Rails.application.configure do
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if ENV["REDIS_URL"].present?
-    config.cache_store = :redis_store, "#{ENV["REDIS_URL"]}/0/queue_system_#{Rails.env}_cache", { expires_in: 24.hours }
+    config.cache_store = :redis_store, "#{ENV["REDIS_URL"]}/0/queue_system_#{Rails.env}_cache", {expires_in: 24.hours}
   end
 
   if Rails.root.join("tmp/caching-dev.txt").exist?

@@ -31,7 +31,7 @@ class ApplicationService
     errors.full_messages.join(", ")
   end
 
-  def return_errors(e)    
+  def return_errors(e)
     puts e.message
     Sentry.capture_message(e.message)
     Rails.logger.error(e.message)

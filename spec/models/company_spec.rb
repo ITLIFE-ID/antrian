@@ -37,7 +37,6 @@ RSpec.describe Company, type: :model do
 
   it { should validate_presence_of :name }
   it { should validate_presence_of :address }
-  it { should validate_presence_of :api_key }
   it { should validate_presence_of :phone_number }
   it { should validate_uniqueness_of :name }
 
@@ -55,6 +54,16 @@ RSpec.describe Company, type: :model do
 
         expect(c1.children).to include(c2)
         expect(c2.parent).to eq c1
+      end
+    end
+  end
+
+  describe "api_key validation" do
+    context "given no initial data when create" do
+      it "should auto filled" do
+        obj = build_stubbed(:company)
+        expect(obj.valid?).to be true
+        expect(obj.api_key.present?).to be true
       end
     end
   end
