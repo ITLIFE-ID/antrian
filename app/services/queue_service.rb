@@ -1,6 +1,8 @@
 class QueueService < ApplicationService
   attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer, :result, :action, :from
 
+  MQTT_CHANNEL = ENV["MQTT_CHANNEL"]
+
   def company
     @company ||= service.company
   end
@@ -107,7 +109,7 @@ class QueueService < ApplicationService
     if Rails.env.test?
       message
     else
-      Rails.application.config.mqtt_connect.publish(ENV["MQTT_CHANNEL"], message.to_json)
+      MqttHelper.publish(MQTT_CHANNEL, message.to_json)
     end
   rescue => e
     return_errors(e)

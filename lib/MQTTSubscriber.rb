@@ -1,4 +1,4 @@
-class MQTTSubscriber
+class MQTTSubscriber  
   MQTT_CHANNEL = ENV["MQTT_CHANNEL"]
 
   def run
@@ -42,7 +42,7 @@ class MQTTSubscriber
     }
 
     message = message.merge(message: result.error_messages, status: "error") unless result.success?
-    mqtt_publish(message)
+    MqttHelper.publish(MQTT_CHANNEL, message)
   end
 
   def publish_server_ready(message)
@@ -55,10 +55,6 @@ class MQTTSubscriber
       status: :success
     }
 
-    mqtt_publish(message)
-  end
-
-  def mqtt_publish(message)
-    Rails.application.config.mqtt_connect.publish(MQTT_CHANNEL, message.to_json)
-  end
+    MqttHelper.publish(MQTT_CHANNEL, message)
+  end  
 end
