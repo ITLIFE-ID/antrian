@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_190306) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_074847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,7 +108,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_190306) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.integer "process_duration"
+    t.bigint "dashboard_detail_id"
     t.index ["counter_id"], name: "index_backup_queues_on_counter_id"
+    t.index ["dashboard_detail_id"], name: "index_backup_queues_on_dashboard_detail_id"
     t.index ["deleted_at"], name: "index_backup_queues_on_deleted_at"
     t.index ["number", "date", "service_id", "letter"], name: "index_backup_queues_on_number_and_date_and_service_and_letter", unique: true
     t.index ["parent_id"], name: "index_backup_queues_on_parent_id"
@@ -179,6 +181,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_190306) do
     t.index ["deleted_at"], name: "index_counters_on_deleted_at"
     t.index ["number", "service_id"], name: "index_counters_on_number_and_service_id", unique: true
     t.index ["service_id"], name: "index_counters_on_service_id"
+  end
+
+  create_table "dashboard_details", force: :cascade do |t|
+    t.bigint "dashboard_id"
+    t.date "date"
+    t.bigint "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dashboard_id"], name: "index_dashboard_details_on_dashboard_id"
+  end
+
+  create_table "dashboards", force: :cascade do |t|
+    t.string "name"
+    t.bigint "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "file_storages", force: :cascade do |t|
@@ -318,7 +336,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_190306) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.integer "process_duration"
+    t.bigint "dashboard_detail_id"
     t.index ["counter_id"], name: "index_today_queues_on_counter_id"
+    t.index ["dashboard_detail_id"], name: "index_today_queues_on_dashboard_detail_id"
     t.index ["deleted_at"], name: "index_today_queues_on_deleted_at"
     t.index ["number", "date", "service_id", "letter"], name: "index_today_queues_on_number_and_date_and_service_id_and_letter", unique: true
     t.index ["parent_id"], name: "index_today_queues_on_parent_id"

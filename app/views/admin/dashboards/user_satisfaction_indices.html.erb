@@ -1,0 +1,29 @@
+<% content_for(:title){t("user_satisfaction_index")} %>
+<div class="d-flex justify-content-start align-items-center mb-4">
+  <h1 class="mr-4"><%= content_for(:title) %></h1>
+</div>
+<div class="row">
+  <%@summary.flatten.each do |s| %>
+    <div class="col-lg-3 col-6">
+      <div class="small-box <%=s[:color]%>">
+        <div class="inner">
+          <h3><%=s[:y]%></h3>
+          <p><%=t(".#{s[:name]}")%></p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <%=link_to s[:detail_path], class: "small-box-footer" do %>
+          More Info <i class="fas fa-arrow-circle-right"></i>
+        <% end%>
+      </div>
+    </div>
+  <% end%>
+</div>
+<div class="row">
+  <%@pie_chart.each do |data|%>
+    <div class="col-<%=12/@pie_chart.count%>">
+      <%=render "pie_charts", data: data %>
+    </div>
+  <% end%>
+</div>

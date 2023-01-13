@@ -21,12 +21,14 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  counter_id            :bigint
+#  dashboard_detail_id   :bigint
 #  parent_id             :bigint
 #  service_id            :bigint
 #
 # Indexes
 #
 #  index_today_queues_on_counter_id                                 (counter_id)
+#  index_today_queues_on_dashboard_detail_id                        (dashboard_detail_id)
 #  index_today_queues_on_deleted_at                                 (deleted_at)
 #  index_today_queues_on_number_and_date_and_service_id_and_letter  (number,date,service_id,letter) UNIQUE
 #  index_today_queues_on_parent_id                                  (parent_id)
@@ -36,6 +38,7 @@ require "rails_helper"
 
 RSpec.describe TodayQueue, type: :model do
   it { should belong_to :service }
+  it { should belong_to :dashboard }
   it { should belong_to(:counter).optional }
   it { should validate_presence_of :letter }
   it { should validate_presence_of :unique_number }

@@ -21,9 +21,10 @@ Rails.application.routes.draw do
     end
     resources :counters
     resources :dashboards do
-      get ":type", as: "past", to: "dashboards#index", on: :collection, defaults: {type: "past"}
-      get ":type", as: "today", to: "dashboards#index", on: :collection, defaults: {type: "today"}
-      get ":type", as: "future", to: "dashboards#index", on: :collection, defaults: {type: "future"}
+      get :past, on: :collection
+      get :today, on: :collection
+      get :future, on: :collection
+      get :user_satisfaction_indices, on: :collection
     end
     resources :file_storages
     # resources :permisi_roles
