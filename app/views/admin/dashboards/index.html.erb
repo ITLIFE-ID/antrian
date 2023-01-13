@@ -35,9 +35,9 @@
   <% end%>
 </div>
 <div class="row">
-  <%@pie_chart.each do |p|%>
+  <%@pie_chart.each do |data|%>
     <div class="col-<%=12/@pie_chart.count%>">
-      <%=render "pie_charts", element: p[:element], data: p[:data].to_json.html_safe %>
+      <%=render "pie_charts", data: data %>
     </div>
   <% end%>
 </div>

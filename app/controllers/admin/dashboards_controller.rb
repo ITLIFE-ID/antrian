@@ -22,7 +22,7 @@ module Admin
         {name: t("total_queues"), y: BackupQueue.total_queue(start_date, end_date, @current_company.services).count, color: "bg-primary"}
       ] << @online_vs_offline
 
-      @pie_chart = [{element: :online_vs_offline, data: @online_vs_offline}]
+      @pie_chart = [{element: :online_vs_offline, colors: "#17a2b8,#28a745", data: @online_vs_offline.map { |x| x.except(:color) }}]
 
       render "index"
     end
@@ -44,8 +44,8 @@ module Admin
       ] << @online_vs_offline << @processed_vs_unprocessed
 
       @pie_chart = [
-        {element: :online_vs_offline, data: @online_vs_offline},
-        {element: :processed_vs_unprocessed, data: @processed_vs_unprocessed}
+        {element: :online_vs_offline, colors: "#17a2b8,#28a745", data: @online_vs_offline.map { |x| x.except(:color) }},
+        {element: :processed_vs_unprocessed, colors: "#007bff,#ffc107", data: @processed_vs_unprocessed.map { |x| x.except(:color) }}
       ]
 
       render "index"
@@ -61,7 +61,7 @@ module Admin
         {name: t("total_future_queues"), y: TodayQueue.total_future_queue.count, color: "bg-dark"}
       ] << @online_vs_offline
 
-      @pie_chart = [{element: :online_vs_offline, data: @online_vs_offline}]
+      @pie_chart = [{element: :online_vs_offline, colors: "#17a2b8,#28a745", data: @online_vs_offline.map { |x| x.except(:color) }}]
 
       render "index"
     end
