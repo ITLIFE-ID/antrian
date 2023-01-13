@@ -1,3 +1,6 @@
-update_lesson_status_job:
-  cron: "0 11 * * *"
+backup_database_job:
+  cron: "0 13 * * *"
   class: "BackupDataBaseWorker"
+calculate_dashboard_job:
+  cron: "0 14 * * *"
+  class: "CalculateDashboardWorker"
