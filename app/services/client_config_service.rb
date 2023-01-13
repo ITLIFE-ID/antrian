@@ -3,7 +3,7 @@ class ClientConfigService < ApplicationService
 
   def execute
     may_i_get_my_config?
-    
+
     @result = send(client_display.type)
   rescue => e
     return_errors(e)
@@ -12,7 +12,7 @@ class ClientConfigService < ApplicationService
   private
 
   def tv
-    {videos: {}, musics: {}, services: {}}
+    {videos: {}, musics: {}, services: client_display.services}
   end
 
   def tab
@@ -24,11 +24,12 @@ class ClientConfigService < ApplicationService
   end
 
   def p10
+    client_display.shared_client_displays
     {last_queue_number: ""}
   end
 
   def client_display
-    ClientDisplay.find_by(ip_address: ip_address)
+    @client_display ||= ClientDisplay.find_by(ip_address: ip_address)
   end
 
   def may_i_get_my_config?
