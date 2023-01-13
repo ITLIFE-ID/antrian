@@ -18,7 +18,7 @@ class CallerService < ApplicationService
       publish_server_ready(message)
     end
 
-    mqtt_callback(response, message) unless message.action == "check_server"
+    @result = mqtt_callback(response, message) unless message.action == "check_server"
   end
 
   private
@@ -34,7 +34,8 @@ class CallerService < ApplicationService
     }
 
     message = message.merge(message: result.error_messages, status: "error") unless result.success?
-    MqttHelper.publish(MQTT_CHANNEL, message)
+
+    api ? message : MqttHelper.publish(MQTT_CHANNEL, message)
   end
 
   def publish_server_ready(message)
@@ -47,6 +48,6 @@ class CallerService < ApplicationService
       status: :success
     }
 
-    MqttHelper.publish(MQTT_CHANNEL, message)
+    api ? message : MqttHelper.publish(MQTT_CHANNEL, message)
   end
 end

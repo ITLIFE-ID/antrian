@@ -113,7 +113,7 @@ GEM
       rails (>= 7.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.691.0)
+    aws-partitions (1.692.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -281,6 +281,7 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    ipaddress (0.8.3)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -323,7 +324,7 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.8.0)
+    mail (2.8.0.1)
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -337,7 +338,6 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.12.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
     minitest (5.17.0)
     mixpanel-ruby (2.3.0)
     msgpack (1.6.0)
@@ -353,8 +353,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.13.10)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.14.0-arm64-darwin)
       racc (~> 1.4)
     noticed (1.6.0)
       http (>= 4.0.0)
@@ -643,6 +642,7 @@ DEPENDENCIES
   fcm
   htmlbeautifier (~> 1.4)
   image_processing
+  ipaddress (~> 0.8.3)
   jbuilder
   jsbundling-rails
   jsonapi.rb

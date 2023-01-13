@@ -7,7 +7,11 @@ class MQTTSubscriber
         return nil unless MQTT_CHANNEL == topic
         data = JSON.parse(message)
 
-        CallerService.execute({data: data}) if ["caller", "kiosk"].include? data["from"]
+        if ["caller", "kiosk"].include? data["from"]
+          CallerService.execute({data: data})
+        elsif data["from"] == "client_display"
+          ClientConfigService.execute(data: data)
+        end
       end
     end
   end

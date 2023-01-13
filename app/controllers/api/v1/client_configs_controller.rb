@@ -1,11 +1,11 @@
 class Api::V1::ClientConfigsController < Api::V1::BaseController
   def show
-    
+    ClientConfigService.execute({ip_address: ip_address, api: true})
   end
 
   private
 
-  def permitted_params
-    params.permit(:ip_address)
+  def ip_address
+    request.ip
   end
 end

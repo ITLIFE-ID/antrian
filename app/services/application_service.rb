@@ -6,7 +6,7 @@ class ApplicationService
   include ActiveModel::Validations
   include ApplicationHelper
 
-  attr_accessor :errors
+  attr_accessor :errors, :result, :api
 
   def self.execute(attributes = {})
     service_instance = new(attributes)

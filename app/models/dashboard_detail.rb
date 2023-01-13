@@ -14,8 +14,10 @@
 #  index_dashboard_details_on_dashboard_id  (dashboard_id)
 #
 class DashboardDetail < ApplicationRecord
-  belong_to :dashboard
+  belongs_to :dashboard
   validates :total, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0}
+  has_many :today_queues
+  has_many :backup_queues
 
   validates_date :date
 end

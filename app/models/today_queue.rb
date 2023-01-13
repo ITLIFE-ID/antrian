@@ -43,7 +43,7 @@ class TodayQueue < ApplicationRecord
 
   belongs_to :service
   belongs_to :counter, optional: true
-  belongs_to :dashboard, optional: true
+  belongs_to :dashboard_detail, optional: true
 
   validates_inclusion_of [:priority, :attend], in: [false, true]
   validates_presence_of :letter, :unique_number, :print_ticket_location, :print_ticket_time, :number,

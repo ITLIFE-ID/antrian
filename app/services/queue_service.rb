@@ -1,5 +1,5 @@
 class QueueService < ApplicationService
-  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer, :result, :action, :from
+  attr_accessor :id, :service_id, :counter_id, :date, :print_ticket_location, :attend, :transfer, :action, :from
 
   MQTT_CHANNEL = ENV["MQTT_CHANNEL"]
 
@@ -106,11 +106,7 @@ class QueueService < ApplicationService
 
     message = message.merge!(target_service_id: service_id) if action == "transfer"
 
-    if Rails.env.test?
-      message
-    else
-      MqttHelper.publish(MQTT_CHANNEL, message)
-    end
+    (Rails.env.test? || api) ? message : MqttHelper.publish(MQTT_CHANNEL, message)
   rescue => e
     return_errors(e)
   end

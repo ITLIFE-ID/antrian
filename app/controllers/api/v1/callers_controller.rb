@@ -1,6 +1,6 @@
 class Api::V1::CallersController < Api::V1::BaseController
   def create
-    execute = CallerService.execute({data: permitted_params["message"]})
+    execute = CallerService.execute(permitted_params["message"])
 
     if execute.success?
       render json: execute.result, status: :created
@@ -12,6 +12,6 @@ class Api::V1::CallersController < Api::V1::BaseController
   private
 
   def permitted_params
-    params.permit(:message)
+    params.permit(:message).merge!(api: true)
   end
 end
