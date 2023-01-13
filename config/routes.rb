@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: 1) do
       devise_for :users
-      resources :load_configs, only: [:index]
+      resources :client_configs, only: [:show]
       resources :callers, only: [:create]
     end
   end
