@@ -35,7 +35,7 @@
 require "rails_helper"
 
 RSpec.describe TodayQueue, type: :model do
-  it { should belong_to :service }  
+  it { should belong_to :service }
   it { should belong_to(:counter).optional }
   it { should validate_presence_of :letter }
   it { should validate_presence_of :unique_number }

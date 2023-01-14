@@ -1,7 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <%=link_to admin_root_path, class: "brand-link text-center" do%>
-    <span class="brand-text font-weight-light">QUEUE SYSTEM</span>
+  <%=link_to admin_root_path, class: "brand-link" do%>
+    <%=image_tag "small-logo.png", class: "brand-image img-circle elevation-3 d-none", id: "small-logo"%>
+    <span class="brand-text"><%=image_tag("logo.png")%></span>
   <% end%>
   <!-- Sidebar -->
   <div class="sidebar">
@@ -33,7 +34,7 @@
     <!-- SidebarSearch Form -->
     <%#=render "base/sidebar/search"%>
     <!-- Sidebar Menu -->
-    <nav class="mt-2">
+    <nav class="mt-2" style="margin-bottom: 40%">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <%=render "base/sidebar/single_menu", path: admin_callers_path, name: t("callers"), icon: "fa-volume-high"%>
         <%=render "base/sidebar/single_menu", path: admin_companies_path, name: t("company"), icon: "fa-building"%>

@@ -3,7 +3,7 @@
 <% end %>
 <div class="d-flex justify-content-start align-items-center mb-4">
   <h1 class="mr-4"><%= content_for(:title) %></h1>
-  <% if @type == "past"%>
+  <% if request.fullpath.split("/").last == "past"%>
     <div class="form-group mt-3">
       <div class="input-group" data-controller="daterangepicker">
         <button type="button" class="btn btn-default float-right" id="daterangepicker">

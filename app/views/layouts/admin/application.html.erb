@@ -17,6 +17,7 @@ By default, it renders:
     <meta charset="utf-8">
     <meta name="ROBOTS" content="NOODP">
     <meta name="viewport" content="initial-scale=1">
+    <%= favicon_link_tag asset_path('logo.ico') %>
     <title> <%= content_for(:title) %> - <%= application_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
