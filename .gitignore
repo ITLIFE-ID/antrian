@@ -39,3 +39,6 @@ rspec_performance.txt
 .sass-cache
 /app/assets/builds/*
 !/app/assets/builds/.keep
+temp_auto_push.bat
+temp_interactive_push.bat
+branch_structure.json

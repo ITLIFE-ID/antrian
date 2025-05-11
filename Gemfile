@@ -1,72 +1,93 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.0"
-
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.4"
-
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
-
-# Use sqlite3 as the database for Active Record
+gem "rails", "~> 8.0.2"
 gem "pg"
+gem "puma"
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
-
-# Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
+# JavaScript/CSS bundling
 gem "jsbundling-rails"
-
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
-
-# Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+# Hotwire
+gem "turbo-rails"
+gem "stimulus-rails"
 
-# Use Redis adapter to run Action Cable in production
-gem "redis-rails", "~> 5.0"
+# Asset pipeline
+gem "sprockets-rails"
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+# JSON APIs
+gem "jsonapi.rb"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Use Sass to process CSS
-gem "sassc-rails"
-
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# Active Storage
 gem "image_processing"
 
+# Redis & background jobs
+gem 'redis', '~> 5.4'
+gem "sidekiq"
+gem "sidekiq-cron"
+
+# Authentication & Authorization
+gem "devise"
+gem "devise-jwt"
+gem "devise-otp"
+gem "devise_token_auth"
+gem "action_policy"
+gem "rack-attack"
+gem "rack-cors"
+gem "permisi"
+
+# Admin dashboard
+gem 'administrate', '1.0.0.beta3'
+
+# Search/filtering
+gem "ransack"
+
+# Notifications
+gem "fcm"
+gem "mqtt", github: "njh/ruby-mqtt"
+gem "noticed"
+
+# Misc features
+gem "aasm"
+gem "paranoia"
+gem "aws-sdk-s3"
+gem "dotenv-rails"
+gem "language_filter"
+gem "mixpanel-ruby"
+gem "paper_trail"
+gem "phonelib"
+gem "prawn"
+gem "rqrcode"
+gem "sentry-ruby"
+gem "sentry-rails"
+gem "terbilang"
+gem "email_validator", "~> 2.2"
+gem "breadcrumbs_on_rails", "~> 4.1"
+gem "marcel", "~> 1.0"
+gem "wicked_pdf", "~> 2.6"
+gem "wkhtmltopdf-binary", "~> 0.12.6"
+gem "ipaddress", "~> 0.8.3"
+gem 'validates_timeliness', '~> 8.0'
+gem "rswag-specs"
+gem "rswag-api"
+gem "rswag-ui"
+
+# Performance & lint
+gem "bootsnap", require: false
+gem "fasterer", "~> 0.10.0"
+gem "htmlbeautifier", "~> 1.4"
+
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "faker"
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "web-console"
-  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "listen"
-  # gem "rack-mini-profiler"
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem "annotate", github: "ctran/annotate_models"
+  # gem "annotate", github: "ctran/annotate_models"
   gem "better_errors"
   gem "binding_of_caller"
   gem "bullet"
@@ -75,13 +96,10 @@ group :development do
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
   gem "capybara"
   gem "selenium-webdriver"
-  # Easy installation and use of web drivers to run system tests with browsers
   gem "database_cleaner-active_record"
   gem "rspec-rails"
-  gem "rswag-specs"
   gem "shoulda-matchers"
   gem "timecop"
   gem "vcr"
@@ -90,57 +108,4 @@ group :test do
   gem "cucumber", "~> 8.0"
 end
 
-# security
-gem "action_policy"
-gem "administrate"
-gem "devise"
-gem "devise-jwt"
-gem "permisi"
-gem "rack-attack"
-gem "rack-cors"
-gem "rotp"
-
-# background job
-gem "sidekiq"
-gem "sidekiq-cron"
-
-gem "ransack"
-
-# API
-gem "jsonapi.rb"
-gem "rswag-api"
-gem "rswag-ui"
-
-# notification
-gem "fcm"
-gem "mqtt", github: "njh/ruby-mqtt"
-gem "noticed"
-
-gem "aasm"
-gem "paranoia"
-gem "aws-sdk-s3"
-gem "devise-otp"
-gem "devise_token_auth"
-gem "dotenv-rails"
-gem "language_filter"
-gem "mixpanel-ruby"
-gem "paper_trail"
-gem "phonelib"
-gem "prawn"
-gem "resolv"
-gem "rqrcode"
-gem "sentry-ruby"
-gem "sentry-rails"
-gem "terbilang"
-gem "to_bool"
-gem "validates_timeliness", github: "adzap/validates_timeliness"
-gem "email_validator", "~> 2.2"
-gem "fasterer", "~> 0.10.0"
-gem "htmlbeautifier", "~> 1.4"
-gem "breadcrumbs_on_rails", "~> 4.1"
-gem "administrate-field-active_storage", "~> 0.4.1"
-gem "marcel", "~> 1.0"
-gem "wicked_pdf", "~> 2.6"
-gem "wkhtmltopdf-binary", "~> 0.12.6"
-gem "activerecord-session_store", "~> 2.0"
-gem "ipaddress", "~> 0.8.3"
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
